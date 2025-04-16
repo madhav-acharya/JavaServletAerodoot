@@ -2,11 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>AeroDoot</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<%-- Include Navbar --%>
+  <jsp:include page="WEB-INF/includes/navbar.jsp"/>
+
+  <!-- Main Content Area (Placeholder) -->
+  <main class="main-content">
+    <div class="container">
+      <h1>Welcome to AeroDoot</h1>
+      <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>
+    </div>
+  </main>
+
+<%-- Include Navbar --%>
+  <jsp:include page="WEB-INF/includes/footer.jsp"/>
 </body>
 </html>
