@@ -9,8 +9,9 @@
         <div class="navbar-menu" id="navbarMenu">
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/signup" class="nav-link">Register</a></li>
+
             </ul>
         </div>
         <div class="navbar-toggle" id="navbarToggle">
