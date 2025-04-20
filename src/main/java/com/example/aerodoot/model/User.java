@@ -12,6 +12,8 @@ public class User {
     private String userType; // Could be "PASSENGER", "AGENT", "ADMIN"
     private Timestamp createdAt;
 
+    public  User() {}
+
     public User(String firstName, String lastName, String email, String password,
                 String phoneNumber, String userType, Timestamp createdAt) {
         this.firstName = firstName;

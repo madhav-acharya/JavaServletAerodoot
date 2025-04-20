@@ -1,10 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: munal
-  Date: 4/18/2025
-  Time: 10:42 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +27,22 @@
       <h2>Create Account</h2>
       <p class="subtitle">Please fill in your information to register</p>
 
-      <form action="${pageContext.request.contextPath}/signup" method="post">
+      <%
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (errorMessage != null && !errorMessage.isEmpty()) {
+      %>
+      <div style="color: red;">
+        <%= errorMessage %>
+      </div>
+      <% } %>
+
+      <form action="${pageContext.request.contextPath}/register" method="post">
         <div class="form-row">
           <div class="form-group">
             <label for="fullname">Full Name</label>
             <div class="input-container">
               <i class="fas fa-user"></i>
-              <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+              <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" <%= request.getParameter("fullname") != null ? request.getParameter("fullname") : "" %> required>
             </div>
           </div>
 
@@ -46,7 +50,7 @@
             <label for="phone">Phone Number</label>
             <div class="input-container">
               <i class="fas fa-phone"></i>
-              <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+              <input type="tel" id="phone" name="phonenumber" placeholder="Enter phone number" required>
             </div>
           </div>
         </div>
@@ -73,7 +77,7 @@
             <label for="confirm-password">Confirm Password</label>
             <div class="input-container">
               <i class="fas fa-lock"></i>
-              <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required>
+              <input type="password" id="confirm-password" name="confirmpassword" placeholder="••••••••" required>
               <i class="fas fa-eye toggle-password"></i>
             </div>
           </div>
@@ -84,7 +88,7 @@
         </button>
       </form>
 
-      <p class="login-link">Already have an account? <a href="#">Login here</a></p>
+      <p class="login-link">Already have an account? <a href="${pageContext.request.contextPath}/login">Login here</a></p>
     </div>
   </div>
 </div>
