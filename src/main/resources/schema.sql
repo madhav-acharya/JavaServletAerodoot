@@ -30,7 +30,7 @@ CREATE TABLE Agent (
                        agentId INT AUTO_INCREMENT PRIMARY KEY,
                        position VARCHAR(20) NOT NULL,
                        licenseNumber VARCHAR(50) UNIQUE NOT NULL,
-                       profilePicture VARCHAR(255),
+                       profilePicture LONGBLOB,
                        companyId INT,
                        userId INT NOT NULL UNIQUE,
                        FOREIGN KEY (companyId) REFERENCES Company(companyId) ON DELETE SET NULL,
@@ -44,7 +44,7 @@ CREATE TABLE Passenger (
                            dateOfBirth DATE NOT NULL,
                            gender ENUM('MALE', 'FEMALE', 'OTHER') NOT NULL,
                            address VARCHAR(30),
-                           profilePicture VARCHAR(255),
+                           profilePicture LONGBLOB,
                            userId INT NOT NULL UNIQUE,
                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
 );
