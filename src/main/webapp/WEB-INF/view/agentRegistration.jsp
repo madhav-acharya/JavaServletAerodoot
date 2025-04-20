@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.aerodoot.model.Company" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: mac
   Date: 20/04/2025
@@ -6,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib prefix="c" uri="https://jakarta.ee/jsp/jstl/core" %>--%>
+
 
 <html>
 <head>
@@ -60,10 +61,17 @@
                 <div class="select-wrapper">
                     <select id="companyId" name="companyId" required>
                         <option value="" disabled selected>Select your company</option>
-<%--                        <c:forEach items="${companies}" var="company">--%>
-<%--                            <option value="${company.id}">${company.companyName}</option>--%>
-<%--                        </c:forEach>--%>
-                        <option value="0">chill</option>
+                        <%
+                            List<com.example.aerodoot.model.Company> companies = (List<Company>) request.getAttribute("companies");
+                            if (companies != null) {
+                                System.out.println("company xa hai" + companies);
+                                for (com.example.aerodoot.model.Company company : companies) {
+                        %>
+                        <option value="<%= company.getCompanyId() %>"><%= company.getCompanyName() %></option>
+                        <%
+                                }
+                            }
+                        %>
                         <option value="new">+ Register a new company</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
