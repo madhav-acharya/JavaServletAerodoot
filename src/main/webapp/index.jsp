@@ -3,22 +3,19 @@
 <html>
 <head>
   <title>AeroDoot</title>
-<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">--%>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
 </head>
 <body>
-<%-- Include Navbar --%>
-<%--  <jsp:include page="WEB-INF/includes/navbar.jsp"/>--%>
+<jsp:include page="WEB-INF/includes/navbar.jsp"/>
 
-<%--  <!-- Main Content Area (Placeholder) -->--%>
-<%--  <main class="main-content">--%>
-<%--    <div class="container">--%>
-<%--      <h1>Welcome to AeroDoot</h1>--%>
-<%--      <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>--%>
-<%--    </div>--%>
-<%--  </main>--%>
+  <!-- Main Content Area (Placeholder) -->
+  <main class="main-content">
+    <div class="container">
+      <h1>Welcome to AeroDoot</h1>
+      <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>
+    </div>
+  </main>
 
-<%--&lt;%&ndash; Include Navbar &ndash;%&gt;--%>
-<%--  <jsp:include page="WEB-INF/includes/footer.jsp"/>--%>
-  <jsp:include page="WEB-INF/view/signup.jsp" />
+<jsp:include page="WEB-INF/includes/footer.jsp"/>
 </body>
 </html>
