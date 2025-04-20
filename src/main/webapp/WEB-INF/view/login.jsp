@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: munal
-  Date: 4/18/2025
-  Time: 10:41 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +57,7 @@
                 </button>
             </form>
 
-            <p class="register-link">Don't have an account? <a href="#">Register here</a></p>
+            <p class="register-link">Don't have an account? <a href="${pageContext.request.contextPath}/register">Register here</a></p>
         </div>
     </div>
 </div>
