@@ -24,6 +24,16 @@ public class Company {
         this.website = website;
         this.registrationNumber = registrationNumber;
     }
+    public Company(String companyName, String companyEmail,
+                   String companyAddress, String contactNumber, String website,
+                   String registrationNumber) {
+        this.companyName = companyName;
+        this.companyEmail = companyEmail;
+        this.companyAddress = companyAddress;
+        this.contactNumber = contactNumber;
+        this.website = website;
+        this.registrationNumber = registrationNumber;
+    }
 
     // Getters and setters
     public int getCompanyId() {

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ taglib prefix="c" uri="https://jakarta.ee/jsp/jstl/core" %>--%>
+
 <html>
 <head>
     <title>Title</title>
@@ -19,7 +21,7 @@
         <p>Please fill in your details to complete registration</p>
     </div>
 
-    <form action="registerAgent" method="post" enctype="multipart/form-data" id="agentForm">
+    <form action="register-agent" method="post" enctype="multipart/form-data" id="agentForm">
         <div class="form-section profile-section">
             <div class="profile-picture-container">
                 <div class="profile-picture" id="profile-preview">
@@ -58,9 +60,10 @@
                 <div class="select-wrapper">
                     <select id="companyId" name="companyId" required>
                         <option value="" disabled selected>Select your company</option>
-                        <c:forEach items="${companies}" var="company">
-                            <option value="${company.id}">${company.companyName}</option>
-                        </c:forEach>
+<%--                        <c:forEach items="${companies}" var="company">--%>
+<%--                            <option value="${company.id}">${company.companyName}</option>--%>
+<%--                        </c:forEach>--%>
+                        <option value="0">chill</option>
                         <option value="new">+ Register a new company</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
@@ -80,7 +83,7 @@
 </div>
 
 <!-- Modal for company registration -->
-<div id="companyModal" class="modal">
+<form action="${pageContext.request.contextPath}/register-company" method="POST" id="companyModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2><i class="fas fa-building"></i> Register New Company</h2>
@@ -135,7 +138,7 @@
             </div>
         </form>
     </div>
-</div>
+</form>
 
 <script>
     // Profile picture preview
