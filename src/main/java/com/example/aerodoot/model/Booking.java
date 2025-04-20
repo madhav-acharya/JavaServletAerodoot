@@ -1,41 +1,107 @@
 package com.example.aerodoot.model;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 public class Booking {
-    private int bookingID;
-    private LocalDate bookingDate;
-    private String seatNumber;
-    private String classType;
-    private String paymentStatus;
-    private int passengerID;
+    private int bookingId;
+    private Timestamp bookingDate;
+    private String classType; // ENUM: ECONOMY, BUSINESS
+    private int seatsBooked;
+    private String seatNumbers;
+    private BigDecimal totalPrice;
+    private String bookingStatus; // ENUM: PENDING, CONFIRMED, CANCELLED, COMPLETED
+    private int flightId;
+    private int passengerId;
 
-    public Booking() {}
-
-    public Booking(int bookingID, LocalDate bookingDate, String seatNumber, String classType, String paymentStatus, int passengerID) {
-        this.bookingID = bookingID;
-        this.bookingDate = bookingDate;
-        this.seatNumber = seatNumber;
-        this.classType = classType;
-        this.paymentStatus = paymentStatus;
-        this.passengerID = passengerID;
+    public Booking() {
+        // Default constructor
     }
 
-    public int getBookingID() { return bookingID; }
-    public void setBookingID(int bookingID) { this.bookingID = bookingID; }
+    public Booking(int bookingId, Timestamp bookingDate, String classType, int seatsBooked,
+                   String seatNumbers, BigDecimal totalPrice, String bookingStatus,
+                   int flightId, int passengerId) {
+        this.bookingId = bookingId;
+        this.bookingDate = bookingDate;
+        this.classType = classType;
+        this.seatsBooked = seatsBooked;
+        this.seatNumbers = seatNumbers;
+        this.totalPrice = totalPrice;
+        this.bookingStatus = bookingStatus;
+        this.flightId = flightId;
+        this.passengerId = passengerId;
+    }
 
-    public LocalDate getBookingDate() { return bookingDate; }
-    public void setBookingDate(LocalDate bookingDate) { this.bookingDate = bookingDate; }
+    // Getters and setters
+    public int getBookingId() {
+        return bookingId;
+    }
 
-    public String getSeatNumber() { return seatNumber; }
-    public void setSeatNumber(String seatNumber) { this.seatNumber = seatNumber; }
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
 
-    public String getClassType() { return classType; }
-    public void setClassType(String classType) { this.classType = classType; }
+    public Timestamp getBookingDate() {
+        return bookingDate;
+    }
 
-    public String getPaymentStatus() { return paymentStatus; }
-    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+    public void setBookingDate(Timestamp bookingDate) {
+        this.bookingDate = bookingDate;
+    }
 
-    public int getPassengerID() { return passengerID; }
-    public void setPassengerID(int passengerID) { this.passengerID = passengerID; }
+    public String getClassType() {
+        return classType;
+    }
+
+    public void setClassType(String classType) {
+        this.classType = classType;
+    }
+
+    public int getSeatsBooked() {
+        return seatsBooked;
+    }
+
+    public void setSeatsBooked(int seatsBooked) {
+        this.seatsBooked = seatsBooked;
+    }
+
+    public String getSeatNumbers() {
+        return seatNumbers;
+    }
+
+    public void setSeatNumbers(String seatNumbers) {
+        this.seatNumbers = seatNumbers;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
+    public int getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
+    }
+
+    public int getPassengerId() {
+        return passengerId;
+    }
+
+    public void setPassengerId(int passengerId) {
+        this.passengerId = passengerId;
+    }
 }

@@ -52,7 +52,7 @@ CREATE TABLE Passenger (
 -- Create Admin table (depends on User)
 CREATE TABLE Admin (
                        adminId INT AUTO_INCREMENT PRIMARY KEY,
-                       adminRole ENUM('SUPER_ADMIN', 'BOOKING_ADMIN', 'FLIGHT_ADMIN') NOT NULL,
+                       adminRole ENUM('SUPER_ADMIN', 'ADMIN') NOT NULL,
                        userId INT NOT NULL UNIQUE,
                        FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
 );

@@ -1,36 +1,86 @@
 package com.example.aerodoot.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Aircraft {
-    private int aircraftID;
+    private int aircraftId;
     private String model;
-    private int capacity;
     private String manufacturer;
-    private LocalDate lastMaintenanceDate;
+    private int seatCapacityEconomy;
+    private int seatCapacityBusiness;
+    private Date lastMaintenanceDate;
+    private int airlineId;
 
-    public Aircraft() {}
+    public Aircraft() {
+        // Default constructor
+    }
 
-    public Aircraft(int aircraftID, String model, int capacity, String manufacturer, LocalDate lastMaintenanceDate) {
-        this.aircraftID = aircraftID;
+    public Aircraft(int aircraftId, String model, String manufacturer,
+                    int seatCapacityEconomy, int seatCapacityBusiness,
+                    Date lastMaintenanceDate, int airlineId) {
+        this.aircraftId = aircraftId;
         this.model = model;
-        this.capacity = capacity;
         this.manufacturer = manufacturer;
+        this.seatCapacityEconomy = seatCapacityEconomy;
+        this.seatCapacityBusiness = seatCapacityBusiness;
+        this.lastMaintenanceDate = lastMaintenanceDate;
+        this.airlineId = airlineId;
+    }
+
+    // Getters and setters
+    public int getAircraftId() {
+        return aircraftId;
+    }
+
+    public void setAircraftId(int aircraftId) {
+        this.aircraftId = aircraftId;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public int getSeatCapacityEconomy() {
+        return seatCapacityEconomy;
+    }
+
+    public void setSeatCapacityEconomy(int seatCapacityEconomy) {
+        this.seatCapacityEconomy = seatCapacityEconomy;
+    }
+
+    public int getSeatCapacityBusiness() {
+        return seatCapacityBusiness;
+    }
+
+    public void setSeatCapacityBusiness(int seatCapacityBusiness) {
+        this.seatCapacityBusiness = seatCapacityBusiness;
+    }
+
+    public Date getLastMaintenanceDate() {
+        return lastMaintenanceDate;
+    }
+
+    public void setLastMaintenanceDate(Date lastMaintenanceDate) {
         this.lastMaintenanceDate = lastMaintenanceDate;
     }
 
-    public int getAircraftID() { return aircraftID; }
-    public void setAircraftID(int aircraftID) { this.aircraftID = aircraftID; }
+    public int getAirlineId() {
+        return airlineId;
+    }
 
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
-
-    public int getCapacity() { return capacity; }
-    public void setCapacity(int capacity) { this.capacity = capacity; }
-
-    public String getManufacturer() { return manufacturer; }
-    public void setManufacturer(String manufacturer) { this.manufacturer = manufacturer; }
-
-    public LocalDate getLastMaintenanceDate() { return lastMaintenanceDate; }
-    public void setLastMaintenanceDate(LocalDate lastMaintenanceDate) { this.lastMaintenanceDate = lastMaintenanceDate; }
+    public void setAirlineId(int airlineId) {
+        this.airlineId = airlineId;
+    }
 }
