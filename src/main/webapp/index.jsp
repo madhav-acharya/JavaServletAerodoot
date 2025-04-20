@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
 </head>
 <body>
+
 <jsp:include page="WEB-INF/includes/navbar.jsp"/>
 
   <!-- Main Content Area (Placeholder) -->
@@ -16,6 +17,9 @@
     </div>
   </main>
 
-<jsp:include page="WEB-INF/includes/footer.jsp"/>
+
+<%-- Include Navbar --%>
+  <jsp:include page="WEB-INF/includes/footer.jsp"/>
+<%--  <jsp:include page="WEB-INF/view/signup.jsp" />--%>
 </body>
 </html>

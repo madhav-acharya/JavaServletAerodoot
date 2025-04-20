@@ -1,24 +1,85 @@
 package com.example.aerodoot.model;
 
+import java.sql.Date;
+
 public class Passenger {
-    private int passengerID;
+    private int passengerId;
     private String passportNumber;
-    private int userID;
+    private Date dateOfBirth;
+    private String gender; // "MALE", "FEMALE", or "OTHER"
+    private String address;
+    private String profilePicture;
+    private int userId;
 
-    public Passenger() {}
-
-    public Passenger(int passengerID, String passportNumber, int userID) {
-        this.passengerID = passengerID;
-        this.passportNumber = passportNumber;
-        this.userID = userID;
+    public Passenger() {
+        // Default constructor
     }
 
-    public int getPassengerID() { return passengerID; }
-    public void setPassengerID(int passengerID) { this.passengerID = passengerID; }
+    public Passenger(int passengerId, String passportNumber, Date dateOfBirth,
+                     String gender, String address, String profilePicture, int userId) {
+        this.passengerId = passengerId;
+        this.passportNumber = passportNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.address = address;
+        this.profilePicture = profilePicture;
+        this.userId = userId;
+    }
 
-    public String getPassportNumber() { return passportNumber; }
-    public void setPassportNumber(String passportNumber) { this.passportNumber = passportNumber; }
+    // Getters and setters
+    public int getPassengerId() {
+        return passengerId;
+    }
 
-    public int getUserID() { return userID; }
-    public void setUserID(int userID) { this.userID = userID; }
+    public void setPassengerId(int passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

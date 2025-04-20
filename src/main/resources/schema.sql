@@ -1,118 +1,152 @@
-CREATE SCHEMA IF NOT EXISTS aerodootdb;
-USE aerodootdb;
+-- Create the AeroDootDB database
+CREATE DATABASE IF NOT EXISTS aerodootDB;
+USE aerodootDB;
 
--- Create the users table
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,  -- Auto increment the user ID
-    full_name VARCHAR(100) NOT NULL,    -- Store the user's full name
-    email VARCHAR(100) NOT NULL UNIQUE, -- Store the user's email and ensure it's unique
-    password VARCHAR(255) NOT NULL,     -- Store the user's password (hashed, not plain text)
-    role INT DEFAULT 1 NOT NULL,        -- User role: 1=regular user (default), 0=admin, 2=super admin
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   -- Track when the user was created
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Track when user details were last updated
-    );
-
--- Create the passengers table
-CREATE TABLE IF NOT EXISTS passengers (
-passenger_id INT AUTO_INCREMENT PRIMARY KEY,  -- Auto increment the passenger ID
-passport_number VARCHAR(100) NOT NULL,        -- Store the passport number
-user_id INT,                                  -- Foreign key to link the passenger to a user
-FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+-- Create User table
+CREATE TABLE User (
+                      userId INT AUTO_INCREMENT PRIMARY KEY,
+                      firstName VARCHAR(20) NOT NULL,
+                      lastName VARCHAR(20) NOT NULL,
+                      email VARCHAR(30) UNIQUE NOT NULL,
+                      password VARCHAR(15) NOT NULL,
+                      phoneNumber VARCHAR(20),
+                      userType ENUM('PASSENGER', 'AGENT', 'ADMIN') NOT NULL,
+                      createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create the bookings table
-CREATE TABLE IF NOT EXISTS bookings (
-    booking_id INT AUTO_INCREMENT PRIMARY KEY,    -- Auto increment the booking ID
-    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   -- Track the date of booking
-    seat_number VARCHAR(20) NOT NULL,               -- Store the seat number
-    class_type VARCHAR(50) NOT NULL,                -- Store the class type (Economy/Business)
-    payment_status VARCHAR(50) NOT NULL,            -- Store the payment status
-    passenger_id INT,                               -- Foreign key to link the booking to a passenger
-    FOREIGN KEY (passenger_id) REFERENCES passengers(passenger_id) ON DELETE CASCADE
-    );
+-- Create Company table
+CREATE TABLE Company (
+                         companyId INT AUTO_INCREMENT PRIMARY KEY,
+                         companyName VARCHAR(20) NOT NULL,
+                         companyEmail VARCHAR(30) UNIQUE NOT NULL,
+                         companyAddress VARCHAR(35) NOT NULL,
+                         contactNumber VARCHAR(20) NOT NULL,
+                         website VARCHAR(50),
+                         registrationNumber VARCHAR(30) UNIQUE NOT NULL
+);
 
+-- Create Agent table (depends on User and Company)
+CREATE TABLE Agent (
+                       agentId INT AUTO_INCREMENT PRIMARY KEY,
+                       position VARCHAR(20) NOT NULL,
+                       licenseNumber VARCHAR(50) UNIQUE NOT NULL,
+                       profilePicture VARCHAR(255),
+                       companyId INT,
+                       userId INT NOT NULL UNIQUE,
+                       FOREIGN KEY (companyId) REFERENCES Company(companyId) ON DELETE SET NULL,
+                       FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+);
 
+-- Create Passenger table (depends on User)
+CREATE TABLE Passenger (
+                           passengerId INT AUTO_INCREMENT PRIMARY KEY,
+                           passportNumber VARCHAR(50) UNIQUE,
+                           dateOfBirth DATE NOT NULL,
+                           gender ENUM('MALE', 'FEMALE', 'OTHER') NOT NULL,
+                           address VARCHAR(30),
+                           profilePicture VARCHAR(255),
+                           userId INT NOT NULL UNIQUE,
+                           FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+);
 
--- Create the flight table
-CREATE TABLE IF NOT EXISTS flights (
-    flight_id INT AUTO_INCREMENT PRIMARY KEY,    -- Auto increment the flight ID
-    flight_number VARCHAR(50) NOT NULL,           -- Store the flight number
-    departure_location VARCHAR(100) NOT NULL,     -- Store the departure location
-    arrival_location VARCHAR(100) NOT NULL,       -- Store the arrival location
-    departure_time TIMESTAMP NOT NULL,            -- Store the departure time
-    arrival_time TIMESTAMP NOT NULL,              -- Store the arrival time
-    status VARCHAR(50) NOT NULL,                  -- Store the flight status (e.g., On time, Delayed)
-    economy_price DECIMAL(10,2) NOT NULL,         -- Store the economy class price
-    business_price DECIMAL(10,2) NOT NULL         -- Store the business class price
-    );
+-- Create Admin table (depends on User)
+CREATE TABLE Admin (
+                       adminId INT AUTO_INCREMENT PRIMARY KEY,
+                       adminRole ENUM('SUPER_ADMIN', 'ADMIN') NOT NULL,
+                       userId INT NOT NULL UNIQUE,
+                       FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+);
 
--- Create the crew table
-CREATE TABLE IF NOT EXISTS crew (
-    crew_id INT AUTO_INCREMENT PRIMARY KEY,      -- Auto increment the crew ID
-    role VARCHAR(100) NOT NULL,                   -- Store the role of the crew member (e.g., Pilot, Flight Attendant)
-    license_number VARCHAR(100) NOT NULL,         -- Store the crew member's license number
-    user_id INT,                                  -- Foreign key to link the crew member to a user
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
+-- Create Airline table
+CREATE TABLE Airline (
+                         airlineId INT AUTO_INCREMENT PRIMARY KEY,
+                         name VARCHAR(30) NOT NULL,
+                         headquarters VARCHAR(200) NOT NULL,
+                         contactNumber VARCHAR(20) NOT NULL,
+                         email VARCHAR(30) UNIQUE NOT NULL
+);
 
--- Create the aircraft table
-CREATE TABLE IF NOT EXISTS aircraft (
-    aircraft_id INT AUTO_INCREMENT PRIMARY KEY,  -- Auto increment the aircraft ID
-    model VARCHAR(100) NOT NULL,                  -- Store the aircraft model
-    capacity INT NOT NULL,                        -- Store the aircraft's capacity
-    manufacturer VARCHAR(100) NOT NULL,           -- Store the aircraft manufacturer's name
-    last_maintenance_date DATE NOT NULL           -- Store the date of the last maintenance
-    );
+-- Create Aircraft table (depends on Airline)
+CREATE TABLE Aircraft (
+                          aircraftId INT AUTO_INCREMENT PRIMARY KEY,
+                          model VARCHAR(50) NOT NULL,
+                          manufacturer VARCHAR(50) NOT NULL,
+                          seatCapacityEconomy INT NOT NULL,
+                          seatCapacityBusiness INT NOT NULL,
+                          lastMaintenanceDate DATE NOT NULL,
+                          airlineId INT NOT NULL,
+                          FOREIGN KEY (airlineId) REFERENCES Airline(airlineId) ON DELETE CASCADE
+);
 
--- Create the staff table
-CREATE TABLE IF NOT EXISTS staff (
-    staff_id INT AUTO_INCREMENT PRIMARY KEY,     -- Auto increment the staff ID
-    position VARCHAR(100) NOT NULL,               -- Store the position of the staff member (e.g., Cabin Crew)
-    role VARCHAR(100) NOT NULL,                   -- Store the staff member's role
-    user_id INT,                                  -- Foreign key to link the staff member to a user
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
+-- Create Flight table (depends on Aircraft and Airline)
+CREATE TABLE Flight (
+                        flightId INT AUTO_INCREMENT PRIMARY KEY,
+                        flightNumber VARCHAR(30) UNIQUE NOT NULL,
+                        departureLocation VARCHAR(30) NOT NULL,
+                        arrivalLocation VARCHAR(30) NOT NULL,
+                        departureTime DATETIME NOT NULL,
+                        arrivalTime DATETIME NOT NULL,
+                        duration TIME NOT NULL,
+                        status ENUM('SCHEDULED', 'DELAYED', 'CANCELLED', 'IN_AIR', 'LANDED', 'BOARDING') NOT NULL,
+                        availableSeatsEconomy INT NOT NULL,
+                        availableSeatsBusiness INT NOT NULL,
+                        economyPrice DECIMAL(10, 2) NOT NULL,
+                        businessPrice DECIMAL(10, 2) NOT NULL,
+                        aircraftId INT NOT NULL,
+                        airlineId INT NOT NULL,
+                        FOREIGN KEY (aircraftId) REFERENCES Aircraft(aircraftId) ON DELETE CASCADE,
+                        FOREIGN KEY (airlineId) REFERENCES Airline(airlineId) ON DELETE CASCADE
+);
 
--- Create the booking_flight table (many-to-many relationship between bookings and flights)
-CREATE TABLE IF NOT EXISTS booking_flight (
-    booking_id INT,                               -- Foreign key to link to a booking
-    flight_id INT,                                -- Foreign key to link to a flight
-    PRIMARY KEY (booking_id, flight_id),          -- Composite primary key
-    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE,
-    FOREIGN KEY (flight_id) REFERENCES flights(flight_id) ON DELETE CASCADE
-    );
+-- Create Booking table (depends on Flight and Passenger)
+CREATE TABLE Booking (
+                         bookingId INT AUTO_INCREMENT PRIMARY KEY,
+                         bookingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         classType ENUM('ECONOMY', 'BUSINESS') NOT NULL,
+                         seatsBooked INT NOT NULL,
+                         seatNumbers VARCHAR(35) NOT NULL,
+                         totalPrice DECIMAL(10, 2) NOT NULL,
+                         bookingStatus ENUM('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED') NOT NULL,
+                         flightId INT NOT NULL,
+                         passengerId INT NOT NULL,
+                         FOREIGN KEY (flightId) REFERENCES Flight(flightId) ON DELETE CASCADE,
+                         FOREIGN KEY (passengerId) REFERENCES Passenger(passengerId) ON DELETE CASCADE
+);
 
--- Create the flight_crew table (many-to-many relationship between flights and crew)
-CREATE TABLE IF NOT EXISTS flight_crew (
-    booking_id INT,                               -- Foreign key to link to a booking
-    flight_id INT,                                -- Foreign key to link to a flight
-    crew_id INT,                                  -- Foreign key to link to a crew member
-    PRIMARY KEY (booking_id, flight_id, crew_id),  -- Composite primary key
-    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE,
-    FOREIGN KEY (flight_id) REFERENCES flights(flight_id) ON DELETE CASCADE,
-    FOREIGN KEY (crew_id) REFERENCES crew(crew_id) ON DELETE CASCADE
-    );
+-- Create Payment table (depends on Booking)
+CREATE TABLE Payment (
+                         paymentId INT AUTO_INCREMENT PRIMARY KEY,
+                         paymentMethod ENUM('CREDIT_CARD', 'DEBIT_CARD', 'PAYPAL', 'BANK_TRANSFER') NOT NULL,
+                         paymentStatus ENUM('PENDING', 'COMPLETED', 'FAILED', 'REFUNDED') NOT NULL,
+                         paymentDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         paidAmount DECIMAL(10, 2) NOT NULL,
+                         bookingId INT NOT NULL,
+                         FOREIGN KEY (bookingId) REFERENCES Booking(bookingId) ON DELETE CASCADE
+);
 
--- Create the flight_aircraft table (many-to-many relationship between flights and aircraft)
-CREATE TABLE IF NOT EXISTS flight_aircraft (
-    booking_id INT,                               -- Foreign key to link to a booking
-    flight_id INT,                                -- Foreign key to link to a flight
-    aircraft_id INT,                              -- Foreign key to link to an aircraft
-    PRIMARY KEY (booking_id, flight_id, aircraft_id),  -- Composite primary key
-    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE,
-    FOREIGN KEY (flight_id) REFERENCES flights(flight_id) ON DELETE CASCADE,
-    FOREIGN KEY (aircraft_id) REFERENCES aircraft(aircraft_id) ON DELETE CASCADE
-    );
+-- Create UserBooking junction table (for many-to-many relationship between User and Booking)
+CREATE TABLE UserBooking (
+                             bookingId INT NOT NULL,
+                             userId INT NOT NULL,
+                             PRIMARY KEY (bookingId, userId),
+                             FOREIGN KEY (bookingId) REFERENCES Booking(bookingId) ON DELETE CASCADE,
+                             FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+);
 
--- Create the flight_staff table (many-to-many relationship between flights and staff)
-CREATE TABLE IF NOT EXISTS flight_staff (
-    booking_id INT,                               -- Foreign key to link to a booking
-    flight_id INT,                                -- Foreign key to link to a flight
-    staff_id INT,                                 -- Foreign key to link to a staff member
-    user_id INT,                                  -- Foreign key to link to a user
-    PRIMARY KEY (booking_id, flight_id, staff_id, user_id),  -- Composite primary key
-    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE,
-    FOREIGN KEY (flight_id) REFERENCES flights(flight_id) ON DELETE CASCADE,
-    FOREIGN KEY (staff_id) REFERENCES staff(staff_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
+-- Create BookingAdmin junction table (relates Admin to Booking)
+CREATE TABLE BookingAdmin (
+                              adminId INT NOT NULL,
+                              bookingId INT NOT NULL,
+                              PRIMARY KEY (adminId, bookingId),
+                              FOREIGN KEY (adminId) REFERENCES Admin(adminId) ON DELETE CASCADE,
+                              FOREIGN KEY (bookingId) REFERENCES Booking(bookingId) ON DELETE CASCADE
+);
+
+-- Create AdminFlight junction table (relates Admin to Flight)
+CREATE TABLE AdminFlight (
+                             adminId INT NOT NULL,
+                             flightId INT NOT NULL,
+                             PRIMARY KEY (adminId, flightId),
+                             FOREIGN KEY (adminId) REFERENCES Admin(adminId) ON DELETE CASCADE,
+                             FOREIGN KEY (flightId) REFERENCES Flight(flightId) ON DELETE CASCADE
+);
