@@ -37,12 +37,12 @@ public class RegistrationServlet extends HttpServlet {
             } else {
                 String errorMessage = AuthService.getErrorMessage(userId);
                 request.setAttribute("errorMessage", errorMessage);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/register.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/signup.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println(""+e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/signup.jsp");
             dispatcher.forward(request, response);
         }
