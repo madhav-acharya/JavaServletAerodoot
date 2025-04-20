@@ -83,13 +83,13 @@
 </div>
 
 <!-- Modal for company registration -->
-<form action="${pageContext.request.contextPath}/register-company" method="POST" id="companyModal" class="modal">
+<div  id="companyModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2><i class="fas fa-building"></i> Register New Company</h2>
             <span class="close">&times;</span>
         </div>
-        <form id="companyForm">
+        <form action="${pageContext.request.contextPath}/register-company" method="POST" id="companyForm">
             <div class="form-group">
                 <label for="companyName">
                     <i class="fas fa-signature"></i> Company Name
@@ -138,7 +138,7 @@
             </div>
         </form>
     </div>
-</form>
+</div>
 
 <script>
     // Profile picture preview

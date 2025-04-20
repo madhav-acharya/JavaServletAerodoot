@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompanyDAO {
     public static int createCompany(Company company) {
@@ -36,5 +38,32 @@ public class CompanyDAO {
         }
 
         return -1;
+    }
+
+    public static List<Company> getAllCompanies() {
+        List<Company> companies = new ArrayList<>();
+        String sql = "SELECT * FROM Company";
+
+        try (Connection con = DbConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Company company = new Company(
+                        rs.getInt("companyId"),
+                        rs.getString("companyName"),
+                        rs.getString("companyEmail"),
+                        rs.getString("companyAddress"),
+                        rs.getString("contactNumber"),
+                        rs.getString("website"),
+                        rs.getString("registrationNumber")
+                );
+                companies.add(company);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching companies: " + e.getMessage());
+        }
+
+        return companies;
     }
 }

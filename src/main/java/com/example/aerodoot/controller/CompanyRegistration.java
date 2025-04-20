@@ -9,9 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/register-company")
 public class CompanyRegistration extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Company> companies = CompanyDAO.getAllCompanies();
+        request.setAttribute("companies", companies);
+        request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String companyName = request.getParameter("companyName");
@@ -32,4 +41,5 @@ public class CompanyRegistration extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/view/companyRegistration.jsp").forward(request, response);
         }
     }
+
 }
