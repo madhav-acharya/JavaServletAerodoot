@@ -8,7 +8,7 @@ CREATE TABLE User (
                       firstName VARCHAR(20) NOT NULL,
                       lastName VARCHAR(20) NOT NULL,
                       email VARCHAR(30) UNIQUE NOT NULL,
-                      password VARCHAR(15) NOT NULL,
+                      password VARCHAR(255) NOT NULL,
                       phoneNumber VARCHAR(20),
                       userType ENUM('PASSENGER', 'AGENT', 'ADMIN') NOT NULL,
                       createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP

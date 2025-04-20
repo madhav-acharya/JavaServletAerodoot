@@ -4,17 +4,22 @@ public class Agent {
     private int agentId;
     private String position;
     private String licenseNumber;
-    private String profilePicture;
+    private byte[] profilePicture;
     private Integer companyId; // Nullable due to ON DELETE SET NULL
     private int userId;
 
-    public Agent() {
-        // Default constructor
-    }
-
-    public Agent(int agentId, String position, String licenseNumber, String profilePicture,
+    public Agent(int agentId, String position, String licenseNumber, byte[] profilePicture,
                  Integer companyId, int userId) {
         this.agentId = agentId;
+        this.position = position;
+        this.licenseNumber = licenseNumber;
+        this.profilePicture = profilePicture;
+        this.companyId = companyId;
+        this.userId = userId;
+    }
+
+    public Agent(String position, String licenseNumber, byte[] profilePicture,
+                 Integer companyId, int userId) {
         this.position = position;
         this.licenseNumber = licenseNumber;
         this.profilePicture = profilePicture;
@@ -47,11 +52,11 @@ public class Agent {
         this.licenseNumber = licenseNumber;
     }
 
-    public String getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 
