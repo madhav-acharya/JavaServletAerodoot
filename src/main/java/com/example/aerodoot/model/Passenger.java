@@ -8,7 +8,7 @@ public class Passenger {
     private Date dateOfBirth;
     private String gender; // "MALE", "FEMALE", or "OTHER"
     private String address;
-    private String profilePicture;
+    private byte[] profilePicture;
     private int userId;
 
     public Passenger() {
@@ -16,7 +16,7 @@ public class Passenger {
     }
 
     public Passenger(int passengerId, String passportNumber, Date dateOfBirth,
-                     String gender, String address, String profilePicture, int userId) {
+                     String gender, String address, byte[] profilePicture, int userId) {
         this.passengerId = passengerId;
         this.passportNumber = passportNumber;
         this.dateOfBirth = dateOfBirth;
@@ -67,11 +67,11 @@ public class Passenger {
         this.address = address;
     }
 
-    public String getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 
