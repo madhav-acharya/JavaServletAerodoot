@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
 </head>
 <body>
-<%-- Include Navbar--%>
-  <jsp:include page="WEB-INF/includes/navbar.jsp"/>
+
+<jsp:include page="WEB-INF/includes/navbar.jsp"/>
 
   <!-- Main Content Area (Placeholder) -->
   <main class="main-content">
@@ -16,6 +16,7 @@
       <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>
     </div>
   </main>
+
 
 <%-- Include Navbar --%>
   <jsp:include page="WEB-INF/includes/footer.jsp"/>
