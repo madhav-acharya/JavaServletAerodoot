@@ -55,6 +55,20 @@ public class UserDAO {
         return -1;
     }
 
+    public static boolean changeUserType(int userId, String newUserType) {
+        String sql = "UPDATE User SET userType = ? WHERE userId = ?";
+        try(Connection conn = DbConnectionUtil.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, newUserType);
+            ps.setInt(2, userId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Error Updating User type "+e.getMessage());
+            return false;
+        }
+    }
+
     public static User getUserByEmailOnly(String email) throws SQLException {
         String sql = "SELECT * FROM User WHERE email = ?";
         try(Connection conn = DbConnectionUtil.getConnection();

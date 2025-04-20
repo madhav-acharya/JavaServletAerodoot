@@ -32,17 +32,22 @@ public class RegistrationServlet extends HttpServlet {
             int userId = AuthService.createUser(fullname, email, phonenumber, password, confirmpassword);
 
             if (userId > 0) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+                System.out.println("UserID: "+userId);
+                System.out.println("User registered successfully");
+                request.getSession().setAttribute("userId", userId);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/userType.jsp");
                 dispatcher.forward(request, response);
             } else {
+                System.out.println("User creation failed " + fullname + " " + email + " " + phonenumber + " " + password + " " + confirmpassword);
                 String errorMessage = AuthService.getErrorMessage(userId);
                 request.setAttribute("errorMessage", errorMessage);
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/signup.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println(""+e.getMessage());
+            System.out.println("cannot be registered "+e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/signup.jsp");
             dispatcher.forward(request, response);
         }

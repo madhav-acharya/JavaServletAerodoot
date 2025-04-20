@@ -1,5 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%--
+  Created by IntelliJ IDEA.
+  User: munal
+  Date: 4/18/2025
+  Time: 10:42 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,22 +32,13 @@
       <h2>Create Account</h2>
       <p class="subtitle">Please fill in your information to register</p>
 
-      <%
-        String errorMessage = (String) request.getAttribute("errorMessage");
-        if (errorMessage != null && !errorMessage.isEmpty()) {
-      %>
-      <div style="color: red;">
-        <%= errorMessage %>
-      </div>
-      <% } %>
-
       <form action="${pageContext.request.contextPath}/register" method="post">
         <div class="form-row">
           <div class="form-group">
             <label for="fullname">Full Name</label>
             <div class="input-container">
               <i class="fas fa-user"></i>
-              <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" <%= request.getParameter("fullname") != null ? request.getParameter("fullname") : "" %> required>
+              <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
             </div>
           </div>
 

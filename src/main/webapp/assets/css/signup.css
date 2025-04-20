@@ -15,8 +15,8 @@ body {
 
 .container {
     display: flex;
-    width: 1200px;
-    height: 700px;
+    width: 1100px;
+    height: 650px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: hidden;
@@ -59,7 +59,7 @@ body {
 }
 
 .overlay-content p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     opacity: 0.9;
 }
@@ -67,14 +67,14 @@ body {
 .right-panel {
     flex: 1;
     background-color: white;
-    padding: 40px;
+    padding: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .form-container {
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
     width: 100%;
 }
@@ -142,8 +142,10 @@ label {
 
 .input-container .toggle-password {
     position: absolute;
-    right: 12px;
+    left: 85%;
     cursor: pointer;
+    width: 1rem;
+    height: 1rem;
 }
 
 input[type="text"],
@@ -182,10 +184,6 @@ input[type="password"]:focus {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-}
-.toggle-password {
-    width: 1rem;
-    height: 1rem;
 }
 
 .register-btn i {
