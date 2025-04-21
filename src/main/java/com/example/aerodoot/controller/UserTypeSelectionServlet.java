@@ -17,17 +17,6 @@ public class UserTypeSelectionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("doGet of user type");
-        System.out.println("doGet of company in agent of user type");
-        try {
-            List<Company> companies = CompanyDAO.getAllCompanies();
-            System.out.println("companies " + companies);
-            request.setAttribute("companies", companies);
-            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
-        } catch (Exception e) {
-            System.out.println("ERROR in CompanyDAO.getAllCompanies(): " + e.getMessage());
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong");
-        }
         request.getRequestDispatcher("/WEB-INF/view/userType.jsp").forward(request, response);
     }
     @Override
