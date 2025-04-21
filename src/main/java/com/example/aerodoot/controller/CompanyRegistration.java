@@ -30,9 +30,9 @@ public class CompanyRegistration extends HttpServlet {
 
         System.out.println(companyId + companyName + companyEmail + companyAddress + contactNumber + website + registrationNumber);
         if (companyId > 0) {
-            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/register-agent");
         } else {
-            request.getRequestDispatcher("/WEB-INF/view/companyRegistration.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
     }
 
