@@ -25,6 +25,7 @@ public class CompanyDAO {
             ps.setString(6, company.getRegistrationNumber());
 
             int rowsAffected = ps.executeUpdate();
+            System.out.println(rowsAffected);
             if (rowsAffected > 0) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {

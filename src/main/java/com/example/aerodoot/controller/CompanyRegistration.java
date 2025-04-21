@@ -24,7 +24,9 @@ public class CompanyRegistration extends HttpServlet {
         String website = request.getParameter("website");
         String registrationNumber = request.getParameter("registrationNumber");
 
+        System.out.println("hdajd");
         Company company = new Company(companyName, companyEmail, companyAddress, contactNumber, website, registrationNumber);
+
         int companyId = CompanyDAO.createCompany(company);
         request.getSession().setAttribute("companyId", companyId);
 
