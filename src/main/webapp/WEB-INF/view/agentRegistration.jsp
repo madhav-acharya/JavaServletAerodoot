@@ -1,5 +1,6 @@
 <%@ page import="com.example.aerodoot.model.Company" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: mac
   Date: 20/04/2025
@@ -64,10 +65,9 @@
                         <%
                             List<com.example.aerodoot.model.Company> companies = (List<Company>) request.getAttribute("companies");
                             if (companies != null) {
-                                System.out.println("company xa hai" + companies);
                                 for (com.example.aerodoot.model.Company company : companies) {
                         %>
-                        <option value="<%= company.getCompanyId() %>"><%= company.getCompanyName() %></option>
+                        <option name="companyId" value="<%= company.getCompanyId() %>"><%= company.getCompanyName() %></option>
                         <%
                                 }
                             }
@@ -193,34 +193,6 @@
             // Reset company select to first option
             companySelect.selectedIndex = 0;
         }
-    });
-
-    // Company form submission
-    document.getElementById('companyForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Here you would typically make an AJAX call to save the company
-        // For this example, we'll simulate adding the new company to the dropdown
-
-        const companyName = document.getElementById('companyName').value;
-
-        // Create a new option with a dummy ID (in a real app, this would be returned from the server)
-        const newOption = document.createElement('option');
-        newOption.value = 'temp-id'; // In a real app, this would be the actual ID returned from server
-        newOption.text = companyName;
-
-        // Insert the new option before the "Register a new company" option
-        const lastIndex = companySelect.options.length - 1;
-        companySelect.add(newOption, lastIndex);
-
-        // Select the newly added company
-        newOption.selected = true;
-
-        // Close the modal
-        modal.style.display = 'none';
-
-        // Show success message (optional)
-        alert('Company registered successfully!');
     });
 </script>
 </body>

@@ -1,7 +1,9 @@
 package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.AgentDAO;
+import com.example.aerodoot.dao.CompanyDAO;
 import com.example.aerodoot.model.Agent;
+import com.example.aerodoot.model.Company;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.List;
 
 @WebServlet("/register-agent")
 @MultipartConfig
@@ -20,6 +23,17 @@ public class AgentRegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("doGet of agent");
+        System.out.println("doGet of company");
+        try {
+            List<Company> companies = CompanyDAO.getAllCompanies();
+            System.out.println("companies " + companies);
+            request.setAttribute("companies", companies);
+            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
+        } catch (Exception e) {
+            System.out.println("ERROR in CompanyDAO.getAllCompanies(): " + e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong");
+        }
         request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
     }
 
@@ -27,10 +41,11 @@ public class AgentRegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        System.out.println("values "+ request.getParameter("position") + " " + request.getParameter("licenseNumber") + " " + request.getParameter("companyId") + " " + request.getSession().getAttribute("userId"));
         String position = request.getParameter("position");
         String licenseNumber = request.getParameter("licenseNumber");
         Part profilePicturePart = request.getPart("profilePicture");
-        int companyId = (int) request.getSession().getAttribute("companyId");
+        int companyId = Integer.parseInt(request.getParameter("companyId"));
         int userId = (int) request.getSession().getAttribute("userId");
 
         byte[] profilePicture = null;
@@ -55,4 +70,6 @@ public class AgentRegistrationServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
     }
+
+
 }

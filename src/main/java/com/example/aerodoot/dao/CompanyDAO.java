@@ -59,8 +59,10 @@ public class CompanyDAO {
                         rs.getString("registrationNumber")
                 );
                 companies.add(company);
+                System.out.println("CompanyDAO: Retrieved " + companies.size() + " companies");
             }
         } catch (SQLException e) {
+            System.out.println("ERROR in CompanyDAO.getAllCompanies(): " + e.getMessage());
             System.err.println("Error fetching companies: " + e.getMessage());
         }
 

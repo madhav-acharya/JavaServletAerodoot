@@ -15,14 +15,8 @@ import java.util.List;
 public class CompanyRegistration extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Company> companies = CompanyDAO.getAllCompanies();
-        request.setAttribute("companies", companies);
-        request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("doPost of company");
         String companyName = request.getParameter("companyName");
         String companyEmail = request.getParameter("companyEmail");
         String companyAddress = request.getParameter("companyAddress");
