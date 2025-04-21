@@ -27,7 +27,8 @@
         <div class="form-section profile-section">
             <div class="profile-picture-container">
                 <div class="profile-picture" id="profile-preview">
-                    <i class="fas fa-user-tie"></i>
+                    <i id="profile-icon" class="fas fa-user-tie" style="font-size: 50px; color: #999;"></i>
+                    <img id="profile-previews" alt="Profile" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
                 </div>
                 <div class="upload-btn-wrapper">
                     <button class="upload-btn"><i class="fas fa-camera"></i> Select Photo</button>
@@ -149,19 +150,25 @@
 </div>
 
 <script>
-    // Profile picture preview
+
     document.getElementById('profile-upload').addEventListener('change', function(e) {
         const file = e.target.files[0];
-        if (file) {
+        if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = function(event) {
-                const preview = document.getElementById('profile-preview');
-                preview.innerHTML = '';
-                preview.style.backgroundImage = `url(${event.target.result})`;
+                const img = document.getElementById('profile-previews');
+                const icon = document.getElementById('profile-icon');
+
+                img.src = event.target.result;
+                img.style.display = 'block';
+                icon.style.display = 'none'; // hide icon when image is shown
             };
             reader.readAsDataURL(file);
+        } else {
+            alert("Please upload a valid image file.");
         }
     });
+
 
     // Company modal handling
     const modal = document.getElementById('companyModal');
