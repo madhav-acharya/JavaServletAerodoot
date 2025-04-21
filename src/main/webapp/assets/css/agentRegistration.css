@@ -8,16 +8,19 @@
 body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     background-image: url("../air-bg.jpeg");
-    backdrop-filter: blur(10px);
-    background-repeat: no-repeat;
-    background-size: contain;
+    backdrop-filter: blur(7px);
+    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    margin: 0;
 }
+
 
 .container {
     background-color: #ffffff;

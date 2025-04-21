@@ -30,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             int userId = AuthService.createUser(fullname, email, phonenumber, password, confirmpassword);
-
+            System.out.println("UserID: "+userId);
             if (userId > 0) {
                 System.out.println("UserID: "+userId);
                 System.out.println("User registered successfully");
@@ -41,6 +41,11 @@ public class RegistrationServlet extends HttpServlet {
                 System.out.println("User creation failed " + fullname + " " + email + " " + phonenumber + " " + password + " " + confirmpassword);
                 String errorMessage = AuthService.getErrorMessage(userId);
                 request.setAttribute("errorMessage", errorMessage);
+
+                // Add the form data back to the request
+                request.setAttribute("fullname", fullname);
+                request.setAttribute("email", email);
+                request.setAttribute("phonenumber", phonenumber);
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/signup.jsp");
                 dispatcher.forward(request, response);

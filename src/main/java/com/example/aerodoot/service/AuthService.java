@@ -37,7 +37,7 @@ public class AuthService {
             firstname = parts[0];
             lastname = String.join(" ", Arrays.copyOfRange(parts, 1, parts.length));
         } else if (parts.length == 1) {
-            return -1; // Only one name provided
+            return -9; // Only one name provided
         }
 
         // Validate names (only alphabets)
@@ -93,6 +93,7 @@ public class AuthService {
             case -6 -> "Invalid email format!";
             case -7 -> "Password must contain at least one letter and one number!";
             case -8 -> "Firstname or Lastname can only contain alphabets!";
+            case -9 -> "Provide both Firstname and Lastname";
             default -> "An unknown error occurred.";
         };
     }
