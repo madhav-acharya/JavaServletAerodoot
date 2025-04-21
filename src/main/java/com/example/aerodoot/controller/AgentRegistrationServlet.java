@@ -24,7 +24,7 @@ public class AgentRegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("doGet of agent");
-        System.out.println("doGet of company");
+        System.out.println("doGet of company in agent");
         try {
             List<Company> companies = CompanyDAO.getAllCompanies();
             System.out.println("companies " + companies);

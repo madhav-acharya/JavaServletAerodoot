@@ -7,6 +7,11 @@
 
 body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-image: url("../air-bg.jpeg");
+    backdrop-filter: blur(10px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     min-height: 100vh;
     display: flex;
     justify-content: center;
