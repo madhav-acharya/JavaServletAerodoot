@@ -32,13 +32,22 @@
       <h2>Create Account</h2>
       <p class="subtitle">Please fill in your information to register</p>
 
+      <% if (request.getAttribute("errorMessage") != null) { %>
+      <div class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <%= request.getAttribute("errorMessage") %>
+      </div>
+      <% } %>
+
       <form action="${pageContext.request.contextPath}/register" method="post">
         <div class="form-row">
           <div class="form-group">
             <label for="fullname">Full Name</label>
             <div class="input-container">
               <i class="fas fa-user"></i>
-              <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+              <input type="text" id="fullname" name="fullname"
+                     value="<%= request.getAttribute("fullname") != null ? request.getAttribute("fullname") : "" %>"
+                     placeholder="Enter your full name" required>
             </div>
           </div>
 
@@ -46,7 +55,9 @@
             <label for="phone">Phone Number</label>
             <div class="input-container">
               <i class="fas fa-phone"></i>
-              <input type="tel" id="phone" name="phonenumber" placeholder="Enter phone number" required>
+              <input type="tel" id="phone" name="phonenumber"
+                     value="<%= request.getAttribute("phonenumber") != null ? request.getAttribute("phonenumber") : "" %>"
+                     placeholder="Enter phone number" required>
             </div>
           </div>
         </div>
@@ -55,7 +66,9 @@
           <label for="email">Email Address</label>
           <div class="input-container">
             <i class="fas fa-envelope"></i>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <input type="email" id="email" name="email"
+                   value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>"
+                   placeholder="Enter your email" required>
           </div>
         </div>
 
@@ -64,7 +77,7 @@
             <label for="password">Password</label>
             <div class="input-container">
               <i class="fas fa-lock"></i>
-              <input type="password" id="password" name="password" placeholder="••••••••" required>
+              <input type="password" id="password" name="password" placeholder="Enter Strong Password" required>
               <i class="fas fa-eye toggle-password"></i>
             </div>
           </div>
@@ -73,7 +86,7 @@
             <label for="confirm-password">Confirm Password</label>
             <div class="input-container">
               <i class="fas fa-lock"></i>
-              <input type="password" id="confirm-password" name="confirmpassword" placeholder="••••••••" required>
+              <input type="password" id="confirm-password" name="confirmpassword" placeholder="Re-enter Password" required>
               <i class="fas fa-eye toggle-password"></i>
             </div>
           </div>
