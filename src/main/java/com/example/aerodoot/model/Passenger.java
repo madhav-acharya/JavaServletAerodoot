@@ -26,6 +26,16 @@ public class Passenger {
         this.userId = userId;
     }
 
+    public Passenger(String passportNumber, Date dateOfBirth,
+                     String gender, String address, byte[] profilePicture, int userId) {
+        this.passportNumber = passportNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.address = address;
+        this.profilePicture = profilePicture;
+        this.userId = userId;
+    }
+
     // Getters and setters
     public int getPassengerId() {
         return passengerId;

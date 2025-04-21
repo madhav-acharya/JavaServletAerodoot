@@ -19,7 +19,7 @@
         <p>Please fill in your details to complete registration</p>
     </div>
 
-    <form action="registerPassenger" method="post" enctype="multipart/form-data">
+    <form action="register-passenger" method="post" enctype="multipart/form-data">
         <div class="form-section profile-section">
             <div class="profile-picture-container">
                 <div class="profile-picture" id="profile-preview">
