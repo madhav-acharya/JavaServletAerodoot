@@ -122,12 +122,6 @@ ul {
     transition: 0.4s;
 }
 
-/* Main Content Styles */
-.main-content {
-    padding: 50px 0;
-    min-height: calc(100vh - 300px);
-}
-
 /* Footer Styles */
 .footer {
     background-color: var(--primary-color);

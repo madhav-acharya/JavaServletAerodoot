@@ -10,12 +10,13 @@
 <jsp:include page="WEB-INF/includes/navbar.jsp"/>
 
   <!-- Main Content Area (Placeholder) -->
-  <main class="main-content">
-    <div class="container">
-      <h1>Welcome to AeroDoot</h1>
-      <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>
-    </div>
-  </main>
+<%--  <main class="main-content">--%>
+<%--    <div class="container">--%>
+<%--      <h1>Welcome to AeroDoot</h1>--%>
+<%--      <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>--%>
+<%--    </div>--%>
+<%--  </main>--%>
+<jsp:include page="WEB-INF/view/passengerDashboard.jsp"/>
 
 
 <%-- Include Navbar --%>

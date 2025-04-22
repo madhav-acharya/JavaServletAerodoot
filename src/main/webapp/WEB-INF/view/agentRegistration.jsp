@@ -148,7 +148,6 @@
         </form>
     </div>
 </div>
-
 <script>
 
     document.getElementById('profile-upload').addEventListener('change', function(e) {
