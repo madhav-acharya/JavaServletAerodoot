@@ -23,37 +23,47 @@ public class UserTypeSelectionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("doPost of user type");
         System.out.println("doPost of company in agent of user type");
-        try {
-            List<Company> companies = CompanyDAO.getAllCompanies();
-            System.out.println("companies " + companies);
-            request.setAttribute("companies", companies);
-            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
-        } catch (Exception e) {
-            System.out.println("ERROR in CompanyDAO.getAllCompanies(): " + e.getMessage());
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong");
+
+        String userType = request.getParameter("userType");
+
+        System.out.println(userType);
+        if (userType.equals("passenger")) {
+            request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
-        // Get parameters from the request (from a form or AJAX)
-        System.out.println(request.getParameter("userType"));
-        System.out.println(request.getSession().getAttribute("userId"));
-        int userId = (int) request.getSession().getAttribute("userId");
-        String newUserType = request.getParameter("userType");
-
-        // Call DAO method
-        boolean success = UserDAO.changeUserType(userId, newUserType);
-
-        // Set response based on result
-        if (success) {
-            request.setAttribute("message", "User type updated successfully!");
-            if ("agent".equals(newUserType)) {
+        else {
+            try {
+                List<Company> companies = CompanyDAO.getAllCompanies();
+                System.out.println("companies " + companies);
+                request.setAttribute("companies", companies);
                 request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
+            } catch (Exception e) {
+                System.out.println("ERROR in CompanyDAO.getAllCompanies(): " + e.getMessage());
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong");
             }
+            // Get parameters from the request (from a form or AJAX)
+            System.out.println(request.getParameter("userType"));
+            System.out.println(request.getSession().getAttribute("userId"));
+            int userId = (int) request.getSession().getAttribute("userId");
+            String newUserType = request.getParameter("userType");
 
-        } else {
-            System.out.println("User Type Updation  failed" + userId);
-            request.setAttribute("message", "Failed to update user type.");
+            // Call DAO method
+            boolean success = UserDAO.changeUserType(userId, newUserType);
+
+            // Set response based on result
+            if (success) {
+                request.setAttribute("message", "User type updated successfully!");
+                if ("agent".equals(newUserType)) {
+                    request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
+                }
+//                else {
+//                    request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
+//                }
+            } else {
+                System.out.println("User Type Updation  failed" + userId);
+                request.setAttribute("message", "Failed to update user type.");
+            }
         }
+
 
         // Forward to a JSP or redirect as needed
 
