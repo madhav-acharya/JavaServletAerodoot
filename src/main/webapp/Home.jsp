@@ -1,20 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: munal
-  Date: 4/22/2025
-  Time: 10:34 AM
-  To change this template use File | Settings | File Templates.
---%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroDoot - Flight Booking</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<jsp:include page="header.jsp" />
+
 <div class="container">
     <header>
         <h1>Your Journey Begins with AeroDoot</h1>
@@ -249,7 +236,5 @@
         </div>
     </section>
 </div>
-
-<script src="${pageContext.request.contextPath}/assets/js/home.js"></script>
-</body>
-</html>
+<script src="./assets/js/home.js"></script>
+<jsp:include page="tail.jsp"/>

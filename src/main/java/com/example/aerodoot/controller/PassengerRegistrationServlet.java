@@ -45,12 +45,12 @@ public class PassengerRegistrationServlet extends HttpServlet {
         Passenger passenger = new Passenger(passportNumber, dateOfBirth, gender, address, profilePicture, userId);
         int passengerId = PassengerDAO.createPassenger(passenger);
 
-        request.getSession().setAttribute("passengerId", passengerId);
+//        request.getSession().setAttribute("passengerId", passengerId);
 
         System.out.println("Passenger ID: " + passengerId + ", Passport: " + passportNumber);
 
         if (passengerId > 0) {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }

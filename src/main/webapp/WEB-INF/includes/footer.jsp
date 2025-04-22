@@ -4,7 +4,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3><span class="plane-icon">✈</span> AeroDoot</h3>
+                <h3><span class="logo-icon">✈</span> AeroDoot</h3>
                 <p>Your trusted partner for air travel management. Fly with confidence, manage with ease.</p>
             </div>
 

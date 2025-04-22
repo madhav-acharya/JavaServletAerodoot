@@ -45,7 +45,10 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(30*60);
 
             if (user.getUserType().equals("PASSENGER")) {
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher("/Home.jsp").forward(request, response);
+            }
+            if (user.getUserType().equals("AGENT")) {
+                request.getRequestDispatcher("/Home.jsp").forward(request, response);
             }
         } else {
             // Login failed

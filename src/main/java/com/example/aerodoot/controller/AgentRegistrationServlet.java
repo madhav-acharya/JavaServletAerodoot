@@ -66,6 +66,9 @@ public class AgentRegistrationServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "Failed to register agent.");
+            List<Company> companies = CompanyDAO.getAllCompanies();
+            System.out.println("companies " + companies);
+            request.setAttribute("companies", companies);
             request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
     }

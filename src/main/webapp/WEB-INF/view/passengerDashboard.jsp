@@ -6,16 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroDoot - Passenger Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/passengerDashboard.css">
-</head>
-<body>
+<jsp:include page="../../header.jsp"/>
 <div class="container">
     <header class="dashboard-header">
         <div class="greeting">
@@ -271,6 +262,5 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/assets/js/passangerDashboard.js"></script>
-</body>
-</html>
+<jsp:include page="../../tail.jsp" />
 
