@@ -11,13 +11,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/passenger/dashboard" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/register" class="nav-link">Register</a></li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/logout" method="post" class="nav-link">
-                        <button type="submit" style="padding: 0; background: none; border: none; color: inherit; cursor: pointer;">Logout</button>
-                    </form>
-                </li>
+<%--                <li class="nav-item"><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>--%>
+<%--                <li class="nav-item"><a href="${pageContext.request.contextPath}/register" class="nav-link">Register</a></li>--%>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
             </ul>
         </div>
         <div class="navbar-toggle" id="navbarToggle">
