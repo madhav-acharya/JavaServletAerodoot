@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/passengerDashboard.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/agentDashboard.css">
 </head>
 <body>
 
