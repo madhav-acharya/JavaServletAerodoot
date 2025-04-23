@@ -14,6 +14,13 @@
 <body>
 <div class="container">
     <h1>Select Your User Type</h1>
+    <% if (request.getAttribute("error") != null) { %>
+    <div style="background-color: #ffe6e6; color: #cc0000; border: 1px solid #cc0000; padding: 12px 16px; border-radius: 8px; margin-bottom: 1rem; font-size: 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <i class="fas fa-exclamation-circle" style="font-size: 18px; color: #cc0000;"></i>
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+
 
     <form action="${pageContext.request.contextPath}/select-usertype" method="post">
         <div class="user-type-selection">

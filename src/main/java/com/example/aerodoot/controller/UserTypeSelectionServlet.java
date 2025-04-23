@@ -26,6 +26,11 @@ public class UserTypeSelectionServlet extends HttpServlet {
 
         String userType = request.getParameter("userType");
 
+        if(userType == null) {
+            request.setAttribute("error", "Please select one userType");
+            request.getRequestDispatcher("/WEB-INF/view/userType.jsp").forward(request, response);
+        }
+
         System.out.println(userType);
         if (userType.equals("passenger")) {
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
