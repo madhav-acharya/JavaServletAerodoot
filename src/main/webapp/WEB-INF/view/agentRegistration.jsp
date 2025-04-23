@@ -1,4 +1,5 @@
 <%@ page import="com.example.aerodoot.model.Company" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
@@ -69,16 +70,11 @@
                 <div class="select-wrapper">
                     <select id="companyId" name="companyId" required>
                         <option value="" disabled selected>Select your company</option>
-                        <%
-                            List<com.example.aerodoot.model.Company> companies = (List<Company>) request.getAttribute("companies");
-                            if (companies != null) {
-                                for (com.example.aerodoot.model.Company company : companies) {
-                        %>
-                        <option name="companyId" value="<%= company.getCompanyId() %>"><%= company.getCompanyName() %></option>
-                        <%
-                                }
-                            }
-                        %>
+                        <c:if test="${not empty companies}">
+                            <c:forEach var="company" items="${companies}">
+                                <option name="companyId" value="${company.companyId}">${company.companyName}</option>
+                            </c:forEach>
+                        </c:if>
                         <option value="new">+ Register a new company</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
