@@ -28,9 +28,9 @@ public class AuthFilter implements Filter {
 
             if (uri.contains("login") || uri.contains("register") || uri.contains("select-usertype")) {
                 if ("ADMIN".equals(userType)) {
-                    res.sendRedirect(req.getContextPath() + "/admin-dashboard");
+                    res.sendRedirect(req.getContextPath() + "/admin/dashboard");
                 } else if ("AGENT".equals(userType)) {
-                    res.sendRedirect(req.getContextPath() + "/agent-dashboard");  // Redirect to Agent Dashboard
+                    res.sendRedirect(req.getContextPath() + "/agent/dashboard");  // Redirect to Agent Dashboard
                 } else if ("PASSENGER".equals(userType)) {
                     res.sendRedirect(req.getContextPath() + "/home");
                 }
@@ -38,7 +38,7 @@ public class AuthFilter implements Filter {
             }
             chain.doFilter(request, response);
         } else {
-            if (uri.endsWith("/admin-dashboard") || uri.endsWith("/agent-dashboard") || uri.endsWith("/passenger-dashboard")) {
+            if (uri.startsWith("/admin") || uri.startsWith("/agent") || uri.startsWith("/passenger")) {
                 // Redirect the user to login page if they try to access a restricted page
                 res.sendRedirect(req.getContextPath() + "/login");
             } else {

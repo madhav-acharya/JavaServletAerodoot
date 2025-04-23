@@ -1,9 +1,29 @@
+/*!* Reset and Base Styles *!*/
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*    font-family: Arial, sans-serif;*/
+/*}*/
+
+/*body {*/
+/*    background: linear-gradient(135deg, #002366 0%, #0066cc 100%);*/
+/*    min-height: 100vh;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    padding: 20px;*/
+/*    color: #333;*/
+/*}*/
+
+/*.container {*/
+/*    width: 100%;*/
+/*    max-width: 1200px;*/
+/*}*/
 
 /* Header Styles */
 header {
     text-align: center;
-    /*color: white;*/
-    color: #1a3a8f;
+    color: white;
     margin-bottom: 30px;
     padding: 20px 0;
 }

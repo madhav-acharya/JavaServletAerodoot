@@ -236,5 +236,5 @@
         </div>
     </section>
 </div>
-<script src="./assets/js/home.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/home.js"></script>
 <jsp:include page="tail.jsp"/>

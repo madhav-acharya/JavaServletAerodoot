@@ -14,11 +14,7 @@
 </head>
 <body>
 
-  <%
-    Boolean isAuthPage = (Boolean) request.getAttribute("authPage");
-    if (isAuthPage == null || !isAuthPage) {
-%>
     <jsp:include page="WEB-INF/includes/navbar.jsp" />
-  <% } %>
+
 
 

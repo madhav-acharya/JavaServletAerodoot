@@ -48,7 +48,10 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/Home.jsp").forward(request, response);
             }
             if (user.getUserType().equals("AGENT")) {
-                request.getRequestDispatcher("/Home.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/view/agentDashboard.jsp").forward(request, response);
+            }
+            if (user.getUserType().equals("ADMIN")) {
+                request.getRequestDispatcher("/WEB-INF/view/adminDashboard.jsp").forward(request, response);
             }
         } else {
             // Login failed
