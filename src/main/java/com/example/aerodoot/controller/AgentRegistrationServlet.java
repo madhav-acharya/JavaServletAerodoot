@@ -45,6 +45,10 @@ public class AgentRegistrationServlet extends HttpServlet {
         String licenseNumber = request.getParameter("licenseNumber");
         Part profilePicturePart = request.getPart("profilePicture");
         int companyId = Integer.parseInt(request.getParameter("companyId"));
+        if(request.getSession().getAttribute("userId") == null) {
+            request.setAttribute("error", "Unauthorized");
+            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
+        }
         int userId = (int) request.getSession().getAttribute("userId");
 
         byte[] profilePicture = null;
@@ -55,6 +59,11 @@ public class AgentRegistrationServlet extends HttpServlet {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        if(position == null || licenseNumber == null || companyId == 0 || userId == 0 ) {
+            request.setAttribute("error", "Please fill all the required fields");
+            request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
 
         Agent agent = new Agent(position, licenseNumber, profilePicture, companyId, userId);

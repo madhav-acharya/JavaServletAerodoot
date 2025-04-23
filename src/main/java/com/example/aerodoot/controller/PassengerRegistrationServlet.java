@@ -31,6 +31,11 @@ public class PassengerRegistrationServlet extends HttpServlet {
         Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
+
+        if(request.getSession().getAttribute("userId") == null) {
+            request.setAttribute("error", "Unauthorized");
+            request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
+        }
         int userId =  (int) request.getSession().getAttribute("userId");
 
         Part filePart = request.getPart("profilePicture");
@@ -42,6 +47,10 @@ public class PassengerRegistrationServlet extends HttpServlet {
             }
         }
 
+        if(passportNumber == null || passportNumber == "" || dateOfBirth == null || gender == null || address == null || userId == 0) {
+            request.setAttribute("error", "Please fill all the required fields");
+            request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
+        }
         Passenger passenger = new Passenger(passportNumber, dateOfBirth, gender, address, profilePicture, userId);
         int passengerId = PassengerDAO.createPassenger(passenger);
 

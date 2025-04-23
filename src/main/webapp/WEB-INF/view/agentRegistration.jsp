@@ -22,6 +22,12 @@
         <h1><i class="fas fa-id-card"></i> Agent Registration</h1>
         <p>Please fill in your details to complete registration</p>
     </div>
+    <% if (request.getAttribute("error") != null) { %>
+    <div style="background-color: #ffe6e6; color: #cc0000; border: 1px solid #cc0000; padding: 12px 16px; border-radius: 8px; margin-bottom: 1rem; font-size: 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <i class="fas fa-exclamation-circle" style="font-size: 18px; color: #cc0000;"></i>
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
 
     <form action="register-agent" method="post" enctype="multipart/form-data" id="agentForm">
         <div class="form-section profile-section">
