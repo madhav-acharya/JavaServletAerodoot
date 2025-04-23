@@ -18,7 +18,7 @@
     <form action="${pageContext.request.contextPath}/select-usertype" method="post">
         <div class="user-type-selection">
             <div class="user-type-option" id="agent-option">
-                <input type="radio" id="agent" name="userType" value="agent">
+                <input type="radio" id="agent" name="agent" value="agent">
                 <label for="agent">
                     <div class="icon-container">
                         <i class="user-icon agent-icon">👨‍💼</i>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="user-type-option" id="passenger-option">
-                <input type="radio" id="passenger" name="userType" value="passenger">
+                <input type="radio" id="passenger" name="passenger" value="passenger">
                 <label for="passenger">
                     <div class="icon-container">
                         <i class="user-icon passenger-icon">🧳</i>

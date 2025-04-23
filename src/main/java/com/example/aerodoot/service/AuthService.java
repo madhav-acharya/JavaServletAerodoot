@@ -60,7 +60,7 @@ public class AuthService {
             return -7; // Weak password
         }
 
-        // Check if email already exists
+        // Check if email already exists call method from UserDAO
         if (UserDAO.getUserByEmail(email) != -1) {
             return -2; // Email already registered
         }
@@ -98,6 +98,7 @@ public class AuthService {
         };
     }
 
+    //---login purpose method---
     public static User validateUser(String email, String password) throws SQLException {
         // Get the user by email (will need to modify UserDAO to get user by email only)
         User user = UserDAO.getUserByEmailOnly(email);
