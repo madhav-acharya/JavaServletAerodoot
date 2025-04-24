@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aerodoot - Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div class="container">
@@ -26,9 +26,17 @@
             <h2>Welcome back</h2>
             <p class="subtitle">Please enter your details to sign in</p>
 
+            <% if (request.getAttribute("error") != null) { %>
+            <div style="background-color: #ffe6e6; color: #cc0000; border: 1px solid #cc0000; padding: 12px 16px; border-radius: 8px; margin-bottom: 1rem; font-size: 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                <i class="fas fa-exclamation-circle" style="font-size: 18px; color: #cc0000;"></i>
+                <%= request.getAttribute("error") %>
+            </div>
+            <% } %>
+
+
             <form action="${pageContext.request.contextPath}/login" method="post">
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email" class="label">Email</label>
                     <div class="input-container">
                         <i class="fas fa-envelope"></i>
                         <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -36,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password" class="label">Password</label>
                     <div class="input-container">
                         <i class="fas fa-lock"></i>
                         <input type="password" id="password" name="password" placeholder="••••••••" required>
@@ -47,7 +55,7 @@
                 <div class="form-options">
                     <div class="remember-me">
                         <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Remember me</label>
+                        <label for="remember" >Remember me</label>
                     </div>
                     <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
