@@ -32,8 +32,11 @@ public class PassengerRegistrationServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
 
+        System.out.println(dateOfBirth + " " + gender);
+
+
         if(request.getSession().getAttribute("userId") == null) {
-            request.setAttribute("error", "Unauthorized");
+            request.setAttribute("error", "Unauthorized User");
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
         int userId =  (int) request.getSession().getAttribute("userId");

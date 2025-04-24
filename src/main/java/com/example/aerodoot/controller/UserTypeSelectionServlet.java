@@ -35,7 +35,7 @@ public class UserTypeSelectionServlet extends HttpServlet {
         if (userType.equals("passenger")) {
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
-        else {
+        else if (userType.equals("agent")) {
             try {
                 List<Company> companies = CompanyDAO.getAllCompanies();
                 System.out.println("companies " + companies);
@@ -60,9 +60,7 @@ public class UserTypeSelectionServlet extends HttpServlet {
                 if ("agent".equals(newUserType)) {
                     request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
                 }
-//                else {
-//                    request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
-//                }
+
             } else {
                 System.out.println("User Type Updation  failed" + userId);
                 request.setAttribute("message", "Failed to update user type.");

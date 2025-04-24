@@ -39,7 +39,9 @@
                     <label for="email" class="label">Email</label>
                     <div class="input-container">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <input type="email" id="email" name="email" placeholder="Enter your email"
+                               value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>"
+                               required>
                     </div>
                 </div>
 

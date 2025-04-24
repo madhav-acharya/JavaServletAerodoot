@@ -46,7 +46,7 @@ public class AgentRegistrationServlet extends HttpServlet {
         Part profilePicturePart = request.getPart("profilePicture");
         int companyId = Integer.parseInt(request.getParameter("companyId"));
         if(request.getSession().getAttribute("userId") == null) {
-            request.setAttribute("error", "Unauthorized");
+            request.setAttribute("error", "Unauthorized User");
             request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
         int userId = (int) request.getSession().getAttribute("userId");
