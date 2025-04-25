@@ -39,10 +39,12 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
 
-            session.setAttribute("user", user);
+            session.setAttribute("userId", user.getUserId());
             session.setAttribute("isLoggedIn", true);
 
             session.setMaxInactiveInterval(30*60);
+
+//            System.out.println(session.getAttribute("user"));
 
             if (user.getUserType().equals("PASSENGER")) {
                 request.getRequestDispatcher("/home.jsp").forward(request, response);
