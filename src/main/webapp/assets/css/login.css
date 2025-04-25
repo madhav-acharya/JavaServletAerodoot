@@ -176,15 +176,9 @@ input[type="password"]:focus {
 
 .remember-me input {
     margin-right: 8px;
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
 }
-#remember{
-    padding: 1rem;
-    width: 2rem;
-    height: 2rem;
-}
-
 .forgot-password {
     color: #0078d4;
     text-decoration: none;
