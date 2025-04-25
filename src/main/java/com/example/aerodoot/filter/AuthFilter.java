@@ -1,5 +1,6 @@
 package com.example.aerodoot.filter;
 
+import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebFilter("/*")
 public class  AuthFilter implements Filter {
@@ -21,9 +23,23 @@ public class  AuthFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        if (session != null && session.getAttribute("user") != null && (boolean) session.getAttribute("isLoggedIn")) {
-            User user = (User) session.getAttribute("user");
+        Boolean isLogged = false;
 
+        if (session != null) {
+            Object loggedAttr = session.getAttribute("isLoggedIn");
+            if (loggedAttr instanceof Boolean) {
+                isLogged = (Boolean) loggedAttr;
+            }
+        }
+
+        if (Boolean.TRUE.equals(isLogged)) {
+
+            User user;
+            try {
+                user = UserDAO.getUserByUserIdOnly( (int) session.getAttribute("userId"));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             String userType = user.getUserType();
 
             if (uri.contains("login") || uri.contains("register") || uri.contains("select-usertype")) {
@@ -38,7 +54,9 @@ public class  AuthFilter implements Filter {
             }
             chain.doFilter(request, response);
         } else {
-            if (uri.startsWith("/admin") || uri.startsWith("/agent") || uri.startsWith("/passenger")) {
+            if (uri.startsWith(req.getContextPath() + "/admin")
+                    || uri.startsWith(req.getContextPath() + "/agent")
+                    || uri.startsWith(req.getContextPath() + "/passenger")) {
                 // Redirect the user to login page if they try to access a restricted page
                 res.sendRedirect(req.getContextPath() + "/login");
             } else {
@@ -46,8 +64,6 @@ public class  AuthFilter implements Filter {
                 chain.doFilter(request, response);
             }
         }
-
-
     }
 
     public void destroy() {

@@ -1,6 +1,8 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.dao.PassengerDAO;
 import com.example.aerodoot.dao.UserDAO;
+import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,8 +24,11 @@ public class PassengerDashboard extends HttpServlet {
 
         System.out.println(userId + " " + "from passenger Dashboard");
         try {
-            User user = UserDAO.getUserByUserIdOnly(userId);
-            request.setAttribute("user", user);
+
+            PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
+            request.setAttribute("passenger", passengerData);
+            System.out.println(request.getParameter("passenger") + " ps Data");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
