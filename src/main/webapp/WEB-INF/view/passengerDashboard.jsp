@@ -6,11 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <jsp:include page="../../header.jsp"/>
+
 <div class="container">
     <header class="dashboard-header">
         <div class="greeting">
-            <h1>Good Morning, <span id="passenger-name">John Passenger</span></h1>
+            <%
+                int hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
+                String greeting = hour < 12 ? "Good Morning" : (hour < 18 ? "Good Afternoon" : "Good Evening");
+            %>
+            <c:set var="username" value="${sessionScope.user}" />
+            <h1><%= greeting %>, <span id="passenger-name">${username.firstName} ${username.lastName}</span></h1>
             <p>Welcome to your passenger dashboard. Manage your flights and bookings here.</p>
         </div>
         <div class="profile-section">

@@ -2,7 +2,7 @@
 <nav class="navbar">
     <div class="container-main">
         <div class="navbar-brand">
-            <a href="#" class="logo">
+            <a href="#" class="logo-navbar">
 
                 <span class="logo-icon">✈</span> AeroDoot
             </a>

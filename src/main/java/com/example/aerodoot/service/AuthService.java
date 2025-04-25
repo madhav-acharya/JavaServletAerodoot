@@ -41,7 +41,7 @@ public class AuthService {
         }
 
         // Validate names (only alphabets)
-        if (!firstname.matches("^[A-Za-z]+$") || !lastname.matches("^[A-Za-z]+$")) {
+        if (!firstname.matches("^[A-Za-z]+$") || !lastname.matches("^[A-Za-z ]+$")) {
             return -8; // Invalid name format
         }
 

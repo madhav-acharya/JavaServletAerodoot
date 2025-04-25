@@ -5,6 +5,6 @@
          version="6.0">
 
     <welcome-file-list>
-        <welcome-file>/WEB-INF/view/login.jsp</welcome-file>
+        <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
