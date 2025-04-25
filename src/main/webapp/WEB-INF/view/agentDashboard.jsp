@@ -9,7 +9,7 @@
 
 <jsp:include page="../../header.jsp"/>
 <div>
-    <h1>Agent Dashboard</h1>
+    <h1>Agent Dashboard ...</h1>
 </div>
 <jsp:include page="../../tail.jsp"/>
 
