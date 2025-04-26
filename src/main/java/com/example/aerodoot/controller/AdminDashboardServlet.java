@@ -12,6 +12,6 @@ import java.io.IOException;
 public class AdminDashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/admin/manage-aircraft.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/adminDashboard.jsp").forward(request, response);
     }
 }

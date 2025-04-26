@@ -9,6 +9,6 @@ import java.io.IOException;
 
 public class ManageAircraftServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/manage-aircraft.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/manage-aircraft.jsp").forward(request, response);
     }
 }

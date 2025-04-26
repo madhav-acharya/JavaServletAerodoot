@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class ManageAirlineServlet extends HttpServlet {
+public class SettingsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/admin/manage-airline.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/setting.jsp").forward(request, response);
     }
 }

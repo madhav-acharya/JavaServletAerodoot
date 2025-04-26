@@ -9,6 +9,6 @@ import java.io.IOException;
 
 public class ManageBookingsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/manage-bookings.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/manage-bookings.jsp").forward(request, response);
     }
 }
