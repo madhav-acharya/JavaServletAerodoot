@@ -18,6 +18,7 @@
     <jsp:include page="../../../admin-header.jsp"/>
     <div class="content" id="content">
       <!-- Content will be loaded here -->
+      this is manage aircraft
       <div class="loading-spinner">
         <div class="spinner"></div>
         <p>Loading...</p>

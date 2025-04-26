@@ -17,6 +17,7 @@
   <main class="main-content" id="main-content">
     <jsp:include page="../../../admin-header.jsp"/>
     <div class="content" id="content">
+      this is analytics
       <!-- Content will be loaded here -->
       <div class="loading-spinner">
         <div class="spinner"></div>
