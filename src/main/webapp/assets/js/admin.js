@@ -1,4 +1,5 @@
 // Static data for the application
+console.log("loaded script")
 const flightsData = [
     {
         id: "1",

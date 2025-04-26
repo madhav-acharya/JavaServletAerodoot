@@ -11,6 +11,8 @@
   <title>Title</title>
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 <body>
 <div class="dashboard-container">
   <jsp:include page="../../../admin-sidebar.jsp" />
