@@ -17,15 +17,322 @@
   <main class="main-content" id="main-content">
     <jsp:include page="../../../admin-header.jsp"/>
     <div class="content" id="content">
-      <!-- Content will be loaded here -->
-      this is manage aircraft
-      <div class="loading-spinner">
-        <div class="spinner"></div>
-        <p>Loading...</p>
+      <div class="tabs">
+        <div class="tabs-list">
+          <button class="tab-button active">Aircraft</button>
+        </div>
+
+        <div class="tab-actions">
+          <button class="btn btn-primary" id="add-aircraft-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Aircraft
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Aircraft Management</h3>
+          <p class="card-description">View, add, edit, and delete aircraft</p>
+        </div>
+        <div class="card-content">
+          <div class="filters">
+            <div class="filter-group">
+              <label for="search-aircraft">Search Aircraft</label>
+              <input type="text" id="search-aircraft" class="input" placeholder="Search by registration, model, manufacturer...">
+            </div>
+            <div class="filter-group">
+              <label for="aircraft-status-filter">Status</label>
+              <select id="aircraft-status-filter" class="select">
+                <option value="all">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="retired">Retired</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="aircraft-table">
+              <thead>
+              <tr>
+                <th>Registration</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Capacity</th>
+                <th>Status</th>
+                <th>Last Maintenance</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <!-- Aircraft data will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <button class="pagination-btn" id="aircraft-first-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="11 17 6 12 11 7"></polyline>
+                <polyline points="18 17 13 12 18 7"></polyline>
+              </svg>
+            </button>
+            <button class="pagination-btn" id="aircraft-prev-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="pagination-info">
+              <input type="text" class="input pagination-input" id="aircraft-current-page" value="1">
+              <span>of <span id="aircraft-total-pages">1</span></span>
+            </div>
+            <button class="pagination-btn" id="aircraft-next-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <button class="pagination-btn" id="aircraft-last-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="13 17 18 12 13 7"></polyline>
+                <polyline points="6 17 11 12 6 7"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aircraft Form Modal -->
+      <div class="modal" id="aircraft-form-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="aircraft-modal-title">Add New Aircraft</h3>
+            <button class="modal-close" id="close-aircraft-modal">×</button>
+          </div>
+          <div class="modal-body">
+            <form id="aircraft-form">
+              <input type="hidden" id="aircraft-id">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="registration">Registration</label>
+                  <input type="text" id="registration" class="input" placeholder="e.g. N12345" required>
+                </div>
+                <div class="form-group">
+                  <label for="manufacturer">Manufacturer</label>
+                  <input type="text" id="manufacturer" class="input" placeholder="e.g. Boeing" required>
+                </div>
+                <div class="form-group">
+                  <label for="model">Model</label>
+                  <input type="text" id="model" class="input" placeholder="e.g. 737-800" required>
+                </div>
+                <div class="form-group">
+                  <label for="year">Year</label>
+                  <input type="number" id="year" class="input" placeholder="e.g. 2018" required>
+                </div>
+                <div class="form-group">
+                  <label for="aircraft-capacity">Capacity</label>
+                  <input type="number" id="aircraft-capacity" class="input" placeholder="Total seats" required>
+                </div>
+                <div class="form-group">
+                  <label for="aircraft-status">Status</label>
+                  <select id="aircraft-status" class="select" required>
+                    <option value="active">Active</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="retired">Retired</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="last-maintenance">Last Maintenance</label>
+                  <input type="date" id="last-maintenance" class="input" required>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline" id="cancel-aircraft-btn">Cancel</button>
+            <button class="btn btn-primary" id="save-aircraft-btn">Add Aircraft</button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Populate aircraft table
+    populateAircraftTable();
+
+    // Setup search functionality
+    searchTable('aircraft-table', 'search-aircraft');
+
+    // Setup status filter
+    setupTableFilter('aircraft-table', 'aircraft-status-filter', 5);
+
+    // Aircraft form modal
+    const addAircraftBtn = document.getElementById('add-aircraft-btn');
+    const closeAircraftModalBtn = document.getElementById('close-aircraft-modal');
+    const cancelAircraftBtn = document.getElementById('cancel-aircraft-btn');
+    const saveAircraftBtn = document.getElementById('save-aircraft-btn');
+    const aircraftForm = document.getElementById('aircraft-form');
+    const aircraftModalTitle = document.getElementById('aircraft-modal-title');
+
+    addAircraftBtn.addEventListener('click', () => {
+      // Reset form and prepare for adding a new aircraft
+      aircraftForm.reset();
+      document.getElementById('aircraft-id').value = '';
+      aircraftModalTitle.textContent = 'Add New Aircraft';
+      saveAircraftBtn.textContent = 'Add Aircraft';
+
+      openModal('aircraft-form-modal');
+    });
+
+    closeAircraftModalBtn.addEventListener('click', () => closeModal('aircraft-form-modal'));
+    cancelAircraftBtn.addEventListener('click', () => closeModal('aircraft-form-modal'));
+
+    saveAircraftBtn.addEventListener('click', () => {
+      if (aircraftForm.checkValidity()) {
+        const aircraftId = document.getElementById('aircraft-id').value;
+        const isEditing = aircraftId !== '';
+
+        // Get form values
+        const registration = document.getElementById('registration').value;
+        const manufacturer = document.getElementById('manufacturer').value;
+        const model = document.getElementById('model').value;
+        const year = document.getElementById('year').value;
+        const capacity = document.getElementById('aircraft-capacity').value;
+        const status = document.getElementById('aircraft-status').value;
+        const lastMaintenance = document.getElementById('last-maintenance').value;
+
+        // Create aircraft object
+        const aircraft = {
+          id: isEditing ? aircraftId : (aircraftData.length + 1).toString(),
+          registration,
+          manufacturer,
+          model,
+          year: parseInt(year),
+          capacity: parseInt(capacity),
+          status,
+          lastMaintenance
+        };
+
+        if (isEditing) {
+          // Update existing aircraft
+          const index = aircraftData.findIndex(a => a.id === aircraftId);
+          if (index !== -1) {
+            aircraftData[index] = aircraft;
+          }
+        } else {
+          // Add new aircraft
+          aircraftData.push(aircraft);
+        }
+
+        // Refresh aircraft table
+        populateAircraftTable();
+        closeModal('aircraft-form-modal');
+
+        // Show success message
+        alert(isEditing ? 'Aircraft updated successfully!' : 'Aircraft added successfully!');
+      } else {
+        // Trigger form validation
+        aircraftForm.reportValidity();
+      }
+    });
+
+    // Function to populate aircraft table
+    function populateAircraftTable() {
+      const tableBody = document.querySelector('#aircraft-table tbody');
+      tableBody.innerHTML = '';
+
+      aircraftData.forEach(aircraft => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                        <td>${aircraft.registration}</td>
+                        <td>${aircraft.manufacturer}</td>
+                        <td>${aircraft.model}</td>
+                        <td>${aircraft.year}</td>
+                        <td>${aircraft.capacity}</td>
+                        <td><span class="status-badge ${aircraft.status}">${aircraft.status.charAt(0).toUpperCase() + aircraft.status.slice(1)}</span></td>
+                        <td>${aircraft.lastMaintenance}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="action-btn edit-btn" title="Edit" data-id="${aircraft.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="action-btn delete-btn" title="Delete" data-id="${aircraft.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                        <path d="M3 6h18"></path>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+
+        tableBody.appendChild(row);
+      });
+
+      // Add event listeners for edit and delete buttons
+      document.querySelectorAll('#aircraft-table .edit-btn').forEach(btn => {
+        btn.addEventListener('click', () => editAircraft(btn.getAttribute('data-id')));
+      });
+
+      document.querySelectorAll('#aircraft-table .delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => deleteAircraft(btn.getAttribute('data-id')));
+      });
+    }
+
+    // Function to edit aircraft
+    function editAircraft(id) {
+      const aircraft = aircraftData.find(a => a.id === id);
+      if (aircraft) {
+        // Set form values
+        document.getElementById('aircraft-id').value = aircraft.id;
+        document.getElementById('registration').value = aircraft.registration;
+        document.getElementById('manufacturer').value = aircraft.manufacturer;
+        document.getElementById('model').value = aircraft.model;
+        document.getElementById('year').value = aircraft.year;
+        document.getElementById('aircraft-capacity').value = aircraft.capacity;
+        document.getElementById('aircraft-status').value = aircraft.status;
+        document.getElementById('last-maintenance').value = aircraft.lastMaintenance;
+
+        // Update modal title and button text
+        aircraftModalTitle.textContent = 'Edit Aircraft';
+        saveAircraftBtn.textContent = 'Update Aircraft';
+
+        openModal('aircraft-form-modal');
+      }
+    }
+
+    // Function to delete aircraft
+    function deleteAircraft(id) {
+      // Check if aircraft is used in any flights
+      const isUsed = flightsData.some(f => f.aircraftId === id);
+
+      if (isUsed) {
+        alert('Cannot delete this aircraft as it is assigned to one or more flights.');
+        return;
+      }
+
+      showConfirmation('Are you sure you want to delete this aircraft?', () => {
+        const index = aircraftData.findIndex(a => a.id === id);
+        if (index !== -1) {
+          aircraftData.splice(index, 1);
+          populateAircraftTable();
+          alert('Aircraft deleted successfully!');
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
