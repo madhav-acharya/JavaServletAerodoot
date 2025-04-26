@@ -59,18 +59,35 @@
             <table class="data-table" id="aircraft-table">
               <thead>
               <tr>
-                <th>Registration</th>
-                <th>Manufacturer</th>
+                <th>Aircraft ID</th>
                 <th>Model</th>
-                <th>Year</th>
-                <th>Capacity</th>
-                <th>Status</th>
-                <th>Last Maintenance</th>
+                <th>Manufacturer</th>
+                <th>Seat Capacity (Economy)</th>
+                <th>Seat Capacity (Business)</th>
+                <th>Last Maintenance Date</th>
+                <th>Airline ID</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <tbody>
-              <!-- Aircraft data will be populated by JavaScript -->
+              <tr>
+                <td>1</td>
+                <td>Boeing 737</td>
+                <td>Boeing</td>
+                <td>150</td>
+                <td>30</td>
+                <td>2024-01-15</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>A320</td>
+                <td>Airbus</td>
+                <td>180</td>
+                <td>40</td>
+                <td>2024-02-10</td>
+                <td>2</td>
+              </tr>
               </tbody>
             </table>
           </div>

@@ -59,17 +59,39 @@
               <thead>
               <tr>
                 <th>Booking ID</th>
-                <th>Passenger</th>
-                <th>Flight</th>
-                <th>Route</th>
                 <th>Booking Date</th>
-                <th>Status</th>
-                <th>Amount</th>
+                <th>Class Type</th>
+                <th>Seats Booked</th>
+                <th>Seat Numbers</th>
+                <th>Total Price</th>
+                <th>Booking Status</th>
+                <th>Flight ID</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <tbody>
-              <!-- Booking data will be populated by JavaScript -->
+              <tr>
+                <td>1</td>
+                <td>2024-04-01 10:00:00</td>
+                <td>ECONOMY</td>
+                <td>2</td>
+                <td>12A,12B</td>
+                <td>300.00</td>
+                <td>CONFIRMED</td>
+                <td>101</td>
+                <td>201</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>2024-04-02 11:30:00</td>
+                <td>BUSINESS</td>
+                <td>1</td>
+                <td>1A</td>
+                <td>500.00</td>
+                <td>PENDING</td>
+                <td>102</td>
+                <td>202</td>
+              </tr>
               </tbody>
             </table>
           </div>

@@ -58,17 +58,29 @@
                         <table class="data-table" id="airlines-table">
                             <thead>
                             <tr>
-                                <th>Airline Code</th>
+                                <th>Airline ID</th>
                                 <th>Name</th>
-                                <th>Country</th>
-                                <th>Founded</th>
-                                <th>Fleet Size</th>
-                                <th>Status</th>
+                                <th>Headquarters</th>
+                                <th>Contact Number</th>
+                                <th>Email</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- Airline data will be populated by JavaScript -->
+                            <tr>
+                                <td>1</td>
+                                <td>Air Nepal</td>
+                                <td>Kathmandu, Nepal</td>
+                                <td>+977 1 4444444</td>
+                                <td>contact@airnepal.com</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Sikha Airlines</td>
+                                <td>Pokhara, Nepal</td>
+                                <td>+977 61 555555</td>
+                                <td>info@sikhaairlines.com</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
