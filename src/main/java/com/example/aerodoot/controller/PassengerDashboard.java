@@ -22,12 +22,15 @@ public class PassengerDashboard extends HttpServlet {
         HttpSession session = request.getSession(false);
         int userId = (int) session.getAttribute("userId");
 
+        System.out.println("userID of passenger Dashboard " + userId);
+
         System.out.println(userId + " " + "from passenger Dashboard");
         try {
 
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
             request.setAttribute("passenger", passengerData);
-            System.out.println(request.getParameter("passenger") + " ps Data");
+            System.out.println(passengerData.getUser().getFirstName());
+            System.out.println(passengerData.getPassenger().getGender());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
