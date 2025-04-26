@@ -1,4 +1,7 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ page import="com.example.aerodoot.model.Flight" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: mac
   Date: 26/04/2025
@@ -12,6 +15,7 @@
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 <body>
+
 <div class="dashboard-container">
   <jsp:include page="../../../admin-sidebar.jsp" />
   <main class="main-content" id="main-content">
@@ -70,21 +74,82 @@
             <table class="data-table" id="flights-table">
               <thead>
               <tr>
-                <th>Flight No.</th>
-                <th>Airline</th>
-                <th>Origin</th>
-                <th>Destination</th>
-                <th>Departure</th>
-                <th>Arrival</th>
+                <th>Flight Number</th>
+                <th>Departure Location</th>
+                <th>Arrival Location</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
                 <th>Status</th>
-                <th>Aircraft</th>
-                <th>Capacity</th>
-                <th>Booked</th>
+                <th>Available Seats (Economy)</th>
+                <th>Available Seats (Business)</th>
+                <th>Economy Price</th>
+                <th>Business Price</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <tbody>
-              <!-- Flight data will be populated by JavaScript -->
+                  <%--              <c:forEach var="flight" items="${flights}">--%>
+                  <tr>
+                    <td>AB123</td>
+                    <td>New York</td>
+                    <td>London</td>
+                    <td>2025-05-01 10:00</td>
+                    <td>2025-05-01 20:00</td>
+                    <td>SCHEDULED</td>
+                    <td>150</td>
+                    <td>50</td>
+                    <td>500.00</td>
+                    <td>1200.00</td>
+                    <td>
+                      <div class="actions">
+                        <button class="action-btn edit-btn" title="Edit" data-id="AB123">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                          </svg>
+                        </button>
+                        <button class="action-btn delete-btn" title="Delete" data-id="AB123">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Flight 2 -->
+                  <tr>
+                    <td>CD456</td>
+                    <td>Paris</td>
+                    <td>Tokyo</td>
+                    <td>2025-05-02 14:00</td>
+                    <td>2025-05-02 22:00</td>
+                    <td>DELAYED</td>
+                    <td>100</td>
+                    <td>30</td>
+                    <td>550.00</td>
+                    <td>1300.00</td>
+                    <td>
+                      <div class="actions">
+                        <button class="action-btn edit-btn" title="Edit" data-id="CD456">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                          </svg>
+                        </button>
+                        <button class="action-btn delete-btn" title="Delete" data-id="CD456">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <%--              </c:forEach>--%>
               </tbody>
             </table>
           </div>
@@ -227,9 +292,10 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Populate flights table
-    populateFlightsTable();
-
+    const savedTab = localStorage.getItem('activeTab');
+    if (savedTab) {
+      updateActiveMenuItem(savedTab);
+    }
     // Setup search functionality
     searchTable('flights-table', 'search-flights');
 
@@ -248,188 +314,22 @@
     const flightModalTitle = document.getElementById('flight-modal-title');
 
     addFlightBtn.addEventListener('click', () => {
-      // Reset form and prepare for adding a new flight
-      flightForm.reset();
       document.getElementById('flight-id').value = '';
       flightModalTitle.textContent = 'Add New Flight';
       saveFlightBtn.textContent = 'Add Flight';
-
-      // Populate airline and aircraft dropdowns
-      populateAirlineDropdown();
-      populateAircraftDropdown();
-
       openModal('flight-form-modal');
     });
 
     closeFlightModalBtn.addEventListener('click', () => closeModal('flight-form-modal'));
     cancelFlightBtn.addEventListener('click', () => closeModal('flight-form-modal'));
 
-    saveFlightBtn.addEventListener('click', () => {
-      if (flightForm.checkValidity()) {
-        const flightId = document.getElementById('flight-id').value;
-        const isEditing = flightId !== '';
-
-        // Get form values
-        const flightNumber = document.getElementById('flight-number').value;
-        const airlineSelect = document.getElementById('airline');
-        const aircraftSelect = document.getElementById('aircraft');
-        const originSelect = document.getElementById('origin');
-        const destinationSelect = document.getElementById('destination');
-        const departureDate = document.getElementById('departure-date').value;
-        const departureTime = document.getElementById('departure-time').value;
-        const arrivalDate = document.getElementById('arrival-date').value;
-        const arrivalTime = document.getElementById('arrival-time').value;
-        const status = document.getElementById('status').value;
-        const capacity = document.getElementById('capacity').value;
-        const notes = document.getElementById('notes').value;
-
-        // Get selected airline and aircraft details
-        const selectedAirline = airlinesData.find(a => a.id === airlineSelect.value);
-        const selectedAircraft = aircraftData.find(a => a.id === aircraftSelect.value);
-        const originText = originSelect.options[originSelect.selectedIndex].text;
-        const destinationText = destinationSelect.options[destinationSelect.selectedIndex].text;
-
-        // Create flight object
-        const flight = {
-          id: isEditing ? flightId : (flightsData.length + 1).toString(),
-          flightNumber,
-          airline: selectedAirline.name,
-          airlineCode: selectedAirline.code,
-          origin: originText,
-          originCode: originSelect.value,
-          destination: destinationText,
-          destinationCode: destinationSelect.value,
-          departureDate,
-          departureTime,
-          arrivalDate,
-          arrivalTime,
-          status,
-          aircraft: `${selectedAircraft.manufacturer} ${selectedAircraft.model}`,
-          aircraftId: selectedAircraft.id,
-          capacity: parseInt(capacity),
-          booked: isEditing ? flightsData.find(f => f.id === flightId).booked : 0,
-          notes
-        };
-
-        if (isEditing) {
-          // Update existing flight
-          const index = flightsData.findIndex(f => f.id === flightId);
-          if (index !== -1) {
-            flightsData[index] = flight;
-          }
-        } else {
-          // Add new flight
-          flightsData.push(flight);
-        }
-
-        // Refresh flights table
-        populateFlightsTable();
-        closeModal('flight-form-modal');
-
-        // Show success message
-        alert(isEditing ? 'Flight updated successfully!' : 'Flight added successfully!');
-      } else {
-        // Trigger form validation
-        flightForm.reportValidity();
-      }
-    });
-
-    // Function to populate flights table
-    function populateFlightsTable() {
-      const tableBody = document.querySelector('#flights-table tbody');
-      tableBody.innerHTML = '';
-
-      flightsData.forEach(flight => {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-                        <td>${flight.flightNumber}</td>
-                        <td>${flight.airline} (${flight.airlineCode})</td>
-                        <td>${flight.origin}</td>
-                        <td>${flight.destination}</td>
-                        <td>${flight.departureDate} ${flight.departureTime}</td>
-                        <td>${flight.arrivalDate} ${flight.arrivalTime}</td>
-                        <td><span class="status-badge ${flight.status}">${flight.status.charAt(0).toUpperCase() + flight.status.slice(1)}</span></td>
-                        <td>${flight.aircraft}</td>
-                        <td>${flight.capacity}</td>
-                        <td>${flight.booked}</td>
-                        <td>
-                            <div class="actions">
-                                <button class="action-btn edit-btn" title="Edit" data-id="${flight.id}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                </button>
-                                <button class="action-btn delete-btn" title="Delete" data-id="${flight.id}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                        <path d="M3 6h18"></path>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                    `;
-
-        tableBody.appendChild(row);
-      });
-
-      // Add event listeners for edit and delete buttons
-      document.querySelectorAll('#flights-table .edit-btn').forEach(btn => {
-        btn.addEventListener('click', () => editFlight(btn.getAttribute('data-id')));
-      });
-
-      document.querySelectorAll('#flights-table .delete-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteFlight(btn.getAttribute('data-id')));
-      });
-    }
-
     // Function to edit flight
-    function editFlight(id) {
-      const flight = flightsData.find(f => f.id === id);
-      if (flight) {
-        // Set form values
-        document.getElementById('flight-id').value = flight.id;
-        document.getElementById('flight-number').value = flight.flightNumber;
-        document.getElementById('departure-date').value = flight.departureDate;
-        document.getElementById('departure-time').value = flight.departureTime;
-        document.getElementById('arrival-date').value = flight.arrivalDate;
-        document.getElementById('arrival-time').value = flight.arrivalTime;
-        document.getElementById('status').value = flight.status;
-        document.getElementById('capacity').value = flight.capacity;
-        document.getElementById('notes').value = flight.notes;
-
-        // Populate dropdowns
-        populateAirlineDropdown();
-        populateAircraftDropdown();
-
-        // Set selected values after populating dropdowns
-        const airlineId = airlinesData.find(a => a.code === flight.airlineCode)?.id;
-        const aircraftId = flight.aircraftId;
-        document.getElementById('airline').value = airlineId;
-        document.getElementById('aircraft').value = aircraftId;
-        document.getElementById('origin').value = flight.originCode;
-        document.getElementById('destination').value = flight.destinationCode;
-
+    function editFlight() {
         // Update modal title and button text
         flightModalTitle.textContent = 'Edit Flight';
         saveFlightBtn.textContent = 'Update Flight';
 
         openModal('flight-form-modal');
-      }
-    }
-
-    // Function to delete flight
-    function deleteFlight(id) {
-      showConfirmation('Are you sure you want to delete this flight?', () => {
-        const index = flightsData.findIndex(f => f.id === id);
-        if (index !== -1) {
-          flightsData.splice(index, 1);
-          populateFlightsTable();
-          alert('Flight deleted successfully!');
-        }
-      });
     }
   });
 </script>

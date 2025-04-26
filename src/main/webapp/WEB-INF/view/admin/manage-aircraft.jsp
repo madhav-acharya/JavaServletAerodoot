@@ -164,6 +164,10 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const savedTab = localStorage.getItem('activeTab');
+    if (savedTab) {
+      updateActiveMenuItem(savedTab);
+    }
     // Populate aircraft table
     populateAircraftTable();
 
@@ -195,91 +199,11 @@
     cancelAircraftBtn.addEventListener('click', () => closeModal('aircraft-form-modal'));
 
     saveAircraftBtn.addEventListener('click', () => {
-      if (aircraftForm.checkValidity()) {
-        const aircraftId = document.getElementById('aircraft-id').value;
-        const isEditing = aircraftId !== '';
-
-        // Get form values
-        const registration = document.getElementById('registration').value;
-        const manufacturer = document.getElementById('manufacturer').value;
-        const model = document.getElementById('model').value;
-        const year = document.getElementById('year').value;
-        const capacity = document.getElementById('aircraft-capacity').value;
-        const status = document.getElementById('aircraft-status').value;
-        const lastMaintenance = document.getElementById('last-maintenance').value;
-
-        // Create aircraft object
-        const aircraft = {
-          id: isEditing ? aircraftId : (aircraftData.length + 1).toString(),
-          registration,
-          manufacturer,
-          model,
-          year: parseInt(year),
-          capacity: parseInt(capacity),
-          status,
-          lastMaintenance
-        };
-
-        if (isEditing) {
-          // Update existing aircraft
-          const index = aircraftData.findIndex(a => a.id === aircraftId);
-          if (index !== -1) {
-            aircraftData[index] = aircraft;
-          }
-        } else {
-          // Add new aircraft
-          aircraftData.push(aircraft);
-        }
-
-        // Refresh aircraft table
-        populateAircraftTable();
         closeModal('aircraft-form-modal');
-
-        // Show success message
-        alert(isEditing ? 'Aircraft updated successfully!' : 'Aircraft added successfully!');
-      } else {
-        // Trigger form validation
-        aircraftForm.reportValidity();
-      }
     });
 
     // Function to populate aircraft table
     function populateAircraftTable() {
-      const tableBody = document.querySelector('#aircraft-table tbody');
-      tableBody.innerHTML = '';
-
-      aircraftData.forEach(aircraft => {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-                        <td>${aircraft.registration}</td>
-                        <td>${aircraft.manufacturer}</td>
-                        <td>${aircraft.model}</td>
-                        <td>${aircraft.year}</td>
-                        <td>${aircraft.capacity}</td>
-                        <td><span class="status-badge ${aircraft.status}">${aircraft.status.charAt(0).toUpperCase() + aircraft.status.slice(1)}</span></td>
-                        <td>${aircraft.lastMaintenance}</td>
-                        <td>
-                            <div class="actions">
-                                <button class="action-btn edit-btn" title="Edit" data-id="${aircraft.id}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                </button>
-                                <button class="action-btn delete-btn" title="Delete" data-id="${aircraft.id}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                        <path d="M3 6h18"></path>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                    `;
-
-        tableBody.appendChild(row);
-      });
 
       // Add event listeners for edit and delete buttons
       document.querySelectorAll('#aircraft-table .edit-btn').forEach(btn => {
@@ -292,45 +216,17 @@
     }
 
     // Function to edit aircraft
-    function editAircraft(id) {
-      const aircraft = aircraftData.find(a => a.id === id);
-      if (aircraft) {
-        // Set form values
-        document.getElementById('aircraft-id').value = aircraft.id;
-        document.getElementById('registration').value = aircraft.registration;
-        document.getElementById('manufacturer').value = aircraft.manufacturer;
-        document.getElementById('model').value = aircraft.model;
-        document.getElementById('year').value = aircraft.year;
-        document.getElementById('aircraft-capacity').value = aircraft.capacity;
-        document.getElementById('aircraft-status').value = aircraft.status;
-        document.getElementById('last-maintenance').value = aircraft.lastMaintenance;
+    function editAircraft() {
 
         // Update modal title and button text
         aircraftModalTitle.textContent = 'Edit Aircraft';
         saveAircraftBtn.textContent = 'Update Aircraft';
 
         openModal('aircraft-form-modal');
-      }
     }
 
     // Function to delete aircraft
     function deleteAircraft(id) {
-      // Check if aircraft is used in any flights
-      const isUsed = flightsData.some(f => f.aircraftId === id);
-
-      if (isUsed) {
-        alert('Cannot delete this aircraft as it is assigned to one or more flights.');
-        return;
-      }
-
-      showConfirmation('Are you sure you want to delete this aircraft?', () => {
-        const index = aircraftData.findIndex(a => a.id === id);
-        if (index !== -1) {
-          aircraftData.splice(index, 1);
-          populateAircraftTable();
-          alert('Aircraft deleted successfully!');
-        }
-      });
     }
   });
 </script>

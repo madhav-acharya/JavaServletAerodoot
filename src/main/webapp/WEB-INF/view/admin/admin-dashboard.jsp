@@ -108,7 +108,10 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('Page loaded');
+    const savedTab = localStorage.getItem('activeTab');
+    if (savedTab) {
+      updateActiveMenuItem(savedTab);
+    }
     // Booking Trends Chart
     const bookingTrendsCtx = document.getElementById('booking-trends-chart')?.getContext('2d');
     if (bookingTrendsCtx) {

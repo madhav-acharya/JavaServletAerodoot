@@ -180,6 +180,10 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const savedTab = localStorage.getItem('activeTab');
+    if (savedTab) {
+      updateActiveMenuItem(savedTab);
+    }
     // Dark mode toggle
     const darkModeToggle = document.getElementById('dark-mode-toggle');
 
