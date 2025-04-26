@@ -1,6 +1,8 @@
 package com.example.aerodoot.dao;
 
+import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.Passenger;
+import com.example.aerodoot.model.User;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.Connection;
@@ -36,5 +38,40 @@ public class PassengerDAO {
         }
 
         return -1;
+    }
+
+    public static Passenger getPassengerByUserId(int userId) throws SQLException {
+        String sql = "SELECT * FROM Passenger WHERE userId = ?";
+
+        try (Connection con = DbConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Passenger passenger = new Passenger();
+                passenger.setPassengerId(rs.getInt("passengerId"));
+                passenger.setPassportNumber(rs.getString("passportNumber"));
+                passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
+                passenger.setGender(rs.getString("gender"));
+                passenger.setAddress(rs.getString("address"));
+                passenger.setProfilePicture(rs.getBytes("profilePicture"));
+                passenger.setUserId(rs.getInt("userId"));
+                return passenger;
+            } else {
+                return null; // No passenger found for given userId
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static PassengerDashboardData getPassengerDataByUserId(int userId) throws SQLException {
+        User user = UserDAO.getUserByUserIdOnly(userId);
+        Passenger passenger = getPassengerByUserId(userId);
+
+        return new PassengerDashboardData(user, passenger);
     }
 }

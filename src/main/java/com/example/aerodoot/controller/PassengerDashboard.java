@@ -1,6 +1,8 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.dao.PassengerDAO;
 import com.example.aerodoot.dao.UserDAO;
+import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,8 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.sql.SQLException;
+import java.util.Base64;
 
 @WebServlet("/passenger/dashboard")
 public class PassengerDashboard extends HttpServlet {
@@ -20,10 +25,28 @@ public class PassengerDashboard extends HttpServlet {
         HttpSession session = request.getSession(false);
         int userId = (int) session.getAttribute("userId");
 
+        System.out.println("userID of passenger Dashboard " + userId);
+
         System.out.println(userId + " " + "from passenger Dashboard");
         try {
-            User user = UserDAO.getUserByUserIdOnly(userId);
-            request.setAttribute("user", user);
+
+            PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
+
+            byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
+            String base64Image = null;
+            String mimeType = null;
+
+            if (profilePicture != null && profilePicture.length > 0) {
+                base64Image = Base64.getEncoder().encodeToString(profilePicture);
+                mimeType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(profilePicture));
+            }
+
+            request.setAttribute("profileImage", base64Image);
+            request.setAttribute("mimeType", mimeType);
+            request.setAttribute("passenger", passengerData);
+            System.out.println(passengerData.getUser().getFirstName());
+            System.out.println(passengerData.getUser().getPhoneNumber());
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

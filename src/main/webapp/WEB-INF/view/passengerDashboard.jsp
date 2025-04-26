@@ -13,17 +13,17 @@
 <div class="container">
     <header class="dashboard-header">
         <div class="greeting">
-            <%
-                int hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
-                String greeting = hour < 12 ? "Good Morning" : (hour < 18 ? "Good Afternoon" : "Good Evening");
-            %>
-            <c:set var="username" value="${sessionScope.user}" />
-            <h1><%= greeting %>, <span id="passenger-name">${username.firstName} ${username.lastName}</span></h1>
+            <h1>Namaste, <span id="passenger-name">${passenger.user.firstName} ${passenger.user.lastName}</span></h1>
             <p>Welcome to your passenger dashboard. Manage your flights and bookings here.</p>
         </div>
         <div class="profile-section">
             <div class="profile-image">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-04-22%20111642-gdcsMawOs661yDsYAZ4f3WJNW3ePdl.png" alt="Profile" id="profile-img">
+                <c:if test="${not empty profileImage}">
+                    <img src="data:${mimeType};base64,${profileImage}" />
+                </c:if>
+                <c:if test="${empty profileImage}">
+                    <img src="" />
+                </c:if>
             </div>
             <button class="btn-edit" id="edit-profile-btn">
                 <i class="fas fa-user"></i> Edit Profile
@@ -170,7 +170,7 @@
         <div class="booking-row">
             <div class="booking-card">
                 <div class="booking-header">
-                    <div class="booking-number">
+                    <div class="booking-number">-
                         <i class="fas fa-ticket-alt"></i> Booking #101
                     </div>
                     <div class="booking-status completed">Completed</div>
@@ -244,23 +244,73 @@
             <p class="modal-description">Make changes to your profile here. Click save when you're done.</p>
 
             <div class="profile-photo-section">
-                <div class="profile-photo">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-04-22%20111642-gdcsMawOs661yDsYAZ4f3WJNW3ePdl.png" alt="Profile" id="modal-profile-img">
+                <c:if test="${not empty profileImage}">
+                    <img src="data:${mimeType};base64,${profileImage}" class="profile-photo" id="modal-profile-img" alt="Profile Photo" />
+                </c:if>
+                <c:if test="${empty profileImage}">
+                    <img src="" id="modal-profile-img" alt="Default Profile Photo" />
+                </c:if>
+                <div class="profile-picture-chnage-">
+                    <button class="upload-btn"><i class="fas fa-camera"></i> Select Photo</button>
+                    <input type="file" name="profilePicture" id="profile-upload" accept="image/*" />
                 </div>
-                <button class="btn-photo" id="change-photo-btn">
-                    <i class="fas fa-camera"></i> Change Photo
-                </button>
             </div>
 
             <div class="form-group">
                 <label for="profile-name">Name</label>
-                <input type="text" id="profile-name" value="John Passenger" class="form-input">
+                <input type="text" id="profile-name" value="${passenger.user.firstName} ${passenger.user.lastName}" class="form-input">
             </div>
 
             <div class="form-group">
-                <label for="profile-email">Email</label>
-                <input type="email" id="profile-email" value="passenger@aerodoot.com" class="form-input">
+                <div style="display: flex;">
+                    <label for="profile-email">Email</label>
+                    <input type="email" id="profile-email" value="${passenger.user.email}" class="form-input">
+                    <label for="profile-phoneNumber">PhoneNumber</label>
+                    <input type="text" id="profile-phoneNumber" value="${passenger.user.phoneNumber}" class="form-input">
+                </div>
             </div>
+
+            <div class="form-group">
+                <label class="label-with-icon">
+                    <i class="fas fa-venus-mars"></i> Gender
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="male" name="gender" value="MALE" required>
+                        <label for="male"><i class="fas fa-male"></i> Male</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="female" name="gender" value="FEMALE">
+                        <label for="female"><i class="fas fa-female"></i> Female</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="gender" value="OTHER">
+                        <label for="other"><i class="fas fa-user"></i> Other</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passportNumber">
+                    <i class="fas fa-passport"></i> Passport Number
+                </label>
+                <input type="text" id="passportNumber" name="passportNumber" value="${passenger.passenger.passportNumber}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfBirth">
+                    <i class="fas fa-calendar-alt"></i> Date of Birth
+                </label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" value="${passenger.passenger.dateOfBirth}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">
+                    <i class="fas fa-home"></i> Address
+                </label>
+                <input type="text" id="address" name="address" value="${passenger.passenger.address}" required>
+            </div>
+
         </div>
         <div class="modal-footer">
             <button class="btn-secondary" id="cancel-changes">Cancel</button>
