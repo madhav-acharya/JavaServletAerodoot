@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/passengerDashboard.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/agentDashboard.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/adminDashboard.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
