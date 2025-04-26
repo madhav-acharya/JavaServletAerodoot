@@ -103,6 +103,7 @@
     </div>
   </main>
 </div>
+<script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     console.log('Page loaded');

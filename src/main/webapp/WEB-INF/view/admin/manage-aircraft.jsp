@@ -26,5 +26,6 @@
     </div>
   </main>
 </div>
+<script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 </body>
 </html>
