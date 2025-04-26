@@ -1,0 +1,264 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: mac
+  Date: 26/04/2025
+  Time: 6:52 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+  <title>Title</title>
+</head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+<body>
+<div class="dashboard-container">
+  <jsp:include page="../../../admin-sidebar.jsp" />
+  <main class="main-content" id="main-content">
+    <jsp:include page="../../../admin-header.jsp"/>
+    <div class="content" id="content">
+      <div class="tabs">
+        <div class="tabs-list">
+          <button class="tab-button active">Bookings</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Booking Management</h3>
+          <p class="card-description">View and manage all passenger bookings</p>
+        </div>
+        <div class="card-content">
+          <div class="filters">
+            <div class="filter-group">
+              <label for="search-bookings">Search Bookings</label>
+              <input type="text" id="search-bookings" class="input" placeholder="Search by booking ID, passenger name, flight...">
+            </div>
+            <div class="filter-group">
+              <label for="booking-status-filter">Status</label>
+              <select id="booking-status-filter" class="select">
+                <option value="all">All Statuses</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="pending">Pending</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="refunded">Refunded</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Booking Date</label>
+              <div class="date-range-picker">
+                <input type="date" id="booking-start-date" class="input date-input" value="2023-04-28">
+                <span>to</span>
+                <input type="date" id="booking-end-date" class="input date-input" value="2023-05-15">
+              </div>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="bookings-table">
+              <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Passenger</th>
+                <th>Flight</th>
+                <th>Route</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <!-- Booking data will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <button class="pagination-btn" id="bookings-first-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="11 17 6 12 11 7"></polyline>
+                <polyline points="18 17 13 12 18 7"></polyline>
+              </svg>
+            </button>
+            <button class="pagination-btn" id="bookings-prev-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="pagination-info">
+              <input type="text" class="input pagination-input" id="bookings-current-page" value="1">
+              <span>of <span id="bookings-total-pages">1</span></span>
+            </div>
+            <button class="pagination-btn" id="bookings-next-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <button class="pagination-btn" id="bookings-last-page-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="13 17 18 12 13 7"></polyline>
+                <polyline points="6 17 11 12 6 7"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Status Modal -->
+      <div class="modal" id="booking-status-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Update Booking Status</h3>
+            <button class="modal-close" id="close-booking-status-modal">×</button>
+          </div>
+          <div class="modal-body">
+            <form id="booking-status-form">
+              <input type="hidden" id="booking-id">
+              <div class="form-group">
+                <label for="booking-status">Status</label>
+                <select id="booking-status" class="select" required>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="pending">Pending</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="refunded">Refunded</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="status-notes">Notes</label>
+                <textarea id="status-notes" class="textarea" placeholder="Reason for status change" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline" id="cancel-booking-status-btn">Cancel</button>
+            <button class="btn btn-primary" id="save-booking-status-btn">Update Status</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Populate bookings table
+    populateBookingsTable();
+
+    // Setup search functionality
+    searchTable('bookings-table', 'search-bookings');
+
+    // Setup status filter
+    setupTableFilter('bookings-table', 'booking-status-filter', 5);
+
+    // Setup date range filter
+    setupDateRangeFilter('bookings-table', 'booking-start-date', 'booking-end-date', 4);
+
+    // Booking status modal
+    const closeBookingStatusModalBtn = document.getElementById('close-booking-status-modal');
+    const cancelBookingStatusBtn = document.getElementById('cancel-booking-status-btn');
+    const saveBookingStatusBtn = document.getElementById('save-booking-status-btn');
+    const bookingStatusForm = document.getElementById('booking-status-form');
+
+    closeBookingStatusModalBtn.addEventListener('click', () => closeModal('booking-status-modal'));
+    cancelBookingStatusBtn.addEventListener('click', () => closeModal('booking-status-modal'));
+
+    saveBookingStatusBtn.addEventListener('click', () => {
+      if (bookingStatusForm.checkValidity()) {
+        const bookingId = document.getElementById('booking-id').value;
+        const status = document.getElementById('booking-status').value;
+
+        // Update booking status
+        const index = bookingsData.findIndex(b => b.id === bookingId);
+        if (index !== -1) {
+          bookingsData[index].status = status;
+        }
+
+        // Refresh bookings table
+        populateBookingsTable();
+        closeModal('booking-status-modal');
+
+        // Show success message
+        alert('Booking status updated successfully!');
+      } else {
+        // Trigger form validation
+        bookingStatusForm.reportValidity();
+      }
+    });
+
+    // Function to populate bookings table
+    function populateBookingsTable() {
+      const tableBody = document.querySelector('#bookings-table tbody');
+      tableBody.innerHTML = '';
+
+      bookingsData.forEach(booking => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+                        <td>${booking.bookingId}</td>
+                        <td>${booking.passengerName}</td>
+                        <td>${booking.flightNumber}</td>
+                        <td>${booking.route}</td>
+                        <td>${booking.bookingDate}</td>
+                        <td><span class="status-badge ${booking.status}">${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}</span></td>
+                        <td>${booking.amount}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="action-btn edit-status-btn" title="Edit Status" data-id="${booking.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="action-btn delete-btn" title="Delete" data-id="${booking.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                        <path d="M3 6h18"></path>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+
+        tableBody.appendChild(row);
+      });
+
+      // Add event listeners for edit status and delete buttons
+      document.querySelectorAll('#bookings-table .edit-status-btn').forEach(btn => {
+        btn.addEventListener('click', () => editBookingStatus(btn.getAttribute('data-id')));
+      });
+
+      document.querySelectorAll('#bookings-table .delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => deleteBooking(btn.getAttribute('data-id')));
+      });
+    }
+
+    // Function to edit booking status
+    function editBookingStatus(id) {
+      const booking = bookingsData.find(b => b.id === id);
+      if (booking) {
+        document.getElementById('booking-id').value = booking.id;
+        document.getElementById('booking-status').value = booking.status;
+        document.getElementById('status-notes').value = '';
+
+        openModal('booking-status-modal');
+      }
+    }
+
+    // Function to delete booking
+    function deleteBooking(id) {
+      showConfirmation('Are you sure you want to delete this booking?', () => {
+        const index = bookingsData.findIndex(b => b.id === id);
+        if (index !== -1) {
+          bookingsData.splice(index, 1);
+          populateBookingsTable();
+          alert('Booking deleted successfully!');
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
+
