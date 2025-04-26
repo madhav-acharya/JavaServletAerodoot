@@ -12,8 +12,17 @@
 </head>
 <body>
 <div class="dashboard-container">
+  <jsp:include page="../../../admin-sidebar.jsp" />
+  <main class="main-content" id="main-content">
     <jsp:include page="../../../admin-header.jsp"/>
-
+    <div class="content" id="content">
+      <!-- Content will be loaded here -->
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </div>
+  </main>
 </div>
 </body>
 </html>
