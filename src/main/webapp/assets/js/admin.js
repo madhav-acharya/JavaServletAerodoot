@@ -330,3 +330,14 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;
 }
+
+function checkmode()
+{
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (isDarkMode) {
+        console.log("System is in Dark Mode");
+    } else {
+        console.log("System is in Light Mode");
+    }
+}

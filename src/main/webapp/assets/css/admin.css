@@ -993,7 +993,7 @@ input:checked + .toggle-slider:before {
 }
 
 /* Dark mode support */
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     :root {
         --primary-color: #3b82f6;
         --primary-hover: #2563eb;
@@ -1040,4 +1040,4 @@ input:checked + .toggle-slider:before {
     .action-btn:hover {
         background-color: #334155;
     }
-} */
+}

@@ -108,6 +108,7 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    checkmode();
     const savedTab = localStorage.getItem('activeTab');
     if (savedTab) {
       updateActiveMenuItem(savedTab);
@@ -156,7 +157,7 @@
       const flightDistributionConfig = {
         type: 'bar',
         data: {
-          labels: ['North America', 'Europe', 'Asia', 'Australia', 'Africa', 'South America'],
+          labels: ['Kathmandu', 'Pokhara', 'Lumbini', 'Biratnagar', 'Dharan', 'Chitwan'],
           datasets: [{
             label: 'Flights',
             data: [125, 95, 86, 45, 32, 68],
