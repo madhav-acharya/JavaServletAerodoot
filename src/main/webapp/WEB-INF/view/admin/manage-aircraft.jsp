@@ -10,6 +10,7 @@
 <head>
     <title>Title</title>
 </head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 <body>
 <div class="dashboard-container">
   <jsp:include page="../../../admin-sidebar.jsp" />
