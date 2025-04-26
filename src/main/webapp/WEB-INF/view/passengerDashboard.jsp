@@ -18,7 +18,12 @@
         </div>
         <div class="profile-section">
             <div class="profile-image">
-                <img src="">
+                <c:if test="${not empty profileImage}">
+                    <img src="data:${mimeType};base64,${profileImage}" />
+                </c:if>
+                <c:if test="${empty profileImage}">
+                    <img src="" />
+                </c:if>
             </div>
             <button class="btn-edit" id="edit-profile-btn">
                 <i class="fas fa-user"></i> Edit Profile
@@ -165,7 +170,7 @@
         <div class="booking-row">
             <div class="booking-card">
                 <div class="booking-header">
-                    <div class="booking-number">
+                    <div class="booking-number">-
                         <i class="fas fa-ticket-alt"></i> Booking #101
                     </div>
                     <div class="booking-status completed">Completed</div>
@@ -239,12 +244,16 @@
             <p class="modal-description">Make changes to your profile here. Click save when you're done.</p>
 
             <div class="profile-photo-section">
-                <div class="profile-photo">
-                    <img src="${passenger.passenger.profilePicture}" id="modal-profile-img">
+                <c:if test="${not empty profileImage}">
+                    <img src="data:${mimeType};base64,${profileImage}" class="profile-photo" id="modal-profile-img" alt="Profile Photo" />
+                </c:if>
+                <c:if test="${empty profileImage}">
+                    <img src="" id="modal-profile-img" alt="Default Profile Photo" />
+                </c:if>
+                <div class="profile-picture-chnage-">
+                    <button class="upload-btn"><i class="fas fa-camera"></i> Select Photo</button>
+                    <input type="file" name="profilePicture" id="profile-upload" accept="image/*" />
                 </div>
-                <button class="btn-photo" id="change-photo-btn">
-                    <i class="fas fa-camera"></i> Change Photo
-                </button>
             </div>
 
             <div class="form-group">
@@ -256,7 +265,7 @@
                 <div style="display: flex;">
                     <label for="profile-email">Email</label>
                     <input type="email" id="profile-email" value="${passenger.user.email}" class="form-input">
-                    <label for="profile-email">Email</label>
+                    <label for="profile-phoneNumber">PhoneNumber</label>
                     <input type="text" id="profile-phoneNumber" value="${passenger.user.phoneNumber}" class="form-input">
                 </div>
             </div>

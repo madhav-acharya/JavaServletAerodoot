@@ -11,8 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.sql.SQLException;
+import java.util.Base64;
 
 @WebServlet("/passenger/dashboard")
 public class PassengerDashboard extends HttpServlet {
@@ -28,9 +31,21 @@ public class PassengerDashboard extends HttpServlet {
         try {
 
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
+
+            byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
+            String base64Image = null;
+            String mimeType = null;
+
+            if (profilePicture != null && profilePicture.length > 0) {
+                base64Image = Base64.getEncoder().encodeToString(profilePicture);
+                mimeType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(profilePicture));
+            }
+
+            request.setAttribute("profileImage", base64Image);
+            request.setAttribute("mimeType", mimeType);
             request.setAttribute("passenger", passengerData);
             System.out.println(passengerData.getUser().getFirstName());
-            System.out.println(passengerData.getPassenger().getGender());
+            System.out.println(passengerData.getUser().getPhoneNumber());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
