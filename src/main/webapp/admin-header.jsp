@@ -25,4 +25,3 @@
         <div class="user-avatar">AD</div>
     </div>
 </header>
-
