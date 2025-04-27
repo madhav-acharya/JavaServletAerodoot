@@ -262,12 +262,13 @@
             </div>
 
             <div class="form-group">
-                <div style="display: flex;">
                     <label for="profile-email">Email</label>
                     <input type="email" id="profile-email" value="${passenger.user.email}" class="form-input">
-                    <label for="profile-phoneNumber">PhoneNumber</label>
-                    <input type="text" id="profile-phoneNumber" value="${passenger.user.phoneNumber}" class="form-input">
-                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profile-phoneNumber">PhoneNumber</label>
+                <input type="text" id="profile-phoneNumber" value="${passenger.user.phoneNumber}" class="form-input">
             </div>
 
             <div class="form-group">
@@ -318,7 +319,6 @@
         </div>
     </div>
 </div>
-
 <script src="${pageContext.request.contextPath}/assets/js/passangerDashboard.js"></script>
 <jsp:include page="../../tail.jsp" />
 
