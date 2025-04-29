@@ -200,20 +200,7 @@
                   <label for="flight-number">Flight Number</label>
                   <input type="text" id="flight-number" class="input" placeholder="e.g. AA1234" required>
                 </div>
-                <div class="form-group">
-                  <label for="airline">Airline</label>
-                  <select id="airline" class="select" required>
-                    <option value="">Select Airline</option>
-                    <!-- Airlines will be populated by JavaScript -->
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="aircraft">Aircraft</label>
-                  <select id="aircraft" class="select" required>
-                    <option value="">Select Aircraft</option>
-                    <!-- Aircraft will be populated by JavaScript -->
-                  </select>
-                </div>
+
                 <div class="form-group">
                   <label for="origin">Origin</label>
                   <select id="origin" class="select" required>
@@ -270,10 +257,23 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="capacity">Capacity</label>
-                  <input type="number" id="capacity" class="input" placeholder="Total seats" value="200" required>
+                  <label for="business-capacity">Seat Capacity(Business)</label>
+                  <input type="number" id="business-capacity" class="input" placeholder="Total seats" value="200" required>
+                </div>
+                <div class="form-group">
+                  <label for="economy-capacity">Seat Capacity(Economy)</label>
+                  <input type="number" id="economy-capacity" class="input" placeholder="Total seats" value="200" required>
+                </div>
+                <div class="form-group">
+                  <label for="business-price">Ticket Price(Business)</label>
+                  <input type="number" id="business-price" class="input" placeholder="Total price" value="2000" required>
+                </div>
+                <div class="form-group">
+                  <label for="economy-price">Ticket Price(Economy)</label>
+                  <input type="number" id="economy-price" class="input" placeholder="Total Price" value="2000" required>
                 </div>
               </div>
+
               <div class="form-group">
                 <label for="notes">Notes</label>
                 <textarea id="notes" class="textarea" placeholder="Additional information about this flight" rows="3"></textarea>
