@@ -278,20 +278,23 @@
         closeUserEditModalBtn.addEventListener('click', () => closeModal('user-edit-modal'));
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
 
+        function editUser() {
+            // Update modal title and button text
+            userModalTitle.textContent = 'Edit User';
+            saveUserBtn.textContent = 'Update User';
+
+            openModal('user-form-modal');
+        }
+        const editUserbtn = document.querySelectorAll('.edit-btn');
+        editUserbtn.forEach(editBtn =>{
+            editBtn.addEventListener('click', ()=>{
+                editUser();
+            });
+        })
+
         saveUserBtn.addEventListener('click', () => {
                 closeModal('user-edit-modal');
         });
-
-        // Add User modal event listeners
-        const addUserButtonMain = document.getElementById('add-user-btn');
-        const closeAddUserModalBtn = document.getElementById('close-add-user-modal');
-        const cancelAddUserBtn = document.getElementById('cancel-add-user-btn');
-        const createUserBtn = document.getElementById('create-user-btn');
-        const addUserForm = document.getElementById('add-user-form');
-
-        addUserButtonMain.addEventListener('click', () => openModal('add-user-modal'));
-        closeAddUserModalBtn.addEventListener('click', () => closeModal('add-user-modal'));
-        cancelAddUserBtn.addEventListener('click', () => closeModal('add-user-modal'));
     });
 </script>
 

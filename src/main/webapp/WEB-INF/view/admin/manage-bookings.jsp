@@ -66,6 +66,7 @@
                 <th>Total Price</th>
                 <th>Booking Status</th>
                 <th>Flight ID</th>
+                <th>Passenger ID</th>
                 <th>Actions</th>
               </tr>
               </thead>

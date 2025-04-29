@@ -312,6 +312,7 @@
     const saveFlightBtn = document.getElementById('save-flight-btn');
     const flightForm = document.getElementById('flight-form');
     const flightModalTitle = document.getElementById('flight-modal-title');
+    const editFlightbtn = document.querySelectorAll('.edit-btn');
 
     addFlightBtn.addEventListener('click', () => {
       document.getElementById('flight-id').value = '';
@@ -331,6 +332,11 @@
 
         openModal('flight-form-modal');
     }
+    editFlightbtn.forEach(editBtn =>{
+      editBtn.addEventListener('click', ()=>{
+        editFlight();
+      });
+    })
   });
 </script>
 </body>

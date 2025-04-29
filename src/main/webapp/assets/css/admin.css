@@ -755,7 +755,6 @@ label {
     align-items: center;
     position: sticky;
     top: 0;
-    background-color: white;
     z-index: 1;
 }
 
@@ -785,7 +784,6 @@ label {
     gap: 16px;
     position: sticky;
     bottom: 0;
-    background-color: white;
     z-index: 1;
 }
 
@@ -1021,8 +1019,8 @@ input:checked + .toggle-slider:before {
     }
 
     .sidebar, .header, .card, .modal-content, .pagination-btn, .btn-outline {
-        background-color: #1e293b;
-        border-color: var(--gray-200);
+        background-color: #1e293b!important;
+        border-color: var(--gray-200)!important;
     }
 
     .data-table th {
