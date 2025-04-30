@@ -205,52 +205,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Add User Modal -->
-            <div class="modal" id="add-user-modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Add New User</h3>
-                        <button class="modal-close" id="close-add-user-modal">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="add-user-form">
-                            <div class="form-group">
-                                <label for="new-first-name">First Name</label>
-                                <input type="text" id="new-first-name" class="input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-last-name">Last Name</label>
-                                <input type="text" id="new-last-name" class="input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-email">Email</label>
-                                <input type="email" id="new-email" class="input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-password">Password</label>
-                                <input type="password" id="new-password" class="input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-phone-number">Phone Number</label>
-                                <input type="tel" id="new-phone-number" class="input">
-                            </div>
-                            <div class="form-group">
-                                <label for="new-user-type">User Type</label>
-                                <select id="new-user-type" class="select" required>
-                                    <option value="PASSENGER">Passenger</option>
-                                    <option value="AGENT">Agent</option>
-                                    <option value="ADMIN">Admin</option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline" id="cancel-add-user-btn">Cancel</button>
-                        <button class="btn btn-primary" id="create-user-btn">Create User</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 </div>
@@ -279,11 +233,7 @@
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
 
         function editUser() {
-            // Update modal title and button text
-            userModalTitle.textContent = 'Edit User';
-            saveUserBtn.textContent = 'Update User';
-
-            openModal('user-form-modal');
+            openModal('user-edit-modal');
         }
         const editUserbtn = document.querySelectorAll('.edit-btn');
         editUserbtn.forEach(editBtn =>{
