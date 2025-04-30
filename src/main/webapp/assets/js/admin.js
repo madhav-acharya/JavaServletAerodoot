@@ -1,4 +1,3 @@
-// Modal handling functions
 function openModal(modalId) {
     document.getElementById(modalId).classList.add('active');
 }
@@ -329,6 +328,16 @@ function handleTouchMove(evt) {
 
     xDown = null;
     yDown = null;
+}
+
+function showSidebar() {
+    document.getElementById('sidebar').classList.remove('collapsed');
+    document.querySelector('.main-content').classList.remove('expanded');
+}
+
+function hideSidebar() {
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.querySelector('.main-content').classList.add('expanded');
 }
 
 function checkmode()

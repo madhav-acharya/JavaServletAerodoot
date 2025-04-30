@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    localStorage.removeItem("activeTab");
-
     // Calendar functionality
     const calendarPopup = document.getElementById('calendar-popup');
     const calendarMonth = document.getElementById('calendar-month');

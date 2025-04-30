@@ -25,3 +25,23 @@
         <div class="user-avatar">AD</div>
     </div>
 </header>
+<script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+<script>
+    localStorage.setItem("sidebar", "opened");
+
+    document.getElementById("sidebar-toggle").addEventListener("click" , () =>{
+        console.log("here....")
+        if (localStorage.getItem("sidebar") == "opened")
+        {
+            localStorage.setItem("sidebar", "closed")
+            console.log("hiding sidebar....")
+            hideSidebar();
+        }
+        else
+        {
+            localStorage.setItem("sidebar", "opened")
+            console.log("showing sidebar....")
+            showSidebar();
+        }
+    })
+</script>
