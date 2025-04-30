@@ -203,9 +203,6 @@
     if (savedTab) {
       updateActiveMenuItem(savedTab);
     }
-    // Populate bookings table
-    populateBookingsTable();
-
     // Setup search functionality
     searchTable('bookings-table', 'search-bookings');
 
@@ -234,6 +231,7 @@
     const editBookingbtn = document.querySelectorAll('.edit-btn');
     editBookingbtn.forEach(editBtn =>{
       editBtn.addEventListener('click', ()=>{
+        console.log("editing bookings...")
         editBooking();
       });
     })
