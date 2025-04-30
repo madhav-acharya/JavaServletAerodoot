@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/view/agentDashboard.jsp").forward(request, response);
             }
             if (user.getUserType().equals("ADMIN")) {
-                request.getRequestDispatcher("/WEB-INF/view/admin/manage-aircraft.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/view/admin/admin-dashboard.jsp").forward(request, response);
             }
         } else {
             // Login failed

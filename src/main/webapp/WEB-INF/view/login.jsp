@@ -70,6 +70,9 @@
             <p class="register-link">Don't have an account? <a href="${pageContext.request.contextPath}/register">Register here</a></p>
         </div>
     </div>
+    <script>
+        localStorage.setItem("activeTab", "overview");
+    </script>
 </div>
 </body>
 </html>
