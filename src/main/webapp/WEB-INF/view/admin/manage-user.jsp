@@ -169,14 +169,14 @@
                                 <input type="tel" id="phone-number" name="phoneNumber" class="input" value="<%=request.getAttribute("phoneNumber")%>">
                             </div>
 
-<%--                            <div class="form-group">--%>
-<%--                                <label for="user-type">User Type</label>--%>
-<%--                                <select id="user-type" name="userType" class="select" required>--%>
-<%--                                    <option value="PASSENGER" ${editUser.userType == 'PASSENGER' ? 'selected' : ''}>Passenger</option>--%>
-<%--                                    <option value="AGENT" ${editUser.userType == 'AGENT' ? 'selected' : ''}>Agent</option>--%>
-<%--                                    <option value="ADMIN" ${editUser.userType == 'ADMIN' ? 'selected' : ''}>Admin</option>--%>
-<%--                                </select>--%>
-<%--                            </div>--%>
+                            <div class="form-group">
+                                <label for="user-type">User Type</label>
+                                <select id="user-type" name="userType" class="select" required>
+                                    <option value="PASSENGER" <%= request.getAttribute("userType") != null && request.getAttribute("userType").equals("PASSENGER") ? "selected" : "" %>>Passenger</option>
+                                    <option value="AGENT" <%= request.getAttribute("userType") != null && request.getAttribute("userType").equals("AGENT") ? "selected" : "" %>>Agent</option>
+                                    <option value="ADMIN" <%= request.getAttribute("userType") != null && request.getAttribute("userType").equals("ADMIN") ? "selected" : "" %>>Admin</option>
+                                </select>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">

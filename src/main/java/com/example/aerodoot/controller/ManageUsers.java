@@ -36,6 +36,7 @@ public class ManageUsers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Its post");
+        System.out.println("action "+ request.getParameter("action"));
             System.out.println("Its edit");
             try {
                 int editId = Integer.parseInt(request.getParameter("userId"));
