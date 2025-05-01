@@ -91,13 +91,17 @@
                                                 </svg>
                                             </button>
                                             </form>
+                                            <form method="post" action="${pageContext.request.contextPath}/admin/manage-user">
                                             <button class="action-btn delete-btn" title="Delete" data-user-id="${user.userId}">
+                                                <input type="hidden"  name="userId" value="${user.userId}">
+                                                <input type="hidden"  name="action" value="delete">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                                                     <path d="M3 6h18"></path>
                                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
                                                     <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                                 </svg>
                                             </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -142,47 +146,50 @@
             <div class="modal" id="user-edit-modal">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Edit User</h3>
+                        <h3 class="modal-title">Edit Users</h3>
                         <button class="modal-close" id="close-user-edit-modal">×</button>
                     </div>
                     <div class="modal-body">
-
+                    <c:if test="${not empty editUser}">
                         <form id="user-edit-form" method="post" action="${pageContext.request.contextPath}/admin/manage-user">
-                            <input type="hidden" id="user-action" name="action" value="edit">
+                            <input type="hidden" id="user-action" name="action" value="update">
+                            <input type="hidden"  name="userId" value="${editUser.userId}">
                             <div class="form-group">
                                 <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" name="firstName" class="input" required value="<%=request.getAttribute("firstName")%>">
+                                <input type="text" id="first-name" name="firstName" class="input" required value="${editUser.firstName}">
                             </div>
 
                             <div class="form-group">
                                 <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" name="lastName" class="input" required value="<%=request.getAttribute("lastName")%>">
+                                <input type="text" id="last-name" name="lastName" class="input" required value="${editUser.lastName}">
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="input" required value="<%=request.getAttribute("email")%>">
+                                <input type="email" id="email" name="email" class="input" required value="${editUser.email}">
                             </div>
 
                             <div class="form-group">
                                 <label for="phone-number">Phone Number</label>
-                                <input type="tel" id="phone-number" name="phoneNumber" class="input" value="<%=request.getAttribute("phoneNumber")%>">
+                                <input type="tel" id="phone-number" name="phoneNumber" class="input" value="${editUser.phoneNumber}">
                             </div>
 
                             <div class="form-group">
-                                <label for="user-type">User Type</label>
+                                <label for="user-type">User Types</label>
                                 <select id="user-type" name="userType" class="select" required>
-                                    <option value="PASSENGER" <%= request.getAttribute("userType") != null && request.getAttribute("userType").equals("PASSENGER") ? "selected" : "" %>>Passenger</option>
-                                    <option value="AGENT" <%= request.getAttribute("userType") != null && request.getAttribute("userType").equals("AGENT") ? "selected" : "" %>>Agent</option>
-                                    <option value="ADMIN" <%= request.getAttribute("userType") != null && request.getAttribute("userType").equals("ADMIN") ? "selected" : "" %>>Admin</option>
+                                    <option value="PASSENGER" ${editUser.userType == 'PASSENGER' ? 'selected' : ''}>Passenger</option>
+                                    <option value="AGENT" ${editUser.userType == 'AGENT' ? 'selected' : ''}>Agent</option>
+                                    <option value="ADMIN" ${editUser.userType == 'ADMIN' ? 'selected' : ''}>Admin</option>
                                 </select>
                             </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline" id="cancel-user-edit-btn">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="save-user-btn">Save Changes</button>
+                            </div>
                         </form>
+                    </c:if>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline" id="cancel-user-edit-btn">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="save-user-btn">Save Changes</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -192,12 +199,10 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
-        window.onload = function() {
-            if (localStorage.getItem("popup") == "opened")
+        if (localStorage.getItem("popup") == "opened")
             {
                 openModal('user-edit-modal');
             }
-        };
         const savedTab = localStorage.getItem('activeTab');
         if (savedTab) {
             updateActiveMenuItem(savedTab);

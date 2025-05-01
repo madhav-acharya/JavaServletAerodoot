@@ -174,6 +174,44 @@ public class UserDAO {
         return user;
     }
 
+    public static boolean updateUser(User user) throws SQLException {
+        String sql = "UPDATE User SET firstName = ?, lastName = ?, email = ?, phoneNumber = ?, userType = ? WHERE userId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getPhoneNumber());
+            ps.setString(5, user.getUserType());
+            ps.setInt(6, user.getUserId());
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Error updating user: " + e.getMessage());
+            return false;
+        }
+    }
+    public static boolean deleteUser(int userId) {
+        String sql = "DELETE FROM User WHERE userId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            int rowsAffected = ps.executeUpdate();
+            System.out.println("user deleted");
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error deleting user: " + e.getMessage());
+            return false;
+        }
+    }
+
 
 }
 
