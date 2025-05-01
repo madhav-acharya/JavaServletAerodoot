@@ -147,5 +147,33 @@ public class UserDAO {
         return users;
     }
 
+    public static User getUserById(int userId) throws SQLException {
+        User user = null;
+        String sql = "SELECT * FROM User WHERE userId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    user = new User();
+                    user.setUserId(rs.getInt("userId"));
+                    user.setFirstName(rs.getString("firstName"));
+                    user.setLastName(rs.getString("lastName"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhoneNumber(rs.getString("phoneNumber"));
+                    user.setUserType(rs.getString("userType"));
+                    user.setCreatedAt(rs.getTimestamp("createdAt"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching user by ID: " + e.getMessage());
+        }
+        return user;
+    }
+
+
 }
 

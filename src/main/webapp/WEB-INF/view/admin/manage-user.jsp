@@ -1,3 +1,4 @@
+<%@ page import="com.example.aerodoot.model.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
@@ -80,13 +81,17 @@
                                     <td>${user.createdAt}</td>
                                     <td>
                                         <div class="actions">
-                                            <button class="action-btn edit-btn" title="Edit" data-user="${user}">
+                                            <form method="post" action="${pageContext.request.contextPath}/admin/manage-user">
+                                                <input type="hidden"  name="userId" value="${user.userId}">
+                                                <input type="hidden"  name="action" value="edit">
+                                            <button class="action-btn edit-btn" title="Edit" data-user-id="${user.userId}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                                                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                                 </svg>
                                             </button>
-                                            <button class="action-btn delete-btn" title="Delete" data-user="${user}">
+                                            </form>
+                                            <button class="action-btn delete-btn" title="Delete" data-user-id="${user.userId}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                                                     <path d="M3 6h18"></path>
                                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
@@ -141,45 +146,42 @@
                         <button class="modal-close" id="close-user-edit-modal">×</button>
                     </div>
                     <div class="modal-body">
-                        <form id="user-edit-form">
-                            <input type="hidden" id="user-id">
+
+                        <form id="user-edit-form" method="post" action="${pageContext.request.contextPath}/admin/manage-user">
+                            <input type="hidden" id="user-action" name="action" value="edit">
                             <div class="form-group">
                                 <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" class="input" required>
+                                <input type="text" id="first-name" name="firstName" class="input" required value="<%=request.getAttribute("firstName")%>">
                             </div>
+
                             <div class="form-group">
                                 <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" class="input" required>
+                                <input type="text" id="last-name" name="lastName" class="input" required value="<%=request.getAttribute("lastName")%>">
                             </div>
+
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="input" required>
+                                <input type="email" id="email" name="email" class="input" required value="<%=request.getAttribute("email")%>">
                             </div>
+
                             <div class="form-group">
                                 <label for="phone-number">Phone Number</label>
-                                <input type="tel" id="phone-number" class="input">
+                                <input type="tel" id="phone-number" name="phoneNumber" class="input" value="<%=request.getAttribute("phoneNumber")%>">
                             </div>
-                            <div class="form-group">
-                                <label for="user-type">User Type</label>
-                                <select id="user-type" class="select" required>
-                                    <option value="PASSENGER">Passenger</option>
-                                    <option value="AGENT">Agent</option>
-                                    <option value="ADMIN">Admin</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="reset-password">Reset Password</label>
-                                <div class="toggle-field">
-                                    <input type="checkbox" id="reset-password" class="toggle">
-                                    <label for="reset-password" class="toggle-label"></label>
-                                    <span class="toggle-text">Send password reset email</span>
-                                </div>
-                            </div>
+
+<%--                            <div class="form-group">--%>
+<%--                                <label for="user-type">User Type</label>--%>
+<%--                                <select id="user-type" name="userType" class="select" required>--%>
+<%--                                    <option value="PASSENGER" ${editUser.userType == 'PASSENGER' ? 'selected' : ''}>Passenger</option>--%>
+<%--                                    <option value="AGENT" ${editUser.userType == 'AGENT' ? 'selected' : ''}>Agent</option>--%>
+<%--                                    <option value="ADMIN" ${editUser.userType == 'ADMIN' ? 'selected' : ''}>Admin</option>--%>
+<%--                                </select>--%>
+<%--                            </div>--%>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-outline" id="cancel-user-edit-btn">Cancel</button>
-                        <button class="btn btn-primary" id="save-user-btn">Save Changes</button>
+                        <button type="submit" class="btn btn-primary" id="save-user-btn">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -188,7 +190,14 @@
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
+        window.onload = function() {
+            if (localStorage.getItem("popup") == "opened")
+            {
+                openModal('user-edit-modal');
+            }
+        };
         const savedTab = localStorage.getItem('activeTab');
         if (savedTab) {
             updateActiveMenuItem(savedTab);
@@ -205,20 +214,14 @@
         const closeUserEditModalBtn = document.getElementById('close-user-edit-modal');
         const cancelUserEditBtn = document.getElementById('cancel-user-edit-btn');
         const saveUserBtn = document.getElementById('save-user-btn');
-        const userEditForm = document.getElementById('user-edit-form');
 
         closeUserEditModalBtn.addEventListener('click', () => closeModal('user-edit-modal'));
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
 
-        function editUser() {
-            openModal('user-edit-modal');
-
-        }
         const editUserbtn = document.querySelectorAll('.edit-btn');
         editUserbtn.forEach(editBtn =>{
             editBtn.addEventListener('click', ()=>{
-                editUser();
-                console.log("user", editUserbtn.data.user);
+                localStorage.setItem("popup", "opened")
             });
         })
 

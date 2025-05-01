@@ -72,6 +72,7 @@
     </div>
     <script>
         localStorage.setItem("activeTab", "overview");
+        localStorage.setItem("popup", "closed");
     </script>
 </div>
 </body>

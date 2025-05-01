@@ -70,7 +70,7 @@ body {
 .sidebar.collapsed {
     width: var(--sidebar-collapsed-width);
     transform: translateX(0);
-    .sidebar-menu-button span,
+    .sidebar-menu-button span, .user-details,
     .sidebar-header .logo span {
         display: none;
     }
