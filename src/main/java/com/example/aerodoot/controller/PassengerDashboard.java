@@ -5,19 +5,19 @@ import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.User;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.Base64;
 
 @WebServlet("/passenger/dashboard")
+@MultipartConfig
 public class PassengerDashboard extends HttpServlet {
 
     @Override
@@ -51,5 +51,41 @@ public class PassengerDashboard extends HttpServlet {
             throw new RuntimeException(e);
         }
         request.getRequestDispatcher("/WEB-INF/view/passengerDashboard.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        System.out.println(session.getAttribute("userId"));
+
+        int userId = (int) session.getAttribute("userId");
+
+        //updating the userdata with UserId
+        String fullName = request.getParameter("fullName");
+        String email = request.getParameter("email");
+        Part profileImg = request.getPart("profilePicture");
+        String phoneNumber = request.getParameter("phoneNumber");
+
+
+        //updating the passengerData with the UserId
+        String passportNumber = request.getParameter("passportNumber");
+        String gender = request.getParameter("gender");
+        String address = request.getParameter("address");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        byte[] profilePicture = null;
+
+        if (profileImg != null || profileImg.getSize() > 0) {
+            try(InputStream inputStream = profileImg.getInputStream()) {
+                profilePicture = inputStream.readAllBytes();
+            }
+        }
+
+
+        System.out.println("the save changed work.");
+        System.out.println(fullName + " " + email + " " + phoneNumber);
+        System.out.println(passportNumber + " " + gender + " " + address + " " + dateOfBirth);
+
+        response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
+
     }
 }

@@ -22,7 +22,7 @@
                     <img src="data:${mimeType};base64,${profileImage}" />
                 </c:if>
                 <c:if test="${empty profileImage}">
-                    <img src="" />
+                    <img src="${pageContext.request.contextPath}/assets/image/default-profile.jpg" />
                 </c:if>
             </div>
             <button class="btn-edit-passdb" id="edit-profile-btn">
@@ -235,10 +235,10 @@
 
 <!-- Profile Edit Modal -->
 <div class="modal" id="profile-modal">
-    <div class="modal-content">
+    <form action="${pageContext.request.contextPath}/passenger/dashboard" method="post" class="modal-content" enctype="multipart/form-data">
         <div class="modal-header">
             <h2>Edit Profile</h2>
-            <button class="close-btn" id="close-modal">&times;</button>
+            <button type="button" class="close-btn" id="close-modal">&times;</button>
         </div>
         <div class="modal-body">
             <p class="modal-description">Make changes to your profile here. Click save when you're done.</p>
@@ -248,7 +248,7 @@
                     <img src="data:${mimeType};base64,${profileImage}" class="profile-photo" id="modal-profile-img" alt="Profile Photo" />
                 </c:if>
                 <c:if test="${empty profileImage}">
-                    <img src="" id="modal-profile-img" alt="Default Profile Photo" />
+                    <img src="${pageContext.request.contextPath}/assets/image/default-profile.jpg" class="profile-photo" id="modal-profile-img" alt="Default Profile Photo" />
                 </c:if>
                 <div class="profile-picture-chnage-">
                     <button class="upload-btn"><i class="fas fa-camera"></i> Select Photo</button>
@@ -258,17 +258,31 @@
 
             <div class="form-group">
                 <label for="profile-name">Name</label>
-                <input type="text" id="profile-name" value="${passenger.user.firstName} ${passenger.user.lastName}" class="form-input">
+                <input type="text" id="profile-name" name="fullName" value="${passenger.user.firstName} ${passenger.user.lastName}" class="form-input">
             </div>
 
             <div class="form-group">
                     <label for="profile-email">Email</label>
-                    <input type="email" id="profile-email" value="${passenger.user.email}" class="form-input">
+                    <input type="email" id="profile-email" name="email" value="${passenger.user.email}" class="form-input">
             </div>
 
             <div class="form-group">
                 <label for="profile-phoneNumber">PhoneNumber</label>
-                <input type="text" id="profile-phoneNumber" value="${passenger.user.phoneNumber}" class="form-input">
+                <input type="text" id="profile-phoneNumber" name="phoneNumber" value="${passenger.user.phoneNumber}" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="address">
+                    <i class="fas fa-home"></i> Address
+                </label>
+                <input type="text" id="address" name="address" value="${passenger.passenger.address}" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="passportNumber">
+                    <i class="fas fa-passport"></i> Passport Number
+                </label>
+                <input type="text" id="passportNumber" name="passportNumber" value="${passenger.passenger.passportNumber}" class="form-input" required>
             </div>
 
             <div class="form-group">
@@ -277,48 +291,51 @@
                 </label>
                 <div class="radio-group">
                     <div class="radio-option">
-                        <input type="radio" id="male" name="gender" value="MALE" required>
+                        <input type="radio" id="male" name="gender" value="MALE"
+                               <c:if test="${passenger.passenger.gender == 'MALE'}">checked</c:if> required>
                         <label for="male"><i class="fas fa-male"></i> Male</label>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" id="female" name="gender" value="FEMALE">
+                        <input type="radio" id="female" name="gender" value="FEMALE"
+                               <c:if test="${passenger.passenger.gender == 'FEMALE'}">checked</c:if>>
                         <label for="female"><i class="fas fa-female"></i> Female</label>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" id="other" name="gender" value="OTHER">
+                        <input type="radio" id="other" name="gender" value="OTHER"
+                               <c:if test="${passenger.passenger.gender == 'OTHER'}">checked</c:if>>
                         <label for="other"><i class="fas fa-user"></i> Other</label>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="passportNumber">
-                    <i class="fas fa-passport"></i> Passport Number
-                </label>
-                <input type="text" id="passportNumber" name="passportNumber" value="${passenger.passenger.passportNumber}" required>
-            </div>
-
-            <div class="form-group">
                 <label for="dateOfBirth">
                     <i class="fas fa-calendar-alt"></i> Date of Birth
                 </label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" value="${passenger.passenger.dateOfBirth}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="address">
-                    <i class="fas fa-home"></i> Address
-                </label>
-                <input type="text" id="address" name="address" value="${passenger.passenger.address}" required>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" value="${passenger.passenger.dateOfBirth}" class="form-input" required>
             </div>
 
         </div>
         <div class="modal-footer">
-            <button class="btn-secondary" id="cancel-changes">Cancel</button>
-            <button class="btn-primary" id="save-changes">Save changes</button>
+            <button type="button" class="btn-secondary" id="cancel-changes">Cancel</button>
+            <button type="submit" class="btn-primary" id="save-changes">Save changes</button>
         </div>
-    </div>
+    </form>
 </div>
+<script>
+    document.getElementById('profile-upload').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = document.getElementById('modal-profile-img');
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    })
+</script>
 <script src="${pageContext.request.contextPath}/assets/js/passangerDashboard.js"></script>
 <jsp:include page="../../tail.jsp" />
 

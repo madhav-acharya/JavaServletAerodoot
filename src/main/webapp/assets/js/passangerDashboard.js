@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const editProfileBtn = document.getElementById("edit-profile-btn")
     const closeModalBtn = document.getElementById("close-modal")
     const cancelChangesBtn = document.getElementById("cancel-changes")
-    const saveChangesBtn = document.getElementById("save-changes")
+    // const saveChangesBtn = document.getElementById("save-changes")
 
     // Open modal
     editProfileBtn.addEventListener("click", () => {
@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
-    // Save changes
-    saveChangesBtn.addEventListener("click", () => {
-        closeModal()
-    })
+    // // Save changes
+    // saveChangesBtn.addEventListener("click", () => {
+    //     closeModal()
+    // })
 })
