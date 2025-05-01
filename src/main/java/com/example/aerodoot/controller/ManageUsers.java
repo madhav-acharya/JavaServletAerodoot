@@ -82,7 +82,8 @@ public class ManageUsers extends HttpServlet {
 
                 if (success) {
                     System.out.println("success");
-
+                    users = UserDAO.getAllUsers();
+                    getServletContext().setAttribute("users", users);
                 }
 
             } catch (Exception e) {

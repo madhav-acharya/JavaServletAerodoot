@@ -1,13 +1,10 @@
 function openModal(modalId) {
-    localStorage.setItem("popup", "opened")
-    console.log("calling")
     document.getElementById(modalId).classList.add('active');
 
 }
 
 function closeModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
-    localStorage.removeItem("popup", "closed")
 }
 
 // Confirmation modal
