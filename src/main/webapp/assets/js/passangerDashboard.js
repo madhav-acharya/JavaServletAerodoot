@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Tab switching functionality
-    const tabButtons = document.querySelectorAll(".tab-btn")
-    const tabContents = document.querySelectorAll(".tab-content")
+    const tabButtons = document.querySelectorAll(".tab-btn-passdb")
+    const tabContents = document.querySelectorAll(".tab-content-passdb")
 
     tabButtons.forEach((button) => {
         button.addEventListener("click", () => {

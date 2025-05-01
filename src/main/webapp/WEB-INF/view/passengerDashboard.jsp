@@ -16,8 +16,8 @@
             <h1>Namaste, <span id="passenger-name">${passenger.user.firstName} ${passenger.user.lastName}</span></h1>
             <p>Welcome to your passenger dashboard. Manage your flights and bookings here.</p>
         </div>
-        <div class="profile-section">
-            <div class="profile-image">
+        <div class="profile-section-passdb">
+            <div class="profile-image-passdb">
                 <c:if test="${not empty profileImage}">
                     <img src="data:${mimeType};base64,${profileImage}" />
                 </c:if>
@@ -25,7 +25,7 @@
                     <img src="" />
                 </c:if>
             </div>
-            <button class="btn-edit" id="edit-profile-btn">
+            <button class="btn-edit-passdb" id="edit-profile-btn">
                 <i class="fas fa-user"></i> Edit Profile
             </button>
         </div>
@@ -41,7 +41,7 @@
                 <div class="stat-label">Upcoming flights</div>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn-view-all">View All</a>
+                <a href="#" class="btn-view-passdb">View All</a>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
                 <div class="stat-label">Total bookings</div>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn-view-history">View History</a>
+                <a href="#" class="btn-view-passdb">View History</a>
             </div>
         </div>
 
@@ -63,22 +63,22 @@
                 <h2>Quick Actions</h2>
             </div>
             <div class="card-content quick-actions">
-                <a href="#" class="btn-action primary">
+                <a href="#" class="btn-action-passdb">
                     <i class="fas fa-plane-departure"></i> Book a Flight
                 </a>
-                <a href="#" class="btn-action secondary">
+                <a href="#" class="btn-action-passdb">
                     <i class="fas fa-ticket-alt"></i> Check Booking
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="upcoming">Upcoming Flights</button>
-        <button class="tab-btn" data-tab="recent">Recent Bookings</button>
+    <div class="tabs-passdb">
+        <button class="tab-btn-passdb active" data-tab="upcoming">Upcoming Flights</button>
+        <button class="tab-btn-passdb" data-tab="recent">Recent Bookings</button>
     </div>
 
-    <div class="tab-content active" id="upcoming-tab">
+    <div class="tab-content-passdb active" id="upcoming-tab">
         <div class="flight-row">
             <div class="flight-card">
                 <div class="flight-header">
@@ -166,9 +166,9 @@
         </div>
     </div>
 
-    <div class="tab-content" id="recent-tab">
+    <div class="tab-content-passdb" id="recent-tab">
         <div class="booking-row">
-            <div class="booking-card">
+            <div class="booking-card-passdb">
                 <div class="booking-header">
                     <div class="booking-number">-
                         <i class="fas fa-ticket-alt"></i> Booking #101
@@ -199,7 +199,7 @@
                 </div>
             </div>
 
-            <div class="booking-card">
+            <div class="booking-card-passdb">
                 <div class="booking-header">
                     <div class="booking-number">
                         <i class="fas fa-ticket-alt"></i> Booking #102
