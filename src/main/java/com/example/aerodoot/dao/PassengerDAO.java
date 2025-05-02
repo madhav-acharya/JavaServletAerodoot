@@ -74,4 +74,29 @@ public class PassengerDAO {
 
         return new PassengerDashboardData(user, passenger);
     }
+
+    public static int PassengerUpdataData(Passenger passenger) throws SQLException {
+        String sql = "UPDATE Passenger SET passportNumber = ?, dateOfBirth = ?, gender = ?, address = ?, profilePicture = ? WHERE userId = ?";
+
+        try (Connection con = DbConnectionUtil.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setString(1, passenger.getPassportNumber());
+            stmt.setDate(2, new java.sql.Date(passenger.getDateOfBirth().getTime()));
+            stmt.setString(3, passenger.getGender());
+            stmt.setString(4, passenger.getAddress());
+            stmt.setBytes(5, passenger.getProfilePicture());
+            stmt.setInt(6, passenger.getUserId());
+
+            int rowsUpdated = stmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  -17;
+    }
 }
