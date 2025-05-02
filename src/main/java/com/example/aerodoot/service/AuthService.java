@@ -112,7 +112,7 @@ public class AuthService {
         return null;
     }
 
-    public static int updateUserData(String fullName,String email,String phoneNumber) throws SQLException {
+    public static int updateUserData(String fullName,String email,String phoneNumber, int userId) throws SQLException {
         // Split fullname into firstname and lastname
         String firstname = "";
         String lastname = "";
@@ -140,16 +140,26 @@ public class AuthService {
             return -6; // Invalid email format
         }
 
+        User initialUser = UserDAO.getUserByUserIdOnly(userId);
+        String userType = initialUser.getUserType();
+        System.out.println("User Type in UserSerive " + userType);
+
         // Check if email already exists call method from UserDAO
-        if (UserDAO.getUserByEmail(email) != -1) {
-            return -2; // Email already registered
+        if (!initialUser.getEmail().equals(email)) {
+            if (UserDAO.getUserByEmail(email) != -1) {
+                return -2; // Email already registered
+            }
         }
+
 
         User user = new User();
         user.setFirstName(firstname);
         user.setLastName(lastname);
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
-    }
+        user.setUserType(userType);
+        user.setUserId(userId);
 
+        return UserDAO.updateUser(user);
+    }
 }

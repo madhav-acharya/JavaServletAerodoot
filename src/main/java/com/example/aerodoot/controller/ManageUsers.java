@@ -80,7 +80,7 @@ public class ManageUsers extends HttpServlet {
 
                 int updateUserId = UserDAO.updateUser(user);
 
-                if (updateUserId > 0) {
+                if (updateUserId >= 0) {
                     System.out.println("success");
                     users = UserDAO.getAllUsers();
                     getServletContext().setAttribute("users", users);

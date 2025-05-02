@@ -4,6 +4,7 @@ import com.example.aerodoot.dao.PassengerDAO;
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.User;
+import com.example.aerodoot.service.AuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -65,7 +66,21 @@ public class PassengerDashboard extends HttpServlet {
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
 
+        try {
+            int UserId = AuthService.updateUserData(fullName, email, phoneNumber, userId);
+            if (UserId < 0) {
+                System.out.println("error get executed");
+                String errorMessage = AuthService.getErrorMessage(UserId);
+                request.setAttribute("message", errorMessage);
+            } else {
+                System.out.println("success runned");
+                response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
+            }
+            System.out.println("Updated or errorId: " + UserId);
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
         //updating the passengerData with the UserId
@@ -86,8 +101,7 @@ public class PassengerDashboard extends HttpServlet {
         System.out.println("the save changed work.");
         System.out.println(fullName + " " + email + " " + phoneNumber);
         System.out.println(passportNumber + " " + gender + " " + address + " " + dateOfBirth);
-
-        response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
+//        response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
 
     }
 }
