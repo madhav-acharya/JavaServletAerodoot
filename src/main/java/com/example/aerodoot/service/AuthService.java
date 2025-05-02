@@ -112,4 +112,44 @@ public class AuthService {
         return null;
     }
 
+    public static int updateUserData(String fullName,String email,String phoneNumber) throws SQLException {
+        // Split fullname into firstname and lastname
+        String firstname = "";
+        String lastname = "";
+
+        String[] parts = fullName.trim().split("\\s+");
+        if (parts.length >= 2) {
+            firstname = parts[0];
+            lastname = String.join(" ", Arrays.copyOfRange(parts, 1, parts.length));
+        } else if (parts.length == 1) {
+            return -9; // Only one name provided
+        }
+
+        // Validate names (only alphabets)
+        if (!firstname.matches("^[A-Za-z]+$") || !lastname.matches("^[A-Za-z ]+$")) {
+            return -8; // Invalid name format
+        }
+
+        // Validate phone number format
+        if (!phoneNumber.matches("^\\+?\\d{7,15}$")) {
+            return -5; // Invalid phone number
+        }
+
+        // Validate email format
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            return -6; // Invalid email format
+        }
+
+        // Check if email already exists call method from UserDAO
+        if (UserDAO.getUserByEmail(email) != -1) {
+            return -2; // Email already registered
+        }
+
+        User user = new User();
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+    }
+
 }

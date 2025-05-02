@@ -78,9 +78,9 @@ public class ManageUsers extends HttpServlet {
                 user.setPhoneNumber(phoneNumber);
                 user.setUserType(userType);
 
-                boolean success = UserDAO.updateUser(user);
+                int updateUserId = UserDAO.updateUser(user);
 
-                if (success) {
+                if (updateUserId > 0) {
                     System.out.println("success");
                     users = UserDAO.getAllUsers();
                     getServletContext().setAttribute("users", users);

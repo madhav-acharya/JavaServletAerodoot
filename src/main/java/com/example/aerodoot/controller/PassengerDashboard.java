@@ -63,11 +63,13 @@ public class PassengerDashboard extends HttpServlet {
         //updating the userdata with UserId
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
-        Part profileImg = request.getPart("profilePicture");
         String phoneNumber = request.getParameter("phoneNumber");
 
 
+
+
         //updating the passengerData with the UserId
+        Part profileImg = request.getPart("profilePicture");
         String passportNumber = request.getParameter("passportNumber");
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");

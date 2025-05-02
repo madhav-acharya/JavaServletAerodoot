@@ -13,6 +13,7 @@ public class PassengerDashboardData {
     }
 
     public User getUser() {
+
         return user;
     }
 

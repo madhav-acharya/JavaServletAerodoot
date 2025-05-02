@@ -26,7 +26,6 @@ public class UserDAO {
             ps.setString(5, user.getUserType());
             ps.setString(6, user.getPassword());
 
-
             int rowsExecuted = ps.executeUpdate();
             System.out.println(rowsExecuted);
             if (rowsExecuted > 0) {
@@ -174,26 +173,31 @@ public class UserDAO {
         return user;
     }
 
-    public static boolean updateUser(User user) throws SQLException {
+    public static int updateUser(User user) throws SQLException {
         String sql = "UPDATE User SET firstName = ?, lastName = ?, email = ?, phoneNumber = ?, userType = ? WHERE userId = ?";
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPhoneNumber());
-            ps.setString(5, user.getUserType());
-            ps.setInt(6, user.getUserId());
+                ps.setString(1, user.getFirstName());
+                ps.setString(2, user.getLastName());
+                ps.setString(3, user.getEmail());
+                ps.setString(4, user.getPhoneNumber());
+                ps.setString(5, user.getUserType());
+                ps.setInt(6, user.getUserId());
 
-            int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0;
+//            int rowsAffected = ps.executeUpdate();
+//            return rowsAffected > 0;
+              ResultSet rs = ps.executeQuery();
+              if (rs.next()) {
+                  return rs.getInt("userId");
+              }
         } catch (SQLException e) {
             System.err.println("Error updating user: " + e.getMessage());
-            return false;
         }
+        return -1;
     }
+
     public static boolean deleteUser(int userId) {
         String sql = "DELETE FROM User WHERE userId = ?";
 
