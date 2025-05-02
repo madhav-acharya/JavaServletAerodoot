@@ -1,9 +1,8 @@
 package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.PassengerDAO;
-import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.dto.PassengerDashboardData;
-import com.example.aerodoot.model.User;
+import com.example.aerodoot.model.Passenger;
 import com.example.aerodoot.service.AuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -14,6 +13,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Base64;
 
@@ -28,9 +28,7 @@ public class PassengerDashboard extends HttpServlet {
 
         System.out.println("userID of passenger Dashboard " + userId);
 
-        System.out.println(userId + " " + "from passenger Dashboard");
         try {
-
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
 
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
@@ -45,8 +43,7 @@ public class PassengerDashboard extends HttpServlet {
             request.setAttribute("profileImage", base64Image);
             request.setAttribute("mimeType", mimeType);
             request.setAttribute("passenger", passengerData);
-            System.out.println(passengerData.getUser().getFirstName());
-            System.out.println(passengerData.getUser().getPhoneNumber());
+            session.setAttribute("passengerId", passengerData.getPassenger().getPassengerId());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -66,29 +63,13 @@ public class PassengerDashboard extends HttpServlet {
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
 
-        try {
-            int UserId = AuthService.updateUserData(fullName, email, phoneNumber, userId);
-            if (UserId < 0) {
-                System.out.println("error get executed");
-                String errorMessage = AuthService.getErrorMessage(UserId);
-                request.setAttribute("message", errorMessage);
-            } else {
-                System.out.println("success runned");
-                response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
-            }
-            System.out.println("Updated or errorId: " + UserId);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
 
         //updating the passengerData with the UserId
         Part profileImg = request.getPart("profilePicture");
         String passportNumber = request.getParameter("passportNumber");
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
-        String dateOfBirth = request.getParameter("dateOfBirth");
+        Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
         byte[] profilePicture = null;
 
         if (profileImg != null || profileImg.getSize() > 0) {
@@ -96,11 +77,37 @@ public class PassengerDashboard extends HttpServlet {
                 profilePicture = inputStream.readAllBytes();
             }
         }
-
+        int passengerId = (int) session.getAttribute("passengerId");
 
         System.out.println("the save changed work.");
-        System.out.println(fullName + " " + email + " " + phoneNumber);
-        System.out.println(passportNumber + " " + gender + " " + address + " " + dateOfBirth);
+
+        try {
+
+
+            Passenger passenger = new Passenger();
+            passenger.setPassportNumber(passportNumber);
+            passenger.setAddress(address);
+            passenger.setGender(gender);
+            passenger.setProfilePicture(profilePicture);
+            passenger.setDateOfBirth(dateOfBirth);
+            passenger.setUserId(userId);
+            passenger.setPassengerId(passengerId);
+
+            int UserInt = AuthService.updateUserData(fullName, email, phoneNumber, userId);
+            int PassengerInt = PassengerDAO.PassengerUpdataData(passenger);
+            if (UserInt < 0 || PassengerInt < 0 ) {
+                System.out.println("error get executed");
+                String errorMessage = AuthService.getErrorMessage(UserInt);
+                request.setAttribute("message", errorMessage);
+                response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
+            } else {
+                System.out.println("success update");
+                response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
+            }
+            System.out.println("Updated or errorId: " + UserInt);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 //        response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
 
     }
