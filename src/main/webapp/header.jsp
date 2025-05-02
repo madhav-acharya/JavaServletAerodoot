@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <jsp:include page="WEB-INF/includes/navbar.jsp" />
+    <jsp:include page="includes/navbar.jsp" />
 
 
 
