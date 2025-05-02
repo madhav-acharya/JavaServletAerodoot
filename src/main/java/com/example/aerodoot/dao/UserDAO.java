@@ -186,12 +186,12 @@ public class UserDAO {
                 ps.setString(5, user.getUserType());
                 ps.setInt(6, user.getUserId());
 
-//            int rowsAffected = ps.executeUpdate();
-//            return rowsAffected > 0;
-              ResultSet rs = ps.executeQuery();
-              if (rs.next()) {
-                  return rs.getInt("userId");
-              }
+                int updatedRows = ps.executeUpdate();
+
+                if(updatedRows > 0) {
+                    return 0;
+                }
+
         } catch (SQLException e) {
             System.err.println("Error updating user: " + e.getMessage());
         }
