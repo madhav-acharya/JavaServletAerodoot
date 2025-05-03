@@ -41,4 +41,38 @@ public class FlightDAO {
         }
         return -1;
     }
+
+    public static Flight getFlightById(int flightId) throws SQLException {
+        String sql = "SELECT * FROM Flight WHERE flightId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, flightId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Flight flight = new Flight();
+                flight.setFlightId(rs.getInt("flightId"));
+                flight.setFlightNumber(rs.getString("flightNumber"));
+                flight.setDepartureLocation(rs.getString("departureLocation"));
+                flight.setArrivalLocation(rs.getString("arrivalLocation"));
+                flight.setDepartureTime(rs.getTimestamp("departureTime"));
+                flight.setArrivalTime(rs.getTimestamp("arrivalTime"));
+                flight.setDuration(rs.getTime("duration"));
+                flight.setStatus(rs.getString("status"));
+                flight.setAvailableSeatsEconomy(rs.getInt("availableSeatsEconomy"));
+                flight.setAvailableSeatsBusiness(rs.getInt("availableSeatsBusiness"));
+                flight.setEconomyPrice(rs.getBigDecimal("economyPrice"));
+                flight.setBusinessPrice(rs.getBigDecimal("businessPrice"));
+                flight.setAircraftId(rs.getInt("aircraftId"));
+                flight.setAirlineId(rs.getInt("airlineId"));
+                return flight;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching flight by ID: " + e.getMessage());
+        }
+        return null;
+    }
+
 }
