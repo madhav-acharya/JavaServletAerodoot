@@ -4,6 +4,8 @@ import com.example.aerodoot.model.Airline;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AirlineDAO {
     public static int createAirline(Airline airline) throws SQLException {
@@ -52,6 +54,28 @@ public class AirlineDAO {
             System.err.println("Error fetching airline by ID: " + e.getMessage());
         }
         return airline;
+    }
+    public static List<Airline> getAllAirlines() throws SQLException {
+        List<Airline> airlines = new ArrayList<>();
+        String sql = "SELECT * FROM Airline";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Airline airline = new Airline();
+                airline.setAirlineId(rs.getInt("airlineId"));
+                airline.setName(rs.getString("name"));
+                airline.setHeadquarters(rs.getString("headquarters"));
+                airline.setContactNumber(rs.getString("contactNumber"));
+                airline.setEmail(rs.getString("email"));
+                airlines.add(airline);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching airlines: " + e.getMessage());
+        }
+        return airlines;
     }
 
 
