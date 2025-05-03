@@ -7,13 +7,13 @@
         <div class="tab-item" data-tab="multi-city">Multi-City</div>
     </div>
 
-    <div class="tab-content" id="round-trip-content">
+    <form class="tab-content" id="round-trip-content" action="flight-booking" method="post">
         <div class="form-row">
             <div class="form-group">
                 <label for="from">From</label>
                 <div class="input-with-icon">
                     <i class="location-icon"></i>
-                    <input type="text" id="from" placeholder="Select departure city" readonly>
+                    <input type="text" id="from" name="departure" placeholder="Select departure city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <label for="to">To</label>
                 <div class="input-with-icon">
                     <i class="location-icon"></i>
-                    <input type="text" id="to" placeholder="Select destination city" readonly>
+                    <input type="text" id="to" name="destination" placeholder="Select destination city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <label for="departure-date">Departure Date</label>
                 <div class="input-with-icon">
                     <i class="calendar-icon"></i>
-                    <input type="text" id="departure-date" placeholder="Select date" readonly>
+                    <input type="text" id="departure-date" name="departureDate" placeholder="Select date" readonly>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                 <label for="return-date">Return Date</label>
                 <div class="input-with-icon">
                     <i class="calendar-icon"></i>
-                    <input type="text" id="return-date" placeholder="Select date" readonly>
+                    <input type="text" id="return-date" name="returnDate" placeholder="Select date" readonly>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                 <label for="passengers">Passengers</label>
                 <div class="input-with-icon">
                     <i class="passenger-icon"></i>
-                    <input type="text" id="passengers" value="1 Passenger" readonly>
+                    <input type="text" id="passengers" name="passenger" value="1 Passenger" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
             </div>
@@ -58,15 +58,15 @@
         <div class="form-row">
             <button class="btn-main btn-search">Search Flights</button>
         </div>
-    </div>
+    </form>
 
-    <div class="tab-content hidden" id="one-way-content">
+    <form class="tab-content hidden" id="one-way-content" action="flight-booking" method="post">
         <div class="form-row">
             <div class="form-group">
                 <label for="one-way-from">From</label>
                 <div class="input-with-icon">
                     <i class="location-icon"></i>
-                    <input type="text" id="one-way-from" placeholder="Select departure city" readonly>
+                    <input type="text" id="one-way-from" name="departure" placeholder="Select departure city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <label for="one-way-to">To</label>
                 <div class="input-with-icon">
                     <i class="location-icon"></i>
-                    <input type="text" id="one-way-to" placeholder="Select destination city" readonly>
+                    <input type="text" id="one-way-to" name="destination" placeholder="Select destination city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <label for="one-way-departure-date">Departure Date</label>
                 <div class="input-with-icon">
                     <i class="calendar-icon"></i>
-                    <input type="text" id="one-way-departure-date" placeholder="Select date" readonly>
+                    <input type="text" id="one-way-departure-date" name="departureDate" placeholder="Select date" readonly>
                 </div>
             </div>
 
@@ -94,16 +94,16 @@
                 <label for="one-way-passengers">Passengers</label>
                 <div class="input-with-icon">
                     <i class="passenger-icon"></i>
-                    <input type="text" id="one-way-passengers" value="1 Passenger" readonly>
+                    <input type="text" id="one-way-passengers" name="passenger" value="1 Passenger" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
             </div>
         </div>
 
         <div class="form-row">
-            <button class="btn-main btn-search">Search Flights</button>
+            <button type="submit" class="btn-main btn-search">Search Flights</button>
         </div>
-    </div>
+    </form>
 
     <div class="tab-content hidden" id="multi-city-content">
         <div class="multi-city-message">
@@ -139,12 +139,16 @@
             <input type="text" placeholder="Search for a city">
         </div>
         <div class="city-list">
-            <div class="city-item" data-city="New York">New York (JFK)</div>
-            <div class="city-item" data-city="London">London (LHR)</div>
-            <div class="city-item" data-city="Paris">Paris (CDG)</div>
-            <div class="city-item" data-city="Tokyo">Tokyo (HND)</div>
-            <div class="city-item" data-city="Dubai">Dubai (DXB)</div>
-            <div class="city-item" data-city="Singapore">Singapore (SIN)</div>
+            <div class="city-item" data-city="Kathmandu">Kathmandu (KTM)</div>
+            <div class="city-item" data-city="Pokhara">Pokhara (PKR)</div>
+            <div class="city-item" data-city="Biratnagar">Biratnagar (BIR)</div>
+            <div class="city-item" data-city="Nepalgunj">Nepalgunj (KEP)</div>
+            <div class="city-item" data-city="Bharatpur">Bharatpur (BHR)</div>
+            <div class="city-item" data-city="Bhadrapur">Bhadrapur (BDP)</div>
+            <div class="city-item" data-city="Dhangadhi">Dhangadhi (DHI)</div>
+            <div class="city-item" data-city="Janakpur">Janakpur (JKR)</div>
+            <div class="city-item" data-city="Simara">Simara (SIF)</div>
+            <div class="city-item" data-city="Lukla">Lukla (LUA)</div>
         </div>
     </div>
 
