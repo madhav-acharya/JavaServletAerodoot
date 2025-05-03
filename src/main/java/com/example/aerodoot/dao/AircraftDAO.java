@@ -110,5 +110,20 @@ public class AircraftDAO {
         }
         return -1;
     }
+    public static boolean deleteAircraft(int aircraftId) {
+        String sql = "DELETE FROM Aircraft WHERE aircraftId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, aircraftId);
+            int rowsDeleted = ps.executeUpdate();
+            System.out.println("Aircraft deleted");
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            System.err.println("Error deleting aircraft: " + e.getMessage());
+            return false;
+        }
+    }
 
 }
