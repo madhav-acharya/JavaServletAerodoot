@@ -119,4 +119,19 @@ public class BookingDAO {
         }
         return -1;
     }
+    public static boolean deleteBooking(int bookingId) {
+        String sql = "DELETE FROM Booking WHERE bookingId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, bookingId);
+            int rowsDeleted = ps.executeUpdate();
+            System.out.println("Booking deleted");
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            System.err.println("Error deleting booking: " + e.getMessage());
+            return false;
+        }
+    }
 }
