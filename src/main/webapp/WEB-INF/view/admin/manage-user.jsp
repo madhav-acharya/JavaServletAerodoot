@@ -81,7 +81,7 @@
                                     <td>${user.createdAt}</td>
                                     <td>
                                         <div class="actions">
-                                            <form method="post" action="${pageContext.request.contextPath}/admin/manage-user">
+                                            <form id="edit-form" method="post" action="${pageContext.request.contextPath}/admin/manage-user">
                                                 <input type="hidden"  name="userId" value="${user.userId}">
                                                 <input type="hidden"  name="action" value="edit">
                                             <button class="action-btn edit-btn" title="Edit" data-user-id="${user.userId}">
@@ -219,6 +219,40 @@
         const closeUserEditModalBtn = document.getElementById('close-user-edit-modal');
         const cancelUserEditBtn = document.getElementById('cancel-user-edit-btn');
         const saveUserBtn = document.getElementById('save-user-btn');
+        const editUserForm = document.getElementById('user-edit-form')
+        const editForms = document.querySelectorAll('#edit-form')
+
+        // editForms.forEach(editForm =>{
+        //     editForm.addEventListener('submit', async (e)=>{
+        //         console.log("default prevented of edit")
+        //         e.preventDefault();
+        //         const form = e.target;
+        //         const formData = new FormData(form);
+        //         console.log("form", form)
+        //         console.log("formdata", formData)
+        //         console.log("form action", form.action)
+        //
+        //         try {
+        //             const response = await fetch(form.action, {
+        //                 method: 'POST',
+        //                 body: formData
+        //             });
+        //
+        //             const text = await response.text();
+        //             console.log("text", text)
+        //             // document.getElementById('response').innerHTML = text;
+        //         } catch (error) {
+        //             console.error('Error:', error);
+        //         }
+        //     })
+        // })
+
+
+
+        // editUserForm.addEventListener('submit', async (e)=>{
+        //     console.log("default prevented")
+        //     e.preventDefault();
+        // })
 
         closeUserEditModalBtn.addEventListener('click', () => closeModal('user-edit-modal'));
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
