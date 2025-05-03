@@ -94,4 +94,29 @@ public class BookingDAO {
         return bookingList;
     }
 
+    public static int updateBooking(Booking booking) throws SQLException {
+        String sql = "UPDATE Booking SET bookingDate = ?, classType = ?, seatsBooked = ?, seatNumbers = ?, totalPrice = ?, bookingStatus = ?, flightId = ?, passengerId = ? WHERE bookingId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setTimestamp(1, booking.getBookingDate());
+            ps.setString(2, booking.getClassType());
+            ps.setInt(3, booking.getSeatsBooked());
+            ps.setString(4, booking.getSeatNumbers());
+            ps.setBigDecimal(5, booking.getTotalPrice());
+            ps.setString(6, booking.getBookingStatus());
+            ps.setInt(7, booking.getFlightId());
+            ps.setInt(8, booking.getPassengerId());
+            ps.setInt(9, booking.getBookingId());
+
+            int updatedRows = ps.executeUpdate();
+            if (updatedRows > 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating booking: " + e.getMessage());
+        }
+        return -1;
+    }
 }
