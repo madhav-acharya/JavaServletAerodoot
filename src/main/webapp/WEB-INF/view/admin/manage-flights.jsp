@@ -94,7 +94,6 @@
                   <td>${flight.arrivalLocation}</td>
                   <td>${flight.departureTime}</td>
                   <td>${flight.arrivalTime}</td>
-                  <td>${flight.duration}</td>
                   <td>${flight.status}</td>
                   <td>${flight.availableSeatsEconomy}</td>
                   <td>${flight.availableSeatsBusiness}</td>
