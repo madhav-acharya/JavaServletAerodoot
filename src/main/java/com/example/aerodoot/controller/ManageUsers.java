@@ -30,7 +30,7 @@ public class ManageUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in doget");
-
+        request.setAttribute("users", users);
         request.getRequestDispatcher("/WEB-INF/view/admin/manage-user.jsp").forward(request, response);
     }
 
@@ -57,18 +57,11 @@ public class ManageUsers extends HttpServlet {
             try {
                 int userId = Integer.parseInt(request.getParameter("userId"));
                 String firstName = request.getParameter("firstName");
+
                 String lastName = request.getParameter("lastName");
                 String email = request.getParameter("email");
                 String phoneNumber = request.getParameter("phoneNumber");
                 String userType = request.getParameter("userType");
-
-                System.out.println("userType " + userType);
-                System.out.println("firstName " + firstName);
-                System.out.println("lastName " + lastName);
-                System.out.println("email " + email);
-                System.out.println("phoneNumber " + phoneNumber);
-                System.out.println("userId " + userId);
-
 
                 User user = new User();
                 user.setUserId(userId);

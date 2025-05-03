@@ -1,40 +1,37 @@
 function openModal(modalId) {
     document.getElementById(modalId).classList.add('active');
-    localStorage.setItem("popup", "opened")
 }
 
 function closeModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
-    localStorage.setItem("popup", "closed")
 }
 
 // Confirmation modal
-function showConfirmation(message, callback, actionText = 'Delete') {
-    const confirmationModal = document.getElementById('confirmation-modal');
+function showConfirmation(message, callback, actionText = 'Confirm') {
     const confirmationMessage = document.getElementById('confirmation-message');
     const confirmActionBtn = document.getElementById('confirm-action-btn');
+    const cancelConfirmationBtn = document.getElementById('cancel-confirmation-btn');
+    const closeConfirmationModal = document.getElementById('close-confirmation-modal');
 
     confirmationMessage.textContent = message;
     confirmActionBtn.textContent = actionText;
 
-    // Set up the confirm action
     confirmActionBtn.onclick = function() {
         callback();
         closeModal('confirmation-modal');
     };
 
-    // Set up the cancel action
-    document.getElementById('cancel-confirmation-btn').onclick = function() {
+    cancelConfirmationBtn.onclick = function() {
         closeModal('confirmation-modal');
     };
 
-    // Set up the close button
-    document.getElementById('close-confirmation-modal').onclick = function() {
+    closeConfirmationModal.onclick = function() {
         closeModal('confirmation-modal');
     };
 
     openModal('confirmation-modal');
 }
+
 
 // Search functionality
 function searchTable(tableId, searchInputId) {

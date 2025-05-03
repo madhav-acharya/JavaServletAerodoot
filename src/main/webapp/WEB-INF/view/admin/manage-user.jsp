@@ -81,18 +81,23 @@
                                     <td>${user.createdAt}</td>
                                     <td>
                                         <div class="actions">
-                                            <form id="edit-form" method="post" action="${pageContext.request.contextPath}/admin/manage-user">
                                                 <input type="hidden"  name="userId" value="${user.userId}">
                                                 <input type="hidden"  name="action" value="edit">
-                                            <button class="action-btn edit-btn" title="Edit" data-user-id="${user.userId}">
+                                            <button class="action-btn edit-btn" title="Edit"
+                                                    data-user-id="${user.userId}"
+                                                    data-first-name="${user.firstName}"
+                                                    data-last-name="${user.lastName}"
+                                                    data-email="${user.email}"
+                                                    data-phone-number="${user.phoneNumber}"
+                                                    data-user-type="${user.userType}"
+                                                    data-created-at="${user.createdAt}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                                                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                                 </svg>
                                             </button>
-                                            </form>
                                             <form method="post" action="${pageContext.request.contextPath}/admin/manage-user">
-                                            <button class="action-btn delete-btn" title="Delete" data-user-id="${user.userId}">
+                                            <button class="action-btn delete-btn" title="Delete" data-user-id="${user.userId}" data-user-action="delete">
                                                 <input type="hidden"  name="userId" value="${user.userId}">
                                                 <input type="hidden"  name="action" value="delete">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
@@ -141,6 +146,22 @@
                     </div>
                 </div>
             </div>
+            <%--confirmation model--%>
+            <div class="modal" id="confirmation-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Confirm Action</h3>
+                        <button class="modal-close" id="close-confirmation-modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="confirmation-message">Are you sure you want to do this?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
+                        <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- User Edit Modal -->
             <div class="modal" id="user-edit-modal">
@@ -150,36 +171,35 @@
                         <button class="modal-close" id="close-user-edit-modal">×</button>
                     </div>
                     <div class="modal-body">
-                    <c:if test="${not empty editUser}">
                         <form id="user-edit-form" method="post" action="${pageContext.request.contextPath}/admin/manage-user">
                             <input type="hidden" id="user-action" name="action" value="update">
-                            <input type="hidden"  name="userId" value="${editUser.userId}">
+                            <input type="hidden"  id="user-id" name="userId" >
                             <div class="form-group">
                                 <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" name="firstName" class="input" required value="${editUser.firstName}">
+                                <input type="text" id="first-name" name="firstName" class="input" required >
                             </div>
 
                             <div class="form-group">
                                 <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" name="lastName" class="input" required value="${editUser.lastName}">
+                                <input type="text" id="last-name" name="lastName" class="input" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="input" required value="${editUser.email}">
+                                <input type="email" id="email" name="email" class="input" required >
                             </div>
 
                             <div class="form-group">
                                 <label for="phone-number">Phone Number</label>
-                                <input type="tel" id="phone-number" name="phoneNumber" class="input" value="${editUser.phoneNumber}">
+                                <input type="tel" id="phone-number" name="phoneNumber" class="input" >
                             </div>
 
                             <div class="form-group">
                                 <label for="user-type">User Types</label>
                                 <select id="user-type" name="userType" class="select" required>
-                                    <option value="PASSENGER" ${editUser.userType == 'PASSENGER' ? 'selected' : ''}>Passenger</option>
-                                    <option value="AGENT" ${editUser.userType == 'AGENT' ? 'selected' : ''}>Agent</option>
-                                    <option value="ADMIN" ${editUser.userType == 'ADMIN' ? 'selected' : ''}>Admin</option>
+                                    <option value="PASSENGER" >Passenger</option>
+                                    <option value="AGENT" >Agent</option>
+                                    <option value="ADMIN" >Admin</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -187,8 +207,8 @@
                                 <button type="submit" class="btn btn-primary" id="save-user-btn">Save Changes</button>
                             </div>
                         </form>
-                    </c:if>
                     </div>
+
 
                 </div>
             </div>
@@ -199,10 +219,16 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
-        if (localStorage.getItem("popup") == "opened")
-            {
-                openModal('user-edit-modal');
-            }
+        function populateForm(button) {
+
+            document.getElementById('user-id').value = button.dataset.userId;
+            document.getElementById('first-name').value = button.dataset.firstName;
+            document.getElementById('last-name').value = button.dataset.lastName;
+            document.getElementById('email').value = button.dataset.email;
+            document.getElementById('phone-number').value = button.dataset.phoneNumber;
+            document.getElementById('user-type').value = button.dataset.userType;
+        }
+
         const savedTab = localStorage.getItem('activeTab');
         if (savedTab) {
             updateActiveMenuItem(savedTab);
@@ -219,40 +245,6 @@
         const closeUserEditModalBtn = document.getElementById('close-user-edit-modal');
         const cancelUserEditBtn = document.getElementById('cancel-user-edit-btn');
         const saveUserBtn = document.getElementById('save-user-btn');
-        const editUserForm = document.getElementById('user-edit-form')
-        const editForms = document.querySelectorAll('#edit-form')
-
-        // editForms.forEach(editForm =>{
-        //     editForm.addEventListener('submit', async (e)=>{
-        //         console.log("default prevented of edit")
-        //         e.preventDefault();
-        //         const form = e.target;
-        //         const formData = new FormData(form);
-        //         console.log("form", form)
-        //         console.log("formdata", formData)
-        //         console.log("form action", form.action)
-        //
-        //         try {
-        //             const response = await fetch(form.action, {
-        //                 method: 'POST',
-        //                 body: formData
-        //             });
-        //
-        //             const text = await response.text();
-        //             console.log("text", text)
-        //             // document.getElementById('response').innerHTML = text;
-        //         } catch (error) {
-        //             console.error('Error:', error);
-        //         }
-        //     })
-        // })
-
-
-
-        // editUserForm.addEventListener('submit', async (e)=>{
-        //     console.log("default prevented")
-        //     e.preventDefault();
-        // })
 
         closeUserEditModalBtn.addEventListener('click', () => closeModal('user-edit-modal'));
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
@@ -260,13 +252,28 @@
             closeModal('user-edit-modal');
         });
 
+        const deleteUserbtn = document.querySelectorAll('.delete-btn');
+        deleteUserbtn.forEach(deleteBtn =>{
+            deleteBtn.addEventListener('click', (event)=>{
+                event.preventDefault();
+                const form = event.currentTarget.closest('form');
+                showConfirmation('Are you sure you want to do whatever you want?', function() {
+                    console.log("submitting form for delete")
+                    form.submit();
+                }, 'Delete');
+            });
+        })
+
+
         const editUserbtn = document.querySelectorAll('.edit-btn');
         editUserbtn.forEach(editBtn =>{
             editBtn.addEventListener('click', ()=>{
+                populateForm(editBtn)
                 openModal('user-edit-modal');
             });
         })
     });
+
 </script>
 
 </body>
