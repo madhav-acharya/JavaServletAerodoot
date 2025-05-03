@@ -256,17 +256,16 @@
 
         closeUserEditModalBtn.addEventListener('click', () => closeModal('user-edit-modal'));
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
+        saveUserBtn.addEventListener('click', () => {
+            closeModal('user-edit-modal');
+        });
 
         const editUserbtn = document.querySelectorAll('.edit-btn');
         editUserbtn.forEach(editBtn =>{
             editBtn.addEventListener('click', ()=>{
-                localStorage.setItem("popup", "opened")
+                openModal('user-edit-modal');
             });
         })
-
-        saveUserBtn.addEventListener('click', () => {
-                closeModal('user-edit-modal');
-        });
     });
 </script>
 
