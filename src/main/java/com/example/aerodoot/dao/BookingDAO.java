@@ -36,4 +36,32 @@ public class BookingDAO {
         }
         return -1;
     }
+
+    public static Booking getBookingById(int bookingId) throws SQLException {
+        String sql = "SELECT * FROM Booking WHERE bookingId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, bookingId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Booking booking = new Booking();
+                booking.setBookingId(rs.getInt("bookingId"));
+                booking.setBookingDate(rs.getTimestamp("bookingDate"));
+                booking.setClassType(rs.getString("classType"));
+                booking.setSeatsBooked(rs.getInt("seatsBooked"));
+                booking.setSeatNumbers(rs.getString("seatNumbers"));
+                booking.setTotalPrice(rs.getBigDecimal("totalPrice"));
+                booking.setBookingStatus(rs.getString("bookingStatus"));
+                booking.setFlightId(rs.getInt("flightId"));
+                booking.setPassengerId(rs.getInt("passengerId"));
+                return booking;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching booking by ID: " + e.getMessage());
+        }
+        return null;
+    }
 }
