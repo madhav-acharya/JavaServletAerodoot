@@ -100,6 +100,25 @@ public class AirlineDAO {
         }
         return -1;
     }
+    public static boolean deleteAirline(int airlineId) {
+        String sql = "DELETE FROM Airline WHERE airlineId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, airlineId);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Airline deleted successfully");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error deleting airline: " + e.getMessage());
+        }
+        return false;
+    }
 
 
 }
