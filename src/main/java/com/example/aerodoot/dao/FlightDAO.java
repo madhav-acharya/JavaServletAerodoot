@@ -1,0 +1,44 @@
+package com.example.aerodoot.dao;
+
+import com.example.aerodoot.model.Flight;
+import com.example.aerodoot.util.DbConnectionUtil;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class FlightDAO {
+    public static int createFlight(Flight flight) throws SQLException {
+        String sql = "INSERT INTO Flight (flightNumber, departureLocation, arrivalLocation, departureTime, arrivalTime, duration, status, availableSeatsEconomy, availableSeatsBusiness, economyPrice, businessPrice, aircraftId, airlineId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            ps.setString(1, flight.getFlightNumber());
+            ps.setString(2, flight.getDepartureLocation());
+            ps.setString(3, flight.getArrivalLocation());
+            ps.setTimestamp(4, flight.getDepartureTime());
+            ps.setTimestamp(5, flight.getArrivalTime());
+            ps.setTime(6, flight.getDuration());
+            ps.setString(7, flight.getStatus());
+            ps.setInt(8, flight.getAvailableSeatsEconomy());
+            ps.setInt(9, flight.getAvailableSeatsBusiness());
+            ps.setBigDecimal(10, flight.getEconomyPrice());
+            ps.setBigDecimal(11, flight.getBusinessPrice());
+            ps.setInt(12, flight.getAircraftId());
+            ps.setInt(13, flight.getAirlineId());
+
+            int rowsExecuted = ps.executeUpdate();
+            if (rowsExecuted > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    return rs.getInt(1); // Return generated flightId
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error creating flight: " + e.getMessage());
+        }
+        return -1;
+    }
+}
