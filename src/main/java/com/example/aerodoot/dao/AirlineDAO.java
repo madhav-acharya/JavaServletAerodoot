@@ -77,6 +77,29 @@ public class AirlineDAO {
         }
         return airlines;
     }
+    public static int updateAirline(Airline airline) throws SQLException {
+        String sql = "UPDATE Airline SET name = ?, headquarters = ?, contactNumber = ?, email = ? WHERE airlineId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, airline.getName());
+            ps.setString(2, airline.getHeadquarters());
+            ps.setString(3, airline.getContactNumber());
+            ps.setString(4, airline.getEmail());
+            ps.setInt(5, airline.getAirlineId());
+
+            int updatedRows = ps.executeUpdate();
+
+            if (updatedRows > 0) {
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error updating airline: " + e.getMessage());
+        }
+        return -1;
+    }
 
 
 }
