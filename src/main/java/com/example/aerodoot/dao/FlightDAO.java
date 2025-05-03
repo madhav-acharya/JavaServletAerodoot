@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlightDAO {
     public static int createFlight(Flight flight) throws SQLException {
@@ -73,6 +75,37 @@ public class FlightDAO {
             System.err.println("Error fetching flight by ID: " + e.getMessage());
         }
         return null;
+    }
+    public static List<Flight> getAllFlights() throws SQLException {
+        List<Flight> flightList = new ArrayList<>();
+        String sql = "SELECT * FROM Flight";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Flight flight = new Flight();
+                flight.setFlightId(rs.getInt("flightId"));
+                flight.setFlightNumber(rs.getString("flightNumber"));
+                flight.setDepartureLocation(rs.getString("departureLocation"));
+                flight.setArrivalLocation(rs.getString("arrivalLocation"));
+                flight.setDepartureTime(rs.getTimestamp("departureTime"));
+                flight.setArrivalTime(rs.getTimestamp("arrivalTime"));
+                flight.setDuration(rs.getTime("duration"));
+                flight.setStatus(rs.getString("status"));
+                flight.setAvailableSeatsEconomy(rs.getInt("availableSeatsEconomy"));
+                flight.setAvailableSeatsBusiness(rs.getInt("availableSeatsBusiness"));
+                flight.setEconomyPrice(rs.getBigDecimal("economyPrice"));
+                flight.setBusinessPrice(rs.getBigDecimal("businessPrice"));
+                flight.setAircraftId(rs.getInt("aircraftId"));
+                flight.setAirlineId(rs.getInt("airlineId"));
+                flightList.add(flight);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all flights: " + e.getMessage());
+        }
+        return flightList;
     }
 
 }
