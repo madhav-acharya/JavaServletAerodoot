@@ -72,7 +72,6 @@
     </div>
     <script>
         localStorage.setItem("activeTab", "overview");
-        localStorage.setItem("popup", "closed");
 
         const togglePassword = document.querySelector('.toggle-password');
         const passwordInput = document.getElementById('password');
