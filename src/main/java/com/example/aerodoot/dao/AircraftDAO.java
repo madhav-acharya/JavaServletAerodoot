@@ -34,5 +34,31 @@ public class AircraftDAO {
         }
         return -1;
     }
+    public static Aircraft getAircraftById(int aircraftId) throws SQLException {
+        String sql = "SELECT * FROM Aircraft WHERE aircraftId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, aircraftId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Aircraft aircraft = new Aircraft();
+                aircraft.setAircraftId(rs.getInt("aircraftId"));
+                aircraft.setModel(rs.getString("model"));
+                aircraft.setManufacturer(rs.getString("manufacturer"));
+                aircraft.setSeatCapacityEconomy(rs.getInt("seatCapacityEconomy"));
+                aircraft.setSeatCapacityBusiness(rs.getInt("seatCapacityBusiness"));
+                aircraft.setLastMaintenanceDate(rs.getDate("lastMaintenanceDate"));
+                aircraft.setAirlineId(rs.getInt("airlineId"));
+                return aircraft;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching aircraft by ID: " + e.getMessage());
+        }
+        return null;
+    }
+
 
 }
