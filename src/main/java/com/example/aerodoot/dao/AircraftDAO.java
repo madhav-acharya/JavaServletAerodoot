@@ -87,4 +87,28 @@ public class AircraftDAO {
         return aircraftList;
     }
 
+    public static int updateAircraft(Aircraft aircraft) throws SQLException {
+        String sql = "UPDATE Aircraft SET model = ?, manufacturer = ?, seatCapacityEconomy = ?, seatCapacityBusiness = ?, lastMaintenanceDate = ?, airlineId = ? WHERE aircraftId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, aircraft.getModel());
+            ps.setString(2, aircraft.getManufacturer());
+            ps.setInt(3, aircraft.getSeatCapacityEconomy());
+            ps.setInt(4, aircraft.getSeatCapacityBusiness());
+            ps.setDate(5, aircraft.getLastMaintenanceDate());
+            ps.setInt(6, aircraft.getAirlineId());
+            ps.setInt(7, aircraft.getAircraftId());
+
+            int updatedRows = ps.executeUpdate();
+            if (updatedRows > 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating aircraft: " + e.getMessage());
+        }
+        return -1;
+    }
+
 }
