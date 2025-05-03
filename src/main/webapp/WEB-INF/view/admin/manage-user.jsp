@@ -97,7 +97,7 @@
                                                 </svg>
                                             </button>
                                             <form method="post" action="${pageContext.request.contextPath}/admin/manage-user">
-                                            <button class="action-btn delete-btn" title="Delete" data-user-id="${user.userId}">
+                                            <button class="action-btn delete-btn" title="Delete" data-user-id="${user.userId}" data-user-action="delete">
                                                 <input type="hidden"  name="userId" value="${user.userId}">
                                                 <input type="hidden"  name="action" value="delete">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
@@ -143,6 +143,22 @@
                                 <polyline points="6 17 11 12 6 7"></polyline>
                             </svg>
                         </button>
+                    </div>
+                </div>
+            </div>
+            <%--confirmation model--%>
+            <div class="modal" id="confirmation-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Confirm Action</h3>
+                        <button class="modal-close" id="close-confirmation-modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="confirmation-message">Are you sure you want to do this?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
+                        <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
                     </div>
                 </div>
             </div>
@@ -192,21 +208,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal" id="confirmation-modal">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Confirm Action</h3>
-                                <button class="modal-close" id="close-confirmation-modal">×</button>
-                            </div>
-                            <div class="modal-body">
-                                <p id="confirmation-message">Are you sure you want to do this?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
-                                <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
@@ -250,14 +252,22 @@
             closeModal('user-edit-modal');
         });
 
+        const deleteUserbtn = document.querySelectorAll('.delete-btn');
+        deleteUserbtn.forEach(deleteBtn =>{
+            deleteBtn.addEventListener('click', (event)=>{
+                event.preventDefault();
+                const form = event.currentTarget.closest('form');
+                showConfirmation('Are you sure you want to do whatever you want?', function() {
+                    console.log("submitting form for delete")
+                    form.submit();
+                }, 'Delete');
+            });
+        })
+
+
         const editUserbtn = document.querySelectorAll('.edit-btn');
         editUserbtn.forEach(editBtn =>{
             editBtn.addEventListener('click', ()=>{
-                showConfirmation('Are you sure you want to do whatever you want?', function() {
-
-                    console.log('j garna man xa');
-
-                }, "custom btn");
                 populateForm(editBtn)
                 openModal('user-edit-modal');
             });
