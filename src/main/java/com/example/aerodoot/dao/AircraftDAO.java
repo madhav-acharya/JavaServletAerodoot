@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AircraftDAO {
     public static int createAircraft(Aircraft aircraft) throws SQLException {
@@ -60,5 +62,29 @@ public class AircraftDAO {
         return null;
     }
 
+    public static List<Aircraft> getAllAircraft() throws SQLException {
+        List<Aircraft> aircraftList = new ArrayList<>();
+        String sql = "SELECT * FROM Aircraft";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Aircraft aircraft = new Aircraft();
+                aircraft.setAircraftId(rs.getInt("aircraftId"));
+                aircraft.setModel(rs.getString("model"));
+                aircraft.setManufacturer(rs.getString("manufacturer"));
+                aircraft.setSeatCapacityEconomy(rs.getInt("seatCapacityEconomy"));
+                aircraft.setSeatCapacityBusiness(rs.getInt("seatCapacityBusiness"));
+                aircraft.setLastMaintenanceDate(rs.getDate("lastMaintenanceDate"));
+                aircraft.setAirlineId(rs.getInt("airlineId"));
+                aircraftList.add(aircraft);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all aircraft: " + e.getMessage());
+        }
+        return aircraftList;
+    }
 
 }
