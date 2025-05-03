@@ -139,44 +139,45 @@
                     </div>
                     <div class="modal-body">
                         <form id="airline-form">
-                            <input type="hidden" id="airline-id">
+                            <input type="hidden" id="airline-id" name="airlineId">
                             <div class="form-grid">
+
                                 <div class="form-group">
-                                    <label for="airline-code">Airline Code</label>
-                                    <input type="text" id="airline-code" class="input" placeholder="e.g. AA" required>
+                                    <label for="airline-id">Airline ID</label>
+                                    <input type="text" id="airline-id" name="airlineId" class="input" placeholder="e.g. RA01" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="airline-name">Name</label>
-                                    <input type="text" id="airline-name" class="input" placeholder="e.g. American Airlines" required>
+                                    <input type="text" id="airline-name" name="name" class="input" placeholder="e.g. Nepal Airlines" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <input type="text" id="country" class="input" placeholder="e.g. United States" required>
+                                    <label for="headquarters">Headquarters</label>
+                                    <input type="text" id="headquarters" name="headquarters" class="input" placeholder="e.g. Kathmandu" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="founded">Founded</label>
-                                    <input type="number" id="founded" class="input" placeholder="e.g. 1934" required>
+                                    <label for="contact-number">Contact Number</label>
+                                    <input type="tel" id="contact-number" name="contactNumber" class="input" placeholder="e.g. 01-1234567" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="fleet-size">Fleet Size</label>
-                                    <input type="number" id="fleet-size" class="input" placeholder="e.g. 950" required>
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="input" placeholder="e.g. info@nepalairlines.com" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="airline-status">Status</label>
-                                    <select id="airline-status" class="select" required>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </div>
+
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-outline" id="cancel-airline-btn">Cancel</button>
-                        <button class="btn btn-primary" id="save-airline-btn">Add Airline</button>
+                        <button type="submit" class="btn btn-primary" id="save-airline-btn">Save Airline</button>
                     </div>
                 </div>
             </div>
+
+        <%--            --%>
         </div>
     </main>
 </div>
