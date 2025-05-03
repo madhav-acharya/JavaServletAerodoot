@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookingDAO {
     public static int createBooking(Booking booking) throws SQLException {
@@ -64,4 +66,32 @@ public class BookingDAO {
         }
         return null;
     }
+
+    public static List<Booking> getAllBookings() throws SQLException {
+        List<Booking> bookingList = new ArrayList<>();
+        String sql = "SELECT * FROM Booking";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Booking booking = new Booking();
+                booking.setBookingId(rs.getInt("bookingId"));
+                booking.setBookingDate(rs.getTimestamp("bookingDate"));
+                booking.setClassType(rs.getString("classType"));
+                booking.setSeatsBooked(rs.getInt("seatsBooked"));
+                booking.setSeatNumbers(rs.getString("seatNumbers"));
+                booking.setTotalPrice(rs.getBigDecimal("totalPrice"));
+                booking.setBookingStatus(rs.getString("bookingStatus"));
+                booking.setFlightId(rs.getInt("flightId"));
+                booking.setPassengerId(rs.getInt("passengerId"));
+                bookingList.add(booking);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all bookings: " + e.getMessage());
+        }
+        return bookingList;
+    }
+
 }
