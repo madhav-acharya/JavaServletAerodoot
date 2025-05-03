@@ -14,15 +14,15 @@
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/passenger/dashboard" class="nav-link">Dashboard</a></li>
 
                 <c:choose>
-                    <%-- Show Logout if isLoggedIn is true --%>
+                    <%-- This is a JSTL comment --%>
                     <c:when test="${sessionScope.isLoggedIn != null && sessionScope.isLoggedIn}">
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a>
                         </li>
                     </c:when>
 
-                    <%-- Otherwise, show Login and Register --%>
                     <c:otherwise>
+                        <%-- If not logged in, show login and register options --%>
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a>
                         </li>
