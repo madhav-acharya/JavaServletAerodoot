@@ -138,4 +138,19 @@ public class FlightDAO {
         return -1;
     }
 
+    public static boolean deleteFlight(int flightId) {
+        String sql = "DELETE FROM Flight WHERE flightId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, flightId);
+            int rowsDeleted = ps.executeUpdate();
+            System.out.println("Flight deleted");
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            System.err.println("Error deleting flight: " + e.getMessage());
+            return false;
+        }
+    }
 }
