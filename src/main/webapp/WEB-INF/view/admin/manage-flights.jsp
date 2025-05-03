@@ -1,13 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ page import="com.example.aerodoot.model.Flight" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: mac
   Date: 26/04/2025
   Time: 6:51 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -89,37 +87,39 @@
               </tr>
               </thead>
               <tbody>
-                  <%--              <c:forEach var="flight" items="${flights}">--%>
-                  <tr>
-                    <td>AB123</td>
-                    <td>New York</td>
-                    <td>London</td>
-                    <td>2025-05-01 10:00</td>
-                    <td>2025-05-01 20:00</td>
-                    <td>SCHEDULED</td>
-                    <td>150</td>
-                    <td>50</td>
-                    <td>500.00</td>
-                    <td>1200.00</td>
-                    <td>
-                      <div class="actions">
-                        <button class="action-btn edit-btn" title="Edit" data-id="AB123">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                          </svg>
-                        </button>
-                        <button class="action-btn delete-btn" title="Delete" data-id="AB123">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                            <path d="M3 6h18"></path>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+              <c:forEach var="flight" items="${flights}">
+                <tr>
+                  <td>${flight.flightNumber}</td>
+                  <td>${flight.departureLocation}</td>
+                  <td>${flight.arrivalLocation}</td>
+                  <td>${flight.departureTime}</td>
+                  <td>${flight.arrivalTime}</td>
+                  <td>${flight.duration}</td>
+                  <td>${flight.status}</td>
+                  <td>${flight.availableSeatsEconomy}</td>
+                  <td>${flight.availableSeatsBusiness}</td>
+                  <td>${flight.economyPrice}</td>
+                  <td>${flight.businessPrice}</td>
 
+                  <td>
+                    <div class="actions">
+                      <button class="action-btn edit-btn" title="Edit" data-id="${flight.flightId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                      </button>
+                      <button class="action-btn delete-btn" title="Delete" data-id="${flight.flightId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                          <path d="M3 6h18"></path>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </c:forEach>
               </tbody>
             </table>
           </div>
