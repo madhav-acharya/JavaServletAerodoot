@@ -76,8 +76,10 @@
                 <th>Flight Number</th>
                 <th>Departure Location</th>
                 <th>Arrival Location</th>
+                <th>Flight Date</th>
                 <th>Departure Time</th>
                 <th>Arrival Time</th>
+                <th>Duration(in minutes)</th>
                 <th>Status</th>
                 <th>Available Seats (Economy)</th>
                 <th>Available Seats (Business)</th>
@@ -92,8 +94,10 @@
                   <td>${flight.flightNumber}</td>
                   <td>${flight.departureLocation}</td>
                   <td>${flight.arrivalLocation}</td>
+                  <td>${flight.flightDate}</td>
                   <td>${flight.departureTime}</td>
                   <td>${flight.arrivalTime}</td>
+                  <td>${flight.duration}</td>
                   <td>${flight.status}</td>
                   <td>${flight.availableSeatsEconomy}</td>
                   <td>${flight.availableSeatsBusiness}</td>
@@ -163,60 +167,62 @@
           </div>
           <div class="modal-body">
             <form id="flight-form">
-              <input type="hidden" id="flight-id">
+              <input type="hidden" id="flight-id" name="flightId">
               <div class="form-grid">
+
                 <div class="form-group">
                   <label for="flight-number">Flight Number</label>
-                  <input type="text" id="flight-number" class="input" placeholder="e.g. AA1234" required>
+                  <input type="text" id="flight-number" name="flightNumber" class="input" placeholder="e.g. RA123" required>
                 </div>
 
                 <div class="form-group">
                   <label for="origin">Origin</label>
-                  <select id="origin" class="select" required>
+                  <select id="origin" name="origin" class="select" required>
                     <option value="">Select Origin Airport</option>
-                    <option value="jfk">New York (JFK)</option>
-                    <option value="lhr">London (LHR)</option>
-                    <option value="cdg">Paris (CDG)</option>
-                    <option value="dxb">Dubai (DXB)</option>
-                    <option value="sin">Singapore (SIN)</option>
-                    <option value="lax">Los Angeles (LAX)</option>
-                    <option value="ord">Chicago (ORD)</option>
-                    <option value="atl">Atlanta (ATL)</option>
+                    <option value="KTM">Kathmandu (KTM)</option>
+                    <option value="PKR">Pokhara (PKR)</option>
+                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="BIR">Biratnagar (BIR)</option>
+                    <option value="BWA">Bhairahawa (BWA)</option>
+                    <option value="JKR">Janakpur (JKR)</option>
+                    <option value="TMI">Tumlingtar (TMI)</option>
+                    <option value="KEP">Nepalgunj (KEP)</option>
                   </select>
                 </div>
+
                 <div class="form-group">
                   <label for="destination">Destination</label>
-                  <select id="destination" class="select" required>
+                  <select id="destination" name="destination" class="select" required>
                     <option value="">Select Destination Airport</option>
-                    <option value="jfk">New York (JFK)</option>
-                    <option value="lhr">London (LHR)</option>
-                    <option value="cdg">Paris (CDG)</option>
-                    <option value="dxb">Dubai (DXB)</option>
-                    <option value="sin">Singapore (SIN)</option>
-                    <option value="lax">Los Angeles (LAX)</option>
-                    <option value="ord">Chicago (ORD)</option>
-                    <option value="atl">Atlanta (ATL)</option>
+                    <option value="KTM">Kathmandu (KTM)</option>
+                    <option value="PKR">Pokhara (PKR)</option>
+                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="BIR">Biratnagar (BIR)</option>
+                    <option value="BWA">Bhairahawa (BWA)</option>
+                    <option value="JKR">Janakpur (JKR)</option>
+                    <option value="TMI">Tumlingtar (TMI)</option>
+                    <option value="KEP">Nepalgunj (KEP)</option>
                   </select>
                 </div>
+
                 <div class="form-group">
-                  <label for="departure-date">Departure Date</label>
-                  <input type="date" id="departure-date" class="input" required>
+                  <label for="flight-date">Flight Date</label>
+                  <input type="date" id="flight-date" name="flightDate" class="input" required>
                 </div>
+
                 <div class="form-group">
                   <label for="departure-time">Departure Time</label>
-                  <input type="time" id="departure-time" class="input" required>
+                  <input type="time" id="departure-time" name="departureTime" class="input" required>
                 </div>
-                <div class="form-group">
-                  <label for="arrival-date">Arrival Date</label>
-                  <input type="date" id="arrival-date" class="input" required>
-                </div>
+
                 <div class="form-group">
                   <label for="arrival-time">Arrival Time</label>
-                  <input type="time" id="arrival-time" class="input" required>
+                  <input type="time" id="arrival-time" name="arrivalTime" class="input" required>
                 </div>
+
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select id="status" class="select" required>
+                  <select id="status" name="status" class="select" required>
                     <option value="scheduled">Scheduled</option>
                     <option value="ontime">On Time</option>
                     <option value="delayed">Delayed</option>
@@ -225,36 +231,43 @@
                     <option value="cancelled">Cancelled</option>
                   </select>
                 </div>
+
                 <div class="form-group">
-                  <label for="business-capacity">Seat Capacity(Business)</label>
-                  <input type="number" id="business-capacity" class="input" placeholder="Total seats" value="200" required>
+                  <label for="business-capacity">Seat Capacity (Business)</label>
+                  <input type="number" id="business-capacity" name="businessCapacity" class="input" placeholder="Total business seats" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="economy-capacity">Seat Capacity(Economy)</label>
-                  <input type="number" id="economy-capacity" class="input" placeholder="Total seats" value="200" required>
+                  <label for="economy-capacity">Seat Capacity (Economy)</label>
+                  <input type="number" id="economy-capacity" name="economyCapacity" class="input" placeholder="Total economy seats" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="business-price">Ticket Price(Business)</label>
-                  <input type="number" id="business-price" class="input" placeholder="Total price" value="2000" required>
+                  <label for="business-price">Ticket Price (Business)</label>
+                  <input type="number" id="business-price" name="businessPrice" class="input" placeholder="Price in NPR" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="economy-price">Ticket Price(Economy)</label>
-                  <input type="number" id="economy-price" class="input" placeholder="Total Price" value="2000" required>
+                  <label for="economy-price">Ticket Price (Economy)</label>
+                  <input type="number" id="economy-price" name="economyPrice" class="input" placeholder="Price in NPR" required>
                 </div>
+
               </div>
 
               <div class="form-group">
                 <label for="notes">Notes</label>
-                <textarea id="notes" class="textarea" placeholder="Additional information about this flight" rows="3"></textarea>
+                <textarea id="notes" name="notes" class="textarea" placeholder="Additional information about this flight" rows="3"></textarea>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-outline" id="cancel-flight-btn">Cancel</button>
-            <button class="btn btn-primary" id="save-flight-btn">Add Flight</button>
+            <button type="button" class="btn btn-outline" id="cancel-flight-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-flight-btn">Save Flight</button>
           </div>
         </div>
       </div>
+
+    <%--      --%>
     </div>
   </main>
 </div>

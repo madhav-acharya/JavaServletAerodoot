@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FlightDAO {
     public static int createFlight(Flight flight) throws SQLException {
-        String sql = "INSERT INTO Flight (flightNumber, departureLocation, arrivalLocation, departureTime, arrivalTime, duration, status, availableSeatsEconomy, availableSeatsBusiness, economyPrice, businessPrice, aircraftId, airlineId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Flight (flightNumber, departureLocation, arrivalLocation, flightDate, departureTime, arrivalTime, duration, status, availableSeatsEconomy, availableSeatsBusiness, economyPrice, businessPrice, aircraftId, airlineId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -20,16 +20,17 @@ public class FlightDAO {
             ps.setString(1, flight.getFlightNumber());
             ps.setString(2, flight.getDepartureLocation());
             ps.setString(3, flight.getArrivalLocation());
-            ps.setTimestamp(4, flight.getDepartureTime());
-            ps.setTimestamp(5, flight.getArrivalTime());
-            ps.setTime(6, flight.getDuration());
-            ps.setString(7, flight.getStatus());
-            ps.setInt(8, flight.getAvailableSeatsEconomy());
-            ps.setInt(9, flight.getAvailableSeatsBusiness());
-            ps.setBigDecimal(10, flight.getEconomyPrice());
-            ps.setBigDecimal(11, flight.getBusinessPrice());
-            ps.setInt(12, flight.getAircraftId());
-            ps.setInt(13, flight.getAirlineId());
+            ps.setDate(4, flight.getFlightDate());
+            ps.setTime(5, flight.getDepartureTime());
+            ps.setTime(6, flight.getArrivalTime());
+            ps.setInt(7, flight.getDuration());
+            ps.setString(8, flight.getStatus());
+            ps.setInt(9, flight.getAvailableSeatsEconomy());
+            ps.setInt(10, flight.getAvailableSeatsBusiness());
+            ps.setDouble(11, flight.getEconomyPrice());
+            ps.setDouble(12, flight.getBusinessPrice());
+            ps.setInt(13, flight.getAircraftId());
+            ps.setInt(14, flight.getAirlineId());
 
             int rowsExecuted = ps.executeUpdate();
             if (rowsExecuted > 0) {
@@ -59,14 +60,15 @@ public class FlightDAO {
                 flight.setFlightNumber(rs.getString("flightNumber"));
                 flight.setDepartureLocation(rs.getString("departureLocation"));
                 flight.setArrivalLocation(rs.getString("arrivalLocation"));
-                flight.setDepartureTime(rs.getTimestamp("departureTime"));
-                flight.setArrivalTime(rs.getTimestamp("arrivalTime"));
-                flight.setDuration(rs.getTime("duration"));
+                flight.setFlightDate(rs.getDate("flightDate"));
+                flight.setDepartureTime(rs.getTime("departureTime"));
+                flight.setArrivalTime(rs.getTime("arrivalTime"));
+                flight.setDuration(rs.getInt("duration"));
                 flight.setStatus(rs.getString("status"));
                 flight.setAvailableSeatsEconomy(rs.getInt("availableSeatsEconomy"));
                 flight.setAvailableSeatsBusiness(rs.getInt("availableSeatsBusiness"));
-                flight.setEconomyPrice(rs.getBigDecimal("economyPrice"));
-                flight.setBusinessPrice(rs.getBigDecimal("businessPrice"));
+                flight.setEconomyPrice(rs.getDouble("economyPrice"));
+                flight.setBusinessPrice(rs.getDouble("businessPrice"));
                 flight.setAircraftId(rs.getInt("aircraftId"));
                 flight.setAirlineId(rs.getInt("airlineId"));
                 return flight;
@@ -90,14 +92,15 @@ public class FlightDAO {
                 flight.setFlightNumber(rs.getString("flightNumber"));
                 flight.setDepartureLocation(rs.getString("departureLocation"));
                 flight.setArrivalLocation(rs.getString("arrivalLocation"));
-                flight.setDepartureTime(rs.getTimestamp("departureTime"));
-                flight.setArrivalTime(rs.getTimestamp("arrivalTime"));
-                flight.setDuration(rs.getTime("duration"));
+                flight.setFlightDate(rs.getDate("flightDate"));
+                flight.setDepartureTime(rs.getTime("departureTime"));
+                flight.setArrivalTime(rs.getTime("arrivalTime"));
+                flight.setDuration(rs.getInt("duration"));
                 flight.setStatus(rs.getString("status"));
                 flight.setAvailableSeatsEconomy(rs.getInt("availableSeatsEconomy"));
                 flight.setAvailableSeatsBusiness(rs.getInt("availableSeatsBusiness"));
-                flight.setEconomyPrice(rs.getBigDecimal("economyPrice"));
-                flight.setBusinessPrice(rs.getBigDecimal("businessPrice"));
+                flight.setEconomyPrice(rs.getDouble("economyPrice"));
+                flight.setBusinessPrice(rs.getDouble("businessPrice"));
                 flight.setAircraftId(rs.getInt("aircraftId"));
                 flight.setAirlineId(rs.getInt("airlineId"));
                 flightList.add(flight);
@@ -116,14 +119,14 @@ public class FlightDAO {
             ps.setString(1, flight.getFlightNumber());
             ps.setString(2, flight.getDepartureLocation());
             ps.setString(3, flight.getArrivalLocation());
-            ps.setTimestamp(4, flight.getDepartureTime());
-            ps.setTimestamp(5, flight.getArrivalTime());
-            ps.setTime(6, flight.getDuration());
+            ps.setTime(4, flight.getDepartureTime());
+            ps.setTime(5, flight.getArrivalTime());
+            ps.setInt(6, flight.getDuration());
             ps.setString(7, flight.getStatus());
             ps.setInt(8, flight.getAvailableSeatsEconomy());
             ps.setInt(9, flight.getAvailableSeatsBusiness());
-            ps.setBigDecimal(10, flight.getEconomyPrice());
-            ps.setBigDecimal(11, flight.getBusinessPrice());
+            ps.setDouble(10, flight.getEconomyPrice());
+            ps.setDouble(11, flight.getBusinessPrice());
             ps.setInt(12, flight.getAircraftId());
             ps.setInt(13, flight.getAirlineId());
             ps.setInt(14, flight.getFlightId());
