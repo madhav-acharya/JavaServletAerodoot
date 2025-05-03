@@ -107,5 +107,35 @@ public class FlightDAO {
         }
         return flightList;
     }
+    public static int updateFlight(Flight flight) throws SQLException {
+        String sql = "UPDATE Flight SET flightNumber = ?, departureLocation = ?, arrivalLocation = ?, departureTime = ?, arrivalTime = ?, duration = ?, status = ?, availableSeatsEconomy = ?, availableSeatsBusiness = ?, economyPrice = ?, businessPrice = ?, aircraftId = ?, airlineId = ? WHERE flightId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, flight.getFlightNumber());
+            ps.setString(2, flight.getDepartureLocation());
+            ps.setString(3, flight.getArrivalLocation());
+            ps.setTimestamp(4, flight.getDepartureTime());
+            ps.setTimestamp(5, flight.getArrivalTime());
+            ps.setTime(6, flight.getDuration());
+            ps.setString(7, flight.getStatus());
+            ps.setInt(8, flight.getAvailableSeatsEconomy());
+            ps.setInt(9, flight.getAvailableSeatsBusiness());
+            ps.setBigDecimal(10, flight.getEconomyPrice());
+            ps.setBigDecimal(11, flight.getBusinessPrice());
+            ps.setInt(12, flight.getAircraftId());
+            ps.setInt(13, flight.getAirlineId());
+            ps.setInt(14, flight.getFlightId());
+
+            int updatedRows = ps.executeUpdate();
+            if (updatedRows > 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating flight: " + e.getMessage());
+        }
+        return -1;
+    }
 
 }
