@@ -12,28 +12,25 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/passenger/dashboard" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/register" class="nav-link">Register</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
-<%--                <c:out value="${sessionScope.isLoggedIn}" />--%>
-<%--                <c:choose>--%>
-<%--                    <!-- Show Logout if isLoggedIn is true -->--%>
-<%--                    <c:when test="${sessionScope.isLoggedIn != null && sessionScope.isLoggedIn}">--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a>--%>
-<%--                        </li>--%>
-<%--                    </c:when>--%>
 
-<%--                    <!-- Otherwise, show Login and Register -->--%>
-<%--                    <c:otherwise>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a href="${pageContext.request.contextPath}/register" class="nav-link">Register</a>--%>
-<%--                        </li>--%>
-<%--                    </c:otherwise>--%>
-<%--                </c:choose>--%>
+                <c:choose>
+                    <%-- This is a JSTL comment --%>
+                    <c:when test="${sessionScope.isLoggedIn != null && sessionScope.isLoggedIn}">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a>
+                        </li>
+                    </c:when>
+
+                    <c:otherwise>
+                        <%-- If not logged in, show login and register options --%>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/register" class="nav-link">Register</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
         <div class="navbar-toggle" id="navbarToggle">
