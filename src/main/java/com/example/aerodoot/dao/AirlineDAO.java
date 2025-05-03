@@ -30,4 +30,29 @@ public class AirlineDAO {
         return -1;
     }
 
+    public static Airline getAirlineById(int airlineId) throws SQLException {
+        String sql = "SELECT * FROM Airline WHERE airlineId = ?";
+        Airline airline = null;
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, airlineId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                airline = new Airline();
+                airline.setAirlineId(rs.getInt("airlineId"));
+                airline.setName(rs.getString("name"));
+                airline.setHeadquarters(rs.getString("headquarters"));
+                airline.setContactNumber(rs.getString("contactNumber"));
+                airline.setEmail(rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching airline by ID: " + e.getMessage());
+        }
+        return airline;
+    }
+
+
 }
