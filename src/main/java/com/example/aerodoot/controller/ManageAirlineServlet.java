@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @WebServlet("/admin/manage-airline")
 public class ManageAirlineServlet extends HttpServlet {
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/view/admin/manage-airline.jsp").forward(request, response);
     }
