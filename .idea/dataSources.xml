@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="aerodootDB@localhost" uuid="0f13cded-f3d8-43b3-8810-3a14b12d5767">
+    <data-source source="LOCAL" name="@localhost" uuid="0f13cded-f3d8-43b3-8810-3a14b12d5767">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
