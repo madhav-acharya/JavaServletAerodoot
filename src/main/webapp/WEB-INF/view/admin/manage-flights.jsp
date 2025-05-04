@@ -106,7 +106,21 @@
 
                   <td>
                     <div class="actions">
-                      <button class="action-btn edit-btn" title="Edit" data-id="${flight.flightId}">
+                      <button class="action-btn edit-btn" title="Edit"
+                              data-id="${flight.flightId}"
+                              data-flight-number="${flight.flightNumber}"
+                              data-departure-location="${flight.departureLocation}"
+                              data-arrival-location="${flight.arrivalLocation}"
+                              data-flight-date="${flight.flightDate}"
+                              data-departure-time="${flight.departureTime}"
+                              data-arrival-time="${flight.arrivalTime}"
+                              data-duration="${flight.duration}"
+                              data-status="${flight.status}"
+                              data-available-seats-economy="${flight.availableSeatsEconomy}"
+                              data-available-seats-business="${flight.availableSeatsBusiness}"
+                              data-economy-price="${flight.economyPrice}"
+                              data-business-price="${flight.businessPrice}"
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -298,6 +312,19 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    function populateForm(button) {
+      document.getElementById('flight-number').value = button.dataset.flightNumber;
+      document.getElementById('origin').value = button.dataset.departureLocation;
+      document.getElementById('destination').value = button.dataset.arrivalLocation;
+      document.getElementById('flight-date').value = button.dataset.flightDate;
+      document.getElementById('departure-time').value = button.dataset.departureTime;
+      document.getElementById('arrival-time').value = button.dataset.arrivalTime;
+      document.getElementById('status').value = button.dataset.status;
+      document.getElementById('economy-capacity').value = button.dataset.availableSeatsEconomy;
+      document.getElementById('business-capacity').value = button.dataset.availableSeatsBusiness;
+      document.getElementById('economy-price').value = button.dataset.economyPrice;
+      document.getElementById('business-price').value = button.dataset.businessPrice;
+    }
     const savedTab = localStorage.getItem('activeTab');
     if (savedTab) {
       updateActiveMenuItem(savedTab);
@@ -332,17 +359,17 @@
     cancelFlightBtn.addEventListener('click', () => closeModal('flight-form-modal'));
 
     // Function to edit flight
-    function editFlight() {
+    function editFlight(button) {
         // Update modal title and button text
         document.getElementById('flight-action').value = 'update';
         flightModalTitle.textContent = 'Edit Flight';
         saveFlightBtn.textContent = 'Update Flight';
-
+      populateForm(button)
         openModal('flight-form-modal');
     }
     editFlightbtn.forEach(editBtn =>{
       editBtn.addEventListener('click', ()=>{
-        editFlight();
+        editFlight(editBtn);
       });
     })
   });

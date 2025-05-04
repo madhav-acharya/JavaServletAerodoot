@@ -111,7 +111,7 @@ public class FlightDAO {
         return flightList;
     }
     public static int updateFlight(Flight flight) throws SQLException {
-        String sql = "UPDATE Flight SET flightNumber = ?, departureLocation = ?, arrivalLocation = ?, departureTime = ?, arrivalTime = ?, duration = ?, status = ?, availableSeatsEconomy = ?, availableSeatsBusiness = ?, economyPrice = ?, businessPrice = ?, aircraftId = ?, airlineId = ? WHERE flightId = ?";
+        String sql = "UPDATE Flight SET flightNumber = ?, departureLocation = ?, arrivalLocation = ?, flightDate = ?, departureTime = ?, arrivalTime = ?, duration = ?, status = ?, availableSeatsEconomy = ?, availableSeatsBusiness = ?, economyPrice = ?, businessPrice = ?, aircraftId = ?, airlineId = ? WHERE flightId = ?";
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -119,17 +119,18 @@ public class FlightDAO {
             ps.setString(1, flight.getFlightNumber());
             ps.setString(2, flight.getDepartureLocation());
             ps.setString(3, flight.getArrivalLocation());
-            ps.setTime(4, flight.getDepartureTime());
-            ps.setTime(5, flight.getArrivalTime());
-            ps.setInt(6, flight.getDuration());
-            ps.setString(7, flight.getStatus());
-            ps.setInt(8, flight.getAvailableSeatsEconomy());
-            ps.setInt(9, flight.getAvailableSeatsBusiness());
-            ps.setDouble(10, flight.getEconomyPrice());
-            ps.setDouble(11, flight.getBusinessPrice());
-            ps.setInt(12, flight.getAircraftId());
-            ps.setInt(13, flight.getAirlineId());
-            ps.setInt(14, flight.getFlightId());
+            ps.setDate(4, flight.getFlightDate());
+            ps.setTime(5, flight.getDepartureTime());
+            ps.setTime(6, flight.getArrivalTime());
+            ps.setInt(7, flight.getDuration());
+            ps.setString(8, flight.getStatus());
+            ps.setInt(9, flight.getAvailableSeatsEconomy());
+            ps.setInt(10, flight.getAvailableSeatsBusiness());
+            ps.setDouble(11, flight.getEconomyPrice());
+            ps.setDouble(12, flight.getBusinessPrice());
+            ps.setInt(13, flight.getAircraftId());
+            ps.setInt(14, flight.getAirlineId());
+            ps.setInt(15, flight.getFlightId());
 
             int updatedRows = ps.executeUpdate();
             if (updatedRows > 0) {
