@@ -82,13 +82,20 @@
                   <td>${aircraft.airlineId}</td>
                   <td>
                     <div class="actions">
-                      <button class="action-btn edit-btn" title="Edit" data-id="${aircraft.aircraftId}">
+                      <button class="action-btn edit-btn" title="Edit"
+                              data-aircraft-id="${aircraft.aircraftId}"
+                              data-model="${aircraft.model}"
+                              data-manufacturer="${aircraft.manufacturer}"
+                              data-seat-capacity-economy="${aircraft.seatCapacityEconomy}"
+                              data-seat-capacity-business="${aircraft.seatCapacityBusiness}"
+                              data-last-maintenance-date="${aircraft.lastMaintenanceDate}"
+                              data-airline-id="${aircraft.airlineId}" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
                       </button>
-                      <button class="action-btn delete-btn" title="Delete" data-id="${aircraft.aircraftId}">
+                      <button class="action-btn delete-btn" title="Delete" data-aircraft-id="${aircraft.aircraftId}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M3 6h18"></path>
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
@@ -134,7 +141,9 @@
         </div>
       </div>
 
-      <!-- Aircraft Form Modal -->
+      <jsp:include page="../../../confirmation-modal.jsp" />
+
+<%--      Aircraft form modal--%>
       <div class="modal" id="aircraft-form-modal">
         <div class="modal-content">
           <div class="modal-header">
@@ -142,8 +151,9 @@
             <button class="modal-close" id="close-aircraft-modal">×</button>
           </div>
           <div class="modal-body">
-            <form id="aircraft-form">
+            <form id="aircraft-form" method="post" action="${pageContext.request.contextPath}/admin/manage-aircraft">
               <input type="hidden" id="aircraft-id" name="aircraftId">
+              <input type="hidden" id="aircraft-action" name="action" >
               <div class="form-grid">
 
                 <div class="form-group">
@@ -177,11 +187,11 @@
                 </div>
 
               </div>
+              <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-aircraft-btn">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="save-aircraft-btn">Save Aircraft</button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-outline" id="cancel-aircraft-btn">Cancel</button>
-            <button type="submit" class="btn btn-primary" id="save-aircraft-btn">Save Aircraft</button>
           </div>
         </div>
       </div>
@@ -193,12 +203,20 @@
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    function populateForm(button) {
+      document.getElementById('aircraft-id').value = button.dataset.aircraftId;
+      document.getElementById('model').value = button.dataset.model;
+      document.getElementById('manufacturer').value = button.dataset.manufacturer;
+      document.getElementById('seat-capacity-economy').value = button.dataset.seatCapacityEconomy;
+      document.getElementById('seat-capacity-business').value = button.dataset.seatCapacityBusiness;
+      document.getElementById('last-maintenance-date').value = button.dataset.lastMaintenanceDate;
+      document.getElementById('airline-id').value = button.dataset.airlineId;
+    }
+
     const savedTab = localStorage.getItem('activeTab');
     if (savedTab) {
       updateActiveMenuItem(savedTab);
     }
-    // Populate aircraft table
-    populateAircraftTable();
 
     // Setup search functionality
     searchTable('aircraft-table', 'search-aircraft');
@@ -211,13 +229,11 @@
     const closeAircraftModalBtn = document.getElementById('close-aircraft-modal');
     const cancelAircraftBtn = document.getElementById('cancel-aircraft-btn');
     const saveAircraftBtn = document.getElementById('save-aircraft-btn');
-    const aircraftForm = document.getElementById('aircraft-form');
     const aircraftModalTitle = document.getElementById('aircraft-modal-title');
 
     addAircraftBtn.addEventListener('click', () => {
-      // Reset form and prepare for adding a new aircraft
-      aircraftForm.reset();
       document.getElementById('aircraft-id').value = '';
+      document.getElementById('aircrft-action').value = "add";
       aircraftModalTitle.textContent = 'Add New Aircraft';
       saveAircraftBtn.textContent = 'Add Aircraft';
 
@@ -231,32 +247,33 @@
         closeModal('aircraft-form-modal');
     });
 
-    // Function to populate aircraft table
-    function populateAircraftTable() {
-
-      // Add event listeners for edit and delete buttons
-      document.querySelectorAll('#aircraft-table .edit-btn').forEach(btn => {
-        btn.addEventListener('click', () => editAircraft(btn.getAttribute('data-id')));
-      });
-
-      document.querySelectorAll('#aircraft-table .delete-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteAircraft(btn.getAttribute('data-id')));
-      });
-    }
-
     // Function to edit aircraft
-    function editAircraft() {
-
-        // Update modal title and button text
+    function editAircraft(button) {
         aircraftModalTitle.textContent = 'Edit Aircraft';
         saveAircraftBtn.textContent = 'Update Aircraft';
-
+        document.getElementById('aircrft-action').value = "update";
+        populateForm(button);
         openModal('aircraft-form-modal');
     }
 
-    // Function to delete aircraft
-    function deleteAircraft(id) {
-    }
+    const deleteAircraftbtn = document.querySelectorAll('.delete-btn');
+    deleteAircraftbtn.forEach(deleteBtn =>{
+      deleteBtn.addEventListener('click', (event)=>{
+        event.preventDefault();
+        const form = event.currentTarget.closest('form');
+        showConfirmation('Are you sure you want to delete this user?', function() {
+          console.log("submitting form for delete")
+          form.submit();
+        }, 'Delete');
+      });
+    })
+
+    const editAircraftbtn = document.querySelectorAll('.edit-btn');
+    editAircraftbtn.forEach(editBtn =>{
+      editBtn.addEventListener('click', ()=>{
+        editAircraft(editBtn);
+      });
+    })
   });
 </script>
 </body>
