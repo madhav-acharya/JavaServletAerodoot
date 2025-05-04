@@ -62,6 +62,8 @@ public class ManageAircraftServlet extends HttpServlet {
                     System.out.println("Aircraft creation successful");
                     aircrafts = AircraftDAO.getAllAircraft();
                     getServletContext().setAttribute("aircrafts", aircrafts);
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-aircraft");
+                    return;
                 } else {
                     System.out.println("Failed to create aircraft");
                 }
@@ -97,6 +99,8 @@ public class ManageAircraftServlet extends HttpServlet {
                     System.out.println("Aircraft update successful");
                     aircrafts = AircraftDAO.getAllAircraft();
                     getServletContext().setAttribute("aircrafts", aircrafts);
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-aircraft");
+                    return;
                 }
 
             } catch (Exception e) {
@@ -113,6 +117,8 @@ public class ManageAircraftServlet extends HttpServlet {
                     System.out.println("Aircraft delete successful");
                     aircrafts = AircraftDAO.getAllAircraft();
                     getServletContext().setAttribute("aircrafts", aircrafts);
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-aircraft");
+                    return;
                 } else {
                     System.out.println("Failed to delete aircraft");
                 }

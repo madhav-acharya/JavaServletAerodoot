@@ -89,7 +89,7 @@
                                                 </svg>
                                             </button>
                                             <form method="post" action="${pageContext.request.contextPath}/admin/manage-airline">
-                                                <input type="hidden" name="aircraftId" value="${airline.airlineId}">
+                                                <input type="hidden" name="airlineId" value="${airline.airlineId}">
                                                 <input type="hidden"  name="action" value="delete">
                                             <button class="action-btn delete-btn" title="Delete" data-id="${airline.airlineId}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">

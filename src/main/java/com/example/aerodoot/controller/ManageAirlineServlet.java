@@ -58,6 +58,8 @@ public class ManageAirlineServlet extends HttpServlet {
                     System.out.println("Airline creation successful");
                     airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-airline");
+                    return;
                 } else {
                     System.out.println("Failed to create airline");
                 }
@@ -89,6 +91,8 @@ public class ManageAirlineServlet extends HttpServlet {
                     System.out.println("Airline update successful");
                     airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-airline");
+                    return;
                 }
 
             } catch (Exception e) {
@@ -105,6 +109,8 @@ public class ManageAirlineServlet extends HttpServlet {
                     System.out.println("Airline delete successful");
                     airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-airline");
+                    return;
                 } else {
                     System.out.println("Failed to delete airline");
                 }
