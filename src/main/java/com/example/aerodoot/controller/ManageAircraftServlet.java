@@ -38,7 +38,7 @@ public class ManageAircraftServlet extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println("action: " + action);
 
-        if ("create".equals(action)) {
+        if ("add".equals(action)) {
             System.out.println("in create");
             try {
                 String model = request.getParameter("model");
@@ -60,8 +60,8 @@ public class ManageAircraftServlet extends HttpServlet {
 
                 if (createdAircraftId >= 0) {
                     System.out.println("Aircraft creation successful");
-                    List<Aircraft> aircraftList = AircraftDAO.getAllAircraft();
-                    getServletContext().setAttribute("aircraftList", aircraftList);
+                    aircrafts = AircraftDAO.getAllAircraft();
+                    getServletContext().setAttribute("aircrafts", aircrafts);
                 } else {
                     System.out.println("Failed to create aircraft");
                 }
@@ -95,8 +95,8 @@ public class ManageAircraftServlet extends HttpServlet {
 
                 if (updateAircraftResult >= 0) {
                     System.out.println("Aircraft update successful");
-                    List<Aircraft> aircraftList = AircraftDAO.getAllAircraft();
-                    getServletContext().setAttribute("aircraftList", aircraftList);
+                    aircrafts = AircraftDAO.getAllAircraft();
+                    getServletContext().setAttribute("aircrafts", aircrafts);
                 }
 
             } catch (Exception e) {
@@ -111,8 +111,8 @@ public class ManageAircraftServlet extends HttpServlet {
                 boolean success = AircraftDAO.deleteAircraft(aircraftId);
                 if (success) {
                     System.out.println("Aircraft delete successful");
-                    List<Aircraft> aircraftList = AircraftDAO.getAllAircraft();
-                    getServletContext().setAttribute("aircraftList", aircraftList);
+                    aircrafts = AircraftDAO.getAllAircraft();
+                    getServletContext().setAttribute("aircrafts", aircrafts);
                 } else {
                     System.out.println("Failed to delete aircraft");
                 }
