@@ -85,7 +85,7 @@
                   <td>${booking.passengerId}</td>
                   <td>
                     <div class="actions">
-                      <button class="action-btn edit-btn" title="Edit" data-booking0id="${booking.bookingId}" data-booking-status="${booking.bookingStatus}">
+                      <button class="action-btn edit-btn" title="Edit" data-booking-id="${booking.bookingId}" data-booking-status="${booking.bookingStatus}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -145,15 +145,14 @@
             <button class="modal-close" id="close-booking-status-modal">×</button>
           </div>
           <div class="modal-body">
-            <form id="booking-status-form">
-              <input type="hidden" id="booking-id">
+            <form id="booking-status-form" method="post" action="${pageContext.request.contextPath}/admin/manage-booking">
+              <input type="hidden" id="booking-id" name="bookingId">
               <div class="form-group">
                 <label for="booking-status">Status</label>
-                <select id="booking-status" class="select" required>
+                <select id="booking-status" name="bookingStatus" class="select" required>
                   <option value="CONFIRMED">Confirmed</option>
                   <option value="PENDING">Pending</option>
                   <option value="CANCELLED">Cancelled</option>
-                  <option value="REFUNDED">Refunded</option>
                 </select>
               </div>
               <div class="form-group">
@@ -162,7 +161,7 @@
               </div>
               <div class="modal-footer">
                 <button class="btn btn-outline" id="cancel-booking-status-btn">Cancel</button>
-                <button class="btn btn-primary" id="save-booking-status-btn">Update Status</button>
+                <button type="submit" class="btn btn-primary" id="save-booking-status-btn">Update Status</button>
               </div>
             </form>
           </div>
@@ -176,6 +175,8 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     function populateForm(button) {
+      console.log("bookingStatus: ", button.dataset.bookingStatus)
+      console.log("bookingId: ", button.dataset.bookingId)
       document.getElementById('booking-status').value = button.dataset.bookingStatus;
       document.getElementById('booking-id').value = button.dataset.bookingId;
     }
