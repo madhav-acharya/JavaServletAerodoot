@@ -265,7 +265,7 @@
       deleteBtn.addEventListener('click', (event)=>{
         event.preventDefault();
         const form = event.currentTarget.closest('form');
-        showConfirmation('Are you sure you want to delete this user?', function() {
+        showConfirmation('Are you sure you want to delete this aircraft?', function() {
           console.log("submitting form for delete")
           form.submit();
         }, 'Delete');
