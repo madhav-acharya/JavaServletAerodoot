@@ -27,6 +27,7 @@ public class ManageAirlineServlet extends HttpServlet {
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/view/admin/manage-airline.jsp").forward(request, response);
     }
@@ -55,7 +56,7 @@ public class ManageAirlineServlet extends HttpServlet {
 
                 if (createdAirlineId >= 0) {
                     System.out.println("Airline creation successful");
-                    List<Airline> airlines = AirlineDAO.getAllAirlines();
+                    airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
                 } else {
                     System.out.println("Failed to create airline");
@@ -86,7 +87,7 @@ public class ManageAirlineServlet extends HttpServlet {
 
                 if (updateAirlineResult == 0) {
                     System.out.println("Airline update successful");
-                    List<Airline> airlines = AirlineDAO.getAllAirlines();
+                    airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
                 }
 
@@ -102,7 +103,7 @@ public class ManageAirlineServlet extends HttpServlet {
                 boolean success = AirlineDAO.deleteAirline(airlineId);
                 if (success) {
                     System.out.println("Airline delete successful");
-                    List<Airline> airlines = AirlineDAO.getAllAirlines();
+                    airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
                 } else {
                     System.out.println("Failed to delete airline");
@@ -112,7 +113,7 @@ public class ManageAirlineServlet extends HttpServlet {
             }
         }
 
-        request.getRequestDispatcher("/WEB-INF/view/admin/manage-airlines.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/manage-airline.jsp").forward(request, response);
     }
 
 }
