@@ -89,6 +89,8 @@ public class ManageFlightServlet extends HttpServlet {
                     flights = FlightDAO.getAllFlights();
                     getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight created successfully!");
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-flight");
+                    return;
                 } else {
                     request.setAttribute("message", "Error creating flight.");
                 }
@@ -155,6 +157,8 @@ public class ManageFlightServlet extends HttpServlet {
                     System.out.println("flight updated sucessfully");
                     getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight updated successfully!");
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-flight");
+                    return;
                 } else {
                     System.out.println("flight update failed");
                     request.setAttribute("message", "Error updating flight.");
@@ -175,6 +179,8 @@ public class ManageFlightServlet extends HttpServlet {
                     flights = FlightDAO.getAllFlights();
                     getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight deleted successfully!");
+                    response.sendRedirect(request.getContextPath() + "/admin/manage-flight");
+                    return;
                 } else {
                     request.setAttribute("message", "Error deleting flight.");
                 }

@@ -47,6 +47,8 @@ public class ManageBookingsServlet extends HttpServlet {
                 System.out.println("Booking status updated successfully.");
                 bookings = BookingDAO.getAllBookings();
                 getServletContext().setAttribute("bookings", bookings);
+                response.sendRedirect(request.getContextPath() + "/admin/manage-booking");
+                return;
             } else {
                 request.setAttribute("error", "Failed to update booking status.");
             }
