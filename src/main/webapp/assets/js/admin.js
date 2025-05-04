@@ -68,9 +68,9 @@ function setupTableFilter(tableId, filterId, columnIndex) {
 
         rows.forEach(row => {
             const cell = row.cells[columnIndex];
-            const cellText = cell.textContent.toLowerCase();
+            const cellText = cell.textContent.toLowerCase() ;
 
-            if (filterValue === 'all' || cellText.includes(filterValue)) {
+            if (filterValue === 'all' || cellText.includes(filterValue) || cell.textContent.toUpperCase()) {
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
