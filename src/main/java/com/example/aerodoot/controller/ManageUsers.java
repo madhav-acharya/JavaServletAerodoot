@@ -85,7 +85,6 @@ public class ManageUsers extends HttpServlet {
                     getServletContext().setAttribute("users", users);
                 }
                 else{
-
                     System.out.println("failed to delete user");
                 }
             }

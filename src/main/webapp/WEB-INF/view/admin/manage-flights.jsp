@@ -128,6 +128,9 @@
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
                       </button>
+                      <form method="post" action="${pageContext.request.contextPath}/admin/manage-flight">
+                        <input type="hidden"  name="flightId" value="${flight.flightId}">
+                        <input type="hidden"  name="action" value="delete">
                       <button class="action-btn delete-btn" title="Delete" data-id="${flight.flightId}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M3 6h18"></path>
@@ -135,6 +138,7 @@
                           <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                         </svg>
                       </button>
+                      </form>
                     </div>
                   </td>
                 </tr>
@@ -173,6 +177,24 @@
           </div>
         </div>
       </div>
+
+      <%--confirmation model--%>
+      <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Confirm Action</h3>
+            <button class="modal-close" id="close-confirmation-modal">×</button>
+          </div>
+          <div class="modal-body">
+            <p id="confirmation-message">Are you sure you want to do this?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
+            <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Flight Form Modal -->
       <div class="modal" id="flight-form-modal">
@@ -386,6 +408,19 @@
       populateForm(button)
         openModal('flight-form-modal');
     }
+
+    const deleteFlightbtn = document.querySelectorAll('.delete-btn');
+    deleteFlightbtn.forEach(deleteBtn =>{
+      deleteBtn.addEventListener('click', (event)=>{
+        event.preventDefault();
+        const form = event.currentTarget.closest('form');
+        showConfirmation('Are you sure you want to delete this FLight?', function() {
+          console.log("submitting form for delete")
+          form.submit();
+        }, 'Delete');
+      });
+    })
+
     editFlightbtn.forEach(editBtn =>{
       editBtn.addEventListener('click', ()=>{
         editFlight(editBtn);

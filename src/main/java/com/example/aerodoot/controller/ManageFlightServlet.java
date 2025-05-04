@@ -37,22 +37,6 @@ public class ManageFlightServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        System.out.println("action: " + action);
-
-        System.out.println("Flight Number: " + request.getParameter("flightNumber"));
-        System.out.println("Departure Location: " + request.getParameter("departureLocation"));
-        System.out.println("Arrival Location: " + request.getParameter("arrivalLocation"));
-        System.out.println("Flight Date: " + request.getParameter("flightDate"));
-        System.out.println("Departure Time: " + request.getParameter("departureTime"));
-        System.out.println("Arrival Time: " + request.getParameter("arrivalTime"));
-        System.out.println("Status: " + request.getParameter("status"));
-        System.out.println("Available Seats (Economy): " + request.getParameter("availableSeatsEconomy"));
-        System.out.println("Available Seats (Business): " + request.getParameter("availableSeatsBusiness"));
-        System.out.println("Economy Price: " + request.getParameter("economyPrice"));
-        System.out.println("Business Price: " + request.getParameter("businessPrice"));
-        System.out.println("Aircraft ID: " + request.getParameter("aircraftId"));
-        System.out.println("Airline ID: " + request.getParameter("airlineId"));
-
         if ("add".equals(action)) {
             try {
                 String flightNumber = request.getParameter("flightNumber");
@@ -102,8 +86,8 @@ public class ManageFlightServlet extends HttpServlet {
                 int createdFlightId = FlightDAO.createFlight(flight);
 
                 if (createdFlightId > 0) {
-                    List<Flight> flights = FlightDAO.getAllFlights();
-                    request.setAttribute("flights", flights);
+                    flights = FlightDAO.getAllFlights();
+                    getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight created successfully!");
                 } else {
                     request.setAttribute("message", "Error creating flight.");
@@ -167,9 +151,9 @@ public class ManageFlightServlet extends HttpServlet {
                 System.out.println("updated flight id: " + updatedFlightId);
 
                 if (updatedFlightId >= 0) {
-                    List<Flight> flights = FlightDAO.getAllFlights();
+                    flights = FlightDAO.getAllFlights();
                     System.out.println("flight updated sucessfully");
-                    request.setAttribute("flights", flights);
+                    getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight updated successfully!");
                 } else {
                     System.out.println("flight update failed");
@@ -186,9 +170,10 @@ public class ManageFlightServlet extends HttpServlet {
             try {
                 int flightId = Integer.parseInt(request.getParameter("flightId"));
                 boolean success = FlightDAO.deleteFlight(flightId);
+                System.out.println("deleted flight id: " + flightId + success);
                 if (success) {
-                    List<Flight> flights = FlightDAO.getAllFlights();
-                    request.setAttribute("flights", flights);
+                    flights = FlightDAO.getAllFlights();
+                    getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight deleted successfully!");
                 } else {
                     request.setAttribute("message", "Error deleting flight.");
