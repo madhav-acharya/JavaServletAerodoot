@@ -337,19 +337,6 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     function populateForm(button) {
-      console.log(button.dataset.flightNumber);
-      console.log(button.dataset.departureLocation);
-      console.log(button.dataset.arrivalLocation);
-      console.log(button.dataset.flightDate);
-      console.log(button.dataset.departureTime);
-      console.log(button.dataset.arrivalTime);
-      console.log(button.dataset.status);
-      console.log(button.dataset.availableSeatsEconomy);
-      console.log(button.dataset.availableSeatsBusiness);
-      console.log(button.dataset.economyPrice);
-      console.log(button.dataset.businessPrice);
-      console.log(button.dataset.aircraftId);
-      console.log(button.dataset.airlineId);
 
       document.getElementById('flight-id').value = button.dataset.flightId;
       document.getElementById('flight-number').value = button.dataset.flightNumber;
@@ -384,7 +371,6 @@
     const closeFlightModalBtn = document.getElementById('close-flight-modal');
     const cancelFlightBtn = document.getElementById('cancel-flight-btn');
     const saveFlightBtn = document.getElementById('save-flight-btn');
-    const flightForm = document.getElementById('flight-form');
     const flightModalTitle = document.getElementById('flight-modal-title');
     const editFlightbtn = document.querySelectorAll('.edit-btn');
 
@@ -405,7 +391,7 @@
         document.getElementById('flight-action').value = 'update';
         flightModalTitle.textContent = 'Edit Flight';
         saveFlightBtn.textContent = 'Update Flight';
-      populateForm(button)
+        populateForm(button)
         openModal('flight-form-modal');
     }
 

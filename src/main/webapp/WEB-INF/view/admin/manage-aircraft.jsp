@@ -95,6 +95,9 @@
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
                       </button>
+                      <form method="post" action="${pageContext.request.contextPath}/admin/manage-aircraft">
+                        <input type="hidden" name="aircraftId" value="${aircraft.aircraftId}">
+                        <input type="hidden"  name="action" value="delete">
                       <button class="action-btn delete-btn" title="Delete" data-aircraft-id="${aircraft.aircraftId}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M3 6h18"></path>
@@ -102,6 +105,7 @@
                           <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                         </svg>
                       </button>
+                      </form>
                     </div>
                   </td>
                 </tr>
@@ -233,7 +237,7 @@
 
     addAircraftBtn.addEventListener('click', () => {
       document.getElementById('aircraft-id').value = '';
-      document.getElementById('aircrft-action').value = "add";
+      document.getElementById('aircraft-action').value = "add";
       aircraftModalTitle.textContent = 'Add New Aircraft';
       saveAircraftBtn.textContent = 'Add Aircraft';
 
@@ -251,7 +255,7 @@
     function editAircraft(button) {
         aircraftModalTitle.textContent = 'Edit Aircraft';
         saveAircraftBtn.textContent = 'Update Aircraft';
-        document.getElementById('aircrft-action').value = "update";
+        document.getElementById('aircraft-action').value = "update";
         populateForm(button);
         openModal('aircraft-form-modal');
     }
