@@ -1,5 +1,3 @@
-<%@ page import="com.example.aerodoot.model.User" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: mac
@@ -7,6 +5,7 @@
   Time: 12:04 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -257,7 +256,7 @@
             deleteBtn.addEventListener('click', (event)=>{
                 event.preventDefault();
                 const form = event.currentTarget.closest('form');
-                showConfirmation('Are you sure you want to do whatever you want?', function() {
+                showConfirmation('Are you sure you want to delete this user?', function() {
                     console.log("submitting form for delete")
                     form.submit();
                 }, 'Delete');

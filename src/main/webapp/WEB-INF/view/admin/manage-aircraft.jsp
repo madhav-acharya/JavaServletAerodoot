@@ -5,6 +5,7 @@
   Time: 6:16 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -70,58 +71,34 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>1</td>
-                <td>Boeing 737</td>
-                <td>Boeing</td>
-                <td>150</td>
-                <td>30</td>
-                <td>2024-01-15</td>
-                <td>1</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn edit-btn" title="Edit" data-id="${aircraft.id}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                      </svg>
-                    </button>
-                    <button class="action-btn delete-btn" title="Delete" data-id="${aircraft.id}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                        <path d="M3 6h18"></path>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>A320</td>
-                <td>Airbus</td>
-                <td>180</td>
-                <td>40</td>
-                <td>2024-02-10</td>
-                <td>2</td>
-                <td>
-                  <div class="actions">
-                    <button class="action-btn edit-btn" title="Edit" data-id="${aircraft.id}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                      </svg>
-                    </button>
-                    <button class="action-btn delete-btn" title="Delete" data-id="${aircraft.id}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                        <path d="M3 6h18"></path>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              <c:forEach var="aircraft" items="${aircrafts}">
+                <tr>
+                  <td>${aircraft.aircraftId}</td>
+                  <td>${aircraft.model}</td>
+                  <td>${aircraft.manufacturer}</td>
+                  <td>${aircraft.seatCapacityEconomy}</td>
+                  <td>${aircraft.seatCapacityBusiness}</td>
+                  <td>${aircraft.lastMaintenanceDate}</td>
+                  <td>${aircraft.airlineId}</td>
+                  <td>
+                    <div class="actions">
+                      <button class="action-btn edit-btn" title="Edit" data-id="${aircraft.aircraftId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                      </button>
+                      <button class="action-btn delete-btn" title="Delete" data-id="${aircraft.aircraftId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                          <path d="M3 6h18"></path>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </c:forEach>
               </tbody>
             </table>
           </div>
@@ -166,49 +143,50 @@
           </div>
           <div class="modal-body">
             <form id="aircraft-form">
-              <input type="hidden" id="aircraft-id">
+              <input type="hidden" id="aircraft-id" name="aircraftId">
               <div class="form-grid">
-                <div class="form-group">
-                  <label for="registration">Registration</label>
-                  <input type="text" id="registration" class="input" placeholder="e.g. N12345" required>
-                </div>
-                <div class="form-group">
-                  <label for="manufacturer">Manufacturer</label>
-                  <input type="text" id="manufacturer" class="input" placeholder="e.g. Boeing" required>
-                </div>
+
                 <div class="form-group">
                   <label for="model">Model</label>
-                  <input type="text" id="model" class="input" placeholder="e.g. 737-800" required>
+                  <input type="text" id="model" name="model" class="input" placeholder="e.g. 737-800" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="year">Year</label>
-                  <input type="number" id="year" class="input" placeholder="e.g. 2018" required>
+                  <label for="manufacturer">Manufacturer</label>
+                  <input type="text" id="manufacturer" name="manufacturer" class="input" placeholder="e.g. Boeing" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="aircraft-capacity">Capacity</label>
-                  <input type="number" id="aircraft-capacity" class="input" placeholder="Total seats" required>
+                  <label for="seat-capacity-economy">Seat Capacity (Economy)</label>
+                  <input type="number" id="seat-capacity-economy" name="seatCapacityEconomy" class="input" placeholder="e.g. 150" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="aircraft-status">Status</label>
-                  <select id="aircraft-status" class="select" required>
-                    <option value="active">Active</option>
-                    <option value="maintenance">Maintenance</option>
-                    <option value="retired">Retired</option>
-                  </select>
+                  <label for="seat-capacity-business">Seat Capacity (Business)</label>
+                  <input type="number" id="seat-capacity-business" name="seatCapacityBusiness" class="input" placeholder="e.g. 30" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="last-maintenance">Last Maintenance</label>
-                  <input type="date" id="last-maintenance" class="input" required>
+                  <label for="last-maintenance-date">Last Maintenance Date</label>
+                  <input type="date" id="last-maintenance-date" name="lastMaintenanceDate" class="input" required>
                 </div>
+
+                <div class="form-group">
+                  <label for="airline-id">Airline ID</label>
+                  <input type="text" id="airline-id" name="airlineId" class="input" placeholder="e.g. RA01" required>
+                </div>
+
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button class="btn btn-outline" id="cancel-aircraft-btn">Cancel</button>
-            <button class="btn btn-primary" id="save-aircraft-btn">Add Aircraft</button>
+            <button type="submit" class="btn btn-primary" id="save-aircraft-btn">Save Aircraft</button>
           </div>
         </div>
       </div>
+
+    <%--      --%>
     </div>
   </main>
 </div>

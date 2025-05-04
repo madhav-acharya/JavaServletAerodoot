@@ -40,18 +40,8 @@ public class ManageUsers extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println("action " + action);
 
-        if ("edit".equals(action)) {
-            try {
-                int editId = Integer.parseInt(request.getParameter("userId"));
-                User editUser = UserDAO.getUserById(editId);
 
-                request.setAttribute("editUser", editUser);
-
-            } catch (Exception e) {
-                throw new ServletException("Failed to fetch user by ID", e);
-            }
-        }
-        else if ("update".equals(action))
+        if ("update".equals(action))
         {
             System.out.println("in update");
             try {
@@ -95,7 +85,6 @@ public class ManageUsers extends HttpServlet {
                     getServletContext().setAttribute("users", users);
                 }
                 else{
-
                     System.out.println("failed to delete user");
                 }
             }

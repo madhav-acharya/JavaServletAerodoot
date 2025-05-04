@@ -1,6 +1,7 @@
 package com.example.aerodoot.model;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.sql.Time;
 
@@ -9,14 +10,15 @@ public class Flight {
     private String flightNumber;
     private String departureLocation;
     private String arrivalLocation;
-    private Timestamp departureTime;
-    private Timestamp arrivalTime;
-    private Time duration;
+    private Date flightDate;
+    private Time departureTime;
+    private Time arrivalTime;
+    private int duration;
     private String status; // Enum: SCHEDULED, DELAYED, CANCELLED, IN_AIR, LANDED, BOARDING
     private int availableSeatsEconomy;
     private int availableSeatsBusiness;
-    private BigDecimal economyPrice;
-    private BigDecimal businessPrice;
+    private double economyPrice;
+    private double businessPrice;
     private int aircraftId;
     private int airlineId;
 
@@ -24,15 +26,16 @@ public class Flight {
         // Default constructor
     }
 
-    public Flight(int flightId, String flightNumber, String departureLocation, String arrivalLocation,
-            Timestamp departureTime, Timestamp arrivalTime, Time duration, String status,
+    public Flight(int flightId, String flightNumber, String departureLocation, String arrivalLocation, Date flightDate,
+            Time departureTime, Time arrivalTime, int duration, String status,
             int availableSeatsEconomy, int availableSeatsBusiness,
-            BigDecimal economyPrice, BigDecimal businessPrice,
+            double economyPrice, double businessPrice,
             int aircraftId, int airlineId) {
         this.flightId = flightId;
         this.flightNumber = flightNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
+        this.flightDate = flightDate;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.duration = duration;
@@ -78,27 +81,27 @@ public class Flight {
         this.arrivalLocation = arrivalLocation;
     }
 
-    public Timestamp getDepartureTime() {
+    public Time getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Timestamp departureTime) {
+    public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
     }
 
-    public Timestamp getArrivalTime() {
+    public Time getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Timestamp arrivalTime) {
+    public void setArrivalTime(Time arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public Time getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -126,19 +129,19 @@ public class Flight {
         this.availableSeatsBusiness = availableSeatsBusiness;
     }
 
-    public BigDecimal getEconomyPrice() {
+    public double getEconomyPrice() {
         return economyPrice;
     }
 
-    public void setEconomyPrice(BigDecimal economyPrice) {
+    public void setEconomyPrice(double economyPrice) {
         this.economyPrice = economyPrice;
     }
 
-    public BigDecimal getBusinessPrice() {
+    public double getBusinessPrice() {
         return businessPrice;
     }
 
-    public void setBusinessPrice(BigDecimal businessPrice) {
+    public void setBusinessPrice(double businessPrice) {
         this.businessPrice = businessPrice;
     }
 
@@ -157,4 +160,8 @@ public class Flight {
     public void setAirlineId(int airlineId) {
         this.airlineId = airlineId;
     }
+
+    public Date getFlightDate() { return flightDate; }
+
+    public void setFlightDate(Date flightDate) { this.flightDate = flightDate; }
 }

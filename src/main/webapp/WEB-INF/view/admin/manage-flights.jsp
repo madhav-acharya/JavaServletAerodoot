@@ -1,13 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ page import="com.example.aerodoot.model.Flight" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: mac
   Date: 26/04/2025
   Time: 6:51 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -78,8 +76,10 @@
                 <th>Flight Number</th>
                 <th>Departure Location</th>
                 <th>Arrival Location</th>
+                <th>Flight Date</th>
                 <th>Departure Time</th>
                 <th>Arrival Time</th>
+                <th>Duration(in minutes)</th>
                 <th>Status</th>
                 <th>Available Seats (Economy)</th>
                 <th>Available Seats (Business)</th>
@@ -89,68 +89,60 @@
               </tr>
               </thead>
               <tbody>
-                  <%--              <c:forEach var="flight" items="${flights}">--%>
-                  <tr>
-                    <td>AB123</td>
-                    <td>New York</td>
-                    <td>London</td>
-                    <td>2025-05-01 10:00</td>
-                    <td>2025-05-01 20:00</td>
-                    <td>SCHEDULED</td>
-                    <td>150</td>
-                    <td>50</td>
-                    <td>500.00</td>
-                    <td>1200.00</td>
-                    <td>
-                      <div class="actions">
-                        <button class="action-btn edit-btn" title="Edit" data-id="AB123">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                          </svg>
-                        </button>
-                        <button class="action-btn delete-btn" title="Delete" data-id="AB123">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                            <path d="M3 6h18"></path>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+              <c:forEach var="flight" items="${flights}">
+                <tr>
+                  <td>${flight.flightNumber}</td>
+                  <td>${flight.departureLocation}</td>
+                  <td>${flight.arrivalLocation}</td>
+                  <td>${flight.flightDate}</td>
+                  <td>${flight.departureTime}</td>
+                  <td>${flight.arrivalTime}</td>
+                  <td>${flight.duration}</td>
+                  <td>${flight.status}</td>
+                  <td>${flight.availableSeatsEconomy}</td>
+                  <td>${flight.availableSeatsBusiness}</td>
+                  <td>${flight.economyPrice}</td>
+                  <td>${flight.businessPrice}</td>
 
-                  <!-- Flight 2 -->
-                  <tr>
-                    <td>CD456</td>
-                    <td>Paris</td>
-                    <td>Tokyo</td>
-                    <td>2025-05-02 14:00</td>
-                    <td>2025-05-02 22:00</td>
-                    <td>DELAYED</td>
-                    <td>100</td>
-                    <td>30</td>
-                    <td>550.00</td>
-                    <td>1300.00</td>
-                    <td>
-                      <div class="actions">
-                        <button class="action-btn edit-btn" title="Edit" data-id="CD456">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                          </svg>
-                        </button>
-                        <button class="action-btn delete-btn" title="Delete" data-id="CD456">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                            <path d="M3 6h18"></path>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <%--              </c:forEach>--%>
+                  <td>
+                    <div class="actions">
+                      <button class="action-btn edit-btn" title="Edit"
+                              data-flight-id="${flight.flightId}"
+                              data-flight-number="${flight.flightNumber}"
+                              data-departure-location="${flight.departureLocation}"
+                              data-arrival-location="${flight.arrivalLocation}"
+                              data-flight-date="${flight.flightDate}"
+                              data-departure-time="${flight.departureTime}"
+                              data-arrival-time="${flight.arrivalTime}"
+                              data-duration="${flight.duration}"
+                              data-status="${flight.status}"
+                              data-available-seats-economy="${flight.availableSeatsEconomy}"
+                              data-available-seats-business="${flight.availableSeatsBusiness}"
+                              data-economy-price="${flight.economyPrice}"
+                              data-business-price="${flight.businessPrice}"
+                              data-airline-id="${flight.airlineId}"
+                              data-aircraft-id="${flight.aircraftId}"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                      </button>
+                      <form method="post" action="${pageContext.request.contextPath}/admin/manage-flight">
+                        <input type="hidden"  name="flightId" value="${flight.flightId}">
+                        <input type="hidden"  name="action" value="delete">
+                      <button class="action-btn delete-btn" title="Delete" data-id="${flight.flightId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                          <path d="M3 6h18"></path>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                      </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              </c:forEach>
               </tbody>
             </table>
           </div>
@@ -186,6 +178,24 @@
         </div>
       </div>
 
+      <%--confirmation model--%>
+      <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Confirm Action</h3>
+            <button class="modal-close" id="close-confirmation-modal">×</button>
+          </div>
+          <div class="modal-body">
+            <p id="confirmation-message">Are you sure you want to do this?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
+            <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
+          </div>
+        </div>
+      </div>
+
+
       <!-- Flight Form Modal -->
       <div class="modal" id="flight-form-modal">
         <div class="modal-content">
@@ -194,105 +204,168 @@
             <button class="modal-close" id="close-flight-modal">×</button>
           </div>
           <div class="modal-body">
-            <form id="flight-form">
-              <input type="hidden" id="flight-id">
+            <form id="flight-form" method="post" action="${pageContext.request.contextPath}/admin/manage-flight">
+              <input type="hidden" id="flight-id" name="flightId">
+              <input type="hidden" id="flight-action" name="action">
               <div class="form-grid">
+
                 <div class="form-group">
                   <label for="flight-number">Flight Number</label>
-                  <input type="text" id="flight-number" class="input" placeholder="e.g. AA1234" required>
+                  <input type="text" id="flight-number" name="flightNumber" class="input" placeholder="e.g. RA123" required>
                 </div>
 
                 <div class="form-group">
-                  <label for="origin">Origin</label>
-                  <select id="origin" class="select" required>
+                  <label for="origin">Departure Location</label>
+                  <select id="origin" name="departureLocation" class="select" required>
                     <option value="">Select Origin Airport</option>
-                    <option value="jfk">New York (JFK)</option>
-                    <option value="lhr">London (LHR)</option>
-                    <option value="cdg">Paris (CDG)</option>
-                    <option value="dxb">Dubai (DXB)</option>
-                    <option value="sin">Singapore (SIN)</option>
-                    <option value="lax">Los Angeles (LAX)</option>
-                    <option value="ord">Chicago (ORD)</option>
-                    <option value="atl">Atlanta (ATL)</option>
+                    <option value="KTM">Kathmandu (KTM)</option>
+                    <option value="PKR">Pokhara (PKR)</option>
+                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="BIR">Biratnagar (BIR)</option>
+                    <option value="BWA">Bhairahawa (BWA)</option>
+                    <option value="JKR">Janakpur (JKR)</option>
+                    <option value="TMI">Tumlingtar (TMI)</option>
+                    <option value="KEP">Nepalgunj (KEP)</option>
                   </select>
                 </div>
+
                 <div class="form-group">
-                  <label for="destination">Destination</label>
-                  <select id="destination" class="select" required>
+                  <label for="destination">Arrival Location</label>
+                  <select id="destination" name="arrivalLocation" class="select" required>
                     <option value="">Select Destination Airport</option>
-                    <option value="jfk">New York (JFK)</option>
-                    <option value="lhr">London (LHR)</option>
-                    <option value="cdg">Paris (CDG)</option>
-                    <option value="dxb">Dubai (DXB)</option>
-                    <option value="sin">Singapore (SIN)</option>
-                    <option value="lax">Los Angeles (LAX)</option>
-                    <option value="ord">Chicago (ORD)</option>
-                    <option value="atl">Atlanta (ATL)</option>
+                    <option value="KTM">Kathmandu (KTM)</option>
+                    <option value="PKR">Pokhara (PKR)</option>
+                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="BIR">Biratnagar (BIR)</option>
+                    <option value="BWA">Bhairahawa (BWA)</option>
+                    <option value="JKR">Janakpur (JKR)</option>
+                    <option value="TMI">Tumlingtar (TMI)</option>
+                    <option value="KEP">Nepalgunj (KEP)</option>
                   </select>
                 </div>
+
                 <div class="form-group">
-                  <label for="departure-date">Departure Date</label>
-                  <input type="date" id="departure-date" class="input" required>
+                  <label for="flight-date">Flight Date</label>
+                  <input type="date" id="flight-date" name="flightDate" class="input" required>
                 </div>
+
                 <div class="form-group">
                   <label for="departure-time">Departure Time</label>
-                  <input type="time" id="departure-time" class="input" required>
+                  <input type="time" id="departure-time" name="departureTime" class="input" required>
                 </div>
-                <div class="form-group">
-                  <label for="arrival-date">Arrival Date</label>
-                  <input type="date" id="arrival-date" class="input" required>
-                </div>
+
                 <div class="form-group">
                   <label for="arrival-time">Arrival Time</label>
-                  <input type="time" id="arrival-time" class="input" required>
+                  <input type="time" id="arrival-time" name="arrivalTime" class="input" required>
                 </div>
+
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select id="status" class="select" required>
-                    <option value="scheduled">Scheduled</option>
-                    <option value="ontime">On Time</option>
-                    <option value="delayed">Delayed</option>
-                    <option value="inair">In Air</option>
-                    <option value="landed">Landed</option>
-                    <option value="cancelled">Cancelled</option>
+                  <select id="status" name="status" class="select" required>
+                    <option value="SCHEDULED">Scheduled</option>
+                    <option value="ONTIME">On Time</option>
+                    <option value="DELAYED">Delayed</option>
+                    <option value="INAIR">In Air</option>
+                    <option value="LANDED">Landed</option>
+                    <option value="CANCELLED">Cancelled</option>
                   </select>
                 </div>
+
                 <div class="form-group">
-                  <label for="business-capacity">Seat Capacity(Business)</label>
-                  <input type="number" id="business-capacity" class="input" placeholder="Total seats" value="200" required>
+                  <label for="business-capacity">Seat Capacity (Business)</label>
+                  <input type="number" id="business-capacity" name="availableSeatsBusiness" class="input" placeholder="Total business seats" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="economy-capacity">Seat Capacity(Economy)</label>
-                  <input type="number" id="economy-capacity" class="input" placeholder="Total seats" value="200" required>
+                  <label for="economy-capacity">Seat Capacity (Economy)</label>
+                  <input type="number" id="economy-capacity" name="availableSeatsEconomy" class="input" placeholder="Total economy seats" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="business-price">Ticket Price(Business)</label>
-                  <input type="number" id="business-price" class="input" placeholder="Total price" value="2000" required>
+                  <label for="business-price">Ticket Price (Business)</label>
+                  <input type="number" id="business-price" name="businessPrice" class="input" placeholder="Price in NPR" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="economy-price">Ticket Price(Economy)</label>
-                  <input type="number" id="economy-price" class="input" placeholder="Total Price" value="2000" required>
+                  <label for="economy-price">Ticket Price (Economy)</label>
+                  <input type="number" id="economy-price" name="economyPrice" class="input" placeholder="Price in NPR" required>
                 </div>
+
+              </div>
+              <div class="form-group">
+                <label for="airline">Airline</label>
+                <select id="airline" name="airlineId" class="select" required>
+                  <option value="">Select Airline</option>
+                  <option value="1">Nepal Airlines</option>
+                  <option value="2">Buddha Air</option>
+                  <option value="3">Yeti Airlines</option>
+                  <option value="4">Shree Airlines</option>
+                  <!-- Add more airlines here -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="aircraft">Aircraft</label>
+                <select id="aircraft" name="aircraftId" class="select" required>
+                  <option value="">Select Aircraft</option>
+                  <option value="1">Airbus A320</option>
+                  <option value="2">ATR 72-500</option>
+                  <option value="3">Boeing 757</option>
+                  <option value="4">Bombardier Dash 8 Q400</option>
+                  <!-- Add more aircraft here -->
+                </select>
               </div>
 
               <div class="form-group">
                 <label for="notes">Notes</label>
-                <textarea id="notes" class="textarea" placeholder="Additional information about this flight" rows="3"></textarea>
+                <textarea id="notes" name="notes" class="textarea" placeholder="Additional information about this flight" rows="3"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline" id="cancel-flight-btn">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="save-flight-btn">Save Flight</button>
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button class="btn btn-outline" id="cancel-flight-btn">Cancel</button>
-            <button class="btn btn-primary" id="save-flight-btn">Add Flight</button>
-          </div>
+
         </div>
       </div>
+
     </div>
   </main>
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    function populateForm(button) {
+      console.log(button.dataset.flightNumber);
+      console.log(button.dataset.departureLocation);
+      console.log(button.dataset.arrivalLocation);
+      console.log(button.dataset.flightDate);
+      console.log(button.dataset.departureTime);
+      console.log(button.dataset.arrivalTime);
+      console.log(button.dataset.status);
+      console.log(button.dataset.availableSeatsEconomy);
+      console.log(button.dataset.availableSeatsBusiness);
+      console.log(button.dataset.economyPrice);
+      console.log(button.dataset.businessPrice);
+      console.log(button.dataset.aircraftId);
+      console.log(button.dataset.airlineId);
+
+      document.getElementById('flight-id').value = button.dataset.flightId;
+      document.getElementById('flight-number').value = button.dataset.flightNumber;
+      document.getElementById('origin').value = button.dataset.departureLocation;
+      document.getElementById('destination').value = button.dataset.arrivalLocation;
+      document.getElementById('flight-date').value = button.dataset.flightDate;
+      document.getElementById('departure-time').value = button.dataset.departureTime;
+      document.getElementById('arrival-time').value = button.dataset.arrivalTime;
+      document.getElementById('status').value = button.dataset.status;
+      document.getElementById('economy-capacity').value = button.dataset.availableSeatsEconomy;
+      document.getElementById('business-capacity').value = button.dataset.availableSeatsBusiness;
+      document.getElementById('economy-price').value = button.dataset.economyPrice;
+      document.getElementById('business-price').value = button.dataset.businessPrice;
+      document.getElementById('airline').value = button.dataset.airlineId;
+      document.getElementById('aircraft').value = button.dataset.aircraftId;
+    }
     const savedTab = localStorage.getItem('activeTab');
     if (savedTab) {
       updateActiveMenuItem(savedTab);
@@ -317,6 +390,7 @@
 
     addFlightBtn.addEventListener('click', () => {
       document.getElementById('flight-id').value = '';
+      document.getElementById('flight-action').value = 'add';
       flightModalTitle.textContent = 'Add New Flight';
       saveFlightBtn.textContent = 'Add Flight';
       openModal('flight-form-modal');
@@ -326,16 +400,30 @@
     cancelFlightBtn.addEventListener('click', () => closeModal('flight-form-modal'));
 
     // Function to edit flight
-    function editFlight() {
+    function editFlight(button) {
         // Update modal title and button text
+        document.getElementById('flight-action').value = 'update';
         flightModalTitle.textContent = 'Edit Flight';
         saveFlightBtn.textContent = 'Update Flight';
-
+      populateForm(button)
         openModal('flight-form-modal');
     }
+
+    const deleteFlightbtn = document.querySelectorAll('.delete-btn');
+    deleteFlightbtn.forEach(deleteBtn =>{
+      deleteBtn.addEventListener('click', (event)=>{
+        event.preventDefault();
+        const form = event.currentTarget.closest('form');
+        showConfirmation('Are you sure you want to delete this FLight?', function() {
+          console.log("submitting form for delete")
+          form.submit();
+        }, 'Delete');
+      });
+    })
+
     editFlightbtn.forEach(editBtn =>{
       editBtn.addEventListener('click', ()=>{
-        editFlight();
+        editFlight(editBtn);
       });
     })
   });

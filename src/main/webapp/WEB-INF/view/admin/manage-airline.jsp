@@ -5,6 +5,7 @@
   Time: 6:47 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -67,55 +68,34 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Air Nepal</td>
-                                <td>Kathmandu, Nepal</td>
-                                <td>+977 1 4444444</td>
-                                <td>contact@airnepal.com</td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="action-btn edit-btn" title="Edit" data-id="1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                            </svg>
-                                        </button>
-                                        <button class="action-btn delete-btn" title="Delete" data-id="1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                                <path d="M3 6h18"></path>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Sikha Airlines</td>
-                                <td>Pokhara, Nepal</td>
-                                <td>+977 61 555555</td>
-                                <td>info@sikhaairlines.com</td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="action-btn edit-btn" title="Edit" data-id="2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                            </svg>
-                                        </button>
-                                        <button class="action-btn delete-btn" title="Delete" data-id="2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                                <path d="M3 6h18"></path>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-                                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            <c:forEach var="airline" items="${airlines}">
+                                <tr>
+                                    <td>${airline.airlineId}</td>
+                                    <td>${airline.name}</td>
+                                    <td>${airline.headquarters}</td>
+                                    <td>${airline.contactNumber}</td>
+                                    <td>${airline.email}</td>
+                                    <td>
+                                        <div class="actions">
+                                            <button class="action-btn edit-btn" title="Edit" data-id="${airline.airlineId}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="action-btn delete-btn" title="Delete" data-id="${airline.airlineId}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                                    <path d="M3 6h18"></path>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
+
                         </table>
                     </div>
 
@@ -159,41 +139,40 @@
                     </div>
                     <div class="modal-body">
                         <form id="airline-form">
-                            <input type="hidden" id="airline-id">
+                            <input type="hidden" id="airline-id" name="airlineId">
                             <div class="form-grid">
+
                                 <div class="form-group">
-                                    <label for="airline-code">Airline Code</label>
-                                    <input type="text" id="airline-code" class="input" placeholder="e.g. AA" required>
+                                    <label for="airline-id">Airline ID</label>
+                                    <input type="text" id="airline-id" name="airlineId" class="input" placeholder="e.g. RA01" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="airline-name">Name</label>
-                                    <input type="text" id="airline-name" class="input" placeholder="e.g. American Airlines" required>
+                                    <input type="text" id="airline-name" name="name" class="input" placeholder="e.g. Nepal Airlines" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <input type="text" id="country" class="input" placeholder="e.g. United States" required>
+                                    <label for="headquarters">Headquarters</label>
+                                    <input type="text" id="headquarters" name="headquarters" class="input" placeholder="e.g. Kathmandu" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="founded">Founded</label>
-                                    <input type="number" id="founded" class="input" placeholder="e.g. 1934" required>
+                                    <label for="contact-number">Contact Number</label>
+                                    <input type="tel" id="contact-number" name="contactNumber" class="input" placeholder="e.g. 01-1234567" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="fleet-size">Fleet Size</label>
-                                    <input type="number" id="fleet-size" class="input" placeholder="e.g. 950" required>
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="input" placeholder="e.g. info@nepalairlines.com" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="airline-status">Status</label>
-                                    <select id="airline-status" class="select" required>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </div>
+
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-outline" id="cancel-airline-btn">Cancel</button>
-                        <button class="btn btn-primary" id="save-airline-btn">Add Airline</button>
+                        <button type="submit" class="btn btn-primary" id="save-airline-btn">Save Airline</button>
                     </div>
                 </div>
             </div>
