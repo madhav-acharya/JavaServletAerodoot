@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FlightDAO {
     public static int createFlight(Flight flight) throws SQLException {
-        String sql = "INSERT INTO Flight (flightNumber, departureLocation, arrivalLocation, flightDate, departureTime, arrivalTime, duration, status, availableSeatsEconomy, availableSeatsBusiness, economyPrice, businessPrice, aircraftId, airlineId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Flight (flightNumber, departureLocation, arrivalLocation, flightDate, departureTime, arrivalTime, duration, status, availableSeatsEconomy, availableSeatsBusiness, economyPrice, businessPrice, aircraftId, airlineId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {

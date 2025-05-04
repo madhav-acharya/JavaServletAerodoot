@@ -166,8 +166,9 @@
             <button class="modal-close" id="close-flight-modal">×</button>
           </div>
           <div class="modal-body">
-            <form id="flight-form">
+            <form id="flight-form" method="post" action="${pageContext.request.contextPath}/admin/manage-flight">
               <input type="hidden" id="flight-id" name="flightId">
+              <input type="hidden" id="flight-action" name="action">
               <div class="form-grid">
 
                 <div class="form-group">
@@ -176,8 +177,8 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="origin">Origin</label>
-                  <select id="origin" name="origin" class="select" required>
+                  <label for="origin">Departure Location</label>
+                  <select id="origin" name="departureLocation" class="select" required>
                     <option value="">Select Origin Airport</option>
                     <option value="KTM">Kathmandu (KTM)</option>
                     <option value="PKR">Pokhara (PKR)</option>
@@ -191,8 +192,8 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="destination">Destination</label>
-                  <select id="destination" name="destination" class="select" required>
+                  <label for="destination">Arrival Location</label>
+                  <select id="destination" name="arrivalLocation" class="select" required>
                     <option value="">Select Destination Airport</option>
                     <option value="KTM">Kathmandu (KTM)</option>
                     <option value="PKR">Pokhara (PKR)</option>
@@ -234,12 +235,12 @@
 
                 <div class="form-group">
                   <label for="business-capacity">Seat Capacity (Business)</label>
-                  <input type="number" id="business-capacity" name="businessCapacity" class="input" placeholder="Total business seats" required>
+                  <input type="number" id="business-capacity" name="availableSeatsBusiness" class="input" placeholder="Total business seats" required>
                 </div>
 
                 <div class="form-group">
                   <label for="economy-capacity">Seat Capacity (Economy)</label>
-                  <input type="number" id="economy-capacity" name="economyCapacity" class="input" placeholder="Total economy seats" required>
+                  <input type="number" id="economy-capacity" name="availableSeatsEconomy" class="input" placeholder="Total economy seats" required>
                 </div>
 
                 <div class="form-group">
@@ -253,17 +254,41 @@
                 </div>
 
               </div>
+              <div class="form-group">
+                <label for="airline">Airline</label>
+                <select id="airline" name="airlineId" class="select" required>
+                  <option value="">Select Airline</option>
+                  <option value="1">Nepal Airlines</option>
+                  <option value="2">Buddha Air</option>
+                  <option value="3">Yeti Airlines</option>
+                  <option value="4">Shree Airlines</option>
+                  <!-- Add more airlines here -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="aircraft">Aircraft</label>
+                <select id="aircraft" name="aircraftId" class="select" required>
+                  <option value="">Select Aircraft</option>
+                  <option value="1">Airbus A320</option>
+                  <option value="2">ATR 72-500</option>
+                  <option value="3">Boeing 757</option>
+                  <option value="4">Bombardier Dash 8 Q400</option>
+                  <!-- Add more aircraft here -->
+                </select>
+              </div>
 
               <div class="form-group">
                 <label for="notes">Notes</label>
                 <textarea id="notes" name="notes" class="textarea" placeholder="Additional information about this flight" rows="3"></textarea>
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline" id="cancel-flight-btn">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="save-flight-btn">Save Flight</button>
+              </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline" id="cancel-flight-btn">Cancel</button>
-            <button type="submit" class="btn btn-primary" id="save-flight-btn">Save Flight</button>
-          </div>
+
         </div>
       </div>
 
@@ -297,6 +322,7 @@
 
     addFlightBtn.addEventListener('click', () => {
       document.getElementById('flight-id').value = '';
+      document.getElementById('flight-action').value = 'add';
       flightModalTitle.textContent = 'Add New Flight';
       saveFlightBtn.textContent = 'Add Flight';
       openModal('flight-form-modal');
@@ -308,6 +334,7 @@
     // Function to edit flight
     function editFlight() {
         // Update modal title and button text
+        document.getElementById('flight-action').value = 'update';
         flightModalTitle.textContent = 'Edit Flight';
         saveFlightBtn.textContent = 'Update Flight';
 

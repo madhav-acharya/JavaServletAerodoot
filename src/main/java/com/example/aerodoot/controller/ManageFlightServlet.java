@@ -37,15 +37,44 @@ public class ManageFlightServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if ("create".equals(action)) {
+        System.out.println("action: " + action);
+
+        System.out.println("Flight Number: " + request.getParameter("flightNumber"));
+        System.out.println("Departure Location: " + request.getParameter("departureLocation"));
+        System.out.println("Arrival Location: " + request.getParameter("arrivalLocation"));
+        System.out.println("Flight Date: " + request.getParameter("flightDate"));
+        System.out.println("Departure Time: " + request.getParameter("departureTime"));
+        System.out.println("Arrival Time: " + request.getParameter("arrivalTime"));
+        System.out.println("Status: " + request.getParameter("status"));
+        System.out.println("Available Seats (Economy): " + request.getParameter("availableSeatsEconomy"));
+        System.out.println("Available Seats (Business): " + request.getParameter("availableSeatsBusiness"));
+        System.out.println("Economy Price: " + request.getParameter("economyPrice"));
+        System.out.println("Business Price: " + request.getParameter("businessPrice"));
+        System.out.println("Aircraft ID: " + request.getParameter("aircraftId"));
+        System.out.println("Airline ID: " + request.getParameter("airlineId"));
+
+        if ("add".equals(action)) {
             try {
                 String flightNumber = request.getParameter("flightNumber");
                 String departureLocation = request.getParameter("departureLocation");
                 String arrivalLocation = request.getParameter("arrivalLocation");
                 Date flightDate = Date.valueOf(request.getParameter("flightDate"));
-                Time departureTime = Time.valueOf(request.getParameter("departureTime"));
-                Time arrivalTime = Time.valueOf(request.getParameter("arrivalTime"));
-                int duration = Integer.parseInt(request.getParameter("duration"));
+                String departureTimeStr = request.getParameter("departureTime");
+                if (departureTimeStr != null && departureTimeStr.length() == 5) {
+                    departureTimeStr += ":00";
+                }
+                Time departureTime = Time.valueOf(departureTimeStr);
+
+                String arrivalTimeStr = request.getParameter("arrivalTime");
+                if (arrivalTimeStr != null && arrivalTimeStr.length() == 5) {
+                    arrivalTimeStr += ":00";
+                }
+                Time arrivalTime = Time.valueOf(arrivalTimeStr);
+                long millisDiff = arrivalTime.getTime() - departureTime.getTime();
+                if (millisDiff < 0) {
+                    millisDiff += 24 * 60 * 60 * 1000;
+                }
+                int duration = (int) (millisDiff / (1000 * 60));
                 String status = request.getParameter("status");
                 int availableSeatsEconomy = Integer.parseInt(request.getParameter("availableSeatsEconomy"));
                 int availableSeatsBusiness = Integer.parseInt(request.getParameter("availableSeatsBusiness"));
@@ -152,6 +181,6 @@ public class ManageFlightServlet extends HttpServlet {
             }
         }
 
-        request.getRequestDispatcher("/WEB-INF/view/admin/manage-flight.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/manage-flights.jsp").forward(request, response);
     }
 }
