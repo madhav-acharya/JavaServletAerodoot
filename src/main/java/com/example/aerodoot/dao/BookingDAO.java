@@ -119,6 +119,26 @@ public class BookingDAO {
         }
         return -1;
     }
+
+    public static int updateBookingStatus(int bookingId, String bookingStatus) throws SQLException {
+        String sql = "UPDATE Booking SET bookingStatus = ? WHERE bookingId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, bookingStatus);
+            ps.setInt(2, bookingId);
+
+            int updatedRows = ps.executeUpdate();
+            if (updatedRows > 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating booking status: " + e.getMessage());
+        }
+        return -1;
+    }
+
     public static boolean deleteBooking(int bookingId) {
         String sql = "DELETE FROM Booking WHERE bookingId = ?";
 
