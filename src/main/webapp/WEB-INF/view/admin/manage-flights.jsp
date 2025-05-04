@@ -107,7 +107,7 @@
                   <td>
                     <div class="actions">
                       <button class="action-btn edit-btn" title="Edit"
-                              data-id="${flight.flightId}"
+                              data-flight-id="${flight.flightId}"
                               data-flight-number="${flight.flightNumber}"
                               data-departure-location="${flight.departureLocation}"
                               data-arrival-location="${flight.arrivalLocation}"
@@ -120,6 +120,8 @@
                               data-available-seats-business="${flight.availableSeatsBusiness}"
                               data-economy-price="${flight.economyPrice}"
                               data-business-price="${flight.businessPrice}"
+                              data-airline-id="${flight.airlineId}"
+                              data-aircraft-id="${flight.aircraftId}"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -238,12 +240,12 @@
                 <div class="form-group">
                   <label for="status">Status</label>
                   <select id="status" name="status" class="select" required>
-                    <option value="scheduled">Scheduled</option>
-                    <option value="ontime">On Time</option>
-                    <option value="delayed">Delayed</option>
-                    <option value="inair">In Air</option>
-                    <option value="landed">Landed</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="SCHEDULED">Scheduled</option>
+                    <option value="ONTIME">On Time</option>
+                    <option value="DELAYED">Delayed</option>
+                    <option value="INAIR">In Air</option>
+                    <option value="LANDED">Landed</option>
+                    <option value="CANCELLED">Cancelled</option>
                   </select>
                 </div>
 
@@ -313,6 +315,21 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     function populateForm(button) {
+      console.log(button.dataset.flightNumber);
+      console.log(button.dataset.departureLocation);
+      console.log(button.dataset.arrivalLocation);
+      console.log(button.dataset.flightDate);
+      console.log(button.dataset.departureTime);
+      console.log(button.dataset.arrivalTime);
+      console.log(button.dataset.status);
+      console.log(button.dataset.availableSeatsEconomy);
+      console.log(button.dataset.availableSeatsBusiness);
+      console.log(button.dataset.economyPrice);
+      console.log(button.dataset.businessPrice);
+      console.log(button.dataset.aircraftId);
+      console.log(button.dataset.airlineId);
+
+      document.getElementById('flight-id').value = button.dataset.flightId;
       document.getElementById('flight-number').value = button.dataset.flightNumber;
       document.getElementById('origin').value = button.dataset.departureLocation;
       document.getElementById('destination').value = button.dataset.arrivalLocation;
@@ -324,6 +341,8 @@
       document.getElementById('business-capacity').value = button.dataset.availableSeatsBusiness;
       document.getElementById('economy-price').value = button.dataset.economyPrice;
       document.getElementById('business-price').value = button.dataset.businessPrice;
+      document.getElementById('airline').value = button.dataset.airlineId;
+      document.getElementById('aircraft').value = button.dataset.aircraftId;
     }
     const savedTab = localStorage.getItem('activeTab');
     if (savedTab) {

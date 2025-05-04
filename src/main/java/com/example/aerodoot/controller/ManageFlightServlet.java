@@ -116,14 +116,28 @@ public class ManageFlightServlet extends HttpServlet {
         }
         else if ("update".equals(action)) {
             try {
+                System.out.println("id here " + request.getParameter("flightId"));
                 int flightId = Integer.parseInt(request.getParameter("flightId"));
                 String flightNumber = request.getParameter("flightNumber");
                 String departureLocation = request.getParameter("departureLocation");
                 String arrivalLocation = request.getParameter("arrivalLocation");
                 Date flightDate = Date.valueOf(request.getParameter("flightDate"));
-                Time departureTime = Time.valueOf(request.getParameter("departureTime"));
-                Time arrivalTime = Time.valueOf(request.getParameter("arrivalTime"));
-                int duration = Integer.parseInt(request.getParameter("duration"));
+                String departureTimeStr = request.getParameter("departureTime");
+                if (departureTimeStr != null && departureTimeStr.length() == 5) {
+                    departureTimeStr += ":00";
+                }
+                Time departureTime = Time.valueOf(departureTimeStr);
+
+                String arrivalTimeStr = request.getParameter("arrivalTime");
+                if (arrivalTimeStr != null && arrivalTimeStr.length() == 5) {
+                    arrivalTimeStr += ":00";
+                }
+                Time arrivalTime = Time.valueOf(arrivalTimeStr);
+                long millisDiff = arrivalTime.getTime() - departureTime.getTime();
+                if (millisDiff < 0) {
+                    millisDiff += 24 * 60 * 60 * 1000;
+                }
+                int duration = (int) (millisDiff / (1000 * 60));
                 String status = request.getParameter("status");
                 int availableSeatsEconomy = Integer.parseInt(request.getParameter("availableSeatsEconomy"));
                 int availableSeatsBusiness = Integer.parseInt(request.getParameter("availableSeatsBusiness"));
@@ -150,16 +164,20 @@ public class ManageFlightServlet extends HttpServlet {
                 flight.setAirlineId(airlineId);
 
                 int updatedFlightId = FlightDAO.updateFlight(flight);
+                System.out.println("updated flight id: " + updatedFlightId);
 
-                if (updatedFlightId > 0) {
+                if (updatedFlightId >= 0) {
                     List<Flight> flights = FlightDAO.getAllFlights();
+                    System.out.println("flight updated sucessfully");
                     request.setAttribute("flights", flights);
                     request.setAttribute("message", "Flight updated successfully!");
                 } else {
+                    System.out.println("flight update failed");
                     request.setAttribute("message", "Error updating flight.");
                 }
 
             } catch (Exception e) {
+                System.out.println("Exception occurred while updating flight: " + e.getMessage());
                 request.setAttribute("message", "Error updating flight: " + e.getMessage());
                 throw new ServletException("Failed to update flight", e);
             }
