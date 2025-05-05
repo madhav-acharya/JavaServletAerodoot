@@ -51,6 +51,7 @@
     </section>
 
     <!-- Ready to Take Flight Section -->
+    <c:if test="${sessionScope.isLoggedIn == null}">
     <section class="cta-section">
         <h2>Ready to Take Flight?</h2>
         <p class="cta-description">Experience the future of airline management with AeroDoot.</p>
@@ -60,6 +61,7 @@
             <a href="#" class="cta-btn sign-in">Sign In</a>
         </div>
     </section>
+    </c:if>
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/bookingContainer.js"></script>
 <jsp:include page="tail.jsp"/>
