@@ -156,6 +156,67 @@
     text-decoration: underline;
 }
 
+/* FAQ Section */
+.aerodoot-contact__container {
+    margin-top: 60px;
+}
+
+.aerodoot-contact__faq {
+    margin-bottom: 50px;
+}
+
+.aerodoot-contact__faq-item {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.aerodoot-contact__faq-question {
+    padding: 20px 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.aerodoot-contact__faq-question:hover {
+    background-color: #f5f9ff;
+}
+
+.aerodoot-contact__faq-question h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #0c2b5a;
+    font-weight: 600;
+}
+
+.aerodoot-contact__faq-icon {
+    color: #3889c4;
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+}
+
+.aerodoot-contact__faq-answer {
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.aerodoot-contact__faq-active .aerodoot-contact__faq-answer {
+    padding: 0 25px 20px;
+    max-height: 300px;
+}
+
+.aerodoot-contact__faq-answer p {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .aerodoot-contact__cards {
@@ -164,5 +225,9 @@
 
     .aerodoot-contact__card {
         width: 100%;
+    }
+
+    .aerodoot-contact__faq-question h3 {
+        font-size: 1rem;
     }
 }
