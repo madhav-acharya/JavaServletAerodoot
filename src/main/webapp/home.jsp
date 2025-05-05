@@ -58,6 +58,8 @@
         </div>
     </section>
 
+    <jsp:include page="topDestinations.jsp"/>
+
     <!-- Ready to Take Flight Section -->
     <c:if test="${sessionScope.isLoggedIn == null}">
     <section class="cta-section">

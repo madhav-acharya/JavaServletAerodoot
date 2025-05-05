@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bookingContainer.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flightBooking.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/contactUs.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/topDestinations.css">
 </head>
 <body>
 
