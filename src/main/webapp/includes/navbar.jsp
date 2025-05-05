@@ -12,9 +12,11 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/flight-booking" class="nav-link">Flights</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/contact" class="nav-link">Contact</a></li>
                 <c:choose>
                     <%-- This is a JSTL comment --%>
                     <c:when test="${sessionScope.isLoggedIn != null && sessionScope.isLoggedIn}">
+                        <li class="nav-item"><a href="${pageContext.request.contextPath}/passenger/dashboard" class="nav-link">Dashboard</a></li>
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a>
                         </li>
