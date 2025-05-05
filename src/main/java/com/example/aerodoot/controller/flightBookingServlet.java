@@ -64,6 +64,7 @@ public class flightBookingServlet extends HttpServlet {
                 System.out.println(key + " -> " + airlinesMap.get(key));
             }
 
+            //testing
             for (int i=0; i < flights.size(); i++) {
                 // Get the current Flight object
                 Flight flight = flights.get(i);
