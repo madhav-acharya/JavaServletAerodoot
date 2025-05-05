@@ -3,10 +3,7 @@ package com.example.aerodoot.dao;
 import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.util.DbConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,4 +154,42 @@ public class FlightDAO {
             return false;
         }
     }
+
+    public static List<Flight> getAllSearchFlights(String departureLocation, String arrivalLocation, Date flightDate) throws SQLException {
+        List<Flight> flightList = new ArrayList<>();
+        String sql = "SELECT * FROM Flight where departureLocation = ? and arrivalLocation = ? and flightDate = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+             ps.setString(1, departureLocation);
+             ps.setString(2, arrivalLocation);
+             ps.setDate(3, flightDate);
+
+             ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Flight flight = new Flight();
+                flight.setFlightId(rs.getInt("flightId"));
+                flight.setFlightNumber(rs.getString("flightNumber"));
+                flight.setDepartureLocation(rs.getString("departureLocation"));
+                flight.setArrivalLocation(rs.getString("arrivalLocation"));
+                flight.setFlightDate(rs.getDate("flightDate"));
+                flight.setDepartureTime(rs.getTime("departureTime"));
+                flight.setArrivalTime(rs.getTime("arrivalTime"));
+                flight.setDuration(rs.getInt("duration"));
+                flight.setStatus(rs.getString("status"));
+                flight.setAvailableSeatsEconomy(rs.getInt("availableSeatsEconomy"));
+                flight.setAvailableSeatsBusiness(rs.getInt("availableSeatsBusiness"));
+                flight.setEconomyPrice(rs.getDouble("economyPrice"));
+                flight.setBusinessPrice(rs.getDouble("businessPrice"));
+                flight.setAircraftId(rs.getInt("aircraftId"));
+                flight.setAirlineId(rs.getInt("airlineId"));
+                flightList.add(flight);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all flights: " + e.getMessage());
+        }
+        return flightList;
+    }
 }
+

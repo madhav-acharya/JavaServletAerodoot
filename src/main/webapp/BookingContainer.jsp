@@ -149,6 +149,7 @@
             <div class="city-item" data-city="Janakpur">Janakpur (JKR)</div>
             <div class="city-item" data-city="Simara">Simara (SIF)</div>
             <div class="city-item" data-city="Lukla">Lukla (LUA)</div>
+            <div class="city-item" data-city="Bhairahawa">Bhairahawa (BWA)</div>
         </div>
     </div>
 
