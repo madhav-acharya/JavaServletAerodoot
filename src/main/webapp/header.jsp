@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bookingContainer.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flightBooking.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/contactUs.css">
 </head>
 <body>
 
