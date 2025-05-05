@@ -25,7 +25,7 @@
                     </div>
                     <div class="flight-search-details">
                         <h3>${flight.flightNumber}</h3>
-                        <p>aircraftMap[flight.aircraftId]</p>
+                        <p>${aircraftMap[flight.aircraftId]}</p>
                     </div>
                 </div>
                 <div class="flight-search-price">
