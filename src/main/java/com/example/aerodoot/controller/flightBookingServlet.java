@@ -1,6 +1,10 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.dao.AircraftDAO;
+import com.example.aerodoot.dao.AirlineDAO;
 import com.example.aerodoot.dao.FlightDAO;
+import com.example.aerodoot.model.Aircraft;
+import com.example.aerodoot.model.Airline;
 import com.example.aerodoot.model.Flight;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +17,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @WebServlet("/flight-booking")
 public class flightBookingServlet extends HttpServlet {
@@ -23,7 +29,50 @@ public class flightBookingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (flights != null) {
+            List<Aircraft> aircrafts;
+            List<Airline> airlines;
+
+            try {
+                aircrafts = AircraftDAO.getAllAircraft();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                airlines = AirlineDAO.getAllAirlines();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            //creating the map of airlines and aircrafts
+            Map<Integer, String> airlinesMap = new HashMap<>();
+            for (Airline airline: airlines) {
+                airlinesMap.put(airline.getAirlineId(), airline.getName());
+            }
+
+            Map<Integer, String> aircraftsMap = new HashMap<>();
+            for (Aircraft aircraft: aircrafts) {
+                aircraftsMap.put(aircraft.getAircraftId(), aircraft.getModel());
+            }
+
+            //printing the aircrafts and airlines
+            for (int key: aircraftsMap.keySet()) {
+                System.out.println(key + " -> " + aircraftsMap.get(key));
+            }
+
+            for (int key: airlinesMap.keySet()) {
+                System.out.println(key + " -> " + airlinesMap.get(key));
+            }
+
+            for (int i=0; i < flights.size(); i++) {
+                // Get the current Flight object
+                Flight flight = flights.get(i);
+                System.out.println("Aircraft for flights: " + aircraftsMap.get(flight.getAircraftId()) + ", Airlines: " + airlinesMap.get(flight.getAirlineId()));
+            }
+
             request.setAttribute("flightLists", flights);
+            request.setAttribute("aircraftMap", aircraftsMap);
+            request.setAttribute("airlineMap", airlinesMap);
         }
 
         System.out.println("get method of flight-booking");

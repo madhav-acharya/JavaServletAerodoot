@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <jsp:include page="../../header.jsp"/>
 
@@ -14,6 +16,7 @@
         <h1 class="flight-search-title">Available Flights</h1>
 
         <!-- Flight Card 1 -->
+    <c:forEach var="flight" items="${flightList}">
         <div class="flight-search-card">
             <div class="flight-search-header">
                 <div class="flight-search-info">
@@ -21,8 +24,8 @@
                         <i class="fas fa-plane"></i>
                     </div>
                     <div class="flight-search-details">
-                        <h3>AD1234</h3>
-                        <p>Boeing 737-800</p>
+                        <h3>${flight.flightNumber}</h3>
+                        <p>ghdad</p>
                     </div>
                 </div>
                 <div class="flight-search-price">
@@ -58,6 +61,7 @@
                 <a href="#" class="flight-search-view-details">View Details</a>
             </div>
         </div>
+    </c:forEach>
 
         <!-- Flight Card 2 -->
         <div class="flight-search-card">
