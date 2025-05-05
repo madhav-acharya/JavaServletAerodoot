@@ -9,8 +9,16 @@
         <p>Seamless flight bookings, exceptional service, and unforgettable journeys await.</p>
 
         <div class="header-buttons">
-            <button class="btn-main btn-primary">Book Your Flight</button>
-            <button class="btn-main btn-secondary">Manage Booking</button>
+            <c:choose>
+                <c:when test="${sessionScope.isLoggedIn == null}">
+                    <button class="btn-main btn-primary"><a href="${pageContext.request.contextPath}/login">Book Your Flight</a></button>
+                    <button class="btn-main btn-secondary"><a href="${pageContext.request.contextPath}/login">Manage Booking</a></button>
+                </c:when>
+                <c:otherwise>
+                    <button class="btn-main btn-primary"><a href="${pageContext.request.contextPath}/flight-booking">Book Your Flight</a></button>
+                    <button class="btn-main btn-secondary"><a href="${pageContext.request.contextPath}/passenger/dashboard">Manage Booking</a></button>
+                </c:otherwise>
+        </c:choose>
         </div>
     </header>
 
