@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<div class="slider-container">
 <div class="slider">
     <!-- Slide 1 -->
     <div class="slide">
@@ -35,7 +36,7 @@
 
     <!-- Slide 2 -->
     <div class="slide">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Summer Vacation">
+        <img src="${pageContext.request.contextPath}/assets/image/KTM-POK-04.jpg" alt="Summer Vacation">
         <div class="slide-content">
             <h2>Summer Getaway Deals</h2>
             <p>Save up to 20% on selected destinations this summer</p>
@@ -67,7 +68,7 @@
 
     <!-- Slide 3 -->
     <div class="slide">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Business Class">
+        <img src="${pageContext.request.contextPath}/assets/image/KTM-BHRTPUR-05.jpg" alt="Business Class">
         <div class="slide-content">
             <h2>Business Class Upgrade</h2>
             <p>Experience luxury in the skies with 30% off business class</p>
@@ -110,6 +111,7 @@
     <div class="slider-dot"></div>
     <div class="slider-dot"></div>
 </div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -124,6 +126,7 @@
 
         // Initialize slider
         function updateSlider() {
+            console.log("Updating to slide:", currentSlide)
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
 
             // Update dots
