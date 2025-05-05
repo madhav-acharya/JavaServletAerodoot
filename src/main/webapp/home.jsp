@@ -57,8 +57,8 @@
         <p class="cta-description">Experience the future of airline management with AeroDoot.</p>
 
         <div class="cta-buttons">
-            <a href="#" class="cta-btn create-account">Create Account</a>
-            <a href="#" class="cta-btn sign-in">Sign In</a>
+            <a href="${pageContext.request.contextPath}/register" class="cta-btn create-account">Create Account</a>
+            <a href="${pageContext.request.contextPath}/login" class="cta-btn sign-in">Sign In</a>
         </div>
     </section>
     </c:if>
