@@ -78,7 +78,7 @@
             <div class="section">
                 <h3 class="section-title">Enter Payment Amount (in NRs)</h3>
                 <div class="form-group">
-                    <input type="text" id="paymentAmount" class="form-input" placeholder="299">
+                    <input type="text" id="paymentAmount" class="form-input" placeholder="Enter correct amount">
                     <div id="errorMessage" class="error-message">
                         <i class="fas fa-exclamation-circle"></i>
                         <span>Amount must be exactly $299</span>

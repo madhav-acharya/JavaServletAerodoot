@@ -62,7 +62,7 @@
                         <div class="ba-price-info">
                             <div class="ba-price">NPR ${flight.economyPrice}</div>
                             <div class="ba-price-subtext">price per person (incl. taxes)</div>
-                            <button class="ba-book-btn">Book Now</button>
+                            <button class="ba-book-btn" id="bookNowBtn">Book Now</button>
                         </div>
                     </div>
 
@@ -145,11 +145,11 @@
                         <div class="ba-tab-content" id="fare-${status.index}">
                             <div class="ba-fare-item">
                                 <div class="ba-fare-label">Economy Class</div>
-                                <div class="ba-fare-value">NRs. ${flight.economyPrice}</div>
+                                <div class="ba-fare-value" id="economyPrice">NRs. ${flight.economyPrice}</div>
                             </div>
                             <div class="ba-fare-item">
                                 <div class="ba-fare-label">Business Class</div>
-                                <div class="ba-fare-value">NRs. ${flight.businessPrice}</div>
+                                <div class="ba-fare-value" id="businessPrice">NRs. ${flight.businessPrice}</div>
                             </div>
                         </div>
 
@@ -201,6 +201,7 @@
             </p>
         </div>
     </c:if>
+    <jsp:include page="payment.jsp"/>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -252,5 +253,6 @@
         });
     });
 </script>
+<script src="${pageContext.request.contextPath}/assets/js/payment.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/bookingContainer.js"></script>
 <jsp:include page="../../tail.jsp" />

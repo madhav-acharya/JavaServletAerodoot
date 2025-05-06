@@ -1,11 +1,3 @@
-// Flight data
-const flightData = {
-    flightNumber: "AD1234",
-    route: "JFK → LAX",
-    economyPrice: 299,
-    businessPrice: 599
-};
-
 // DOM Elements
 const bookNowBtn = document.getElementById('bookNowBtn');
 const paymentModal = document.getElementById('paymentModal');
@@ -15,24 +7,30 @@ const payNowBtn = document.getElementById('payNowBtn');
 const paymentAmount = document.getElementById('paymentAmount');
 const errorMessage = document.getElementById('errorMessage');
 const totalFareDisplay = document.getElementById('totalFareDisplay');
-const decreasePassengerBtn = document.getElementById('decreasePassenger');
-const increasePassengerBtn = document.getElementById('increasePassenger');
 const passengerCountEl = document.getElementById('passenger-count');
 const classOptions = document.getElementById('classOptions');
 const paymentOptions = document.getElementById('paymentOptions');
-const successMessage = document.getElementById('successMessage');
+const economyPrice = document.getElementById('economyPrice');
+const businessPrice = document.getElementById('businessPrice');
 
 // State variables
-let passengerCount = 1;
+let passengerCount = passengerCountEl.textContent.replace(/ passengers?/i, '');
+console.log(passengerCount)
+
+let economySeatPrice = economyPrice.textContent.replace('NRs. ', '');
+let businessSeatPrice = businessPrice.textContent.replace('NRs. ', '');
+console.log(`Economy: ${economySeatPrice}, Business: ${businessSeatPrice}`)
+
 let selectedClass = 'economy';
 let selectedPayment = 'eSewa';
 let totalFare = calculateTotalFare();
+console.log(`Total fare: ` + totalFare);
 
 // Calculate total fare based on class and passenger count
 function calculateTotalFare() {
     const basePrice = selectedClass === 'economy'
-        ? flightData.economyPrice
-        : flightData.businessPrice;
+        ? economySeatPrice
+        : businessSeatPrice;
     return basePrice * passengerCount;
 }
 
@@ -45,12 +43,6 @@ function updateTotalFare() {
     validateAmount();
 }
 
-// Update passenger count display
-function updatePassengerCount() {
-    passengerCountEl.textContent = `${passengerCount} passenger${passengerCount > 1 ? 's' : ''}`;
-    updateTotalFare();
-}
-
 // Validate payment amount
 function validateAmount() {
     const amount = paymentAmount.value.trim();
@@ -58,7 +50,7 @@ function validateAmount() {
     if (amount === '') {
         errorMessage.classList.remove('visible');
         payNowBtn.disabled = true;
-        return;
+        return
     }
 
     if (amount !== totalFare.toString()) {
@@ -70,17 +62,6 @@ function validateAmount() {
         payNowBtn.disabled = false;
     }
 }
-
-// Show success message
-function showSuccessMessage() {
-    successMessage.classList.add('show');
-
-    setTimeout(() => {
-        successMessage.classList.remove('show');
-    }, 3000);
-}
-
-// Event Listeners
 
 // Open modal
 bookNowBtn.addEventListener('click', () => {
@@ -99,18 +80,6 @@ function closeModalHandler() {
 closeModal.addEventListener('click', closeModalHandler);
 cancelBtn.addEventListener('click', closeModalHandler);
 
-// Passenger controls
-decreasePassengerBtn.addEventListener('click', () => {
-    if (passengerCount > 1) {
-        passengerCount--;
-        updatePassengerCount();
-    }
-});
-
-increasePassengerBtn.addEventListener('click', () => {
-    passengerCount++;
-    updatePassengerCount();
-});
 
 // Class selection
 classOptions.addEventListener('click', (e) => {
@@ -154,7 +123,6 @@ paymentAmount.addEventListener('input', validateAmount);
 
 // Pay Now button
 payNowBtn.addEventListener('click', () => {
-    showSuccessMessage();
     closeModalHandler();
 });
 
