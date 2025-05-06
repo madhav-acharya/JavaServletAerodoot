@@ -27,7 +27,7 @@
                     <span>•</span>
                     <span>${trip}</span>
                     <span>•</span>
-                    <span>${passenger}</span>
+                    <span id="passenger-count">${passenger}</span>
                 </div>
             </c:forEach>
 
@@ -132,11 +132,11 @@
                                     </div>
                                     <div class="ba-flight-info-item">
                                         <div class="ba-info-label">Available Economy seat:</div>
-                                        <div class="ba-info-value">${flight.availableSeatsEconomy}</div>
+                                        <div class="ba-info-value economy-price">${flight.availableSeatsEconomy}</div>
                                     </div>
                                     <div class="ba-flight-info-item">
                                         <div class="ba-info-label">Available Business seat:</div>
-                                        <div class="ba-info-value">${flight.availableSeatsBusiness}</div>
+                                        <div class="ba-info-value business-price">${flight.availableSeatsBusiness}</div>
                                     </div>
                                 </div>
                             </div>
