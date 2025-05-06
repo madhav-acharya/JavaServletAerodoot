@@ -12,6 +12,8 @@ const classOptions = document.getElementById('classOptions');
 const paymentOptions = document.getElementById('paymentOptions');
 const economyPrice = document.getElementById('economyPrice');
 const businessPrice = document.getElementById('businessPrice');
+const economySeatPricePerPerson = document.getElementById('EconomySeatPricePerPerson');
+const businessSeatPricePerPerson  = document.getElementById('BusinessSeatPricePerPerson');
 
 // State variables
 let passengerCount = passengerCountEl.textContent.replace(/ passengers?/i, '');
@@ -25,6 +27,10 @@ let selectedClass = 'economy';
 let selectedPayment = 'eSewa';
 let totalFare = calculateTotalFare();
 console.log(`Total fare: ` + totalFare);
+
+
+economySeatPricePerPerson.querySelector('span').textContent = `NRs. ${economySeatPrice} per passenger`;
+businessSeatPricePerPerson.querySelector('span').textContent = `NRs. ${businessSeatPrice} per passenger`;
 
 // Calculate total fare based on class and passenger count
 function calculateTotalFare() {

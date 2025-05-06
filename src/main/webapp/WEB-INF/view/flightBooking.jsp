@@ -234,7 +234,7 @@
                             <input type="radio" name="class" value="economy" checked>
                             <div class="payment-label">
                                 <div class="payment-name">Economy Class</div>
-                                <div class="class-price">NRs. 299 per passenger</div>
+                                <div class="class-price" id="EconomySeatPricePerPerson"><span>NRs. 299 per passenger</span></div>
                             </div>
                         </label>
 
@@ -242,7 +242,7 @@
                             <input type="radio" name="class" value="business">
                             <div class="payment-label">
                                 <div class="payment-name">Business Class</div>
-                                <div class="class-price">NRs. 599 per passenger</div>
+                                <div class="class-price" id="BusinessSeatPricePerPerson"><span>NRs. 599 per passenger</span></div>
                             </div>
                         </label>
                     </div>
@@ -283,7 +283,7 @@
                         <input type="text" id="paymentAmount" class="form-input" placeholder="Enter correct amount">
                         <div id="errorMessage" class="error-message">
                             <i class="fas fa-exclamation-circle"></i>
-                            <span>Amount must be exactly $299</span>
+                            <span></span>
                         </div>
                         <p class="form-hint">Amount must match the flight price exactly.</p>
                     </div>
