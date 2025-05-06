@@ -143,5 +143,3 @@ public class flightBookingServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }
 }
-
-

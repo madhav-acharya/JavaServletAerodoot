@@ -12,156 +12,205 @@
 
     <jsp:include page="../../BookingContainer.jsp" />
 
-    <div class="flight-search-wrapper">
-        <h1 class="flight-search-title">Available Flights</h1>
+    <c:if test="${not empty flightLists}">
+        <div class="flight-search-wrapper">
+            <h1 class="flight-search-title">Available Flights</h1>
 
-        <!-- Flight Card 1 -->
-    <c:forEach var="flight" items="${flightLists}">
-        <div class="flight-search-card">
-            <div class="flight-search-header">
-                <div class="flight-search-info">
-                    <div class="flight-search-icon">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <div class="flight-search-details">
-                        <h3>${flight.flightNumber}</h3>
-                        <p>${aircraftMap[flight.aircraftId]}</p>
-                    </div>
-                </div>
-                <div class="flight-search-price">
-                    <div class="flight-search-price-amount">
-                        <span>${flight.economyPrice}</span>
-                        <span style="font-size: 0.85em; color: #C9B037; margin-left: 1rem;">${flight.businessPrice}</span>
-                    </div>
-                    <div class="flight-search-seats">${flight.availableSeatsEconomy} seats left</div>
-                    <button class="flight-search-book-btn">Book Now</button>
-                </div>
-            </div>
+            <c:forEach var="flight" items="${flightLists}" varStatus="status">
+                <div class="ba-flight-container" data-flight-index="${status.index}">
+                    <div class="ba-flight-header">
+                        <div class="ba-airline-info">
+                            <div class="ba-airline-name">
+                                <h2>${airlineMap[flight.airlineId]}</h2>
+                                <p>${flight.flightNumber}</p>
+                            </div>
+                        </div>
 
-            <div class="flight-search-route">
-                <div class="flight-search-airport">
-                    <div class="flight-search-airport-code">${flight.departureLocation}</div>
-                    <div class="flight-search-airport-time">${flight.departureTime} AM</div>
-                </div>
-                <div class="flight-search-route-line">
-                    <div class="flight-search-route-info">${flight.duration} minutes</div>
-                    <div class="flight-search-line">
-                        <i class="fas fa-plane flight-search-plane-icon"></i>
-                    </div>
-                    <div class="flight-search-route-info">Direct</div>
-                </div>
-                <div class="flight-search-airport">
-                    <div class="flight-search-airport-code">${flight.arrivalLocation}</div>
-                    <div class="flight-search-airport-time">${flight.arrivalTime} PM</div>
-                </div>
-            </div>
+                        <div class="ba-flight-time">
+                            <div class="ba-time-location">
+                                <div class="ba-time">${flight.departureTime} <span>PM</span></div>
+                                <div class="ba-location">${flight.departureLocation}</div>
+                            </div>
 
-            <div class="flight-search-footer">
-                <div class="flight-search-departure">
-                    <i class="far fa-clock"></i>
-                    <span>Departure: ${flight.flightDate}</span>
+                            <div class="ba-duration">
+                                <div class="ba-duration-line"></div>
+                                <div class="ba-duration-text">${flight.departureLocation}m</div>
+                                <div class="ba-flight-type">Non Stop</div>
+                            </div>
+
+                            <div class="ba-time-location">
+                                <div class="ba-time">${flight.arrivalTime} <span>PM</span></div>
+                                <div class="ba-location">${flight.arrivalLocation}</div>
+                            </div>
+                        </div>
+
+                        <div class="ba-price-info">
+                            <div class="ba-price">NPR ${flight.economyPrice}</div>
+                            <div class="ba-price-subtext">price per person (incl. taxes)</div>
+                            <button class="ba-book-btn">Book Now</button>
+                        </div>
+                    </div>
+
+                    <div class="ba-view-details-btn">
+                        View Flight Details <span class="ba-arrow-icon"></span>
+                    </div>
+
+                    <div class="ba-flight-details">
+                        <div class="ba-tabs">
+                            <div class="ba-tab active" data-tab="itinerary-${status.index}">Flight Itinerary</div>
+                            <div class="ba-tab" data-tab="fare-${status.index}">Fare Breakdown</div>
+                            <div class="ba-tab" data-tab="baggage-${status.index}">Baggage</div>
+                        </div>
+
+                        <div class="ba-tab-content active" id="itinerary-${status.index}">
+                            <div class="ba-itinerary-content">
+                                <div class="ba-itinerary-header">Flight Details</div>
+
+                                <div class="ba-journey-visual">
+                                    <div class="ba-journey-cities">
+                                        <div>
+                                            <div class="ba-journey-city">${flight.departureLocation}</div>
+                                            <div class="ba-journey-time">${flight.departureTime} PM</div>
+                                        </div>
+                                        <div>
+                                            <div class="ba-journey-city">${flight.arrivalLocation}</div>
+                                            <div class="ba-journey-time">${flight.arrivalTime} PM</div>
+                                        </div>
+                                    </div>
+                                    <div class="ba-journey-line">
+                                        <div class="ba-journey-progress"></div>
+                                    </div>
+                                </div>
+
+                                <div class="ba-flight-info-grid">
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Airline:</div>
+                                        <div class="ba-info-value">${airlineMap[flight.airlineId]}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Flight No:</div>
+                                        <div class="ba-info-value">${flight.flightNumber}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Date:</div>
+                                        <div class="ba-info-value">${flight.flightDate}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Duration:</div>
+                                        <div class="ba-info-value">${flight.duration} minutes</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Departure:</div>
+                                        <div class="ba-info-value">${flight.departureLocation} - ${flight.departureTime}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Arrival:</div>
+                                        <div class="ba-info-value">${flight.arrivalLocation} - ${flight.arrivalTime}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Type:</div>
+                                        <div class="ba-info-value">Non Stop</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ba-tab-content" id="fare-${status.index}">
+                            <div class="ba-fare-item">
+                                <div class="ba-fare-label">Economy Class</div>
+                                <div class="ba-fare-value">NRs. ${flight.economyPrice}</div>
+                            </div>
+                            <div class="ba-fare-item">
+                                <div class="ba-fare-label">Business Class</div>
+                                <div class="ba-fare-value">NRs. ${flight.businessPrice}</div>
+                            </div>
+                            <div class="ba-fare-item">
+                                <div class="ba-fare-label">Total Taxes</div>
+                                <div class="ba-fare-value">NRs. 443</div>
+                            </div>
+                            <div class="ba-fare-item">
+                                <div class="ba-fare-label">Total Fare (Economy)</div>
+                                <div class="ba-fare-value">NRs. 6,276</div>
+                            </div>
+                            <div class="ba-fare-item">
+                                <div class="ba-fare-label">Total Fare (Business)</div>
+                                <div class="ba-fare-value">NRs. 9,943</div>
+                            </div>
+                        </div>
+
+                        <div class="ba-tab-content" id="baggage-${status.index}">
+                            <table class="ba-baggage-table">
+                                <thead>
+                                <tr>
+                                    <th>Airlines</th>
+                                    <th>Route</th>
+                                    <th>Baggage</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>${airlineMap[flight.airlineId]}</td>
+                                    <td>${flight.departureLocation} to ${flight.arrivalLocation}</td>
+                                    <td>15 KG</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <a href="#" class="flight-search-view-details">View Details</a>
-            </div>
+            </c:forEach>
         </div>
-    </c:forEach>
-
-<%--        <!-- Flight Card 2 -->--%>
-<%--        <div class="flight-search-card">--%>
-<%--            <div class="flight-search-header">--%>
-<%--                <div class="flight-search-info">--%>
-<%--                    <div class="flight-search-icon">--%>
-<%--                        <i class="fas fa-plane"></i>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-search-details">--%>
-<%--                        <h3>AD1236</h3>--%>
-<%--                        <p>Airbus A320</p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-search-price">--%>
-<%--                    <div class="flight-search-price-amount">--%>
-<%--                        <span>$349</span>--%>
-<%--                        <span style="font-size: 0.85em; color: #C9B037; margin-left: 1rem;">Busniess: $249</span>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-search-seats">28 seats left</div>--%>
-<%--                    <button class="flight-search-book-btn">Book Now</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="flight-search-route">--%>
-<%--                <div class="flight-search-airport">--%>
-<%--                    <div class="flight-search-airport-code">JFK</div>--%>
-<%--                    <div class="flight-search-airport-time">2:15 PM</div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-search-route-line">--%>
-<%--                    <div class="flight-search-route-info">5h 15m</div>--%>
-<%--                    <div class="flight-search-line">--%>
-<%--                        <i class="fas fa-plane flight-search-plane-icon"></i>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-search-route-info">Direct</div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-search-airport">--%>
-<%--                    <div class="flight-search-airport-code">LAX</div>--%>
-<%--                    <div class="flight-search-airport-time">5:30 PM</div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="flight-search-footer">--%>
-<%--                <div class="flight-search-departure">--%>
-<%--                    <i class="far fa-clock"></i>--%>
-<%--                    <span>Departure: Tuesday, May 6, 2025</span>--%>
-<%--                </div>--%>
-<%--                <a href="#" class="flight-search-view-details">View Details</a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<%--        <!-- Flight Card 3 -->--%>
-<%--        <div class="flight-search-card">--%>
-<%--            <div class="flight-search-header">--%>
-<%--                <div class="flight-search-info">--%>
-<%--                    <div class="flight-search-icon">--%>
-<%--                        <i class="fas fa-plane"></i>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-search-details">--%>
-<%--                        <h3>AD1239</h3>--%>
-<%--                        <p>Boeing 737-800</p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-search-price">--%>
-<%--                    <div class="flight-search-price-amount">$279</div>--%>
-<%--                    <div class="flight-search-seats">15 seats left</div>--%>
-<%--                    <button class="flight-search-book-btn">Book Now</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="flight-search-route">--%>
-<%--                <div class="flight-search-airport">--%>
-<%--                    <div class="flight-search-airport-code">JFK</div>--%>
-<%--                    <div class="flight-search-airport-time">7:45 PM</div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-search-route-line">--%>
-<%--                    <div class="flight-search-route-info">5h 15m</div>--%>
-<%--                    <div class="flight-search-line">--%>
-<%--                        <i class="fas fa-plane flight-search-plane-icon"></i>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-search-route-info">Direct</div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-search-airport">--%>
-<%--                    <div class="flight-search-airport-code">LAX</div>--%>
-<%--                    <div class="flight-search-airport-time">11:00 PM</div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="flight-search-footer">--%>
-<%--                <div class="flight-search-departure">--%>
-<%--                    <i class="far fa-clock"></i>--%>
-<%--                    <span>Departure: Tuesday, May 6, 2025</span>--%>
-<%--                </div>--%>
-<%--                <a href="#" class="flight-search-view-details">View Details</a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-    </div>
-
+    </c:if>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all flight containers
+        const flightContainers = document.querySelectorAll('.ba-flight-container');
+
+        // Add event listeners to each flight container
+        flightContainers.forEach(container => {
+            const viewDetailsBtn = container.querySelector('.ba-view-details-btn');
+            const flightDetails = container.querySelector('.ba-flight-details');
+            const tabs = container.querySelectorAll('.ba-tab');
+
+            // Toggle flight details
+            viewDetailsBtn.addEventListener('click', function() {
+                flightDetails.classList.toggle('active');
+
+                if (flightDetails.classList.contains('active')) {
+                    viewDetailsBtn.innerHTML = 'Hide Flight Details <span class="ba-arrow-icon up"></span>';
+                } else {
+                    viewDetailsBtn.innerHTML = 'View Flight Details <span class="ba-arrow-icon"></span>';
+                }
+            });
+
+            // Handle tabs for this specific flight container
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+
+                    // Remove active class from all tabs in this container
+                    container.querySelectorAll('.ba-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+
+                    // Remove active class from all tab contents in this container
+                    container.querySelectorAll('.ba-tab-content').forEach(tc => {
+                        tc.classList.remove('active');
+                    });
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    // Find and activate the corresponding tab content
+                    const tabContent = document.getElementById(tabId);
+                    if (tabContent) {
+                        tabContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    });
+</script>
 <script src="${pageContext.request.contextPath}/assets/js/bookingContainer.js"></script>
 <jsp:include page="../../tail.jsp" />
