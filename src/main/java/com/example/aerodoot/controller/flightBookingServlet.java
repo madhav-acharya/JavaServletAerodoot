@@ -29,6 +29,8 @@ public class flightBookingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
         if (flights != null) {
             List<Aircraft> aircrafts;
             List<Airline> airlines;
@@ -56,16 +58,11 @@ public class flightBookingServlet extends HttpServlet {
                 aircraftsMap.put(aircraft.getAircraftId(), aircraft.getModel());
             }
 
-            HttpSession session = request.getSession();
-
             // Get attributes from session
             String departureDate = (String) session.getAttribute("departureDate");
             String returnDate = (String) session.getAttribute("returnDate");
             String trip = (String) session.getAttribute("trip");
             String passenger = (String) session.getAttribute("passenger");
-
-            int flightNumbers = (int) session.getAttribute("flightNumbers");
-            System.out.println("checking flight Numbers: " + flightNumbers);
 
             request.setAttribute("departureDate", departureDate);
             request.setAttribute("returnDate", returnDate);
@@ -75,6 +72,8 @@ public class flightBookingServlet extends HttpServlet {
             request.setAttribute("aircraftMap", aircraftsMap);
             request.setAttribute("airlineMap", airlinesMap);
         }
+        int flightNumbers = (int) session.getAttribute("flightNumbers");
+        System.out.println("checking flight Numbers: " + flightNumbers);
 
         System.out.println("get method of flight-booking");
         request.getRequestDispatcher("/WEB-INF/view/flightBooking.jsp").forward(request, response);
