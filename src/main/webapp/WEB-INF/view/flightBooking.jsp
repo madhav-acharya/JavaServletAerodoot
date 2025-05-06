@@ -16,6 +16,21 @@
         <div class="flight-search-wrapper">
             <h1 class="flight-search-title">Available Flights</h1>
 
+            <c:forEach var="flight" items="${flightLists}" begin="0" end="0">
+                <h2 class="flight-search-title">Flights from ${flight.departureLocation} to ${flight.arrivalLocation}</h2>
+                <div class="flight-info-data">
+                    <span>${departureDate}</span>
+                    <c:if test="${returnDate ne '0'}">
+                    <span>•</span>
+                    <span>${returnDate}</span>
+                    </c:if>
+                    <span>•</span>
+                    <span>${trip}</span>
+                    <span>•</span>
+                    <span>${passenger}</span>
+                </div>
+            </c:forEach>
+
             <c:forEach var="flight" items="${flightLists}" varStatus="status">
                 <div class="ba-flight-container" data-flight-index="${status.index}">
                     <div class="ba-flight-header">

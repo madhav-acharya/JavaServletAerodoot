@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -55,21 +56,20 @@ public class flightBookingServlet extends HttpServlet {
                 aircraftsMap.put(aircraft.getAircraftId(), aircraft.getModel());
             }
 
-            //printing the aircrafts and airlines
-            for (int key: aircraftsMap.keySet()) {
-                System.out.println(key + " -> " + aircraftsMap.get(key));
-            }
+            HttpSession session = request.getSession();
 
-            for (int key: airlinesMap.keySet()) {
-                System.out.println(key + " -> " + airlinesMap.get(key));
-            }
+            // Get attributes from session
+            String departureDate = (String) session.getAttribute("departureDate");
+            String returnDate = (String) session.getAttribute("returnDate");
+            String trip = (String) session.getAttribute("trip");
+            String passenger = (String) session.getAttribute("passenger");
 
-            //testing
-            for (int i=0; i < flights.size(); i++) {
-                // Get the current Flight object
-                Flight flight = flights.get(i);
-                System.out.println("Aircraft for flights: " + aircraftsMap.get(flight.getAircraftId()) + ", Airlines: " + airlinesMap.get(flight.getAirlineId()));
-            }
+
+            request.setAttribute("departureDate", departureDate);
+            request.setAttribute("returnDate", returnDate);
+            request.setAttribute("trip", trip);
+            request.setAttribute("passenger", passenger);
+
 
             request.setAttribute("flightLists", flights);
             request.setAttribute("aircraftMap", aircraftsMap);
@@ -95,7 +95,7 @@ public class flightBookingServlet extends HttpServlet {
                 // Remove ordinal suffixes (st, nd, rd, th)
                 departureDateStr = departureDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
-                // Format of the date string coming from JSP (e.g., "May 5th, 2025" -> "May 5, 2025")
+                // Format of the date string "May 5th, 2025" -> "May 5, 2025"
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
                 java.util.Date utilDate = sdf.parse(departureDateStr);
                 departureDate = new java.sql.Date(utilDate.getTime());
@@ -110,7 +110,7 @@ public class flightBookingServlet extends HttpServlet {
                 // Remove ordinal suffixes (st, nd, rd, th)
                 returnDateStr = returnDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
-                // Format of the date string coming from JSP (e.g., "May 5th, 2025" -> "May 5, 2025")
+                // Format of the date string "May 5th, 2025" -> "May 5, 2025"
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
                 java.util.Date utilDate = sdf.parse(returnDateStr);
                 returnDate = new java.sql.Date(utilDate.getTime());
@@ -120,26 +120,36 @@ public class flightBookingServlet extends HttpServlet {
                 // Optionally, add an error message or take appropriate action
             }
         }
+
+
         List<Flight> returnFlights;
+        HttpSession session = request.getSession();
 
         if (returnDate != null) {
             try {
                 flights = FlightDAO.getAllSearchFlights(departureLocation, arrivalLocation, departureDate);
                 returnFlights = FlightDAO.getAllSearchFlights(arrivalLocation, departureLocation, returnDate);
                 flights.addAll(returnFlights);
+                session.setAttribute("departureDate", departureDateStr);
+                session.setAttribute("returnDate", returnDateStr);
+                session.setAttribute("trip", "Round Trip");
+                session.setAttribute("passenger", passenger);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         } else {
             try {
+                session.setAttribute("departureDate", departureDateStr);
+                session.setAttribute("returnDate", "0");
+                session.setAttribute("trip", "One Way Trip");
+                session.setAttribute("passenger", passenger);
                 flights = FlightDAO.getAllSearchFlights(departureLocation, arrivalLocation, departureDate);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
 
-
-            System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
+        System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
 
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }

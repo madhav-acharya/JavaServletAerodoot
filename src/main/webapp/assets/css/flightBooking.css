@@ -17,11 +17,27 @@
     color: #666;
 }
 
+
 .flight-search-title {
     color: #002366;
     margin-bottom: 20px;
-    font-size: 24px;
     font-weight: bold;
+}
+
+.flight-search-title h2 {
+    font-size: 30px;
+}
+
+.flight-search-title h2 {
+    font-size: 24px;
+}
+
+.flight-info-data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #1a1a1a;
+    font-size: 18px;
 }
 
 .ba-flight-container {
