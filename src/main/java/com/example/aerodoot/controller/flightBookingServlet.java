@@ -64,15 +64,19 @@ public class flightBookingServlet extends HttpServlet {
             String trip = (String) session.getAttribute("trip");
             String passenger = (String) session.getAttribute("passenger");
 
-            request.setAttribute("departureDate", departureDate);
-            request.setAttribute("returnDate", returnDate);
-            request.setAttribute("trip", trip);
-            request.setAttribute("passenger", passenger);
             request.setAttribute("flightLists", flights);
             request.setAttribute("aircraftMap", aircraftsMap);
             request.setAttribute("airlineMap", airlinesMap);
         }
-        int flightNumbers = (int) session.getAttribute("flightNumbers");
+
+        //this is for in case there is not flight found
+        int flightNumbers = 0; // default value
+        if (session.getAttribute("flightNumbers") != null) {
+            flightNumbers = (int) session.getAttribute("flightNumbers");
+            String departureLocation = (String) session.getAttribute("departureLocation");
+            String arrivalLocation = (String) session.getAttribute("arrivalLocation");
+            String departureDate = (String) session.getAttribute("departureDate");
+        }
         System.out.println("checking flight Numbers: " + flightNumbers);
 
         System.out.println("get method of flight-booking");
@@ -148,6 +152,8 @@ public class flightBookingServlet extends HttpServlet {
 
         //creating session to check if flights is available or not if not then to display the no flight found message
         session.setAttribute("flightNumbers", flights.size());
+        session.setAttribute("departureLocation", departureLocation);
+        session.setAttribute("arrivalLocation", arrivalLocation);
 
         System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
 

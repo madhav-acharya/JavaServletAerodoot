@@ -176,6 +176,31 @@
             </c:forEach>
         </div>
     </c:if>
+
+    <c:if test="${flightNumbers == 0}">
+        <div class="flight-not-found-container">
+            <div class="flight-not-found-icon">
+                <i class="fas fa-plane-slash"></i>
+            </div>
+            <h2 class="flight-not-found-title">No Flights Found</h2>
+
+            <div class="flight-route">
+                <div class="flight-location">${departureLocation}</div>
+                <div class="flight-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                <div class="flight-location">${arrivalLocation}</div>
+            </div>
+
+            <div class="flight-date">
+                <i class="far fa-calendar-alt"></i> ${departureDate}
+            </div>
+
+            <p>We couldn't find any flights matching your criteria.</p>
+
+            <p class="flight-suggestion">
+                Try adjusting your search parameters or check nearby dates.
+            </p>
+        </div>
+    </c:if>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

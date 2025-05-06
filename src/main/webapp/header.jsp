@@ -3,7 +3,6 @@
 <html>
 <head>
   <title>AeroDoot</title>
-<%--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">--%>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <%--  Main styles --%>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
