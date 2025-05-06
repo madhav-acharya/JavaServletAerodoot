@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    rgba(0, 0, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,10 +30,14 @@
     position: relative;
     transform: translateY(20px);
     transition: transform 0.3s;
+    display: block; /* Explicitly set display to block */
+    opacity: 1;
 }
 
 .modal-overlay.active .modal {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-header-payment {

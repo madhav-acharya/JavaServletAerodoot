@@ -1,5 +1,5 @@
 // DOM Elements
-const bookNowBtn = document.getElementById('bookNowBtn');
+const bookNowBtns = document.querySelectorAll('.ba-book-btn');
 const paymentModal = document.getElementById('paymentModal');
 const closeModal = document.getElementById('closeModal');
 const cancelBtn = document.getElementById('cancelBtn');
@@ -37,7 +37,7 @@ function calculateTotalFare() {
 // Update UI with calculated fare
 function updateTotalFare() {
     totalFare = calculateTotalFare();
-    totalFareDisplay.textContent = `$${totalFare}`;
+    totalFareDisplay.textContent = `NRs. ${totalFare}`;
 
     // Reset validation
     validateAmount();
@@ -54,7 +54,7 @@ function validateAmount() {
     }
 
     if (amount !== totalFare.toString()) {
-        errorMessage.querySelector('span').textContent = `Amount must be exactly $${totalFare}`;
+        errorMessage.querySelector('span').textContent = `Amount must be exactly NRs. ${totalFare}`;
         errorMessage.classList.add('visible');
         payNowBtn.disabled = true;
     } else {
@@ -64,9 +64,13 @@ function validateAmount() {
 }
 
 // Open modal
-bookNowBtn.addEventListener('click', () => {
-    paymentModal.classList.add('active');
-});
+bookNowBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log('Book Now button clicked!');
+        paymentModal.classList.add('active');
+        updateTotalFare();
+    });
+})
 
 // Close modal
 function closeModalHandler() {
@@ -77,54 +81,67 @@ function closeModalHandler() {
     payNowBtn.disabled = true;
 }
 
-closeModal.addEventListener('click', closeModalHandler);
-cancelBtn.addEventListener('click', closeModalHandler);
+if (closeModal) {
+    closeModal.addEventListener('click', closeModalHandler);
+}
+
+if (cancelBtn) {
+    cancelBtn.addEventListener('click', closeModalHandler);
+}
 
 
 // Class selection
-classOptions.addEventListener('click', (e) => {
-    const option = e.target.closest('.radio-option');
-    if (!option) return;
+if (classOptions) {
+    classOptions.addEventListener('click', (e) => {
+        const option = e.target.closest('.radio-option');
+        if (!option) return;
 
-    // Update UI
-    document.querySelectorAll('#classOptions .radio-option').forEach(opt => {
-        opt.classList.remove('selected');
+        // Update UI
+        document.querySelectorAll('#classOptions .radio-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        option.classList.add('selected');
+
+        // Update radio button
+        option.querySelector('input').checked = true;
+
+        // Update state
+        selectedClass = option.dataset.value;
+        updateTotalFare();
     });
-    option.classList.add('selected');
-
-    // Update radio button
-    option.querySelector('input').checked = true;
-
-    // Update state
-    selectedClass = option.dataset.value;
-    updateTotalFare();
-});
+}
 
 // Payment method selection
-paymentOptions.addEventListener('click', (e) => {
-    const option = e.target.closest('.radio-option');
-    if (!option) return;
+if (paymentOptions) {
+    paymentOptions.addEventListener('click', (e) => {
+        const option = e.target.closest('.radio-option');
+        if (!option) return;
 
-    // Update UI
-    document.querySelectorAll('#paymentOptions .radio-option').forEach(opt => {
-        opt.classList.remove('selected');
+        // Update UI
+        document.querySelectorAll('#paymentOptions .radio-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        option.classList.add('selected');
+
+        // Update radio button
+        option.querySelector('input').checked = true;
+
+        // Update state
+        selectedPayment = option.dataset.value;
     });
-    option.classList.add('selected');
-
-    // Update radio button
-    option.querySelector('input').checked = true;
-
-    // Update state
-    selectedPayment = option.dataset.value;
-});
+}
 
 // Payment amount validation
-paymentAmount.addEventListener('input', validateAmount);
+if (paymentAmount) {
+    paymentAmount.addEventListener('input', validateAmount);
+}
 
 // Pay Now button
-payNowBtn.addEventListener('click', () => {
-    closeModalHandler();
-});
+if (payNowBtn) {
+    payNowBtn.addEventListener('click', () => {
+        closeModalHandler();
+    });
+}
 
 // Close modal on click outside
 paymentModal.addEventListener('click', (e) => {
