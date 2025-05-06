@@ -1,0 +1,248 @@
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay .modal {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal-header-payment {
+    padding: 20px 20px 10px;
+    position: relative;
+}
+
+.modal-header-payment .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.modal-header-payment .modal-subtitle {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.modal-header-payment .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-header-payment .close-btn:hover {
+    color: #000;
+}
+
+.modal-body-payment {
+    padding: 10px 20px 20px;
+}
+
+.modal-body-payment .section {
+    margin-bottom: 20px;
+}
+
+.modal-body-payment .section-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.flight-detail-payment {
+    margin-bottom: 10px;
+}
+
+.flight-detail-payment .flight-route {
+    color: #333;
+}
+
+.total-amount-payment {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Radio Selections */
+.section .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section .radio-group .radio-option {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.section .radio-group .radio-option:hover {
+    background-color: #f9f9f9;
+}
+
+.section .radio-group .radio-option.selected {
+    border-color: #0d47a1;
+    background-color: #e3f2fd;
+}
+
+.section .radio-group .radio-option input {
+    margin-right: 10px;
+}
+
+.payment-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin-right: 12px;
+    color: white;
+}
+
+.esewa-icon {
+    background-color: #5ac726;
+}
+
+.khalti-icon {
+    background-color: #5C2D91;
+}
+
+.payment-label {
+    flex: 1;
+}
+
+.payment-name {
+    font-weight: 500;
+}
+
+.payment-description {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.class-price {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* Form Input */
+.section .form-group {
+    margin-bottom: 20px;
+}
+
+.section .form-group .form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.section .form-group .form-input:focus {
+    outline: none;
+    border-color: #0d47a1;
+    box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.1);
+}
+
+.form-hint {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.form-group .error-message {
+    display: flex;
+    align-items: center;
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-group .error-message.visible {
+    display: flex;
+}
+
+.form-group .error-message i {
+    margin-right: 5px;
+}
+
+/* Action Buttons */
+.modal-footer-payment {
+    padding: 0 20px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-footer-payment .btn-payment {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.modal-footer-payment .btn-cancel {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.modal-footer-payment .btn-cancel:hover {
+    background-color: #e5e5e5;
+}
+
+.modal-footer-payment .btn-pay {
+    background-color: #0d47a1;
+    color: white;
+}
+
+.modal-footer-payment .btn-pay:hover:not(:disabled) {
+    background-color: #0a3880;
+}
+
+.modal-footer-payment .btn-pay:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
