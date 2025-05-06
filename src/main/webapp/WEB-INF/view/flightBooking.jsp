@@ -28,18 +28,18 @@
 
                         <div class="ba-flight-time">
                             <div class="ba-time-location">
-                                <div class="ba-time">${flight.departureTime} <span>PM</span></div>
+                                <div class="ba-time">${flight.departureTime}</div>
                                 <div class="ba-location">${flight.departureLocation}</div>
                             </div>
 
                             <div class="ba-duration">
                                 <div class="ba-duration-line"></div>
-                                <div class="ba-duration-text">${flight.departureLocation}m</div>
+                                <div class="ba-duration-text">${flight.duration} mins</div>
                                 <div class="ba-flight-type">Non Stop</div>
                             </div>
 
                             <div class="ba-time-location">
-                                <div class="ba-time">${flight.arrivalTime} <span>PM</span></div>
+                                <div class="ba-time">${flight.arrivalTime}</div>
                                 <div class="ba-location">${flight.arrivalLocation}</div>
                             </div>
                         </div>
@@ -70,11 +70,11 @@
                                     <div class="ba-journey-cities">
                                         <div>
                                             <div class="ba-journey-city">${flight.departureLocation}</div>
-                                            <div class="ba-journey-time">${flight.departureTime} PM</div>
+                                            <div class="ba-journey-time">${flight.departureTime}</div>
                                         </div>
                                         <div>
                                             <div class="ba-journey-city">${flight.arrivalLocation}</div>
-                                            <div class="ba-journey-time">${flight.arrivalTime} PM</div>
+                                            <div class="ba-journey-time">${flight.arrivalTime}</div>
                                         </div>
                                     </div>
                                     <div class="ba-journey-line">
@@ -86,6 +86,10 @@
                                     <div class="ba-flight-info-item">
                                         <div class="ba-info-label">Airline:</div>
                                         <div class="ba-info-value">${airlineMap[flight.airlineId]}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Airline:</div>
+                                        <div class="ba-info-value">${aircraftMap[flight.aircraftId]}</div>
                                     </div>
                                     <div class="ba-flight-info-item">
                                         <div class="ba-info-label">Flight No:</div>
@@ -123,18 +127,6 @@
                             <div class="ba-fare-item">
                                 <div class="ba-fare-label">Business Class</div>
                                 <div class="ba-fare-value">NRs. ${flight.businessPrice}</div>
-                            </div>
-                            <div class="ba-fare-item">
-                                <div class="ba-fare-label">Total Taxes</div>
-                                <div class="ba-fare-value">NRs. 443</div>
-                            </div>
-                            <div class="ba-fare-item">
-                                <div class="ba-fare-label">Total Fare (Economy)</div>
-                                <div class="ba-fare-value">NRs. 6,276</div>
-                            </div>
-                            <div class="ba-fare-item">
-                                <div class="ba-fare-label">Total Fare (Business)</div>
-                                <div class="ba-fare-value">NRs. 9,943</div>
                             </div>
                         </div>
 
