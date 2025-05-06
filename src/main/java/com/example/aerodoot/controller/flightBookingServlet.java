@@ -85,10 +85,11 @@ public class flightBookingServlet extends HttpServlet {
         String departureLocation = request.getParameter("departure");
         String arrivalLocation = request.getParameter("destination");
         String departureDateStr = request.getParameter("departureDate");
-        String returnDate = request.getParameter("returnDate");
+        String returnDateStr = request.getParameter("returnDate");
         String passenger = request.getParameter("passenger");
 
         Date departureDate = null;
+        Date returnDate = null;
         if (departureDateStr != null && !departureDateStr.trim().isEmpty()) {
             try {
                 // Remove ordinal suffixes (st, nd, rd, th)
@@ -103,42 +104,42 @@ public class flightBookingServlet extends HttpServlet {
                 System.out.println("Error parsing date: " + departureDateStr);
                 // Optionally, add an error message or take appropriate action
             }
-
         }
-            System.out.println(departureDate);
+        if (returnDateStr != null && !returnDateStr.trim().isEmpty()) {
+            try {
+                // Remove ordinal suffixes (st, nd, rd, th)
+                returnDateStr = returnDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
+                // Format of the date string coming from JSP (e.g., "May 5th, 2025" -> "May 5, 2025")
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
+                java.util.Date utilDate = sdf.parse(returnDateStr);
+                returnDate = new java.sql.Date(utilDate.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                System.out.println("Error parsing date: " + returnDateStr);
+                // Optionally, add an error message or take appropriate action
+            }
+        }
+        List<Flight> returnFlights;
 
+        if (returnDate != null) {
+            try {
+                flights = FlightDAO.getAllSearchFlights(departureLocation, arrivalLocation, departureDate);
+                returnFlights = FlightDAO.getAllSearchFlights(arrivalLocation, departureLocation, returnDate);
+                flights.addAll(returnFlights);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
             try {
                 flights = FlightDAO.getAllSearchFlights(departureLocation, arrivalLocation, departureDate);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        }
 
-            for (int i=0; i < flights.size(); i++) {
-                // Get the current Flight object
-                Flight flight = flights.get(i);
 
-                // Print the details of the flight
-                System.out.println("Flight " + (i + 1) + ":");
-                System.out.println("Flight ID: " + flight.getFlightId());
-                System.out.println("Flight Number: " + flight.getFlightNumber());
-                System.out.println("Departure Location: " + flight.getDepartureLocation());
-                System.out.println("Arrival Location: " + flight.getArrivalLocation());
-                System.out.println("Flight Date: " + flight.getFlightDate());
-                System.out.println("Departure Time: " + flight.getDepartureTime());
-                System.out.println("Arrival Time: " + flight.getArrivalTime());
-                System.out.println("Duration: " + flight.getDuration() + " minutes");
-                System.out.println("Status: " + flight.getStatus());
-                System.out.println("Available Economy Seats: " + flight.getAvailableSeatsEconomy());
-                System.out.println("Available Business Seats: " + flight.getAvailableSeatsBusiness());
-                System.out.println("Economy Price: " + flight.getEconomyPrice());
-                System.out.println("Business Price: " + flight.getBusinessPrice());
-                System.out.println("Aircraft ID: " + flight.getAircraftId());
-                System.out.println("Airline ID: " + flight.getAirlineId());
-                System.out.println();
-            }
-
-            System.out.println(departureDateStr + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
+            System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
 
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }

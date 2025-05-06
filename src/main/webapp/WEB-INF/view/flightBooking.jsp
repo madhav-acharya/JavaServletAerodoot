@@ -115,6 +115,14 @@
                                         <div class="ba-info-label">Type:</div>
                                         <div class="ba-info-value">Non Stop</div>
                                     </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Available Economy seat:</div>
+                                        <div class="ba-info-value">${flight.availableSeatsEconomy}</div>
+                                    </div>
+                                    <div class="ba-flight-info-item">
+                                        <div class="ba-info-label">Available Business seat:</div>
+                                        <div class="ba-info-value">${flight.availableSeatsBusiness}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

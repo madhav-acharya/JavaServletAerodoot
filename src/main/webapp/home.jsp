@@ -6,8 +6,6 @@
 <div class="container">
     <header class="home-header">
 
-        <jsp:include page="imageSlider.jsp" />
-
         <h1>Your Journey Begins with AeroDoot</h1>
         <p>Seamless flight bookings, exceptional service, and unforgettable journeys await.</p>
 
