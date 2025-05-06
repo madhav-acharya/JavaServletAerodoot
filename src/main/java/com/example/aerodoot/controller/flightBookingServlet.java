@@ -64,13 +64,13 @@ public class flightBookingServlet extends HttpServlet {
             String trip = (String) session.getAttribute("trip");
             String passenger = (String) session.getAttribute("passenger");
 
+            int flightNumbers = (int) session.getAttribute("flightNumbers");
+            System.out.println("checking flight Numbers: " + flightNumbers);
 
             request.setAttribute("departureDate", departureDate);
             request.setAttribute("returnDate", returnDate);
             request.setAttribute("trip", trip);
             request.setAttribute("passenger", passenger);
-
-
             request.setAttribute("flightLists", flights);
             request.setAttribute("aircraftMap", aircraftsMap);
             request.setAttribute("airlineMap", airlinesMap);
@@ -102,7 +102,6 @@ public class flightBookingServlet extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
                 System.out.println("Error parsing date: " + departureDateStr);
-                // Optionally, add an error message or take appropriate action
             }
         }
         if (returnDateStr != null && !returnDateStr.trim().isEmpty()) {
@@ -117,7 +116,6 @@ public class flightBookingServlet extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
                 System.out.println("Error parsing date: " + returnDateStr);
-                // Optionally, add an error message or take appropriate action
             }
         }
 
@@ -148,6 +146,9 @@ public class flightBookingServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+
+        //creating session to check if flights is available or not if not then to display the no flight found message
+        session.setAttribute("flightNumbers", flights.size());
 
         System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
 
