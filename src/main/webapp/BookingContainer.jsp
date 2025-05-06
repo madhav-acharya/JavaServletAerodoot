@@ -1,3 +1,5 @@
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <main class="booking-card">
@@ -16,6 +18,7 @@
                     <input type="text" id="from" name="departure" placeholder="Select departure city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
 
             <div class="form-group">
@@ -25,6 +28,7 @@
                     <input type="text" id="to" name="destination" placeholder="Select destination city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
         </div>
 
@@ -35,6 +39,7 @@
                     <i class="calendar-icon"></i>
                     <input type="text" id="departure-date" name="departureDate" placeholder="Select date" readonly>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
 
             <div class="form-group" id="return-date-group">
@@ -43,6 +48,7 @@
                     <i class="calendar-icon"></i>
                     <input type="text" id="return-date" name="returnDate" placeholder="Select date" readonly>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
 
             <div class="form-group">
@@ -52,11 +58,12 @@
                     <input type="text" id="passengers" name="passenger" value="1 Passenger" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
         </div>
 
         <div class="form-row">
-            <button class="btn-main btn-search">Search Flights</button>
+            <button type="submit" class="btn-main btn-search">Search Flights</button>
         </div>
     </form>
 
@@ -69,6 +76,7 @@
                     <input type="text" id="one-way-from" name="departure" placeholder="Select departure city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
 
             <div class="form-group">
@@ -78,6 +86,7 @@
                     <input type="text" id="one-way-to" name="destination" placeholder="Select destination city" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
         </div>
 
@@ -88,6 +97,7 @@
                     <i class="calendar-icon"></i>
                     <input type="text" id="one-way-departure-date" name="departureDate" placeholder="Select date" readonly>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
 
             <div class="form-group">
@@ -97,6 +107,7 @@
                     <input type="text" id="one-way-passengers" name="passenger" value="1 Passenger" readonly>
                     <i class="dropdown-icon"></i>
                 </div>
+                <!-- Error message will be inserted here by JavaScript -->
             </div>
         </div>
 

@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (tabId === 'round-trip') {
                 document.getElementById('return-date-group').style.display = 'block';
             }
+
+            // Clear any existing error messages when switching tabs
+            clearAllErrorMessages();
         });
     });
 
@@ -161,6 +164,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (activeInput === 'departure') {
                     selectedDepartureDate = selectedDate;
                     departureInput.value = formatDate(selectedDate);
+                    // Clear any error message when value is selected
+                    clearErrorMessage(departureInput);
 
                     // If return date is before departure date, reset it
                     if (selectedReturnDate && selectedReturnDate < selectedDate) {
@@ -180,11 +185,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (selectedDepartureDate && selectedDate >= selectedDepartureDate) {
                         selectedReturnDate = selectedDate;
                         returnInput.value = formatDate(selectedDate);
+                        // Clear any error message when value is selected
+                        clearErrorMessage(returnInput);
                         calendarPopup.classList.remove('active');
                     }
                 } else if (activeInput === 'one-way-departure') {
                     selectedDepartureDate = selectedDate;
                     oneWayDepartureInput.value = formatDate(selectedDate);
+                    // Clear any error message when value is selected
+                    clearErrorMessage(oneWayDepartureInput);
                     calendarPopup.classList.remove('active');
                 }
 
@@ -317,6 +326,8 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation(); // Prevent event bubbling
             if (activeCityInput) {
                 activeCityInput.value = item.getAttribute('data-city');
+                // Clear any error message when value is selected
+                clearErrorMessage(activeCityInput);
                 cityDropdown.classList.remove('active');
             }
         });
@@ -411,6 +422,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (activePassengerInput) {
             activePassengerInput.value = passengerText;
+            // Clear any error message when value is selected
+            clearErrorMessage(activePassengerInput);
             passengerDropdown.classList.remove('active');
         }
     });
@@ -462,4 +475,106 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!document.body.contains(passengerDropdown)) {
         document.body.appendChild(passengerDropdown);
     }
+
+    // FORM VALIDATION FUNCTIONALITY
+
+    // Add error message display function
+    function showErrorMessage(inputElement, message) {
+        // Check if error message already exists
+        let errorElement = inputElement.parentElement.nextElementSibling;
+        if (!errorElement || !errorElement.classList.contains('error-message')) {
+            // Create error message element
+            errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.style.color = '#e74c3c';
+            errorElement.style.fontSize = '15px';
+            errorElement.style.marginTop = '5px';
+            errorElement.style.paddingLeft = '5px';
+
+            // Insert error message after input parent
+            inputElement.parentElement.parentNode.insertBefore(errorElement, inputElement.parentElement.nextSibling);
+        }
+
+        errorElement.textContent = message;
+        inputElement.parentElement.classList.add('error-input');
+    }
+
+    // Clear error message function
+    function clearErrorMessage(inputElement) {
+        const errorElement = inputElement.parentElement.nextElementSibling;
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.textContent = '';
+            inputElement.parentElement.classList.remove('error-input');
+        }
+    }
+
+    // Clear all error messages
+    function clearAllErrorMessages() {
+        const errorMessages = document.querySelectorAll('.error-message');
+        errorMessages.forEach(element => {
+            element.textContent = '';
+        });
+
+        const errorInputs = document.querySelectorAll('.error-input');
+        errorInputs.forEach(element => {
+            element.classList.remove('error-input');
+        });
+    }
+
+    // Form validation function
+    function validateForm(formElement) {
+        let isValid = true;
+
+        // Get all inputs in the form
+        const inputs = formElement.querySelectorAll('input[type="text"]');
+
+        inputs.forEach(input => {
+            // Skip passenger input as it has default value
+            if (input.id === 'passengers' || input.id === 'one-way-passengers') {
+                return;
+            }
+
+            // Skip return date for one-way trips
+            if (input.id === 'return-date' && document.querySelector('.tab-item[data-tab="one-way"]').classList.contains('active')) {
+                return;
+            }
+
+            if (!input.value.trim()) {
+                let fieldName = input.previousElementSibling.textContent || input.getAttribute('placeholder').replace('Select ', '');
+                showErrorMessage(input, `Please select a ${fieldName.toLowerCase()}`);
+                isValid = false;
+            } else {
+                clearErrorMessage(input);
+            }
+        });
+
+        return isValid;
+    }
+
+    // Add submit event listeners to forms
+    const roundTripForm = document.getElementById('round-trip-content');
+    const oneWayForm = document.getElementById('one-way-content');
+
+    roundTripForm.addEventListener('submit', function(e) {
+        if (!validateForm(roundTripForm)) {
+            e.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    oneWayForm.addEventListener('submit', function(e) {
+        if (!validateForm(oneWayForm)) {
+            e.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    // Add click event listeners to search buttons
+    const searchButtons = document.querySelectorAll('.btn-search');
+    searchButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const form = this.closest('form');
+            if (!validateForm(form)) {
+                e.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    });
 });
