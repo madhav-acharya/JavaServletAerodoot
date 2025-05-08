@@ -28,7 +28,7 @@
             </svg>
           </div>
           <div class="card-content">
-            <div class="stat-value">1,284</div>
+            <div class="stat-value">${totalFlights}</div>
             <p class="stat-change positive">+12.5% from last month</p>
           </div>
         </div>
@@ -43,7 +43,7 @@
             </svg>
           </div>
           <div class="card-content">
-            <div class="stat-value">3,567</div>
+            <div class="stat-value">${activeBookings}</div>
             <p class="stat-change positive">+8.2% from last month</p>
           </div>
         </div>
@@ -57,7 +57,7 @@
             </svg>
           </div>
           <div class="card-content">
-            <div class="stat-value">RS: 428,651</div>
+            <div class="stat-value">RS: ${totalRevenue}</div>
             <p class="stat-change positive">+18.3% from last month</p>
           </div>
         </div>
@@ -72,7 +72,7 @@
             </svg>
           </div>
           <div class="card-content">
-            <div class="stat-value">24,836</div>
+            <div class="stat-value">${totalPassengers}</div>
             <p class="stat-change positive">+5.7% from last month</p>
           </div>
         </div>

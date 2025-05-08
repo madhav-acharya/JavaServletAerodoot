@@ -1,5 +1,6 @@
 package com.example.aerodoot.dao;
 
+import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.Connection;
