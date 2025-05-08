@@ -191,6 +191,7 @@
                                 <h3 class="section-title">Flight Details</h3>
                                 <div class="flight-detail-payment">
                                     <p class="flight-route">${flight.departureLocation} → ${flight.arrivalLocation}</p>
+                                    <p class="flight-route">${passenger}</p>
                                 </div>
                                 <div class="total-amount-payment">
                                     <span>Total Amount:</span>
