@@ -82,8 +82,6 @@ public class PassengerDashboard extends HttpServlet {
         System.out.println("the save changed work.");
 
         try {
-
-
             Passenger passenger = new Passenger();
             passenger.setPassportNumber(passportNumber);
             passenger.setAddress(address);

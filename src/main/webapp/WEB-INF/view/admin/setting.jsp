@@ -152,21 +152,21 @@
         <h2 class="settings-section-title">Account Settings</h2>
 
         <div class="card settings-card">
-          <div class="card-content">
+          <form action="${pageContext.request.contextPath}/admin/manage-setting" method="post" class="card-content">
             <div class="form-group">
               <label for="user-name">Name</label>
-              <input type="text" id="user-name" class="input" value="${sessionScope.user.firstName} ${sessionScope.user.lastName}">
+              <input type="text" id="user-name" name="fullName" class="input" value="${sessionScope.user.firstName} ${sessionScope.user.lastName}">
             </div>
 
             <div class="form-group">
               <label for="user-email">Email</label>
-              <input type="email" id="user-email" class="input" value="${sessionScope.user.email}">
+              <input type="email" id="user-email" name="email" class="input" value="${sessionScope.user.email}">
             </div>
 
             <div class="form-group">
               <button class="btn btn-primary" id="save-account-settings-btn">Save Changes</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
