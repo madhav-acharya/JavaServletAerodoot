@@ -482,10 +482,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function showErrorMessage(inputElement, message) {
         // Check if error message already exists
         let errorElement = inputElement.parentElement.nextElementSibling;
-        if (!errorElement || !errorElement.classList.contains('error-message')) {
+        if (!errorElement || !errorElement.classList.contains('error-message-search-book')) {
             // Create error message element
             errorElement = document.createElement('div');
-            errorElement.className = 'error-message';
+            errorElement.className = 'error-message-search-book';
             errorElement.style.color = '#e74c3c';
             errorElement.style.fontSize = '15px';
             errorElement.style.marginTop = '5px';
@@ -502,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear error message function
     function clearErrorMessage(inputElement) {
         const errorElement = inputElement.parentElement.nextElementSibling;
-        if (errorElement && errorElement.classList.contains('error-message')) {
+        if (errorElement && errorElement.classList.contains('error-message-search-book')) {
             errorElement.textContent = '';
             inputElement.parentElement.classList.remove('error-input');
         }
@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Clear all error messages
     function clearAllErrorMessages() {
-        const errorMessages = document.querySelectorAll('.error-message');
+        const errorMessages = document.querySelectorAll('.error-message-search-book');
         errorMessages.forEach(element => {
             element.textContent = '';
         });
