@@ -155,17 +155,12 @@
           <div class="card-content">
             <div class="form-group">
               <label for="user-name">Name</label>
-              <input type="text" id="user-name" class="input" value="Admin User">
+              <input type="text" id="user-name" class="input" value="${sessionScope.user.firstName} ${sessionScope.user.lastName}">
             </div>
 
             <div class="form-group">
               <label for="user-email">Email</label>
-              <input type="email" id="user-email" class="input" value="admin@airline.com">
-            </div>
-
-            <div class="form-group">
-              <label for="user-password">Password</label>
-              <input type="password" id="user-password" class="input" value="********">
+              <input type="email" id="user-email" class="input" value="${sessionScope.user.email}">
             </div>
 
             <div class="form-group">

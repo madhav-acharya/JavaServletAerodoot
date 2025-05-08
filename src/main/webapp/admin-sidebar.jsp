@@ -5,6 +5,7 @@
   Time: 5:53 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
@@ -107,7 +108,9 @@
     </nav>
     <div class="sidebar-footer">
         <div class="user-info">
-            <div class="user-avatar">AD</div>
+            <div class="user-avatar">
+                ${fn:toUpperCase(fn:substring(sessionScope.user.firstName, 0, 1))}${fn:toUpperCase(fn:substring(sessionScope.user.lastName, 0, 1))}
+            </div>
             <div class="user-details">
                 <p class="user-name">
                     ${sessionScope.user.firstName} ${sessionScope.user.lastName}
