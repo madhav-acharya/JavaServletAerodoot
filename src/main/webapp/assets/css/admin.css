@@ -67,6 +67,14 @@ body {
     overflow-y: auto;
 }
 
+.setting-link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: white;
+}
 .sidebar.collapsed {
     width: var(--sidebar-collapsed-width);
     transform: translateX(0);

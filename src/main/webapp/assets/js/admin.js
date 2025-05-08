@@ -232,50 +232,6 @@ function exportTableAsCSV(tableId, filename = 'data.csv') {
     document.body.removeChild(link);
 }
 
-// Utility function to format date
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
-}
-
-// Utility function to format time
-function formatTime(timeString) {
-    return timeString;
-}
-
-// Utility function to capitalize first letter
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-// Utility function to generate a unique ID
-function generateId() {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-}
-
-// Utility function to debounce function calls
-function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-        const context = this;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-}
-
-// Utility function to throttle function calls
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
 function updateActiveMenuItem(tabId) {
     console.log(tabId)
     document.querySelectorAll('.sidebar-menu-item').forEach(item => {
