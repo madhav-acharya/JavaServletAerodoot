@@ -109,8 +109,12 @@
         <div class="user-info">
             <div class="user-avatar">AD</div>
             <div class="user-details">
-                <p class="user-name">Admin User</p>
-                <p class="user-email">admin@airline.com</p>
+                <p class="user-name">
+                    ${sessionScope.user.firstName} ${sessionScope.user.lastName}
+                </p>
+                <p class="user-email">
+                    ${sessionScope.user.email}
+                </p>
             </div>
         </div>
     </div>
