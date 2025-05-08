@@ -171,6 +171,10 @@ body {
     font-size: 12px;
 }
 
+.head-setting{
+    margin-left: .5rem;
+}
+
 .user-details {
     overflow: hidden;
 }
