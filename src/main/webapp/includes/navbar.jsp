@@ -16,11 +16,26 @@
                 <c:choose>
                     <%-- This is a JSTL comment --%>
                     <c:when test="${sessionScope.isLoggedIn != null && sessionScope.isLoggedIn}">
-                        <li class="nav-item"><a href="${pageContext.request.contextPath}/passenger/dashboard" class="nav-link">Dashboard</a></li>
+                        <c:choose>
+                            <c:when test='${sessionScope.userType == "ADMIN"}'>
+                                <c:set var="dashboardLink" value="${pageContext.request.contextPath}/admin" />
+                            </c:when>
+                            <c:when test='${sessionScope.userType == "AGENT"}'>
+                                <c:set var="dashboardLink" value="${pageContext.request.contextPath}/agent/dashboard" />
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="dashboardLink" value="${pageContext.request.contextPath}/passenger/dashboard" />
+                            </c:otherwise>
+                        </c:choose>
+
+                        <li class="nav-item">
+                            <a href="${dashboardLink}" class="nav-link">Dashboard</a>
+                        </li>
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a>
                         </li>
                     </c:when>
+
 
                     <c:otherwise>
                         <%-- If not logged in, show login and register options --%>

@@ -40,7 +40,6 @@ public class ManageUsers extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println("action " + action);
 
-
         if ("update".equals(action))
         {
             System.out.println("in update");

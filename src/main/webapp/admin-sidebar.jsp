@@ -5,6 +5,7 @@
   Time: 5:53 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
@@ -102,15 +103,31 @@
                         <span>Settings</span>
                     </a>
                 </li>
+                <li class="sidebar-menu-item" data-tab="exit-admin" >
+                    <a href="${pageContext.request.contextPath}/home" class="sidebar-menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <span>Exit Admin</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
     <div class="sidebar-footer">
         <div class="user-info">
-            <div class="user-avatar">AD</div>
+            <div class="user-avatar">
+                ${fn:toUpperCase(fn:substring(sessionScope.user.firstName, 0, 1))}${fn:toUpperCase(fn:substring(sessionScope.user.lastName, 0, 1))}
+            </div>
             <div class="user-details">
-                <p class="user-name">Admin User</p>
-                <p class="user-email">admin@airline.com</p>
+                <p class="user-name">
+                    ${sessionScope.user.firstName} ${sessionScope.user.lastName}
+                </p>
+                <p class="user-email">
+                    ${sessionScope.user.email}
+                </p>
             </div>
         </div>
     </div>

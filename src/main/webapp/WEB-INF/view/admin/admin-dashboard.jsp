@@ -57,7 +57,7 @@
             </svg>
           </div>
           <div class="card-content">
-            <div class="stat-value">$428,651</div>
+            <div class="stat-value">RS: 428,651</div>
             <p class="stat-change positive">+18.3% from last month</p>
           </div>
         </div>

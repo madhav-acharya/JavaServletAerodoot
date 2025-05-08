@@ -215,7 +215,28 @@ public class UserDAO {
             return false;
         }
     }
+    public static int updateAdmin(User user) throws SQLException {
+        String sql = "UPDATE User SET firstName = ?, lastName = ?, email = ? WHERE userId = ?";
 
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getEmail());
+            ps.setInt(4, user.getUserId());
+
+            int updatedRows = ps.executeUpdate();
+
+            if(updatedRows > 0) {
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error updating admin: " + e.getMessage());
+        }
+        return -1;
+    }
 
 }
 
