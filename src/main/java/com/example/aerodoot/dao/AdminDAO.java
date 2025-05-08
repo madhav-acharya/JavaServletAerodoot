@@ -39,7 +39,7 @@ public class AdminDAO {
 
     // Method to get total revenue
     public double getTotalRevenue() throws SQLException {
-        String query = "SELECT SUM(totalPrice) AS total_revenue FROM Booking WHERE bookingStatus = 'COMPLETED'";
+        String query = "SELECT SUM(totalPrice) AS total_revenue FROM Booking WHERE bookingStatus = 'CONFIRMED'";
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
