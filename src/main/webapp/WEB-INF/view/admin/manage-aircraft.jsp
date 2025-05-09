@@ -190,7 +190,7 @@
                   <select id="airline-id" name="airlineId" class="select" required>
                     <option value="">Select Airline ID</option>
                     <c:forEach var="airline" items="${airlines}">
-                      <option value="${airline.airlineId}">${airline.airlineId}</option>
+                      <option value="${airline.airlineId}">${airline.name}</option>
                     </c:forEach>
                   </select>
                 </div>
