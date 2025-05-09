@@ -19,7 +19,7 @@ import java.util.Base64;
 
 @WebServlet("/passenger/dashboard")
 @MultipartConfig
-public class PassengerDashboard extends HttpServlet {
+public class PassengerDashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
