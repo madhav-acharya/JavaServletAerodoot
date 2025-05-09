@@ -225,7 +225,6 @@ public class FlightDAO {
         } catch (SQLException e) {
             System.err.println("Error getting flights from flightId: " + e.getMessage());
         }
-
         return null;
     }
 }

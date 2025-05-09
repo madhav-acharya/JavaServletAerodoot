@@ -12,18 +12,17 @@ import java.util.List;
 
 public class BookingDAO {
     public static int createBooking(Booking booking) throws SQLException {
-        String sql = "INSERT INTO Booking (classType, seatsBooked, totalPrice, bookingStatus, flightId, passengerId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Booking ( classType, seatsBooked, totalPrice, bookingStatus, flightId, passengerId) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            ps.setTimestamp(1, booking.getBookingDate());
-            ps.setString(2, booking.getClassType());
-            ps.setInt(3, booking.getSeatsBooked());
-            ps.setBigDecimal(4, booking.getTotalPrice());
-            ps.setString(5, booking.getBookingStatus());
-            ps.setInt(6, booking.getFlightId());
-            ps.setInt(7, booking.getPassengerId());
+            ps.setString(1, booking.getClassType());
+            ps.setInt(2, booking.getSeatsBooked());
+            ps.setBigDecimal(3, booking.getTotalPrice());
+            ps.setString(4, booking.getBookingStatus());
+            ps.setInt(5, booking.getFlightId());
+            ps.setInt(6, booking.getPassengerId());
 
             int rowsExecuted = ps.executeUpdate();
             if (rowsExecuted > 0) {
