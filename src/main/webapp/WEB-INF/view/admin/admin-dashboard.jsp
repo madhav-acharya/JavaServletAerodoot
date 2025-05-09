@@ -5,7 +5,9 @@
   Time: 6:55 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
   <title>Title</title>
@@ -113,16 +115,24 @@
     if (savedTab) {
       updateActiveMenuItem(savedTab);
     }
+    const bookingTrends = [
+      <c:forEach var="b" items="${bookingTrends}" varStatus="status">
+      {
+        date: '${b.date}',
+        count: ${b.count}
+      }<c:if test="${!status.last}">,</c:if>
+      </c:forEach>
+    ];
     // Booking Trends Chart
     const bookingTrendsCtx = document.getElementById('booking-trends-chart')?.getContext('2d');
     if (bookingTrendsCtx) {
       const bookingTrendsConfig = {
         type: 'line',
         data: {
-          labels: ['Apr 1', 'Apr 5', 'Apr 10', 'Apr 15', 'Apr 20', 'Apr 25', 'Apr 30'],
+          labels: bookingTrends.map(b => b.date),
           datasets: [{
             label: 'Bookings',
-            data: [65, 78, 52, 91, 83, 106, 123],
+            data: bookingTrends.map(b => b.count),
             borderColor: 'rgb(59, 130, 246)',
             backgroundColor: 'rgba(59, 130, 246, 0.1)',
             tension: 0.3,
@@ -151,16 +161,25 @@
       bookingTrendsCtx.canvas.parentNode.parentNode.appendChild(resetZoomBtn);
     }
 
+    const flightDistributions = [
+      <c:forEach var="fd" items="${flightDistributions}" varStatus="status">
+      {
+        location: '${fd.location}',
+        count: ${fd.count}
+      }<c:if test="${!status.last}">,</c:if>
+      </c:forEach>
+    ];
+
     // Flight Distribution Chart
     const flightDistributionCtx = document.getElementById('flight-distribution-chart')?.getContext('2d');
     if (flightDistributionCtx) {
       const flightDistributionConfig = {
         type: 'bar',
         data: {
-          labels: ['Kathmandu', 'Pokhara', 'Lumbini', 'Biratnagar', 'Dharan', 'Chitwan'],
+          labels: flightDistributions.map(fd => fd.location),
           datasets: [{
             label: 'Flights',
-            data: [125, 95, 86, 45, 32, 68],
+            data: flightDistributions.map(fd => fd.count),
             backgroundColor: [
               'rgba(59, 130, 246, 0.7)',
               'rgba(16, 185, 129, 0.7)',

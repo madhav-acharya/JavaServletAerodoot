@@ -39,7 +39,7 @@ public class AdminDAO {
 
     // Method to get total revenue
     public double getTotalRevenue() throws SQLException {
-        String query = "SELECT SUM(totalPrice) AS total_revenue FROM Booking WHERE bookingStatus = 'COMPLETED'";
+        String query = "SELECT SUM(totalPrice) AS total_revenue FROM Booking WHERE bookingStatus = 'CONFIRMED'";
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
@@ -130,4 +130,86 @@ public class AdminDAO {
             return count;
         }
     }
+
+    public List<BookingAnalysisByClass> getBookingAnalysisByClass() throws SQLException {
+        String query = "SELECT classType, COUNT(*) AS booking_count FROM Booking GROUP BY classType";
+        List<BookingAnalysisByClass> bookingAnalysis = new ArrayList<>();
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                BookingAnalysisByClass analysis = new BookingAnalysisByClass(
+                        rs.getString("classType"),
+                        rs.getInt("booking_count"));
+                bookingAnalysis.add(analysis);
+            }
+        }
+        return bookingAnalysis;
+    }
+
+    // Method for Revenue by Route (source-destination)
+    public List<RevenueByRoute> getRevenueByRoute() throws SQLException {
+        String query = "SELECT departureLocation, arrivalLocation, SUM(totalPrice) AS total_revenue " +
+                "FROM Booking JOIN Flight ON Booking.flightId = Flight.flightId " +
+                "WHERE bookingStatus = 'CONFIRMED' " +
+                "GROUP BY departureLocation, arrivalLocation";
+        List<RevenueByRoute> revenueByRoute = new ArrayList<>();
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                RevenueByRoute routeRevenue = new RevenueByRoute(
+                        rs.getString("departureLocation"),
+                        rs.getString("arrivalLocation"),
+                        rs.getDouble("total_revenue"));
+                revenueByRoute.add(routeRevenue);
+            }
+        }
+        return revenueByRoute;
+    }
+
+    // Data Transfer Object for Booking Analysis by Class
+    public static class BookingAnalysisByClass {
+        private String classType;
+        private int bookingCount;
+
+        public BookingAnalysisByClass(String classType, int bookingCount) {
+            this.classType = classType;
+            this.bookingCount = bookingCount;
+        }
+
+        public String getClassType() {
+            return classType;
+        }
+
+        public int getBookingCount() {
+            return bookingCount;
+        }
+    }
+
+    // Data Transfer Object for Revenue by Route
+    public static class RevenueByRoute {
+        private String departureLocation;
+        private String arrivalLocation;
+        private double totalRevenue;
+
+        public RevenueByRoute(String departureLocation, String arrivalLocation, double totalRevenue) {
+            this.departureLocation = departureLocation;
+            this.arrivalLocation = arrivalLocation;
+            this.totalRevenue = totalRevenue;
+        }
+
+        public String getDepartureLocation() {
+            return departureLocation;
+        }
+
+        public String getArrivalLocation() {
+            return arrivalLocation;
+        }
+
+        public double getTotalRevenue() {
+            return totalRevenue;
+        }
+    }
+
 }
