@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 @WebServlet("/payment")
@@ -29,6 +30,10 @@ public class FlightPaymentServlet extends HttpServlet {
         int seatsBooked = Integer.parseInt(passengerList[0]);
 
         Booking booking = new Booking();
+        booking.setClassType(classType);
+        booking.setSeatsBooked(seatsBooked);
+        booking.setTotalPrice(BigDecimal.valueOf(totalPrice));
+        booking.setBookingStatus("CONFIRMED");
 
         String paymentMethod = request.getParameter("paymentMethod");
         Float paidAmount = totalPrice;
