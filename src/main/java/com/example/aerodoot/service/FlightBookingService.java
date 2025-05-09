@@ -3,9 +3,11 @@ package com.example.aerodoot.service;
 import com.example.aerodoot.dao.BookingDAO;
 import com.example.aerodoot.dao.FlightDAO;
 import com.example.aerodoot.dao.PassengerDAO;
+import com.example.aerodoot.dao.PaymentDAO;
 import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.model.Passenger;
+import com.example.aerodoot.model.Payment;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -14,7 +16,7 @@ import java.sql.SQLException;
 
 public class FlightBookingService {
 
-    public int createBooking(HttpServletRequest request, String classType, String passengerCount, Float totalPrice, String flightNumber) throws ClassNotFoundException, SQLException {
+    public static int createBooking(HttpServletRequest request, String classType, String passengerCount, Float totalPrice, String flightNumber) throws ClassNotFoundException, SQLException {
 
         HttpSession session = request.getSession(false);
         int userId = (int) session.getAttribute("userId");
@@ -53,6 +55,16 @@ public class FlightBookingService {
         return BookingDAO.createBooking(booking);
     }
 
+    public static int createPayment(String paymentMethod, Float totalPrice, int bookingId) throws ClassNotFoundException, SQLException {
 
+        //creating the payment object of Payment
+        Payment payment = new Payment();
+        payment.setPaymentMethod(paymentMethod);
+        payment.setPaymentStatus("COMPLETED");
+        payment.setPaidAmount(BigDecimal.valueOf(totalPrice));
+        payment.setBookingId(bookingId);
+
+        return PaymentDAO.makePayment(payment);
+    }
 }
 
