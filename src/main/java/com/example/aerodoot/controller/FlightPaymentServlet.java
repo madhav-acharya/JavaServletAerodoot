@@ -3,6 +3,7 @@ package com.example.aerodoot.controller;
 import com.example.aerodoot.dao.BookingDAO;
 import com.example.aerodoot.dao.FlightDAO;
 import com.example.aerodoot.dao.PassengerDAO;
+import com.example.aerodoot.dao.PaymentDAO;
 import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.model.Passenger;
@@ -53,6 +54,7 @@ public class FlightPaymentServlet extends HttpServlet {
 
         int flightNum = flight.getFlightId();
 
+        //creating the booking object of current booking
         Booking booking = new Booking();
         booking.setClassType(classType);
         booking.setSeatsBooked(seatsBooked);
@@ -61,9 +63,12 @@ public class FlightPaymentServlet extends HttpServlet {
         booking.setFlightId(flightNum);
         booking.setPassengerId(passengerId);
 
+        //creating the payment object of Payment
+
         try {
-            int bookingDone = BookingDAO.createBooking(booking);
-            System.out.println("Booking is done ------>" + bookingDone);
+            int bookingId = BookingDAO.createBooking(booking);
+//            int paymentId = PaymentDAO.makePayment();
+            System.out.println("Booking is done ------>" + bookingId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
