@@ -7,6 +7,7 @@ import com.example.aerodoot.dao.PaymentDAO;
 import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.model.Passenger;
+import com.example.aerodoot.model.Payment;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +24,7 @@ public class FlightPaymentServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //classtype, numofseatbooks, totalprice, bookingStatus, flightId, passengerId, flightNumber
+
         String classType = request.getParameter("seatClass");
         String passengerCount = request.getParameter("passengerCount");
         Float totalPrice = Float.parseFloat(request.getParameter("paymentAmount"));
@@ -63,24 +64,24 @@ public class FlightPaymentServlet extends HttpServlet {
         booking.setFlightId(flightNum);
         booking.setPassengerId(passengerId);
 
-        //creating the payment object of Payment
-
-        try {
-            int bookingId = BookingDAO.createBooking(booking);
-//            int paymentId = PaymentDAO.makePayment();
-            System.out.println("Booking is done ------>" + bookingId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         String paymentMethod = request.getParameter("paymentMethod");
         Float paidAmount = totalPrice;
 
-        System.out.println(classType + " -> " + seatsBooked + " -> " + totalPrice + " " + paidAmount + " -> " + flightNumber + " -> " );
+        //creating the payment object of Payment
+        Payment payment = new Payment();
+        payment.setPaymentMethod(paymentMethod);
+        payment.setPaymentStatus("COMPLETED");
+        payment.setPaidAmount(BigDecimal.valueOf(paidAmount));
 
-
-
-
+        try {
+            int bookingId = BookingDAO.createBooking(booking);
+            payment.setBookingId(bookingId);
+            int paymentId = PaymentDAO.makePayment(payment);
+            System.out.println("Booking is done ------>" + bookingId);
+            System.out.println("Payment is done ------>" + paymentId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
     }
 }
