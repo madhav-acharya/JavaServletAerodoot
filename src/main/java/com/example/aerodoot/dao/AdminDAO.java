@@ -1,6 +1,5 @@
 package com.example.aerodoot.dao;
 
-import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.Connection;
@@ -132,7 +131,10 @@ public class AdminDAO {
     }
 
     public List<BookingAnalysisByClass> getBookingAnalysisByClass() throws SQLException {
-        String query = "SELECT classType, COUNT(*) AS booking_count FROM Booking GROUP BY classType";
+        String query = "SELECT classType, EXTRACT(MONTH FROM bookingDate) AS month, COUNT(*) AS booking_count " +
+                "FROM Booking " +
+                "GROUP BY classType, EXTRACT(MONTH FROM bookingDate) " +
+                "ORDER BY month";
         List<BookingAnalysisByClass> bookingAnalysis = new ArrayList<>();
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -140,7 +142,9 @@ public class AdminDAO {
             while (rs.next()) {
                 BookingAnalysisByClass analysis = new BookingAnalysisByClass(
                         rs.getString("classType"),
-                        rs.getInt("booking_count"));
+                        rs.getInt("booking_count"),
+                        rs.getInt("month")  // Add the month info to the DTO
+                );
                 bookingAnalysis.add(analysis);
             }
         }
@@ -172,10 +176,12 @@ public class AdminDAO {
     public static class BookingAnalysisByClass {
         private String classType;
         private int bookingCount;
+        private int month;
 
-        public BookingAnalysisByClass(String classType, int bookingCount) {
+        public BookingAnalysisByClass(String classType, int bookingCount, int month) {
             this.classType = classType;
             this.bookingCount = bookingCount;
+            this.month = month;
         }
 
         public String getClassType() {
@@ -184,6 +190,9 @@ public class AdminDAO {
 
         public int getBookingCount() {
             return bookingCount;
+        }
+        public int getMonth() {
+            return month;
         }
     }
 
@@ -209,6 +218,9 @@ public class AdminDAO {
 
         public double getTotalRevenue() {
             return totalRevenue;
+        }
+        public String getRouteName() {
+            return departureLocation + " to " + arrivalLocation;
         }
     }
 

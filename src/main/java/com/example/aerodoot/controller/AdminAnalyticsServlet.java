@@ -27,6 +27,8 @@ public class AdminAnalyticsServlet extends HttpServlet {
 
             getServletContext().setAttribute("bookingAnalysisByClass", bookingAnalysisByClass);
             getServletContext().setAttribute("revenueByRoute", revenueByRoute);
+            System.out.println("bookingAnalysisByClass: " + bookingAnalysisByClass);
+            System.out.println("revenueByRoute: " + revenueByRoute);
 
         } catch (SQLException e) {
             System.err.println("Error initializing dashboard data: " + e.getMessage());

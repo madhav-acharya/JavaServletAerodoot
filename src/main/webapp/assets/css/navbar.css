@@ -64,7 +64,7 @@
     content: '';
     position: absolute;
     width: 104%;
-    height: 4px;
+    height: 3px;
     bottom: 0;
     left: 0;
     background-color: #007bff;
@@ -110,7 +110,7 @@
     content: '';
     position: absolute;
     width: 0;
-    height: 4px;
+    height: 3px;
     bottom: 0;
     left: 0;
     background-color: var(--light-text);
