@@ -105,7 +105,6 @@ CREATE TABLE Booking (
                          bookingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                          classType ENUM('ECONOMY', 'BUSINESS') NOT NULL,
                          seatsBooked INT NOT NULL,
-                         seatNumbers VARCHAR(35) NOT NULL,
                          totalPrice DECIMAL(10, 2) NOT NULL,
                          bookingStatus ENUM('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED') NOT NULL,
                          flightId INT NOT NULL,
@@ -117,7 +116,7 @@ CREATE TABLE Booking (
 -- Create Payment table (depends on Booking)
 CREATE TABLE Payment (
                          paymentId INT AUTO_INCREMENT PRIMARY KEY,
-                         paymentMethod ENUM('CREDIT_CARD', 'DEBIT_CARD', 'PAYPAL', 'BANK_TRANSFER') NOT NULL,
+                         paymentMethod ENUM('ESEWA', 'KHALTI') NOT NULL,
                          paymentStatus ENUM('PENDING', 'COMPLETED', 'FAILED', 'REFUNDED') NOT NULL,
                          paymentDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                          paidAmount DECIMAL(10, 2) NOT NULL,

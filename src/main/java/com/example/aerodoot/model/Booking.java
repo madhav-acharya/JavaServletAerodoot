@@ -8,7 +8,6 @@ public class Booking {
     private Timestamp bookingDate;
     private String classType; // ENUM: ECONOMY, BUSINESS
     private int seatsBooked;
-    private String seatNumbers;
     private BigDecimal totalPrice;
     private String bookingStatus; // ENUM: PENDING, CONFIRMED, CANCELLED, COMPLETED
     private int flightId;
@@ -19,13 +18,12 @@ public class Booking {
     }
 
     public Booking(int bookingId, Timestamp bookingDate, String classType, int seatsBooked,
-                   String seatNumbers, BigDecimal totalPrice, String bookingStatus,
+                   BigDecimal totalPrice, String bookingStatus,
                    int flightId, int passengerId) {
         this.bookingId = bookingId;
         this.bookingDate = bookingDate;
         this.classType = classType;
         this.seatsBooked = seatsBooked;
-        this.seatNumbers = seatNumbers;
         this.totalPrice = totalPrice;
         this.bookingStatus = bookingStatus;
         this.flightId = flightId;
@@ -63,14 +61,6 @@ public class Booking {
 
     public void setSeatsBooked(int seatsBooked) {
         this.seatsBooked = seatsBooked;
-    }
-
-    public String getSeatNumbers() {
-        return seatNumbers;
-    }
-
-    public void setSeatNumbers(String seatNumbers) {
-        this.seatNumbers = seatNumbers;
     }
 
     public BigDecimal getTotalPrice() {

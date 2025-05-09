@@ -937,6 +937,7 @@
                                     </div>
                                     <!-- Hidden field to track flight number -->
                                     <input type="hidden" name="flightNumber" value="${flight.flightNumber}">
+                                    <input type="hidden" name="passengerCount" value="${passenger}">
                                 </div>
 
                                 <!-- Payment Method -->
