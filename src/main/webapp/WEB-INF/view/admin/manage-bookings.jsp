@@ -42,7 +42,6 @@
                 <option value="confirmed">Confirmed</option>
                 <option value="pending">Pending</option>
                 <option value="cancelled">Cancelled</option>
-                <option value="refunded">Refunded</option>
               </select>
             </div>
             <div class="filter-group">

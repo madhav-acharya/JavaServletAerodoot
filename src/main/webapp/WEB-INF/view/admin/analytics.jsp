@@ -92,7 +92,7 @@
       {
         classType: '${b.classType}',
         bookingCount: ${b.bookingCount},
-        month: ${b.month}  // Include the month field
+        month: ${b.month}
       }<c:if test="${!status.last}">,</c:if>
       </c:forEach>
     ];
