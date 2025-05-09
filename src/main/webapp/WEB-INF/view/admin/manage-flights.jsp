@@ -296,25 +296,23 @@
                 <label for="airline">Airline</label>
                 <select id="airline" name="airlineId" class="select" required>
                   <option value="">Select Airline</option>
-                  <option value="1">Nepal Airlines</option>
-                  <option value="2">Buddha Air</option>
-                  <option value="3">Yeti Airlines</option>
-                  <option value="4">Shree Airlines</option>
-                  <!-- Add more airlines here -->
+                  <c:forEach var="airline" items="${airlines}">
+                    <option value="${airline.airlineId}">${airline.name}</option>
+                  </c:forEach>
                 </select>
               </div>
+
 
               <div class="form-group">
                 <label for="aircraft">Aircraft</label>
                 <select id="aircraft" name="aircraftId" class="select" required>
                   <option value="">Select Aircraft</option>
-                  <option value="1">Airbus A320</option>
-                  <option value="2">ATR 72-500</option>
-                  <option value="3">Boeing 757</option>
-                  <option value="4">Bombardier Dash 8 Q400</option>
-                  <!-- Add more aircraft here -->
+                  <c:forEach var="aircraft" items="${aircrafts}">
+                    <option value="${aircraft.aircraftId}">${aircraft.model}</option>
+                  </c:forEach>
                 </select>
               </div>
+
 
               <div class="form-group">
                 <label for="notes">Notes</label>

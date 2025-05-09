@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: mac
@@ -85,35 +86,52 @@
     if (savedTab) {
       updateActiveMenuItem(savedTab);
     }
+
+    const bookingAnalysisByClass = [
+      <c:forEach var="b" items="${bookingAnalysisByClass}" varStatus="status">
+      {
+        classType: '${b.classType}',
+        bookingCount: ${b.bookingCount},
+        month: ${b.month}
+      }<c:if test="${!status.last}">,</c:if>
+      </c:forEach>
+    ];
     // Booking Analytics Chart
     const bookingAnalyticsCtx = document.getElementById('booking-analytics-chart')?.getContext('2d');
     if (bookingAnalyticsCtx) {
+      console.log("bookingAnalysisByClass: ", bookingAnalysisByClass);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const economyData = months.map(month =>
+              bookingAnalysisByClass.filter(b => b.classType === 'ECONOMY' && b.month === (months.indexOf(month) + 1))
+                      .reduce((total, b) => total + b.bookingCount, 0)
+      );
+      const businessData = months.map(month =>
+              bookingAnalysisByClass.filter(b => b.classType === 'BUSINESS' && b.month === (months.indexOf(month) + 1))
+                      .reduce((total, b) => total + b.bookingCount, 0)
+      );
+
+      console.log("economyData: ", economyData);
+      console.log("businessData: ", businessData);
+
       const bookingAnalyticsConfig = {
         type: 'line',
         data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          labels: months,
           datasets: [
             {
               label: 'Economy Class',
-              data: [1200, 1350, 1250, 1420, 1550, 1680, 1810, 1790, 1680, 1590, 1720, 1890],
+              data: economyData,
               borderColor: 'rgb(59, 130, 246)',
               backgroundColor: 'rgba(59, 130, 246, 0.1)',
               tension: 0.3
             },
             {
               label: 'Business Class',
-              data: [320, 350, 380, 410, 390, 450, 480, 460, 490, 510, 540, 580],
+              data: businessData,
               borderColor: 'rgb(16, 185, 129)',
               backgroundColor: 'rgba(16, 185, 129, 0.1)',
               tension: 0.3
             },
-            {
-              label: 'First Class',
-              data: [85, 90, 95, 110, 105, 120, 125, 130, 140, 135, 150, 160],
-              borderColor: 'rgb(249, 115, 22)',
-              backgroundColor: 'rgba(249, 115, 22, 0.1)',
-              tension: 0.3
-            }
           ]
         },
         options: {
@@ -180,27 +198,31 @@
       });
     }
 
+
+    const revenueRouteLabels = [
+      <c:forEach var="r" items="${revenueByRoute}" varStatus="status">
+      '${r.routeName}'<c:if test="${!status.last}">,</c:if>
+      </c:forEach>
+    ];
+
+    const revenueRouteData = [
+      <c:forEach var="r" items="${revenueByRoute}" varStatus="status">
+      ${r.totalRevenue}<c:if test="${!status.last}">,</c:if>
+      </c:forEach>
+    ];
+    console.log("revenueRouteLabels: ", revenueRouteLabels);
+    console.log("revenueRouteData: ", revenueRouteData);
+
     // Revenue by Route Chart
     const revenueRouteCtx = document.getElementById('revenue-route-chart')?.getContext('2d');
     if (revenueRouteCtx) {
       const revenueRouteConfig = {
         type: 'bar',
         data: {
-          labels: [
-            'JFK-LHR',
-            'LAX-SYD',
-            'SIN-DXB',
-            'LHR-CDG',
-            'ORD-LAX',
-            'ATL-MIA',
-            'DXB-DEL',
-            'SFO-HKG',
-            'FRA-JFK',
-            'AMS-CPT'
-          ],
+          labels: revenueRouteLabels,
           datasets: [{
-            label: 'Revenue (in thousands $)',
-            data: [850, 780, 720, 650, 620, 580, 550, 520, 490, 460],
+            label: 'Revenue (in thousands RS.)',
+            data: revenueRouteData,
             backgroundColor: 'rgba(59, 130, 246, 0.7)'
           }]
         },
@@ -210,7 +232,7 @@
               beginAtZero: true,
               title: {
                 display: true,
-                text: 'Revenue (thousands $)'
+                text: 'Revenue (thousands RS.)'
               }
             },
             x: {

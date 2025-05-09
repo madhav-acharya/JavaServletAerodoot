@@ -1,6 +1,10 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.dao.AircraftDAO;
+import com.example.aerodoot.dao.AirlineDAO;
 import com.example.aerodoot.dao.FlightDAO;
+import com.example.aerodoot.model.Aircraft;
+import com.example.aerodoot.model.Airline;
 import com.example.aerodoot.model.Flight;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,13 +20,20 @@ import java.util.List;
 @WebServlet("/admin/manage-flight")
 public class ManageFlightServlet extends HttpServlet {
     private List<Flight> flights;
+    private List<Aircraft> aircrafts;
+    private List<Airline> airlines;
 
     @Override
     public void init() throws ServletException {
         System.out.println("FlightInitServlet: Initialization started...");
         try {
             flights = FlightDAO.getAllFlights();
+            airlines = AirlineDAO.getAllAirlines();
+            aircrafts = AircraftDAO.getAllAircraft();
+
             getServletContext().setAttribute("flights", flights);
+            getServletContext().setAttribute("airlines", airlines);
+            getServletContext().setAttribute("aircrafts", aircrafts);
             System.out.println("Flights loaded successfully.");
         } catch (Exception e) {
             throw new ServletException("Flight initialization failed", e);
