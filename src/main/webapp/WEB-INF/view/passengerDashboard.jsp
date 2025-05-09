@@ -358,4 +358,4 @@
     })
 </script>
 <script src="${pageContext.request.contextPath}/assets/js/passangerDashboard.js"></script>
-
+<jsp:include page="../../tail.jsp" />
