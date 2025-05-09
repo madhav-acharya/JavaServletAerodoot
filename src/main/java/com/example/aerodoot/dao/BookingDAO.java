@@ -53,7 +53,6 @@ public class BookingDAO {
                 booking.setBookingDate(rs.getTimestamp("bookingDate"));
                 booking.setClassType(rs.getString("classType"));
                 booking.setSeatsBooked(rs.getInt("seatsBooked"));
-                booking.setSeatNumbers(rs.getString("seatNumbers"));
                 booking.setTotalPrice(rs.getBigDecimal("totalPrice"));
                 booking.setBookingStatus(rs.getString("bookingStatus"));
                 booking.setFlightId(rs.getInt("flightId"));
@@ -80,7 +79,6 @@ public class BookingDAO {
                 booking.setBookingDate(rs.getTimestamp("bookingDate"));
                 booking.setClassType(rs.getString("classType"));
                 booking.setSeatsBooked(rs.getInt("seatsBooked"));
-                booking.setSeatNumbers(rs.getString("seatNumbers"));
                 booking.setTotalPrice(rs.getBigDecimal("totalPrice"));
                 booking.setBookingStatus(rs.getString("bookingStatus"));
                 booking.setFlightId(rs.getInt("flightId"));
@@ -94,7 +92,7 @@ public class BookingDAO {
     }
 
     public static int updateBooking(Booking booking) throws SQLException {
-        String sql = "UPDATE Booking SET bookingDate = ?, classType = ?, seatsBooked = ?, seatNumbers = ?, totalPrice = ?, bookingStatus = ?, flightId = ?, passengerId = ? WHERE bookingId = ?";
+        String sql = "UPDATE Booking SET bookingDate = ?, classType = ?, seatsBooked = ?, totalPrice = ?, bookingStatus = ?, flightId = ?, passengerId = ? WHERE bookingId = ?";
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -102,12 +100,11 @@ public class BookingDAO {
             ps.setTimestamp(1, booking.getBookingDate());
             ps.setString(2, booking.getClassType());
             ps.setInt(3, booking.getSeatsBooked());
-            ps.setString(4, booking.getSeatNumbers());
-            ps.setBigDecimal(5, booking.getTotalPrice());
-            ps.setString(6, booking.getBookingStatus());
-            ps.setInt(7, booking.getFlightId());
-            ps.setInt(8, booking.getPassengerId());
-            ps.setInt(9, booking.getBookingId());
+            ps.setBigDecimal(4, booking.getTotalPrice());
+            ps.setString(5, booking.getBookingStatus());
+            ps.setInt(6, booking.getFlightId());
+            ps.setInt(7, booking.getPassengerId());
+            ps.setInt(8, booking.getBookingId());
 
             int updatedRows = ps.executeUpdate();
             if (updatedRows > 0) {
