@@ -187,8 +187,14 @@
 
                 <div class="form-group">
                   <label for="airline-id">Airline ID</label>
-                  <input type="text" id="airline-id" name="airlineId" class="input" placeholder="e.g. RA01" required>
+                  <select id="airline-id" name="airlineId" class="select" required>
+                    <option value="">Select Airline ID</option>
+                    <c:forEach var="airline" items="${airlines}">
+                      <option value="${airline.airlineId}">${airline.airlineId}</option>
+                    </c:forEach>
+                  </select>
                 </div>
+
 
               </div>
               <div class="modal-footer">
