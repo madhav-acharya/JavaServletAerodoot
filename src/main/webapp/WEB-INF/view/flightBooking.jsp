@@ -367,7 +367,7 @@
         <p>Search for available flights and book your next trip.</p>
     </header>
 
-    <jsp:include page="../../BookingContainer.jsp" />
+    <jsp:include page="../../includes/BookingContainer.jsp" />
 
     <c:if test="${not empty flightLists}">
         <div class="flight-search-wrapper">

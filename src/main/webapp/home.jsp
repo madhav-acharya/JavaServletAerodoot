@@ -23,7 +23,7 @@
         </div>
     </header>
 
-    <jsp:include page="BookingContainer.jsp" />
+    <jsp:include page="includes/BookingContainer.jsp" />
 
     <!-- Why Choose AeroDoot Section -->
     <section class="why-choose-section">
@@ -59,7 +59,7 @@
         </div>
     </section>
 
-    <jsp:include page="topDestinations.jsp"/>
+    <jsp:include page="includes/topDestinations.jsp"/>
 
     <!-- Ready to Take Flight Section -->
     <c:if test="${sessionScope.isLoggedIn == null}">
