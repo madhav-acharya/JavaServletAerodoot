@@ -531,7 +531,7 @@
                     </div>
                 </div>
 
-                <!-- Modal Overlay - Unique ID for each flight -->
+                <!-- Payment Modal Overlay - Unique ID for each flight -->
                 <div id="paymentModal-${status.index}" class="modal-overlay payment-modal">
                     <div class="modal">
                         <!-- Modal Header -->
@@ -627,6 +627,7 @@
                         </div>
                     </div>
                 </div>
+
             </c:forEach>
         </div>
 
