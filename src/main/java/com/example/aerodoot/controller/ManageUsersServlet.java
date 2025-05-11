@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/admin/manage-user")
-public class ManageUsers extends HttpServlet {
+public class ManageUsersServlet extends HttpServlet {
     private List<User> users;
     @Override
     public void init() throws ServletException {
