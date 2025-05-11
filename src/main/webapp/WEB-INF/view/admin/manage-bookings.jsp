@@ -62,7 +62,6 @@
                 <th>Booking Date</th>
                 <th>Class Type</th>
                 <th>Seats Booked</th>
-                <th>Seat Numbers</th>
                 <th>Total Price</th>
                 <th>Booking Status</th>
                 <th>Flight ID</th>
@@ -77,7 +76,6 @@
                   <td>${booking.bookingDate}</td>
                   <td>${booking.classType}</td>
                   <td>${booking.seatsBooked}</td>
-                  <td>${booking.seatNumbers}</td>
                   <td>${booking.totalPrice}</td>
                   <td>${booking.bookingStatus}</td>
                   <td>${booking.flightId}</td>
