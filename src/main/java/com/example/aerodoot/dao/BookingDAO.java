@@ -149,4 +149,34 @@ public class BookingDAO {
             return false;
         }
     }
+
+    public static List<Booking> getPassengerBookings(int passengerId) throws SQLException {
+        List<Booking> bookingList = new ArrayList<>();
+        String sql = "SELECT * FROM Booking where passengerId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, passengerId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = new Booking();
+                booking.setBookingId(rs.getInt("bookingId"));
+                booking.setBookingDate(rs.getTimestamp("bookingDate"));
+                booking.setClassType(rs.getString("classType"));
+                booking.setSeatsBooked(rs.getInt("seatsBooked"));
+                booking.setTotalPrice(rs.getBigDecimal("totalPrice"));
+                booking.setBookingStatus(rs.getString("bookingStatus"));
+                booking.setFlightId(rs.getInt("flightId"));
+                booking.setPassengerId(rs.getInt("passengerId"));
+                bookingList.add(booking);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all bookings: " + e.getMessage());
+        }
+        return bookingList;
+    }
+
 }
