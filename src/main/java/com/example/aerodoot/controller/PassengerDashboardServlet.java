@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class PassengerDashboardServlet extends HttpServlet {
 
         System.out.println("userID of passenger Dashboard " + userId);
 
-        List<Booking> upcomingFlight = null;
-        List<Booking> recentFlight = null;
+        List<Booking> upcomingFlight = new ArrayList<>();
+        List<Booking> recentFlight = new ArrayList<>();
 
         try {
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
@@ -45,8 +46,14 @@ public class PassengerDashboardServlet extends HttpServlet {
                 }
                 if (booking.getBookingStatus().equals("COMPLETED")) {
                     System.out.println("PassengerId in loop: " + booking.getClassType());
+                    recentFlight.add(booking);
                 }
             }
+
+            System.out.println("Upcoming Flight: " + upcomingFlight.size());
+            System.out.println("Recent Flight: " + recentFlight.size());
+
+
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
             String base64Image = null;
             String mimeType = null;
