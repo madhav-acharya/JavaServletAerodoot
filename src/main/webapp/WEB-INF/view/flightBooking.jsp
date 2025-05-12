@@ -64,7 +64,7 @@
                             <div class="ba-price-subtext">price per person (incl. taxes)</div>
                             <c:choose>
                                 <c:when test="${sessionScope.isLoggedIn == null}">
-                                    <button class="ba-book-btn"><a href="${pageContext.request.contextPath}/login">Book Your Flight</a></button>
+                                    <button class="ba-book-btn"><a href="${pageContext.request.contextPath}/login">Book Now</a></button>
                                 </c:when>
                                 <c:otherwise>
                                     <button class="ba-book-btn" data-flight-index="${status.index}">Book Now</button>

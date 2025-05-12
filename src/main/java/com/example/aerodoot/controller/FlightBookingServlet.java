@@ -24,49 +24,51 @@ import java.util.Locale;
 import java.util.Map;
 
 @WebServlet("/flight-booking")
-public class flightBookingServlet extends HttpServlet {
-    List<Flight> flights = null;
+public class FlightBookingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        if (flights != null) {
-            List<Aircraft> aircrafts;
-            List<Airline> airlines;
+        if(session.getAttribute("flights") != null) {
+            List<Flight> flights = (List<Flight>) session.getAttribute("flights");
+            if (flights != null) {
+                List<Aircraft> aircrafts;
+                List<Airline> airlines;
 
-            try {
-                aircrafts = AircraftDAO.getAllAircraft();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                try {
+                    aircrafts = AircraftDAO.getAllAircraft();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    airlines = AirlineDAO.getAllAirlines();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                //creating the map of airlines and aircrafts
+                Map<Integer, String> airlinesMap = new HashMap<>();
+                for (Airline airline: airlines) {
+                    airlinesMap.put(airline.getAirlineId(), airline.getName());
+                }
+
+                Map<Integer, String> aircraftsMap = new HashMap<>();
+                for (Aircraft aircraft: aircrafts) {
+                    aircraftsMap.put(aircraft.getAircraftId(), aircraft.getModel());
+                }
+
+                // Get attributes from session
+                String departureDate = (String) session.getAttribute("departureDate");
+                String returnDate = (String) session.getAttribute("returnDate");
+                String trip = (String) session.getAttribute("trip");
+                String passenger = (String) session.getAttribute("passenger");
+
+                request.setAttribute("flightLists", flights);
+                request.setAttribute("aircraftMap", aircraftsMap);
+                request.setAttribute("airlineMap", airlinesMap);
             }
-
-            try {
-                airlines = AirlineDAO.getAllAirlines();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            //creating the map of airlines and aircrafts
-            Map<Integer, String> airlinesMap = new HashMap<>();
-            for (Airline airline: airlines) {
-                airlinesMap.put(airline.getAirlineId(), airline.getName());
-            }
-
-            Map<Integer, String> aircraftsMap = new HashMap<>();
-            for (Aircraft aircraft: aircrafts) {
-                aircraftsMap.put(aircraft.getAircraftId(), aircraft.getModel());
-            }
-
-            // Get attributes from session
-            String departureDate = (String) session.getAttribute("departureDate");
-            String returnDate = (String) session.getAttribute("returnDate");
-            String trip = (String) session.getAttribute("trip");
-            String passenger = (String) session.getAttribute("passenger");
-
-            request.setAttribute("flightLists", flights);
-            request.setAttribute("aircraftMap", aircraftsMap);
-            request.setAttribute("airlineMap", airlinesMap);
         }
 
         //this is for in case there is not flight found
@@ -122,8 +124,8 @@ public class flightBookingServlet extends HttpServlet {
             }
         }
 
-
-        List<Flight> returnFlights;
+        List<Flight> flights = null;
+        List<Flight> returnFlights = null;
         HttpSession session = request.getSession();
 
         if (returnDate != null) {
@@ -154,6 +156,7 @@ public class flightBookingServlet extends HttpServlet {
         session.setAttribute("flightNumbers", flights.size());
         session.setAttribute("departureLocation", departureLocation);
         session.setAttribute("arrivalLocation", arrivalLocation);
+        session.setAttribute("flights", flights);
 
         System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
 
