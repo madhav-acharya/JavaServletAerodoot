@@ -1,7 +1,9 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.dao.BookingDAO;
 import com.example.aerodoot.dao.PassengerDAO;
 import com.example.aerodoot.dto.PassengerDashboardData;
+import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.model.Passenger;
 import com.example.aerodoot.service.AuthService;
 import jakarta.servlet.ServletException;
@@ -16,6 +18,7 @@ import java.net.URLConnection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.List;
 
 @WebServlet("/passenger/dashboard")
 @MultipartConfig
@@ -30,7 +33,12 @@ public class PassengerDashboardServlet extends HttpServlet {
 
         try {
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
+            List<Booking> bookingList = BookingDAO.getPassengerBookings(passengerData.getPassenger().getPassengerId());
 
+            for (Booking booking: bookingList) {
+                System.out.println("PassengerId in loop: " + booking.getPassengerId());
+                System.out.println("PassengerId in loop: " + booking.getClassType());
+            }
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
             String base64Image = null;
             String mimeType = null;
