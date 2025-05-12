@@ -31,13 +31,21 @@ public class PassengerDashboardServlet extends HttpServlet {
 
         System.out.println("userID of passenger Dashboard " + userId);
 
+        List<Booking> upcomingFlight = null;
+        List<Booking> recentFlight = null;
+
         try {
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
             List<Booking> bookingList = BookingDAO.getPassengerBookings(passengerData.getPassenger().getPassengerId());
 
             for (Booking booking: bookingList) {
-                System.out.println("PassengerId in loop: " + booking.getPassengerId());
-                System.out.println("PassengerId in loop: " + booking.getClassType());
+                if (booking.getBookingStatus().equals("CONFIRMED")) {
+                    System.out.println("PassengerId in loop: " + booking.getClassType());
+                    upcomingFlight.add(booking);
+                }
+                if (booking.getBookingStatus().equals("COMPLETED")) {
+                    System.out.println("PassengerId in loop: " + booking.getClassType());
+                }
             }
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
             String base64Image = null;
@@ -51,6 +59,7 @@ public class PassengerDashboardServlet extends HttpServlet {
             request.setAttribute("profileImage", base64Image);
             request.setAttribute("mimeType", mimeType);
             request.setAttribute("passenger", passengerData);
+            request.setAttribute("upcomingBooking", bookingList);
             session.setAttribute("passengerId", passengerData.getPassenger().getPassengerId());
 
         } catch (SQLException e) {
