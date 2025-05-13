@@ -42,8 +42,8 @@ public class PassengerDashboardServlet extends HttpServlet {
 
         try {
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
-            List<Booking> bookingList = BookingDAO.getPassengerBookings(passengerData.getPassenger().getPassengerId());
 
+            List<Booking> bookingList = BookingDAO.getPassengerBookings(passengerData.getPassenger().getPassengerId());
 
 
             for (Booking booking: bookingList) {
@@ -59,12 +59,12 @@ public class PassengerDashboardServlet extends HttpServlet {
                 System.out.println("Current DateTime: " + currentDateTime);
 
                 if(flightDateTime.isBefore(currentDateTime)) {
-                    int value = FlightDAO.updateFlightStatus(booking.getFlightId());
-                    System.out.println("The Flight is completed." + " " + value);
-                } else {
-                    System.out.println("The Flight is not completed.");
-                }
+                    int flightComp = FlightDAO.updateFlightStatus(booking.getFlightId());
+                    int flightBooks = BookingDAO.updateBookingStatus(booking.getBookingId(), "COMPLETED");
 
+                    booking.setBookingStatus("COMPLETED");
+
+                }
 
                 if (booking.getBookingStatus().equals("CONFIRMED")) {
                     upcomingFlight.add(booking);
@@ -76,6 +76,8 @@ public class PassengerDashboardServlet extends HttpServlet {
 
             System.out.println("Upcoming Flight: " + upcomingFlight.size());
             System.out.println("Recent Flight: " + recentFlight.size());
+            int totalBooking = upcomingFlight.size() + recentFlight.size();
+            System.out.println("Total Booking: " + totalBooking);
 
 
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
@@ -90,7 +92,8 @@ public class PassengerDashboardServlet extends HttpServlet {
             request.setAttribute("profileImage", base64Image);
             request.setAttribute("mimeType", mimeType);
             request.setAttribute("passenger", passengerData);
-            request.setAttribute("upcomingBooking", bookingList);
+            request.setAttribute("upcomingBookingNum", upcomingFlight.size());
+            request.setAttribute("totalBookingNum", recentFlight.size() + upcomingFlight.size());
             session.setAttribute("passengerId", passengerData.getPassenger().getPassengerId());
 
         } catch (SQLException e) {

@@ -37,7 +37,7 @@
                 <h2>My Flights</h2>
             </div>
             <div class="card-content">
-                <div class="stat-number">2</div>
+                <div class="stat-number">${upcomingBookingNum}</div>
                 <div class="stat-label">Upcoming flights</div>
             </div>
             <div class="card-footer">
@@ -50,7 +50,7 @@
                 <h2>My Bookings</h2>
             </div>
             <div class="card-content">
-                <div class="stat-number">4</div>
+                <div class="stat-number">${totalBookingNum}</div>
                 <div class="stat-label">Total bookings</div>
             </div>
             <div class="card-footer">
