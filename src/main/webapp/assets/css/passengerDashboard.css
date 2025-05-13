@@ -360,19 +360,19 @@
     flex-grow: 1;
 }
 
-.flight-route {
+.flight-route-dashboard {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.route-from,
-.route-to {
+.route-from-dashboard,
+.route-to-dashboard {
     flex: 1;
 }
 
-.route-icon {
+.route-icon-dashboard {
     margin: 0 20px;
     color: #666;
 }
@@ -386,26 +386,26 @@
     gap: 5px;
 }
 
-.city {
+.city-dashboard {
     font-weight: 500;
     color: #333;
 }
 
-.flight-info {
+.flight-info-dashboard {
     display: flex;
     gap: 30px;
 }
 
-.info-item {
+.info-item-dashboard {
     flex: 1;
 }
 
-.value {
+.value-dashboard {
     font-weight: 500;
     color: #333;
 }
 
-.flight-actions {
+.flight-actions-dashboard {
     display: flex;
     justify-content: space-between;
     padding: 12px 20px;
@@ -518,13 +518,13 @@
         grid-template-columns: 1fr;
     }
 
-    .flight-route {
+    .flight-route-dashboard {
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;
     }
 
-    .route-icon {
+    .route-icon-dashboard {
         transform: rotate(90deg);
         margin: 10px 0;
     }
@@ -534,7 +534,7 @@
         gap: 15px;
     }
 
-    .flight-actions {
+    .flight-actions-dashboard {
         flex-direction: column;
         gap: 10px;
     }

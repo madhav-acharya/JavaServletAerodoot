@@ -88,27 +88,27 @@
                     <div class="flight-status confirmed">Confirmed</div>
                 </div>
                 <div class="flight-details">
-                    <div class="flight-route">
-                        <div class="route-from">
+                    <div class="flight-route-dashboard">
+                        <div class="route-from-dashboard">
                             <div class="label">From</div>
-                            <div class="city">New York (JFK)</div>
+                            <div class="city-dashboard">New York (JFK)</div>
                         </div>
-                        <div class="route-icon">
+                        <div class="route-icon-dashboard">
                             <i class="fas fa-exchange-alt"></i>
                         </div>
-                        <div class="route-to">
+                        <div class="route-to-dashboard">
                             <div class="label">To</div>
-                            <div class="city">Los Angeles (LAX)</div>
+                            <div class="city-dashboard">Los Angeles (LAX)</div>
                         </div>
                     </div>
-                    <div class="flight-info">
-                        <div class="info-item">
+                    <div class="flight-info-dashboard">
+                        <div class="info-item-dashboard">
                             <div class="label">
                                 <i class="far fa-calendar-alt"></i> Date
                             </div>
-                            <div class="value">2025-04-20</div>
+                            <div class="value-dashboard">2025-04-20</div>
                         </div>
-                        <div class="info-item">
+                        <div class="info-item-dashboard">
                             <div class="label">
                                 <i class="far fa-clock"></i> Time
                             </div>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flight-actions">
+                <div class="flight-actions-dashboard">
                     <button class="btn-details">View Details</button>
                     <button class="btn-cancel">Cancel</button>
                 </div>
@@ -125,40 +125,40 @@
             <div class="flight-card">
                 <div class="flight-header">
                     <div class="flight-number">
-                        <i class="fas fa-plane"></i> AD5678
+                        <i class="fas fa-plane"></i> AD1234
                     </div>
                     <div class="flight-status confirmed">Confirmed</div>
                 </div>
                 <div class="flight-details">
-                    <div class="flight-route">
-                        <div class="route-from">
+                    <div class="flight-route-dashboard">
+                        <div class="route-from-dashboard">
                             <div class="label">From</div>
-                            <div class="city">Los Angeles (LAX)</div>
+                            <div class="city-dashboard">New York (JFK)</div>
                         </div>
-                        <div class="route-icon">
+                        <div class="route-icon-dashboard">
                             <i class="fas fa-exchange-alt"></i>
                         </div>
-                        <div class="route-to">
+                        <div class="route-to-dashboard">
                             <div class="label">To</div>
-                            <div class="city">New York (JFK)</div>
+                            <div class="city-dashboard">Los Angeles (LAX)</div>
                         </div>
                     </div>
-                    <div class="flight-info">
-                        <div class="info-item">
+                    <div class="flight-info-dashboard">
+                        <div class="info-item-dashboard">
                             <div class="label">
                                 <i class="far fa-calendar-alt"></i> Date
                             </div>
-                            <div class="value">2025-04-27</div>
+                            <div class="value-dashboard">2025-04-20</div>
                         </div>
-                        <div class="info-item">
+                        <div class="info-item-dashboard">
                             <div class="label">
                                 <i class="far fa-clock"></i> Time
                             </div>
-                            <div class="value">1:45 PM</div>
+                            <div class="value">10:30 AM</div>
                         </div>
                     </div>
                 </div>
-                <div class="flight-actions">
+                <div class="flight-actions-dashboard">
                     <button class="btn-details">View Details</button>
                     <button class="btn-cancel">Cancel</button>
                 </div>
