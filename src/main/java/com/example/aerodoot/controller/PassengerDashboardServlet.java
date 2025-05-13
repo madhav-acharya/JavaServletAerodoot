@@ -1,9 +1,11 @@
 package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.BookingDAO;
+import com.example.aerodoot.dao.FlightDAO;
 import com.example.aerodoot.dao.PassengerDAO;
 import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.Booking;
+import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.model.Passenger;
 import com.example.aerodoot.service.AuthService;
 import jakarta.servlet.ServletException;
@@ -17,6 +19,9 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -39,13 +44,32 @@ public class PassengerDashboardServlet extends HttpServlet {
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
             List<Booking> bookingList = BookingDAO.getPassengerBookings(passengerData.getPassenger().getPassengerId());
 
+
+
             for (Booking booking: bookingList) {
+
+                Flight flight = FlightDAO.getFlightById(booking.getFlightId());
+
+                LocalDate flightDate = flight.getFlightDate().toLocalDate();
+                LocalTime flightTime = flight.getDepartureTime().toLocalTime();
+
+                LocalDateTime flightDateTime = LocalDateTime.of(flightDate, flightTime);
+                LocalDateTime currentDateTime = LocalDateTime.now();
+                System.out.println("Flight DateTime: " + flightDateTime);
+                System.out.println("Current DateTime: " + currentDateTime);
+
+                if(flightDateTime.isBefore(currentDateTime)) {
+                    int value = FlightDAO.updateFlightStatus(booking.getFlightId());
+                    System.out.println("The Flight is completed." + " " + value);
+                } else {
+                    System.out.println("The Flight is not completed.");
+                }
+
+
                 if (booking.getBookingStatus().equals("CONFIRMED")) {
-                    System.out.println("PassengerId in loop: " + booking.getClassType());
                     upcomingFlight.add(booking);
                 }
                 if (booking.getBookingStatus().equals("COMPLETED")) {
-                    System.out.println("PassengerId in loop: " + booking.getClassType());
                     recentFlight.add(booking);
                 }
             }

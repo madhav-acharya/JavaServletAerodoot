@@ -97,7 +97,7 @@ public class FlightBookingServlet extends HttpServlet {
         Date returnDate = null;
         if (departureDateStr != null && !departureDateStr.trim().isEmpty()) {
             try {
-                // Remove ordinal suffixes (st, nd, rd, th)
+                // Removing ordinal suffixes (st, nd, rd, th)
                 departureDateStr = departureDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
                 // Format of the date string "May 5th, 2025" -> "May 5, 2025"
@@ -111,7 +111,7 @@ public class FlightBookingServlet extends HttpServlet {
         }
         if (returnDateStr != null && !returnDateStr.trim().isEmpty()) {
             try {
-                // Remove ordinal suffixes (st, nd, rd, th)
+                // Removing ordinal suffixes (st, nd, rd, th)
                 returnDateStr = returnDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
                 // Format of the date string "May 5th, 2025" -> "May 5, 2025"
@@ -157,8 +157,6 @@ public class FlightBookingServlet extends HttpServlet {
         session.setAttribute("departureLocation", departureLocation);
         session.setAttribute("arrivalLocation", arrivalLocation);
         session.setAttribute("flights", flights);
-
-        System.out.println(departureDate + " -> " + departureLocation + " " + returnDate + " -> " + arrivalLocation + " " + passenger);
 
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }

@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
-public class FlightBookingService {
+public class FlightBookingPaymentService {
 
     public static int createBooking(HttpServletRequest request, String classType, String passengerCount, Float totalPrice, String flightNumber) throws ClassNotFoundException, SQLException {
 

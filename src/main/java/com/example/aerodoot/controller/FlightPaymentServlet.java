@@ -1,14 +1,6 @@
 package com.example.aerodoot.controller;
 
-import com.example.aerodoot.dao.BookingDAO;
-import com.example.aerodoot.dao.FlightDAO;
-import com.example.aerodoot.dao.PassengerDAO;
-import com.example.aerodoot.dao.PaymentDAO;
-import com.example.aerodoot.model.Booking;
-import com.example.aerodoot.model.Flight;
-import com.example.aerodoot.model.Passenger;
-import com.example.aerodoot.model.Payment;
-import com.example.aerodoot.service.FlightBookingService;
+import com.example.aerodoot.service.FlightBookingPaymentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -32,8 +24,8 @@ public class FlightPaymentServlet extends HttpServlet {
         String paymentMethod = request.getParameter("paymentMethod");
 
         try {
-            int bookingId = FlightBookingService.createBooking(request, classType, passengerCount, totalPrice, flightNumber);
-            int paymentId = FlightBookingService.createPayment(paymentMethod, totalPrice, bookingId);
+            int bookingId = FlightBookingPaymentService.createBooking(request, classType, passengerCount, totalPrice, flightNumber);
+            int paymentId = FlightBookingPaymentService.createPayment(paymentMethod, totalPrice, bookingId);
             System.out.println("booking successful " + bookingId + " -> " + paymentId);
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);

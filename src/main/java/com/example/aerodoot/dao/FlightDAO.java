@@ -227,5 +227,25 @@ public class FlightDAO {
         }
         return null;
     }
+
+    public static int updateFlightStatus(int flightId) throws SQLException {
+        String sql = "UPDATE Flight SET status = ? WHERE flightId = ?";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "LANDED");
+            ps.setInt(2, flightId);
+
+
+            int updatedRows = ps.executeUpdate();
+            if (updatedRows > 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating flight: " + e.getMessage());
+        }
+        return -1;
+    }
 }
 
