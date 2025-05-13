@@ -73,160 +73,588 @@
         </div>
     </div>
 
-    <div class="tabs-passdb">
-        <button class="tab-btn-passdb active" data-tab="upcoming">Upcoming Flights</button>
-        <button class="tab-btn-passdb" data-tab="recent">Recent Bookings</button>
+<%--    <div class="tabs-passdb">--%>
+<%--        <button class="tab-btn-passdb active" data-tab="upcoming">Upcoming Flights</button>--%>
+<%--        <button class="tab-btn-passdb" data-tab="recent">Recent Bookings</button>--%>
+<%--    </div>--%>
+
+<%--    <div class="tab-content-passdb active" id="upcoming-tab">--%>
+<%--        <div class="flight-row">--%>
+<%--            <div class="flight-card">--%>
+<%--                <div class="flight-header">--%>
+<%--                    <div class="flight-number">--%>
+<%--                        <i class="fas fa-plane"></i> AD1234--%>
+<%--                    </div>--%>
+<%--                    <div class="flight-status confirmed">Confirmed</div>--%>
+<%--                </div>--%>
+<%--                <div class="flight-details">--%>
+<%--                    <div class="flight-route-dashboard">--%>
+<%--                        <div class="route-from-dashboard">--%>
+<%--                            <div class="label">From</div>--%>
+<%--                            <div class="city-dashboard">New York (JFK)</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="route-icon-dashboard">--%>
+<%--                            <i class="fas fa-exchange-alt"></i>--%>
+<%--                        </div>--%>
+<%--                        <div class="route-to-dashboard">--%>
+<%--                            <div class="label">To</div>--%>
+<%--                            <div class="city-dashboard">Los Angeles (LAX)</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="flight-info-dashboard">--%>
+<%--                        <div class="info-item-dashboard">--%>
+<%--                            <div class="label">--%>
+<%--                                <i class="far fa-calendar-alt"></i> Date--%>
+<%--                            </div>--%>
+<%--                            <div class="value-dashboard">2025-04-20</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="info-item-dashboard">--%>
+<%--                            <div class="label">--%>
+<%--                                <i class="far fa-clock"></i> Time--%>
+<%--                            </div>--%>
+<%--                            <div class="value">10:30 AM</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="flight-actions-dashboard">--%>
+<%--                    <button class="btn-details">View Details</button>--%>
+<%--                    <button class="btn-cancel">Cancel</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
+<%--            <div class="flight-card">--%>
+<%--                <div class="flight-header">--%>
+<%--                    <div class="flight-number">--%>
+<%--                        <i class="fas fa-plane"></i> AD1234--%>
+<%--                    </div>--%>
+<%--                    <div class="flight-status confirmed">Confirmed</div>--%>
+<%--                </div>--%>
+<%--                <div class="flight-details">--%>
+<%--                    <div class="flight-route-dashboard">--%>
+<%--                        <div class="route-from-dashboard">--%>
+<%--                            <div class="label">From</div>--%>
+<%--                            <div class="city-dashboard">New York (JFK)</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="route-icon-dashboard">--%>
+<%--                            <i class="fas fa-exchange-alt"></i>--%>
+<%--                        </div>--%>
+<%--                        <div class="route-to-dashboard">--%>
+<%--                            <div class="label">To</div>--%>
+<%--                            <div class="city-dashboard">Los Angeles (LAX)</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="flight-info-dashboard">--%>
+<%--                        <div class="info-item-dashboard">--%>
+<%--                            <div class="label">--%>
+<%--                                <i class="far fa-calendar-alt"></i> Date--%>
+<%--                            </div>--%>
+<%--                            <div class="value-dashboard">2025-04-20</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="info-item-dashboard">--%>
+<%--                            <div class="label">--%>
+<%--                                <i class="far fa-clock"></i> Time--%>
+<%--                            </div>--%>
+<%--                            <div class="value">10:30 AM</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="flight-actions-dashboard">--%>
+<%--                    <button class="btn-details">View Details</button>--%>
+<%--                    <button class="btn-cancel">Cancel</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+
+<%--    <div class="tab-content-passdb" id="recent-tab">--%>
+<%--        <div class="booking-row">--%>
+<%--            <div class="booking-card-passdb">--%>
+<%--                <div class="booking-header">--%>
+<%--                    <div class="booking-number">---%>
+<%--                        <i class="fas fa-ticket-alt"></i> Booking #101--%>
+<%--                    </div>--%>
+<%--                    <div class="booking-status completed">Completed</div>--%>
+<%--                </div>--%>
+<%--                <div class="booking-details">--%>
+<%--                    <div class="booking-route">--%>
+<%--                        <div class="flight-label">Flight</div>--%>
+<%--                        <div class="flight-value">AD4321</div>--%>
+<%--                        <div class="route-icon">--%>
+<%--                            <i class="fas fa-exchange-alt"></i>--%>
+<%--                        </div>--%>
+<%--                        <div class="route-label">Route</div>--%>
+<%--                        <div class="route-value">New York (JFK) → London (LHR)</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="booking-info">--%>
+<%--                        <div class="info-item">--%>
+<%--                            <div class="label">--%>
+<%--                                <i class="far fa-calendar-alt"></i> Booking Date--%>
+<%--                            </div>--%>
+<%--                            <div class="value">2025-03-15</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="booking-actions">--%>
+<%--                    <button class="btn-details-full">View Details</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
+<%--            <div class="booking-card-passdb">--%>
+<%--                <div class="booking-header">--%>
+<%--                    <div class="booking-number">--%>
+<%--                        <i class="fas fa-ticket-alt"></i> Booking #102--%>
+<%--                    </div>--%>
+<%--                    <div class="booking-status completed">Completed</div>--%>
+<%--                </div>--%>
+<%--                <div class="booking-details">--%>
+<%--                    <div class="booking-route">--%>
+<%--                        <div class="flight-label">Flight</div>--%>
+<%--                        <div class="flight-value">AD8765</div>--%>
+<%--                        <div class="route-icon">--%>
+<%--                            <i class="fas fa-exchange-alt"></i>--%>
+<%--                        </div>--%>
+<%--                        <div class="route-label">Route</div>--%>
+<%--                        <div class="route-value">London (LHR) → New York (JFK)</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="booking-info">--%>
+<%--                        <div class="info-item">--%>
+<%--                            <div class="label">--%>
+<%--                                <i class="far fa-calendar-alt"></i> Booking Date--%>
+<%--                            </div>--%>
+<%--                            <div class="value">2025-02-28</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="booking-actions">--%>
+<%--                    <button class="btn-details-full">View Details</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+
+
+    <div class="flight-header">
+        <h1 class="flight-title">My Bookings</h1>
+        <p class="flight-subtitle">View and manage all your flight bookings</p>
     </div>
 
-    <div class="tab-content-passdb active" id="upcoming-tab">
-        <div class="flight-row">
-            <div class="flight-card">
-                <div class="flight-header">
-                    <div class="flight-number">
-                        <i class="fas fa-plane"></i> AD1234
-                    </div>
-                    <div class="flight-status confirmed">Confirmed</div>
+    <div class="flight-tabs">
+        <button class="flight-tab active" id="flight-tab-upcoming">Upcoming Bookings</button>
+        <button class="flight-tab" id="flight-tab-past">Past Bookings</button>
+    </div>
+
+    <!-- Upcoming Bookings Tab Content -->
+    <div class="flight-tab-content active" id="flight-content-upcoming">
+        <!-- Booking Card 1 -->
+        <div class="flight-booking-card">
+            <div class="flight-booking-header">
+                <div class="flight-booking-number">
+                    <i class="fas fa-ticket-alt"></i>
+                    Booking #BK1001
                 </div>
-                <div class="flight-details">
-                    <div class="flight-route-dashboard">
-                        <div class="route-from-dashboard">
-                            <div class="label">From</div>
-                            <div class="city-dashboard">New York (JFK)</div>
+                <div class="flight-booking-status">Confirmed</div>
+            </div>
+
+            <div class="flight-booking-content">
+                <div class="flight-details-section">
+                    <h3 class="flight-section-title">Flight Details</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-plane"></i>
                         </div>
-                        <div class="route-icon-dashboard">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <div class="route-to-dashboard">
-                            <div class="label">To</div>
-                            <div class="city-dashboard">Los Angeles (LAX)</div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Flight</div>
+                            <div class="flight-detail-value">AD1234</div>
                         </div>
                     </div>
-                    <div class="flight-info-dashboard">
-                        <div class="info-item-dashboard">
-                            <div class="label">
-                                <i class="far fa-calendar-alt"></i> Date
-                            </div>
-                            <div class="value-dashboard">2025-04-20</div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div class="info-item-dashboard">
-                            <div class="label">
-                                <i class="far fa-clock"></i> Time
-                            </div>
-                            <div class="value">10:30 AM</div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Route</div>
+                            <div class="flight-route-db">New York (JFK) → Los Angeles (LAX)</div>
                         </div>
                     </div>
                 </div>
-                <div class="flight-actions-dashboard">
-                    <button class="btn-details">View Details</button>
-                    <button class="btn-cancel">Cancel</button>
+
+                <div class="flight-date-section">
+                    <h3 class="flight-section-title">Date & Time</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Departure Date</div>
+                            <div class="flight-detail-value">2025-04-20</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Time</div>
+                            <div class="flight-detail-value">10:30 AM - 1:45 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-booking-info-section">
+                    <h3 class="flight-section-title">Booking Info</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Booking Date</div>
+                            <div class="flight-detail-value">2025-03-15</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Passengers</div>
+                            <div class="flight-detail-value">1</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Total Price</div>
+                            <div class="flight-price">$299</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="flight-card">
-                <div class="flight-header">
-                    <div class="flight-number">
-                        <i class="fas fa-plane"></i> AD1234
-                    </div>
-                    <div class="flight-status confirmed">Confirmed</div>
+            <div class="flight-booking-actions">
+                <button class="flight-btn flight-btn-secondary" id="flight-btn-boarding-pass-1">Boarding Pass</button>
+                <button class="flight-btn flight-btn-danger" id="flight-btn-cancel-booking-1">Cancel Booking</button>
+            </div>
+        </div>
+
+        <!-- Booking Card 2 -->
+        <div class="flight-booking-card">
+            <div class="flight-booking-header">
+                <div class="flight-booking-number">
+                    <i class="fas fa-ticket-alt"></i>
+                    Booking #BK1002
                 </div>
-                <div class="flight-details">
-                    <div class="flight-route-dashboard">
-                        <div class="route-from-dashboard">
-                            <div class="label">From</div>
-                            <div class="city-dashboard">New York (JFK)</div>
+                <div class="flight-booking-status">Confirmed</div>
+            </div>
+
+            <div class="flight-booking-content">
+                <div class="flight-details-section">
+                    <h3 class="flight-section-title">Flight Details</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-plane"></i>
                         </div>
-                        <div class="route-icon-dashboard">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <div class="route-to-dashboard">
-                            <div class="label">To</div>
-                            <div class="city-dashboard">Los Angeles (LAX)</div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Flight</div>
+                            <div class="flight-detail-value">AD5678</div>
                         </div>
                     </div>
-                    <div class="flight-info-dashboard">
-                        <div class="info-item-dashboard">
-                            <div class="label">
-                                <i class="far fa-calendar-alt"></i> Date
-                            </div>
-                            <div class="value-dashboard">2025-04-20</div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div class="info-item-dashboard">
-                            <div class="label">
-                                <i class="far fa-clock"></i> Time
-                            </div>
-                            <div class="value">10:30 AM</div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Route</div>
+                            <div class="flight-route-db">Los Angeles (LAX) → New York (JFK)</div>
                         </div>
                     </div>
                 </div>
-                <div class="flight-actions-dashboard">
-                    <button class="btn-details">View Details</button>
-                    <button class="btn-cancel">Cancel</button>
+
+                <div class="flight-date-section">
+                    <h3 class="flight-section-title">Date & Time</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Departure Date</div>
+                            <div class="flight-detail-value">2025-04-27</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Time</div>
+                            <div class="flight-detail-value">1:45 PM - 10:00 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-booking-info-section">
+                    <h3 class="flight-section-title">Booking Info</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Booking Date</div>
+                            <div class="flight-detail-value">2025-03-15</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Passengers</div>
+                            <div class="flight-detail-value">1</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Total Price</div>
+                            <div class="flight-price">$329</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-booking-actions">
+                <button class="flight-btn flight-btn-secondary" id="flight-btn-boarding-pass-2">Boarding Pass</button>
+                <button class="flight-btn flight-btn-danger" id="flight-btn-cancel-booking-2">Cancel Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Past Bookings Tab Content -->
+    <div class="flight-tab-content" id="flight-content-past">
+        <!-- Past Booking Card 1 -->
+        <div class="flight-booking-card">
+            <div class="flight-booking-header-recent">
+                <div class="flight-booking-number">
+                    <i class="fas fa-ticket-alt"></i>
+                    Booking #BK901
+                </div>
+                <div class="flight-booking-status completed">Completed</div>
+            </div>
+
+            <div class="flight-booking-content">
+                <div class="flight-details-section">
+                    <h3 class="flight-section-title">Flight Details</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Flight</div>
+                            <div class="flight-detail-value">AD4321</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Route</div>
+                            <div class="flight-route-db">New York (JFK) → London (LHR)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-date-section">
+                    <h3 class="flight-section-title">Date & Time</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Departure Date</div>
+                            <div class="flight-detail-value">2025-02-15</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Time</div>
+                            <div class="flight-detail-value">9:30 PM - 9:45 AM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-booking-info-section">
+                    <h3 class="flight-section-title">Booking Info</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Booking Date</div>
+                            <div class="flight-detail-value">2025-01-05</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Passengers</div>
+                            <div class="flight-detail-value">1</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Total Price</div>
+                            <div class="flight-price">$649</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-booking-actions">
+                <button class="flight-btn flight-btn-secondary">Download Invoice</button>
+                <button class="flight-btn flight-btn-primary">Book Similar Flight</button>
+            </div>
+        </div>
+
+        <!-- Past Booking Card 2 -->
+        <div class="flight-booking-card">
+            <div class="flight-booking-header-recent">
+                <div class="flight-booking-number">
+                    <i class="fas fa-ticket-alt"></i>
+                    Booking #BK902
+                </div>
+                <div class="flight-booking-status completed">Completed</div>
+            </div>
+
+            <div class="flight-booking-content">
+                <div class="flight-details-section">
+                    <h3 class="flight-section-title">Flight Details</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Flight</div>
+                            <div class="flight-detail-value">AD8765</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Route</div>
+                            <div class="flight-route-db">London (LHR) → New York (JFK)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-date-section">
+                    <h3 class="flight-section-title">Date & Time</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Departure Date</div>
+                            <div class="flight-detail-value">2025-02-22</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Time</div>
+                            <div class="flight-detail-value">11:15 AM - 2:30 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-booking-info-section">
+                    <h3 class="flight-section-title">Booking Info</h3>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Booking Date</div>
+                            <div class="flight-detail-value">2025-01-05</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Passengers</div>
+                            <div class="flight-detail-value">1</div>
+                        </div>
+                    </div>
+
+                    <div class="flight-detail-item">
+                        <div class="flight-detail-content">
+                            <div class="flight-detail-label">Total Price</div>
+                            <div class="flight-price">$629</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-booking-actions">
+                <button class="flight-btn flight-btn-secondary">Download Invoice</button>
+                <button class="flight-btn flight-btn-primary">Book Similar Flight</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boarding Pass Modal -->
+    <div class="flight-modal-backdrop" id="flight-boarding-pass-modal">
+        <div class="flight-modal">
+            <div class="flight-modal-header">
+                <div class="flight-modal-title">Boarding Pass</div>
+                <button class="flight-modal-close">&times;</button>
+            </div>
+            <div class="flight-modal-body">
+                <div class="flight-modal-message">Your boarding pass will be available 24 hours before departure.</div>
+                <div class="flight-modal-boarding-pass">
+                    <p>Boarding pass for Flight AD1234 will be available on 2025-04-20 at 10:30 AM.</p>
+                </div>
+                <div class="flight-modal-actions">
+                    <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="tab-content-passdb" id="recent-tab">
-        <div class="booking-row">
-            <div class="booking-card-passdb">
-                <div class="booking-header">
-                    <div class="booking-number">-
-                        <i class="fas fa-ticket-alt"></i> Booking #101
-                    </div>
-                    <div class="booking-status completed">Completed</div>
-                </div>
-                <div class="booking-details">
-                    <div class="booking-route">
-                        <div class="flight-label">Flight</div>
-                        <div class="flight-value">AD4321</div>
-                        <div class="route-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <div class="route-label">Route</div>
-                        <div class="route-value">New York (JFK) → London (LHR)</div>
-                    </div>
-                    <div class="booking-info">
-                        <div class="info-item">
-                            <div class="label">
-                                <i class="far fa-calendar-alt"></i> Booking Date
-                            </div>
-                            <div class="value">2025-03-15</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="booking-actions">
-                    <button class="btn-details-full">View Details</button>
-                </div>
+    <!-- Cancel Booking Modal -->
+    <div class="flight-modal-backdrop" id="flight-cancel-booking-modal">
+        <div class="flight-modal">
+            <div class="flight-modal-header">
+                <div class="flight-modal-title">Cancel Booking</div>
+                <button class="flight-modal-close">&times;</button>
             </div>
+            <div class="flight-modal-body">
+                <div class="flight-modal-message">Are you sure you want to cancel this booking? This action cannot be undone.</div>
 
-            <div class="booking-card-passdb">
-                <div class="booking-header">
-                    <div class="booking-number">
-                        <i class="fas fa-ticket-alt"></i> Booking #102
+                <div class="flight-warning">
+                    <div class="flight-warning-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <div class="booking-status completed">Completed</div>
-                </div>
-                <div class="booking-details">
-                    <div class="booking-route">
-                        <div class="flight-label">Flight</div>
-                        <div class="flight-value">AD8765</div>
-                        <div class="route-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <div class="route-label">Route</div>
-                        <div class="route-value">London (LHR) → New York (JFK)</div>
-                    </div>
-                    <div class="booking-info">
-                        <div class="info-item">
-                            <div class="label">
-                                <i class="far fa-calendar-alt"></i> Booking Date
-                            </div>
-                            <div class="value">2025-02-28</div>
-                        </div>
+                    <div class="flight-warning-content">
+                        <strong>Warning</strong>
+                        <p>Cancellation fees may apply based on your fare type. Refunds will be processed within 7 business days.</p>
                     </div>
                 </div>
-                <div class="booking-actions">
-                    <button class="btn-details-full">View Details</button>
+
+                <div class="flight-modal-actions">
+                    <button class="flight-btn flight-btn-secondary" id="flight-keep-booking">No, Keep My Booking</button>
+                    <button class="flight-btn flight-btn-danger" id="flight-confirm-cancel">Yes, Cancel Booking</button>
                 </div>
             </div>
         </div>

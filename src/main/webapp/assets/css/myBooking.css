@@ -1,0 +1,322 @@
+/* Header Styles */
+.flight-header {
+    margin-bottom: 20px;
+}
+
+.flight-title {
+    font-size: 24px;
+    color: #0a2559;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.flight-subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Tab Navigation */
+.flight-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.flight-tab {
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.flight-tab.active {
+    color: #0a2559;
+    font-weight: bold;
+    border-bottom: 2px solid #0a2559;
+}
+
+/* Booking Card Styles */
+.flight-bookings-container {
+    width: 100%;
+}
+
+.flight-booking-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.flight-booking-header {
+    background-color: #0a2559;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flight-booking-header-recent {
+    background-color: #43464B;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flight-booking-number {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.flight-booking-number i {
+    margin-right: 10px;
+}
+
+.flight-booking-status {
+    background-color: #e8f4e5;
+    color: #2d8a39;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/*.flight-booking-status .completed {*/
+/*    background-color: #e8e8e8;*/
+/*    color: #555;*/
+/*}*/
+
+/* Booking Content Grid */
+.flight-booking-content {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.flight-details-section, .flight-date-section, .flight-booking-info-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-section-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.flight-detail-item {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.flight-detail-icon {
+    color: #777;
+    margin-right: 10px;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.flight-detail-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-detail-label {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.flight-detail-value {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.flight-route-db {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Booking Actions */
+.flight-booking-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px 20px;
+    gap: 10px;
+}
+
+.flight-btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.flight-btn-primary {
+    background-color: #0a2559;
+    color: white;
+}
+
+.flight-btn-primary:hover {
+    background-color: #083b8c;
+}
+
+.flight-btn-secondary {
+    background-color: white;
+    color: #0a2559;
+    border: 1px solid #0a2559;
+}
+
+.flight-btn-secondary:hover {
+    background-color: #f0f4ff;
+}
+
+.flight-btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.flight-btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Modal Styles */
+.flight-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none;
+}
+
+.flight-modal {
+    background-color: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.flight-modal-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.flight-modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.flight-modal-close {
+    font-size: 20px;
+    color: #777;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.flight-modal-body {
+    padding: 20px;
+}
+
+.flight-modal-message {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.flight-modal-boarding-pass {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.flight-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+/* Warning styles */
+.flight-warning {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.flight-warning-icon {
+    color: #ef4444;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.flight-warning-content {
+    color: #b91c1c;
+    font-size: 14px;
+}
+
+/* Tab content visibility */
+.flight-tab-content {
+    display: none;
+}
+
+.flight-tab-content.active {
+    display: block;
+}
+
+/* Price formatting */
+.flight-price {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .flight-booking-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .flight-booking-actions {
+        flex-direction: column;
+    }
+
+    .flight-btn {
+        width: 100%;
+    }
+}
