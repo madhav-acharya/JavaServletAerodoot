@@ -68,6 +68,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    margin-bottom: 30px;
 }
 
 .flight-booking-number {
