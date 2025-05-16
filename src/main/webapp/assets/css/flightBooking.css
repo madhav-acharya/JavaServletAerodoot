@@ -1,17 +1,17 @@
-.flight-booking-header {
+.flight-booking-header-main {
     display: flex;
     flex-direction: column;
     text-align: start;
     margin-bottom: 30px;
 }
 
-.flight-booking-header h1 {
+.flight-booking-header-main h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     color: #002366;
 }
 
-.flight-booking-header p {
+.flight-booking-header-main p {
     font-size: 1.1rem;
     margin-bottom: 20px;
     color: #666;

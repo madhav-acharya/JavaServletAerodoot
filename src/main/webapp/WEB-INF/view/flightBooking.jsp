@@ -5,7 +5,7 @@
 <jsp:include page="../../header.jsp"/>
 
 <div class="container">
-    <header class="flight-booking-header">
+    <header class="flight-booking-header-main">
         <h1>Flight Search</h1>
         <p>Search for available flights and book your next trip.</p>
     </header>
