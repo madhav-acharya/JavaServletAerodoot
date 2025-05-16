@@ -98,10 +98,12 @@ public class PassengerDashboardServlet extends HttpServlet {
             request.setAttribute("profileImage", base64Image);
             request.setAttribute("mimeType", mimeType);
             request.setAttribute("passenger", passengerData);
-            request.setAttribute("upcomingBookingNum", upcomingFlights.size());
-            request.setAttribute("totalBookingNum", recentFlights.size() + upcomingFlights.size());
             session.setAttribute("passengerId", passengerData.getPassenger().getPassengerId());
 
+            request.setAttribute("upcomingBookingNum", upcomingFlights.size());
+            request.setAttribute("totalBookingNum", recentFlights.size() + upcomingFlights.size());
+            request.setAttribute("upcomingFlights", upcomingFlights);
+            request.setAttribute("recentFlights", recentFlights);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
