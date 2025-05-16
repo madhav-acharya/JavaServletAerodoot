@@ -1,12 +1,8 @@
 package com.example.aerodoot.controller;
 
-import com.example.aerodoot.dao.BookingDAO;
-import com.example.aerodoot.dao.FlightDAO;
-import com.example.aerodoot.dao.PassengerDAO;
+import com.example.aerodoot.dao.*;
 import com.example.aerodoot.dto.PassengerDashboardData;
-import com.example.aerodoot.model.Booking;
-import com.example.aerodoot.model.Flight;
-import com.example.aerodoot.model.Passenger;
+import com.example.aerodoot.model.*;
 import com.example.aerodoot.service.AuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -22,9 +18,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 @WebServlet("/passenger/dashboard")
 @MultipartConfig
@@ -35,16 +29,13 @@ public class PassengerDashboardServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         int userId = (int) session.getAttribute("userId");
 
-        System.out.println("userID of passenger Dashboard " + userId);
-
-        List<Booking> upcomingFlight = new ArrayList<>();
-        List<Booking> recentFlight = new ArrayList<>();
+        List<Map<String, Object>> upcomingFlights = new ArrayList<>();
+        List<Map<String, Object>> recentFlights = new ArrayList<>();
 
         try {
             PassengerDashboardData passengerData = PassengerDAO.getPassengerDataByUserId(userId);
 
             List<Booking> bookingList = BookingDAO.getPassengerBookings(passengerData.getPassenger().getPassengerId());
-
 
             for (Booking booking: bookingList) {
 
@@ -61,25 +52,40 @@ public class PassengerDashboardServlet extends HttpServlet {
                 if(flightDateTime.isBefore(currentDateTime)) {
                     int flightComp = FlightDAO.updateFlightStatus(booking.getFlightId());
                     int flightBooks = BookingDAO.updateBookingStatus(booking.getBookingId(), "COMPLETED");
-
                     booking.setBookingStatus("COMPLETED");
-
                 }
+
+                Airline airline = AirlineDAO.getAirlineById(flight.getAirlineId());
+                Aircraft aircraft = AircraftDAO.getAircraftById(flight.getAircraftId());
+
+                Map<String, Object> bookingDate = new HashMap<>();
+                bookingDate.put("booking", booking);
+                bookingDate.put("flight", flight);
+                bookingDate.put("airline", airline);
+                bookingDate.put("aircraft", aircraft);
 
                 if (booking.getBookingStatus().equals("CONFIRMED")) {
-                    upcomingFlight.add(booking);
+                    upcomingFlights.add(bookingDate);
                 }
                 if (booking.getBookingStatus().equals("COMPLETED")) {
-                    recentFlight.add(booking);
+                    recentFlights.add(bookingDate);
                 }
             }
 
-            System.out.println("Upcoming Flight: " + upcomingFlight.size());
-            System.out.println("Recent Flight: " + recentFlight.size());
-            int totalBooking = upcomingFlight.size() + recentFlight.size();
+            //flight data checking
+            for (Map<String, Object> booking: recentFlights) {
+                Booking books = (Booking) booking.get("booking");
+                Flight flight = (Flight) booking.get("flight");
+                Aircraft aircraft = (Aircraft) booking.get("aircraft");
+                System.out.println(books.getBookingDate() + " " + flight.getFlightDate() + " " + aircraft.getModel());
+            }
+
+            System.out.println("Upcoming Flights: " + upcomingFlights.size());
+            System.out.println("Recent Flights: " + recentFlights.size());
+            int totalBooking = upcomingFlights.size() + recentFlights.size();
             System.out.println("Total Booking: " + totalBooking);
 
-
+            //for profile image
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();
             String base64Image = null;
             String mimeType = null;
@@ -92,13 +98,14 @@ public class PassengerDashboardServlet extends HttpServlet {
             request.setAttribute("profileImage", base64Image);
             request.setAttribute("mimeType", mimeType);
             request.setAttribute("passenger", passengerData);
-            request.setAttribute("upcomingBookingNum", upcomingFlight.size());
-            request.setAttribute("totalBookingNum", recentFlight.size() + upcomingFlight.size());
+            request.setAttribute("upcomingBookingNum", upcomingFlights.size());
+            request.setAttribute("totalBookingNum", recentFlights.size() + upcomingFlights.size());
             session.setAttribute("passengerId", passengerData.getPassenger().getPassengerId());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         request.getRequestDispatcher("/WEB-INF/view/passengerDashboard.jsp").forward(request, response);
     }
 

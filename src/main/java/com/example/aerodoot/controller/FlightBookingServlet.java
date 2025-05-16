@@ -75,6 +75,7 @@ public class FlightBookingServlet extends HttpServlet {
         int flightNumbers = 0; // default value
         if (session.getAttribute("flightNumbers") != null) {
             flightNumbers = (int) session.getAttribute("flightNumbers");
+            System.out.println("flight num in get: " + flightNumbers);
             String departureLocation = (String) session.getAttribute("departureLocation");
             String arrivalLocation = (String) session.getAttribute("arrivalLocation");
             String departureDate = (String) session.getAttribute("departureDate");
@@ -157,6 +158,7 @@ public class FlightBookingServlet extends HttpServlet {
         session.setAttribute("departureLocation", departureLocation);
         session.setAttribute("arrivalLocation", arrivalLocation);
         session.setAttribute("flights", flights);
+        System.out.println(flights.size());
 
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }
