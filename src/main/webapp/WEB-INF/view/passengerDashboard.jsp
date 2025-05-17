@@ -443,51 +443,54 @@
     </div>
 
     <!-- Boarding Pass Modal -->
-    <div class="flight-modal-backdrop" id="flight-boarding-pass-modal">
-        <div class="flight-modal">
-            <div class="flight-modal-header">
-                <div class="flight-modal-title">Boarding Pass</div>
-                <button class="flight-modal-close">&times;</button>
-            </div>
-            <div class="flight-modal-body">
-                <div class="flight-modal-message">Your boarding pass will be available 24 hours before departure.</div>
-                <div class="flight-modal-boarding-pass">
-                    <p>Boarding pass for Flight AD1234 will be available on 2025-04-20 at 10:30 AM.</p>
+    <c:if test="${not empty upcomingFlights}">
+        <c:forEach var="item" items="${recentFlights}">
+        <div class="flight-modal-backdrop" id="flight-boarding-pass-modal">
+            <div class="flight-modal">
+                <div class="flight-modal-header">
+                    <div class="flight-modal-title">Boarding Pass</div>
+                    <button class="flight-modal-close">&times;</button>
                 </div>
-                <div class="flight-modal-actions">
-                    <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal">Close</button>
+                <div class="flight-modal-body">
+                    <div class="flight-modal-message">Your boarding pass will be available 24 hours before departure.</div>
+                    <div class="flight-modal-boarding-pass">
+                        <p>Boarding pass for Flight AD1234 will be available on ${item.flight.flightDate} at 10:30 AM.</p>
+                    </div>
+                    <div class="flight-modal-actions">
+                        <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Cancel Booking Modal -->
-    <div class="flight-modal-backdrop" id="flight-cancel-booking-modal">
-        <div class="flight-modal">
-            <div class="flight-modal-header">
-                <div class="flight-modal-title">Cancel Booking</div>
-                <button class="flight-modal-close">&times;</button>
-            </div>
-            <div class="flight-modal-body">
-                <div class="flight-modal-message">Are you sure you want to cancel this booking? This action cannot be undone.</div>
-
-                <div class="flight-warning">
-                    <div class="flight-warning-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="flight-warning-content">
-                        <strong>Warning</strong>
-                        <p>Cancellation fees may apply based on your fare type. Refunds will be processed within 7 business days.</p>
-                    </div>
+        <div class="flight-modal-backdrop" id="flight-cancel-booking-modal">
+            <div class="flight-modal">
+                <div class="flight-modal-header">
+                    <div class="flight-modal-title">Cancel Booking</div>
+                    <button class="flight-modal-close">&times;</button>
                 </div>
+                <div class="flight-modal-body">
+                    <div class="flight-modal-message">Are you sure you want to cancel this booking? This action cannot be undone.</div>
 
-                <div class="flight-modal-actions">
-                    <button class="flight-btn flight-btn-secondary" id="flight-keep-booking">No, Keep My Booking</button>
-                    <button class="flight-btn flight-btn-danger" id="flight-confirm-cancel">Yes, Cancel Booking</button>
+                    <div class="flight-warning">
+                        <div class="flight-warning-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="flight-warning-content">
+                            <strong>Warning</strong>
+                            <p>Cancellation fees may apply based on your fare type. Refunds will be processed within 7 business days.</p>
+                        </div>
+                    </div>
+
+                    <div class="flight-modal-actions">
+                        <button class="flight-btn flight-btn-secondary" id="flight-keep-booking">No, Keep My Booking</button>
+                        <button class="flight-btn flight-btn-danger" id="flight-confirm-cancel">Yes, Cancel Booking</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        </c:forEach>
+    </c:if>
 </div>
 
 <!-- Profile Edit Modal -->
