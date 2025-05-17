@@ -452,9 +452,9 @@
                     <button class="flight-modal-close">&times;</button>
                 </div>
                 <div class="flight-modal-body">
-                    <div class="flight-modal-message">Your boarding pass will be available 24 hours before departure.</div>
+                    <div class="flight-modal-message">Your boarding pass will be available before departure.</div>
                     <div class="flight-modal-boarding-pass">
-                        <p>Boarding pass for Flight AD1234 will be available on ${item.flight.flightDate} at 10:30 AM.</p>
+                        <p>Boarding pass for Flight ${item.aircraft.model} will be available on ${item.flight.flightDate} at  ${item.flight.departureTime}.</p>
                     </div>
                     <div class="flight-modal-actions">
                         <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal">Close</button>
