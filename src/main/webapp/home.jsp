@@ -12,14 +12,37 @@
         <div class="header-buttons">
             <c:choose>
                 <c:when test="${sessionScope.isLoggedIn == null}">
-                    <button class="btn-main btn-primary"><a href="${pageContext.request.contextPath}/login">Book Your Flight</a></button>
-                    <button class="btn-main btn-secondary"><a href="${pageContext.request.contextPath}/login">Manage Booking</a></button>
+                    <button class="btn-main btn-primary">
+                        <a href="${pageContext.request.contextPath}/login">Book Your Flight</a>
+                    </button>
+                    <button class="btn-main btn-secondary">
+                        <a href="${pageContext.request.contextPath}/login">Manage Booking</a>
+                    </button>
                 </c:when>
                 <c:otherwise>
-                    <button class="btn-main btn-primary"><a href="${pageContext.request.contextPath}/flight-booking">Book Your Flight</a></button>
-                    <button class="btn-main btn-secondary"><a href="${pageContext.request.contextPath}/passenger/dashboard">Manage Booking</a></button>
+                    <button class="btn-main btn-primary">
+                        <a href="${pageContext.request.contextPath}/flight-booking">Book Your Flight</a>
+                    </button>
+
+                    <!-- Role-based dashboard link -->
+                    <c:choose>
+                        <c:when test="${sessionScope.userType == 'ADMIN'}">
+                            <c:set var="dashboardLink" value="${pageContext.request.contextPath}/admin" />
+                        </c:when>
+                        <c:when test="${sessionScope.userType == 'AGENT'}">
+                            <c:set var="dashboardLink" value="${pageContext.request.contextPath}/agent/dashboard" />
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="dashboardLink" value="${pageContext.request.contextPath}/passenger/dashboard" />
+                        </c:otherwise>
+                    </c:choose>
+
+                    <button class="btn-main btn-secondary">
+                        <a href="${dashboardLink}">Manage Booking</a>
+                    </button>
                 </c:otherwise>
-        </c:choose>
+            </c:choose>
+
         </div>
     </header>
 
