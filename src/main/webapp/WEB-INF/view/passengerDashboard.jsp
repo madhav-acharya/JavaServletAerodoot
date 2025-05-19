@@ -267,7 +267,7 @@
                             </div>
                             <div class="flight-detail-content">
                                 <div class="flight-detail-label">Flight</div>
-                                <div class="flight-detail-value">${item.aircraft.model}</div>
+                                <div class="flight-detail-value">${item.airline.name} → ${item.aircraft.model}</div>
                             </div>
                         </div>
 
@@ -348,7 +348,7 @@
     <!-- Past Bookings Tab Content -->
     <div class="flight-tab-content" id="flight-content-past">
 
-    <c:if test="${not empty upcomingFlights}">
+    <c:if test="${not empty recentFlights}">
         <c:forEach var="item" items="${recentFlights}">
         <div class="flight-booking-card">
             <div class="flight-booking-header-recent">
@@ -369,7 +369,7 @@
                         </div>
                         <div class="flight-detail-content">
                             <div class="flight-detail-label">Flight</div>
-                            <div class="flight-detail-value">${item.aircraft.model}</div>
+                            <div class="flight-detail-value">${item.airline.name} → ${item.aircraft.model}</div>
                         </div>
                     </div>
 
@@ -455,7 +455,7 @@
                 <div class="flight-modal-body">
                     <div class="flight-modal-message">Your boarding pass will be available before departure.</div>
                     <div class="flight-modal-boarding-pass">
-                        <p>Boarding pass for Flight ${item.aircraft.model} will be available on ${item.flight.flightDate} at  ${item.flight.departureTime}.</p>
+                        <p>Boarding pass for Flight ${item.airline.name} ${item.aircraft.model} will be available on ${item.flight.flightDate} at  ${item.flight.departureTime}.</p>
                     </div>
                     <div class="flight-modal-actions">
                         <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal">Close</button>
