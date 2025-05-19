@@ -4,6 +4,7 @@ import com.example.aerodoot.dao.AgentDAO;
 import com.example.aerodoot.dao.CompanyDAO;
 import com.example.aerodoot.model.Agent;
 import com.example.aerodoot.model.Company;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,6 +47,7 @@ public class AgentRegistrationServlet extends HttpServlet {
         Part profilePicturePart = request.getPart("profilePicture");
         int companyId = Integer.parseInt(request.getParameter("companyId"));
         if(request.getSession().getAttribute("userId") == null) {
+            FlashMessageUtil.setError(request.getSession(), "Unauthorized User");
             request.setAttribute("error", "Unauthorized User");
             request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
@@ -57,11 +59,13 @@ public class AgentRegistrationServlet extends HttpServlet {
                 profilePicture = new byte[inputStream.available()];
                 inputStream.read(profilePicture);
             } catch (IOException e) {
+                FlashMessageUtil.setError(request.getSession(), "Something went wrong in image");
                 e.printStackTrace();
             }
         }
 
         if(position == null || licenseNumber == null || companyId == 0 || userId == 0 ) {
+            FlashMessageUtil.setError(request.getSession(), "Please fill all the required fields");
             request.setAttribute("error", "Please fill all the required fields");
             request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
@@ -70,10 +74,11 @@ public class AgentRegistrationServlet extends HttpServlet {
         int generatedAgentId = AgentDAO.createAgent(agent);
         System.out.println(position + " " + licenseNumber + " " + profilePicture + " " + companyId + " " + userId);
         if (generatedAgentId > 0) {
-
+            FlashMessageUtil.setSuccess(request.getSession(), "Agent registered successfully");
             request.setAttribute("message", "Agent registered successfully!");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } else {
+            FlashMessageUtil.setError(request.getSession(), "Something went wrong");
             request.setAttribute("message", "Failed to register agent.");
             List<Company> companies = CompanyDAO.getAllCompanies();
             System.out.println("companies " + companies);
