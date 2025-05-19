@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.CompanyDAO;
 import com.example.aerodoot.model.Company;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +25,6 @@ public class CompanyRegistration extends HttpServlet {
         String website = request.getParameter("website");
         String registrationNumber = request.getParameter("registrationNumber");
 
-        System.out.println("hdajd");
         Company company = new Company(companyName, companyEmail, companyAddress, contactNumber, website, registrationNumber);
 
         int companyId = CompanyDAO.createCompany(company);
@@ -32,8 +32,10 @@ public class CompanyRegistration extends HttpServlet {
 
         System.out.println(companyId + companyName + companyEmail + companyAddress + contactNumber + website + registrationNumber);
         if (companyId > 0) {
+            FlashMessageUtil.setSuccess(request.getSession(), "Company Registered Successfully");
             response.sendRedirect(request.getContextPath() + "/register-agent");
         } else {
+            FlashMessageUtil.setError(request.getSession(), "Company Registration Failed");
             request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
         }
     }
