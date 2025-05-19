@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.model.User;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -52,12 +53,17 @@ public class SettingsServlet extends HttpServlet {
             int updateUserId = UserDAO.updateAdmin(user);
 
             if (updateUserId >= 0) {
+                FlashMessageUtil.setSuccess(session, "Successfully updated");
                 session.setAttribute("user", user);
                 System.out.println("success");
+            }
+            else{
+                FlashMessageUtil.setError(request.getSession(), "Failed to Update");
             }
 
             response.sendRedirect(request.getContextPath() + "/admin/manage-setting");
         } catch (SQLException e) {
+            FlashMessageUtil.setError(request.getSession(), e.getMessage());
             throw new RuntimeException(e);
         }
     }
