@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.PassengerDAO;
 import com.example.aerodoot.model.Passenger;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,6 +37,7 @@ public class PassengerRegistrationServlet extends HttpServlet {
 
 
         if(request.getSession().getAttribute("userId") == null) {
+            FlashMessageUtil.setError(request.getSession(), "You are not logged in");
             request.setAttribute("error", "Unauthorized User");
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
@@ -47,11 +49,14 @@ public class PassengerRegistrationServlet extends HttpServlet {
         if (filePart != null && filePart.getSize() > 0) {
             try (InputStream inputStream = filePart.getInputStream()) {
                 profilePicture = inputStream.readAllBytes();
+            }catch (IOException e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
             }
         }
 
         if(passportNumber == null || passportNumber == "" || dateOfBirth == null || gender == null || address == null || userId == 0) {
             request.setAttribute("error", "Please fill all the required fields");
+            FlashMessageUtil.setError(request.getSession(), "Please fill all the required fields");
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
         Passenger passenger = new Passenger(passportNumber, dateOfBirth, gender, address, profilePicture, userId);
@@ -62,8 +67,10 @@ public class PassengerRegistrationServlet extends HttpServlet {
         System.out.println("Passenger ID: " + passengerId + ", Passport: " + passportNumber);
 
         if (passengerId > 0) {
+            FlashMessageUtil.setSuccess(request.getSession(), "Passenger successfully registered");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } else {
+            FlashMessageUtil.setError(request.getSession(), "Passenger Registration Failed!");
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
     }
