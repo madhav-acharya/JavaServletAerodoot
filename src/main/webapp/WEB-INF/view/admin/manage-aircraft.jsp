@@ -203,9 +203,6 @@
     // Setup search functionality
     searchTable('aircraft-table', 'search-aircraft');
 
-    // Setup status filter
-    setupTableFilter('aircraft-table', 'aircraft-status-filter', 5);
-
     // Aircraft form modal
     const addAircraftBtn = document.getElementById('add-aircraft-btn');
     const closeAircraftModalBtn = document.getElementById('close-aircraft-modal');

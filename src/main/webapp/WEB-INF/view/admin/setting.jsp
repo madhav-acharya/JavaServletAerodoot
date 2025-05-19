@@ -239,16 +239,6 @@
     if (autoRefreshToggle.checked) {
       startAutoRefresh();
     }
-
-    // Save account settings
-    document.getElementById('save-account-settings-btn').addEventListener('click', function() {
-      const userName = document.getElementById('user-name').value;
-      const userEmail = document.getElementById('user-email').value;
-      const userPassword = document.getElementById('user-password').value;
-
-      // In a real application, this would save the settings to the server
-      alert(`Account settings saved:\nName: ${userName}\nEmail: ${userEmail}\nPassword: ${userPassword}`);
-    });
   });
 </script>
 </body>

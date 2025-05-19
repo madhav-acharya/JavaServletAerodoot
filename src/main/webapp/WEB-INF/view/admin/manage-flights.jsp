@@ -315,12 +315,6 @@
     // Setup search functionality
     searchTable('flights-table', 'search-flights');
 
-    // Setup status filter
-    setupTableFilter('flights-table', 'status-filter', 6);
-
-    // Setup date range filter
-    setupDateRangeFilter('flights-table', 'flight-start-date', 'flight-end-date', 4);
-
     // Flight form modal
     const addFlightBtn = document.getElementById('add-flight-btn');
     const closeFlightModalBtn = document.getElementById('close-flight-modal');

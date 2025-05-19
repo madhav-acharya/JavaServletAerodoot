@@ -192,12 +192,6 @@
         }
         searchTable('users-table', 'search-users');
 
-        // Setup user type filter
-        setupTableFilter('users-table', 'user-type-filter', 5);
-
-        // Setup date range filter
-        setupDateRangeFilter('users-table', 'user-start-date', 'user-end-date', 6);
-
         // User edit modal event listeners
         const closeUserEditModalBtn = document.getElementById('close-user-edit-modal');
         const cancelUserEditBtn = document.getElementById('cancel-user-edit-btn');

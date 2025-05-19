@@ -179,9 +179,6 @@
         }
         searchTable('airlines-table', 'search-airlines');
 
-        // Setup status filter
-        setupTableFilter('airlines-table', 'airline-status-filter', 5);
-
         // Airline form modal
         const addAirlineBtn = document.getElementById('add-airline-btn');
         const closeAirlineModalBtn = document.getElementById('close-airline-modal');

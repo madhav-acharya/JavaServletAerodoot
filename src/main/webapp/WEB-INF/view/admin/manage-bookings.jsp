@@ -156,12 +156,6 @@
     // Setup search functionality
     searchTable('bookings-table', 'search-bookings');
 
-    // Setup status filter
-    setupTableFilter('bookings-table', 'booking-status-filter', 5);
-
-    // Setup date range filter
-    setupDateRangeFilter('bookings-table', 'booking-start-date', 'booking-end-date', 4);
-
     // Booking status modal
     const closeBookingStatusModalBtn = document.getElementById('close-booking-status-modal');
     const cancelBookingStatusBtn = document.getElementById('cancel-booking-status-btn');
