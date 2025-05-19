@@ -1,6 +1,7 @@
 package com.example.aerodoot.controller;
 
 import com.example.aerodoot.service.AuthService;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,12 +33,14 @@ public class RegistrationServlet extends HttpServlet {
             int userId = AuthService.createUser(fullname, email, phonenumber, password, confirmpassword);
             System.out.println("UserID: "+userId);
             if (userId > 0) {
+                FlashMessageUtil.setSuccess(request.getSession(), "User successfully registered");
                 System.out.println("UserID: "+userId);
                 System.out.println("User registered successfully");
                 request.getSession().setAttribute("userId", userId);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/userType.jsp");
                 dispatcher.forward(request, response);
             } else {
+                FlashMessageUtil.setError(request.getSession(), "User Registration Failed!");
                 System.out.println("User creation failed " + fullname + " " + email + " " + phonenumber + " " + password + " " + confirmpassword);
                 String errorMessage = AuthService.getErrorMessage(userId);
                 request.setAttribute("errorMessage", errorMessage);
@@ -52,6 +55,7 @@ public class RegistrationServlet extends HttpServlet {
             }
 
         } catch (SQLException | ClassNotFoundException e) {
+            FlashMessageUtil.setError(request.getSession(), e.getMessage());
             System.out.println("cannot be registered "+e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/signup.jsp");
             dispatcher.forward(request, response);
