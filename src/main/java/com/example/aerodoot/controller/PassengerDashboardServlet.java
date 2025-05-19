@@ -4,6 +4,7 @@ import com.example.aerodoot.dao.*;
 import com.example.aerodoot.dto.PassengerDashboardData;
 import com.example.aerodoot.model.*;
 import com.example.aerodoot.service.AuthService;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -156,14 +157,17 @@ public class PassengerDashboardServlet extends HttpServlet {
             if (UserInt < 0 || PassengerInt < 0 ) {
                 System.out.println("error get executed");
                 String errorMessage = AuthService.getErrorMessage(UserInt);
+                FlashMessageUtil.setError(request.getSession(), errorMessage);
                 request.setAttribute("message", errorMessage);
                 response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
             } else {
+                FlashMessageUtil.setSuccess(request.getSession(), "Updated Successfully");
                 System.out.println("success update");
                 response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
             }
             System.out.println("Updated or errorId: " + UserInt);
         } catch (SQLException e) {
+            FlashMessageUtil.setError(request.getSession(), e.getMessage());
             throw new RuntimeException(e);
         }
 //        response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
