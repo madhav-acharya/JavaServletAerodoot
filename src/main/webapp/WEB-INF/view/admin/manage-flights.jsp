@@ -13,7 +13,7 @@
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 <body>
-
+<jsp:include page="../../../includes/toast.jsp" />
 <div class="dashboard-container">
   <jsp:include page="../../../admin-sidebar.jsp" />
   <main class="main-content" id="main-content">

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/userType.css">
 </head>
 <body>
+<jsp:include page="../../includes/toast.jsp" />
 <div class="container">
     <h1>Select Your User Type</h1>
     <form action="${pageContext.request.contextPath}/select-usertype" method="post">

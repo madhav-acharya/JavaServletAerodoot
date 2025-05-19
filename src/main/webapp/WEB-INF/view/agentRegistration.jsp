@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/agentRegistration.css">
 </head>
 <body>
+<jsp:include page="../../includes/toast.jsp" />
 <div class="container">
     <div class="form-header">
         <h1><i class="fas fa-id-card"></i> Agent Registration</h1>

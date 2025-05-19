@@ -20,6 +20,7 @@
   <jsp:include page="../../../admin-sidebar.jsp" />
   <main class="main-content" id="main-content">
     <jsp:include page="../../../admin-header.jsp"/>
+    <jsp:include page="../../../includes/toast.jsp" />
     <div class="content" id="content">
       <div class="stats-grid">
         <div class="card stat-card">

@@ -3,6 +3,7 @@
 
 
 <jsp:include page="../../header.jsp"/>
+<jsp:include page="../../includes/toast.jsp" />
 
 <div class="container">
     <header class="flight-booking-header-main">

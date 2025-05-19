@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../../header.jsp"/>
+<jsp:include page="../../includes/toast.jsp" />
 <div>
     <h1>Agent Dashboard ...</h1>
 </div>
