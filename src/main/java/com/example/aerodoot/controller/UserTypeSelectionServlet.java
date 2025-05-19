@@ -3,6 +3,7 @@ package com.example.aerodoot.controller;
 import com.example.aerodoot.dao.CompanyDAO;
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.model.Company;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,21 +28,25 @@ public class UserTypeSelectionServlet extends HttpServlet {
         String userType = request.getParameter("userType");
 
         if(userType == null) {
+            FlashMessageUtil.setError(request.getSession(), "userType is required");
             request.setAttribute("error", "Please select one userType");
             request.getRequestDispatcher("/WEB-INF/view/userType.jsp").forward(request, response);
         }
 
         System.out.println(userType);
         if (userType.equals("passenger")) {
+            FlashMessageUtil.setSuccess(request.getSession(), "Registering as Passenger");
             request.getRequestDispatcher("/WEB-INF/view/passengerRegistration.jsp").forward(request, response);
         }
         else if (userType.equals("agent")) {
             try {
+                FlashMessageUtil.setSuccess(request.getSession(), "Registering as Agent");
                 List<Company> companies = CompanyDAO.getAllCompanies();
                 System.out.println("companies " + companies);
                 request.setAttribute("companies", companies);
                 request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.out.println("ERROR in CompanyDAO.getAllCompanies(): " + e.getMessage());
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong");
             }
@@ -56,12 +61,14 @@ public class UserTypeSelectionServlet extends HttpServlet {
 
             // Set response based on result
             if (success) {
+                FlashMessageUtil.setSuccess(request.getSession(), "User Type Changed Successfully");
                 request.setAttribute("message", "User type updated successfully!");
                 if ("agent".equals(newUserType)) {
                     request.getRequestDispatcher("/WEB-INF/view/agentRegistration.jsp").forward(request, response);
                 }
 
             } else {
+                FlashMessageUtil.setError(request.getSession(), "User Type Changed Failed!");
                 System.out.println("User Type Updation  failed" + userId);
                 request.setAttribute("message", "Failed to update user type.");
             }
