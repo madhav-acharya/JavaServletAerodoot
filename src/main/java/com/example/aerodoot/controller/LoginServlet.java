@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
         try {
             user = AuthService.validateUser(email, password);
         } catch (SQLException e) {
+            FlashMessageUtil.setError(request.getSession(), e.getMessage());
             throw new RuntimeException(e);
         }
 
