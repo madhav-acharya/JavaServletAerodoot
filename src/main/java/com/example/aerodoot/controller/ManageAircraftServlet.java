@@ -4,6 +4,7 @@ import com.example.aerodoot.dao.AircraftDAO;
 import com.example.aerodoot.dao.AirlineDAO;
 import com.example.aerodoot.model.Aircraft;
 import com.example.aerodoot.model.Airline;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -64,16 +65,19 @@ public class ManageAircraftServlet extends HttpServlet {
                 int createdAircraftId = AircraftDAO.createAircraft(aircraft);
 
                 if (createdAircraftId >= 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Aircraft Created Successfully");
                     System.out.println("Aircraft creation successful");
                     aircrafts = AircraftDAO.getAllAircraft();
                     getServletContext().setAttribute("aircrafts", aircrafts);
                     response.sendRedirect(request.getContextPath() + "/admin/manage-aircraft");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Aircraft Creation Failed");
                     System.out.println("Failed to create aircraft");
                 }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error creating aircraft: " + e.getMessage());
                 throw new ServletException("Failed to create aircraft", e);
             }
