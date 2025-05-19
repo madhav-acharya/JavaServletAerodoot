@@ -1,5 +1,6 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +19,7 @@ public class LogoutServlet extends HttpServlet {
 
         if(session!=null){
             session.invalidate();
+            FlashMessageUtil.setSuccess(session, "Logged out");
             request.getRequestDispatcher("/home.jsp").forward(request,response);
         }
     }
