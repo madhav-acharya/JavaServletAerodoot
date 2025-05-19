@@ -105,6 +105,7 @@ public class ManageAircraftServlet extends HttpServlet {
                 int updateAircraftResult = AircraftDAO.updateAircraft(aircraft);
 
                 if (updateAircraftResult >= 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Aircraft Updated Successfully");
                     System.out.println("Aircraft update successful");
                     aircrafts = AircraftDAO.getAllAircraft();
                     getServletContext().setAttribute("aircrafts", aircrafts);
@@ -113,6 +114,7 @@ public class ManageAircraftServlet extends HttpServlet {
                 }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error updating aircraft: " + e.getMessage());
                 throw new ServletException("Failed to update aircraft", e);
             }
@@ -123,15 +125,18 @@ public class ManageAircraftServlet extends HttpServlet {
                 int aircraftId = Integer.parseInt(request.getParameter("aircraftId"));
                 boolean success = AircraftDAO.deleteAircraft(aircraftId);
                 if (success) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Aircraft Deleted Successfully");
                     System.out.println("Aircraft delete successful");
                     aircrafts = AircraftDAO.getAllAircraft();
                     getServletContext().setAttribute("aircrafts", aircrafts);
                     response.sendRedirect(request.getContextPath() + "/admin/manage-aircraft");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Aircraft Deletion Failed");
                     System.out.println("Failed to delete aircraft");
                 }
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error deleting aircraft: " + e.getMessage());
             }
         }
