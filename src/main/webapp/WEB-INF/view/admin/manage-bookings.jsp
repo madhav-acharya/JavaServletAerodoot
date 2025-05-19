@@ -35,15 +35,15 @@
               <label for="search-bookings">Search Bookings</label>
               <input type="text" id="search-bookings" class="input" placeholder="Search by booking ID, passenger name, flight...">
             </div>
-            <div class="filter-group">
-              <label for="booking-status-filter">Status</label>
-              <select id="booking-status-filter" class="select">
-                <option value="all">All Statuses</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="pending">Pending</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
+<%--            <div class="filter-group">--%>
+<%--              <label for="booking-status-filter">Status</label>--%>
+<%--              <select id="booking-status-filter" class="select">--%>
+<%--                <option value="all">All Statuses</option>--%>
+<%--                <option value="confirmed">Confirmed</option>--%>
+<%--                <option value="pending">Pending</option>--%>
+<%--                <option value="cancelled">Cancelled</option>--%>
+<%--              </select>--%>
+<%--            </div>--%>
 <%--            <div class="filter-group">--%>
 <%--              <label>Booking Date</label>--%>
 <%--              <div class="date-range-picker">--%>
@@ -103,34 +103,6 @@
             </table>
           </div>
 
-          <div class="pagination">
-            <button class="pagination-btn" id="bookings-first-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="11 17 6 12 11 7"></polyline>
-                <polyline points="18 17 13 12 18 7"></polyline>
-              </svg>
-            </button>
-            <button class="pagination-btn" id="bookings-prev-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="pagination-info">
-              <input type="text" class="input pagination-input" id="bookings-current-page" value="1">
-              <span>of <span id="bookings-total-pages">1</span></span>
-            </div>
-            <button class="pagination-btn" id="bookings-next-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-            <button class="pagination-btn" id="bookings-last-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="13 17 18 12 13 7"></polyline>
-                <polyline points="6 17 11 12 6 7"></polyline>
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
 

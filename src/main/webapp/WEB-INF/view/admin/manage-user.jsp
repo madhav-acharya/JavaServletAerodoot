@@ -35,15 +35,15 @@
                             <label for="search-users">Search Users</label>
                             <input type="text" id="search-users" class="input" placeholder="Search by ID, name, email...">
                         </div>
-                        <div class="filter-group">
-                            <label for="user-type-filter">User Type</label>
-                            <select id="user-type-filter" class="select">
-                                <option value="all">All Types</option>
-                                <option value="PASSENGER">Passenger</option>
-                                <option value="AGENT">Agent</option>
-                                <option value="ADMIN">Admin</option>
-                            </select>
-                        </div>
+<%--                        <div class="filter-group">--%>
+<%--                            <label for="user-type-filter">User Type</label>--%>
+<%--                            <select id="user-type-filter" class="select">--%>
+<%--                                <option value="all">All Types</option>--%>
+<%--                                <option value="PASSENGER">Passenger</option>--%>
+<%--                                <option value="AGENT">Agent</option>--%>
+<%--                                <option value="ADMIN">Admin</option>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
 <%--                        <div class="filter-group">--%>
 <%--                            <label>Registration Date</label>--%>
 <%--                            <div class="date-range-picker">--%>
@@ -115,52 +115,10 @@
                         </table>
                     </div>
 
-                    <div class="pagination">
-                        <button class="pagination-btn" id="users-first-page-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                <polyline points="11 17 6 12 11 7"></polyline>
-                                <polyline points="18 17 13 12 18 7"></polyline>
-                            </svg>
-                        </button>
-                        <button class="pagination-btn" id="users-prev-page-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                        </button>
-                        <div class="pagination-info">
-                            <input type="text" class="input pagination-input" id="users-current-page" value="1">
-                            <span>of <span id="users-total-pages">1</span></span>
-                        </div>
-                        <button class="pagination-btn" id="users-next-page-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </button>
-                        <button class="pagination-btn" id="users-last-page-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                                <polyline points="13 17 18 12 13 7"></polyline>
-                                <polyline points="6 17 11 12 6 7"></polyline>
-                            </svg>
-                        </button>
-                    </div>
                 </div>
             </div>
             <%--confirmation model--%>
-            <div class="modal" id="confirmation-modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Confirm Action</h3>
-                        <button class="modal-close" id="close-confirmation-modal">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="confirmation-message">Are you sure you want to do this?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
-                        <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="../../../confirmation-modal.jsp" />
 
             <!-- User Edit Modal -->
             <div class="modal" id="user-edit-modal">

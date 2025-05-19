@@ -47,18 +47,18 @@
               <label for="search-flights">Search Flights</label>
               <input type="text" id="search-flights" class="input" placeholder="Search by flight number, origin, destination...">
             </div>
-            <div class="filter-group">
-              <label for="status-filter">Status</label>
-              <select id="status-filter" class="select">
-                <option value="ALL">All Statuses</option>
-                <option value="SCHEDULED">Scheduled</option>
-                <option value="ONTIME">On Time</option>
-                <option value="DELAYED">Delayed</option>
-                <option value="INAIR">In Air</option>
-                <option value="LANDED">Landed</option>
-                <option value="CANCELLED">Cancelled</option>
-              </select>
-            </div>
+<%--            <div class="filter-group">--%>
+<%--              <label for="status-filter">Status</label>--%>
+<%--              <select id="status-filter" class="select">--%>
+<%--                <option value="ALL">All Statuses</option>--%>
+<%--                <option value="SCHEDULED">Scheduled</option>--%>
+<%--                <option value="ONTIME">On Time</option>--%>
+<%--                <option value="DELAYED">Delayed</option>--%>
+<%--                <option value="INAIR">In Air</option>--%>
+<%--                <option value="LANDED">Landed</option>--%>
+<%--                <option value="CANCELLED">Cancelled</option>--%>
+<%--              </select>--%>
+<%--            </div>--%>
 <%--            <div class="filter-group">--%>
 <%--              <label>Date Range</label>--%>
 <%--              <div class="date-range-picker">--%>
@@ -146,54 +146,11 @@
               </tbody>
             </table>
           </div>
-
-          <div class="pagination">
-            <button class="pagination-btn" id="first-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="11 17 6 12 11 7"></polyline>
-                <polyline points="18 17 13 12 18 7"></polyline>
-              </svg>
-            </button>
-            <button class="pagination-btn" id="prev-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="pagination-info">
-              <input type="text" class="input pagination-input" id="current-page" value="1">
-              <span>of <span id="total-pages">1</span></span>
-            </div>
-            <button class="pagination-btn" id="next-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-            <button class="pagination-btn" id="last-page-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                <polyline points="13 17 18 12 13 7"></polyline>
-                <polyline points="6 17 11 12 6 7"></polyline>
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
 
       <%--confirmation model--%>
-      <div class="modal" id="confirmation-modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Confirm Action</h3>
-            <button class="modal-close" id="close-confirmation-modal">×</button>
-          </div>
-          <div class="modal-body">
-            <p id="confirmation-message">Are you sure you want to do this?</p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-outline" id="cancel-confirmation-btn">Cancel</button>
-            <button class="btn btn-danger" id="confirm-action-btn">Ok</button>
-          </div>
-        </div>
-      </div>
+      <jsp:include page="../../../confirmation-modal.jsp" />
 
 
       <!-- Flight Form Modal -->

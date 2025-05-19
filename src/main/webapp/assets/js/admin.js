@@ -63,14 +63,14 @@ function setupTableFilter(tableId, filterId, columnIndex) {
     if (!filterSelect || !table) return;
 
     filterSelect.addEventListener('change', function() {
-        const filterValue = this.value.toLowerCase();
+        const filterValue = this.value;
         const rows = table.querySelectorAll('tbody tr');
 
         rows.forEach(row => {
             const cell = row.cells[columnIndex];
-            const cellText = cell.textContent.toLowerCase() ;
+            const cellText = cell.textContent ;
 
-            if (filterValue === 'all' || cellText.includes(filterValue) || cell.textContent.toUpperCase()) {
+            if (filterValue === 'all' || cellText.includes(filterValue) || cell.textContent) {
                 row.style.display = '';
             } else {
                 row.style.display = 'none';

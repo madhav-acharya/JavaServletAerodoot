@@ -21,14 +21,14 @@
     <jsp:include page="../../../admin-header.jsp"/>
     <div class="content" id="content">
       <div class="analytics-controls">
-        <div class="filter-group">
-          <label>Date Range</label>
-          <div class="date-range-picker">
-            <input type="date" id="analytics-start-date" class="input date-input" value="2023-01-01">
-            <span>to</span>
-            <input type="date" id="analytics-end-date" class="input date-input" value="2023-12-31">
-          </div>
-        </div>
+<%--        <div class="filter-group">--%>
+<%--          <label>Date Range</label>--%>
+<%--          <div class="date-range-picker">--%>
+<%--            <input type="date" id="analytics-start-date" class="input date-input" value="2023-01-01">--%>
+<%--            <span>to</span>--%>
+<%--            <input type="date" id="analytics-end-date" class="input date-input" value="2023-12-31">--%>
+<%--          </div>--%>
+<%--        </div>--%>
         <div class="filter-group">
           <label for="chart-type">Chart Type</label>
           <select id="chart-type" class="select">
