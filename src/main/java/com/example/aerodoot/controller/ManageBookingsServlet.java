@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.BookingDAO;
 import com.example.aerodoot.model.Booking;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,16 +45,19 @@ public class ManageBookingsServlet extends HttpServlet {
             int updateBookingStatus = BookingDAO.updateBookingStatus(bookingId, bookingStatus);
 
             if (updateBookingStatus >= 0) {
+                FlashMessageUtil.setSuccess(request.getSession(),  " Booking updated successfully.");
                 System.out.println("Booking status updated successfully.");
                 bookings = BookingDAO.getAllBookings();
                 getServletContext().setAttribute("bookings", bookings);
                 response.sendRedirect(request.getContextPath() + "/admin/manage-booking");
                 return;
             } else {
+                FlashMessageUtil.setError(request.getSession(),  "Failed to update Bookings");
                 request.setAttribute("error", "Failed to update booking status.");
             }
 
         } catch (Exception e) {
+            FlashMessageUtil.setError(request.getSession(), e.getMessage());
             System.err.println("Error updating booking status: " + e.getMessage());
             throw new ServletException("Failed to update booking status", e);
         }
