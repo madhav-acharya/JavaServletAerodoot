@@ -383,18 +383,18 @@
 
             <% if (request.getAttribute("error") != null) { %>
             <div style="
-    background-color: #FFF0F0;
-    color: #D32F2F;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin: 15px 25px;
-    border: 1px solid #FFCDD2;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    ">
+                    background-color: #FFF0F0;
+                    color: #D32F2F;
+                    padding: 12px 16px;
+                    border-radius: 6px;
+                    margin: 15px 25px;
+                    border: 1px solid #FFCDD2;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.95rem;
+                    line-height: 1.4;
+                    ">
                 <i class="fas fa-exclamation-circle" style="
         font-size: 1.1rem;
         flex-shrink: 0;"></i>

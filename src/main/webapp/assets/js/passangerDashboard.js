@@ -23,61 +23,81 @@ document.addEventListener("DOMContentLoaded", () => {
     // Boarding Pass Modal Functions
     const boardingPassModal = document.getElementById('flight-boarding-pass-modal');
     const boardingPassButtons = document.querySelectorAll('[id^="flight-btn-boarding-pass"]');
-    const closeBoardingModalBtn = document.getElementById('flight-close-boarding-modal');
-    const boardingModalCloseBtn = boardingPassModal.querySelector('.flight-modal-close');
 
-    // Open boarding pass modal
-    boardingPassButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            boardingPassModal.style.display = 'flex';
-        });
-    });
+    if (boardingPassModal) {
+        const closeBoardingModalBtn = document.getElementById('flight-close-boarding-modal');
+        const boardingModalCloseBtn = boardingPassModal.querySelector('.flight-modal-close');
 
-    // Close boarding pass modal
-    closeBoardingModalBtn.addEventListener('click', function() {
-        boardingPassModal.style.display = 'none';
-    });
+        // Open boarding pass modal
+        if (boardingPassButtons.length > 0) {
+            boardingPassButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    boardingPassModal.style.display = 'flex';
+                });
+            });
+        }
 
-    boardingModalCloseBtn.addEventListener('click', function() {
-        boardingPassModal.style.display = 'none';
-    });
+        // Close boarding pass modal
+        if (closeBoardingModalBtn) {
+            closeBoardingModalBtn.addEventListener('click', function() {
+                boardingPassModal.style.display = 'none';
+            });
+        }
+
+        if (boardingModalCloseBtn) {
+            boardingModalCloseBtn.addEventListener('click', function() {
+                boardingPassModal.style.display = 'none';
+            });
+        }
+    }
 
     // Cancel Booking Modal Functions
     const cancelBookingModal = document.getElementById('flight-cancel-booking-modal');
     const cancelBookingButtons = document.querySelectorAll('[id^="flight-btn-cancel-booking"]');
-    const keepBookingBtn = document.getElementById('flight-keep-booking');
-    const confirmCancelBtn = document.getElementById('flight-confirm-cancel');
-    const cancelModalCloseBtn = cancelBookingModal.querySelector('.flight-modal-close');
 
-    // Open cancel booking modal
-    cancelBookingButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            cancelBookingModal.style.display = 'flex';
-        });
-    });
+    if (cancelBookingModal) {
+        const keepBookingBtn = document.getElementById('flight-keep-booking');
+        const confirmCancelBtn = document.getElementById('flight-confirm-cancel');
+        const cancelModalCloseBtn = cancelBookingModal.querySelector('.flight-modal-close');
 
-    // Close cancel booking modal
-    keepBookingBtn.addEventListener('click', function() {
-        cancelBookingModal.style.display = 'none';
-    });
+        // Open cancel booking modal
+        if (cancelBookingButtons.length > 0) {
+            cancelBookingButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    cancelBookingModal.style.display = 'flex';
+                });
+            });
+        }
 
-    confirmCancelBtn.addEventListener('click', function() {
-        // Here you would typically send a request to cancel the booking
-        // For this demo, we'll just close the modal
-        cancelBookingModal.style.display = 'none';
-        // You could add additional code here to handle the actual cancellation
-    });
+        // Close cancel booking modal
+        if (keepBookingBtn) {
+            keepBookingBtn.addEventListener('click', function() {
+                cancelBookingModal.style.display = 'none';
+            });
+        }
 
-    cancelModalCloseBtn.addEventListener('click', function() {
-        cancelBookingModal.style.display = 'none';
-    });
+        if (confirmCancelBtn) {
+            confirmCancelBtn.addEventListener('click', function() {
+                // Here you would typically send a request to cancel the booking
+                // For this demo, we'll just close the modal
+                cancelBookingModal.style.display = 'none';
+                // You could add additional code here to handle the actual cancellation
+            });
+        }
+
+        if (cancelModalCloseBtn) {
+            cancelModalCloseBtn.addEventListener('click', function() {
+                cancelBookingModal.style.display = 'none';
+            });
+        }
+    }
 
     // Close modals when clicking outside of them
     window.addEventListener('click', function(event) {
-        if (event.target === boardingPassModal) {
+        if (boardingPassModal && event.target === boardingPassModal) {
             boardingPassModal.style.display = 'none';
         }
-        if (event.target === cancelBookingModal) {
+        if (cancelBookingModal && event.target === cancelBookingModal) {
             cancelBookingModal.style.display = 'none';
         }
     });
