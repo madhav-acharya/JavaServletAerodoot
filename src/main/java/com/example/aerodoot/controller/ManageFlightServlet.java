@@ -6,6 +6,7 @@ import com.example.aerodoot.dao.FlightDAO;
 import com.example.aerodoot.model.Aircraft;
 import com.example.aerodoot.model.Airline;
 import com.example.aerodoot.model.Flight;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -97,16 +98,19 @@ public class ManageFlightServlet extends HttpServlet {
                 int createdFlightId = FlightDAO.createFlight(flight);
 
                 if (createdFlightId > 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Flight added successfully");
                     flights = FlightDAO.getAllFlights();
                     getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight created successfully!");
                     response.sendRedirect(request.getContextPath() + "/admin/manage-flight");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Error creating flight");
                     request.setAttribute("message", "Error creating flight.");
                 }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 request.setAttribute("message", "Error creating flight: " + e.getMessage());
                 throw new ServletException("Failed to create flight", e);
             }
@@ -164,6 +168,7 @@ public class ManageFlightServlet extends HttpServlet {
                 System.out.println("updated flight id: " + updatedFlightId);
 
                 if (updatedFlightId >= 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Flight updated successfully");
                     flights = FlightDAO.getAllFlights();
                     System.out.println("flight updated sucessfully");
                     getServletContext().setAttribute("flights", flights);
@@ -171,11 +176,13 @@ public class ManageFlightServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/admin/manage-flight");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Error updating flight");
                     System.out.println("flight update failed");
                     request.setAttribute("message", "Error updating flight.");
                 }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.out.println("Exception occurred while updating flight: " + e.getMessage());
                 request.setAttribute("message", "Error updating flight: " + e.getMessage());
                 throw new ServletException("Failed to update flight", e);
@@ -187,15 +194,18 @@ public class ManageFlightServlet extends HttpServlet {
                 boolean success = FlightDAO.deleteFlight(flightId);
                 System.out.println("deleted flight id: " + flightId + success);
                 if (success) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Flight deleted successfully");
                     flights = FlightDAO.getAllFlights();
                     getServletContext().setAttribute("flights", flights);
                     request.setAttribute("message", "Flight deleted successfully!");
                     response.sendRedirect(request.getContextPath() + "/admin/manage-flight");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Error deleting flight");
                     request.setAttribute("message", "Error deleting flight.");
                 }
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 request.setAttribute("message", "Error deleting flight: " + e.getMessage());
                 throw new ServletException("Failed to delete flight", e);
             }
