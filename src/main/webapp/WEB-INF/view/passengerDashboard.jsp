@@ -74,166 +74,7 @@
         </div>
     </div>
 
-<%--    <div class="tabs-passdb">--%>
-<%--        <button class="tab-btn-passdb active" data-tab="upcoming">Upcoming Flights</button>--%>
-<%--        <button class="tab-btn-passdb" data-tab="recent">Recent Bookings</button>--%>
-<%--    </div>--%>
-
-<%--    <div class="tab-content-passdb active" id="upcoming-tab">--%>
-<%--        <div class="flight-row">--%>
-<%--            <div class="flight-card">--%>
-<%--                <div class="flight-header">--%>
-<%--                    <div class="flight-number">--%>
-<%--                        <i class="fas fa-plane"></i> AD1234--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-status confirmed">Confirmed</div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-details">--%>
-<%--                    <div class="flight-route-dashboard">--%>
-<%--                        <div class="route-from-dashboard">--%>
-<%--                            <div class="label">From</div>--%>
-<%--                            <div class="city-dashboard">New York (JFK)</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="route-icon-dashboard">--%>
-<%--                            <i class="fas fa-exchange-alt"></i>--%>
-<%--                        </div>--%>
-<%--                        <div class="route-to-dashboard">--%>
-<%--                            <div class="label">To</div>--%>
-<%--                            <div class="city-dashboard">Los Angeles (LAX)</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-info-dashboard">--%>
-<%--                        <div class="info-item-dashboard">--%>
-<%--                            <div class="label">--%>
-<%--                                <i class="far fa-calendar-alt"></i> Date--%>
-<%--                            </div>--%>
-<%--                            <div class="value-dashboard">2025-04-20</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="info-item-dashboard">--%>
-<%--                            <div class="label">--%>
-<%--                                <i class="far fa-clock"></i> Time--%>
-<%--                            </div>--%>
-<%--                            <div class="value">10:30 AM</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-actions-dashboard">--%>
-<%--                    <button class="btn-details">View Details</button>--%>
-<%--                    <button class="btn-cancel">Cancel</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="flight-card">--%>
-<%--                <div class="flight-header">--%>
-<%--                    <div class="flight-number">--%>
-<%--                        <i class="fas fa-plane"></i> AD1234--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-status confirmed">Confirmed</div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-details">--%>
-<%--                    <div class="flight-route-dashboard">--%>
-<%--                        <div class="route-from-dashboard">--%>
-<%--                            <div class="label">From</div>--%>
-<%--                            <div class="city-dashboard">New York (JFK)</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="route-icon-dashboard">--%>
-<%--                            <i class="fas fa-exchange-alt"></i>--%>
-<%--                        </div>--%>
-<%--                        <div class="route-to-dashboard">--%>
-<%--                            <div class="label">To</div>--%>
-<%--                            <div class="city-dashboard">Los Angeles (LAX)</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="flight-info-dashboard">--%>
-<%--                        <div class="info-item-dashboard">--%>
-<%--                            <div class="label">--%>
-<%--                                <i class="far fa-calendar-alt"></i> Date--%>
-<%--                            </div>--%>
-<%--                            <div class="value-dashboard">2025-04-20</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="info-item-dashboard">--%>
-<%--                            <div class="label">--%>
-<%--                                <i class="far fa-clock"></i> Time--%>
-<%--                            </div>--%>
-<%--                            <div class="value">10:30 AM</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="flight-actions-dashboard">--%>
-<%--                    <button class="btn-details">View Details</button>--%>
-<%--                    <button class="btn-cancel">Cancel</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-<%--    <div class="tab-content-passdb" id="recent-tab">--%>
-<%--        <div class="booking-row">--%>
-<%--            <div class="booking-card-passdb">--%>
-<%--                <div class="booking-header">--%>
-<%--                    <div class="booking-number">---%>
-<%--                        <i class="fas fa-ticket-alt"></i> Booking #101--%>
-<%--                    </div>--%>
-<%--                    <div class="booking-status completed">Completed</div>--%>
-<%--                </div>--%>
-<%--                <div class="booking-details">--%>
-<%--                    <div class="booking-route">--%>
-<%--                        <div class="flight-label">Flight</div>--%>
-<%--                        <div class="flight-value">AD4321</div>--%>
-<%--                        <div class="route-icon">--%>
-<%--                            <i class="fas fa-exchange-alt"></i>--%>
-<%--                        </div>--%>
-<%--                        <div class="route-label">Route</div>--%>
-<%--                        <div class="route-value">New York (JFK) → London (LHR)</div>--%>
-<%--                    </div>--%>
-<%--                    <div class="booking-info">--%>
-<%--                        <div class="info-item">--%>
-<%--                            <div class="label">--%>
-<%--                                <i class="far fa-calendar-alt"></i> Booking Date--%>
-<%--                            </div>--%>
-<%--                            <div class="value">2025-03-15</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="booking-actions">--%>
-<%--                    <button class="btn-details-full">View Details</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="booking-card-passdb">--%>
-<%--                <div class="booking-header">--%>
-<%--                    <div class="booking-number">--%>
-<%--                        <i class="fas fa-ticket-alt"></i> Booking #102--%>
-<%--                    </div>--%>
-<%--                    <div class="booking-status completed">Completed</div>--%>
-<%--                </div>--%>
-<%--                <div class="booking-details">--%>
-<%--                    <div class="booking-route">--%>
-<%--                        <div class="flight-label">Flight</div>--%>
-<%--                        <div class="flight-value">AD8765</div>--%>
-<%--                        <div class="route-icon">--%>
-<%--                            <i class="fas fa-exchange-alt"></i>--%>
-<%--                        </div>--%>
-<%--                        <div class="route-label">Route</div>--%>
-<%--                        <div class="route-value">London (LHR) → New York (JFK)</div>--%>
-<%--                    </div>--%>
-<%--                    <div class="booking-info">--%>
-<%--                        <div class="info-item">--%>
-<%--                            <div class="label">--%>
-<%--                                <i class="far fa-calendar-alt"></i> Booking Date--%>
-<%--                            </div>--%>
-<%--                            <div class="value">2025-02-28</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="booking-actions">--%>
-<%--                    <button class="btn-details-full">View Details</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-
+    <%-- Booking info section --%>
     <div class="flight-header">
         <h1 class="flight-title">My Bookings</h1>
         <p class="flight-subtitle">View and manage all your flight bookings</p>
@@ -341,7 +182,17 @@
         </c:if>
 
         <c:if test="${upcomingBookingNum == 0}">
-            <div>You have not booked any flights</div>
+            <div class="empty-booking-container">
+                <div class="empty-booking-icon">
+                    <i class="fas fa-plane-departure"></i>
+                </div>
+                <h3 class="empty-booking-title">No Upcoming Flights</h3>
+                <p class="empty-booking-message">You haven't booked any flights yet. Ready to plan your next adventure?</p>
+                <a href="#" class="book-now-btn">
+                    <i class="fas fa-search"></i>
+                    Find Flights
+                </a>
+            </div>
         </c:if>
     </div>
 
@@ -442,7 +293,7 @@
             </c:forEach>
         </c:if>
         <c:if test="${recentBookingNum == 0}">
-            <div>You have not booked any flights</div>
+
         </c:if>
     </div>
 
