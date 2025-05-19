@@ -21,86 +21,97 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Boarding Pass Modal Functions
-    const boardingPassModal = document.getElementById('flight-boarding-pass-modal');
-    const boardingPassButtons = document.querySelectorAll('[id^="flight-btn-boarding-pass"]');
+    const boardingPassModals = document.querySelectorAll('[id^="flight-boarding-pass-modal-"]');
+    const boardingPassButtons = document.querySelectorAll('[id^="flight-btn-boarding-pass-"]');
 
-    if (boardingPassModal) {
-        const closeBoardingModalBtn = document.getElementById('flight-close-boarding-modal');
-        const boardingModalCloseBtn = boardingPassModal.querySelector('.flight-modal-close');
+    // Setup boarding pass modals
+    if (boardingPassButtons.length > 0) {
+        boardingPassButtons.forEach(btn => {
+            // Extract the booking ID from the button ID
+            const bookingId = btn.id.replace('flight-btn-boarding-pass-', '');
+            const correspondingModal = document.getElementById(`flight-boarding-pass-modal-${bookingId}`);
 
-        // Open boarding pass modal
-        if (boardingPassButtons.length > 0) {
-            boardingPassButtons.forEach(btn => {
+            if (correspondingModal) {
+                // Setup open modal event
                 btn.addEventListener('click', function() {
-                    boardingPassModal.style.display = 'flex';
+                    correspondingModal.style.display = 'flex';
                 });
-            });
-        }
 
-        // Close boarding pass modal
-        if (closeBoardingModalBtn) {
-            closeBoardingModalBtn.addEventListener('click', function() {
-                boardingPassModal.style.display = 'none';
-            });
-        }
+                // Setup close events for this specific modal
+                const closeModalBtn = correspondingModal.querySelector('.flight-modal-close');
+                const closeActionBtn = correspondingModal.querySelector('[id^="flight-close-boarding-modal-"]');
 
-        if (boardingModalCloseBtn) {
-            boardingModalCloseBtn.addEventListener('click', function() {
-                boardingPassModal.style.display = 'none';
-            });
-        }
+                if (closeModalBtn) {
+                    closeModalBtn.addEventListener('click', function() {
+                        correspondingModal.style.display = 'none';
+                    });
+                }
+
+                if (closeActionBtn) {
+                    closeActionBtn.addEventListener('click', function() {
+                        correspondingModal.style.display = 'none';
+                    });
+                }
+
+                // Close modal when clicking outside
+                window.addEventListener('click', function(event) {
+                    if (event.target === correspondingModal) {
+                        correspondingModal.style.display = 'none';
+                    }
+                });
+            }
+        });
     }
 
     // Cancel Booking Modal Functions
-    const cancelBookingModal = document.getElementById('flight-cancel-booking-modal');
-    const cancelBookingButtons = document.querySelectorAll('[id^="flight-btn-cancel-booking"]');
+    const cancelBookingModals = document.querySelectorAll('[id^="flight-cancel-booking-modal-"]');
+    const cancelBookingButtons = document.querySelectorAll('[id^="flight-btn-cancel-booking-"]');
 
-    if (cancelBookingModal) {
-        const keepBookingBtn = document.getElementById('flight-keep-booking');
-        const confirmCancelBtn = document.getElementById('flight-confirm-cancel');
-        const cancelModalCloseBtn = cancelBookingModal.querySelector('.flight-modal-close');
+    // Setup cancel booking modals
+    if (cancelBookingButtons.length > 0) {
+        cancelBookingButtons.forEach(btn => {
+            // Extract the booking ID from the button ID
+            const bookingId = btn.id.replace('flight-btn-cancel-booking-', '');
+            const correspondingModal = document.getElementById(`flight-cancel-booking-modal-${bookingId}`);
 
-        // Open cancel booking modal
-        if (cancelBookingButtons.length > 0) {
-            cancelBookingButtons.forEach(btn => {
+            if (correspondingModal) {
+                // Setup open modal event
                 btn.addEventListener('click', function() {
-                    cancelBookingModal.style.display = 'flex';
+                    correspondingModal.style.display = 'flex';
                 });
-            });
-        }
 
-        // Close cancel booking modal
-        if (keepBookingBtn) {
-            keepBookingBtn.addEventListener('click', function() {
-                cancelBookingModal.style.display = 'none';
-            });
-        }
+                // Setup close events for this specific modal
+                const closeModalBtn = correspondingModal.querySelector('.flight-modal-close');
+                const keepBookingBtn = correspondingModal.querySelector(`#flight-keep-booking-${bookingId}`);
+                const confirmCancelBtn = correspondingModal.querySelector(`#flight-confirm-cancel-${bookingId}`);
 
-        if (confirmCancelBtn) {
-            confirmCancelBtn.addEventListener('click', function() {
-                // Here you would typically send a request to cancel the booking
-                // For this demo, we'll just close the modal
-                cancelBookingModal.style.display = 'none';
-                // You could add additional code here to handle the actual cancellation
-            });
-        }
+                if (closeModalBtn) {
+                    closeModalBtn.addEventListener('click', function() {
+                        correspondingModal.style.display = 'none';
+                    });
+                }
 
-        if (cancelModalCloseBtn) {
-            cancelModalCloseBtn.addEventListener('click', function() {
-                cancelBookingModal.style.display = 'none';
-            });
-        }
+                if (keepBookingBtn) {
+                    keepBookingBtn.addEventListener('click', function() {
+                        correspondingModal.style.display = 'none';
+                    });
+                }
+
+                if (confirmCancelBtn) {
+                    confirmCancelBtn.addEventListener('click', function() {
+                        correspondingModal.style.display = 'none';
+                    });
+                }
+
+                // Close modal when clicking outside
+                window.addEventListener('click', function(event) {
+                    if (event.target === correspondingModal) {
+                        correspondingModal.style.display = 'none';
+                    }
+                });
+            }
+        });
     }
-
-    // Close modals when clicking outside of them
-    window.addEventListener('click', function(event) {
-        if (boardingPassModal && event.target === boardingPassModal) {
-            boardingPassModal.style.display = 'none';
-        }
-        if (cancelBookingModal && event.target === cancelBookingModal) {
-            cancelBookingModal.style.display = 'none';
-        }
-    });
 
     // Profile modal functionality
     const modal = document.getElementById("profile-modal")
