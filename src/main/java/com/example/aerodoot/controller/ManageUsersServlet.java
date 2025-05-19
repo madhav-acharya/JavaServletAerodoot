@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.model.User;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -63,12 +64,17 @@ public class ManageUsersServlet extends HttpServlet {
                 int updateUserId = UserDAO.updateUser(user);
 
                 if (updateUserId >= 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "User updated successfully");
                     System.out.println("success");
                     users = UserDAO.getAllUsers();
                     getServletContext().setAttribute("users", users);
                 }
+                else{
+                    FlashMessageUtil.setError(request.getSession(), "Error updating Users");
+                }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error updating user: " + e.getMessage());
                 throw new ServletException("Failed to update user", e);
             }
@@ -79,16 +85,19 @@ public class ManageUsersServlet extends HttpServlet {
                 int userId = Integer.parseInt(request.getParameter("userId"));
                 boolean success = UserDAO.deleteUser(userId);
                 if (success) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "User deleted successfully");
                     System.out.println("success");
                     users = UserDAO.getAllUsers();
                     getServletContext().setAttribute("users", users);
                 }
                 else{
+                    FlashMessageUtil.setError(request.getSession(), "Error deleting Users");
                     System.out.println("failed to delete user");
                 }
             }
             catch (Exception e)
             {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error deleting user: " + e.getMessage());
             }
         }
