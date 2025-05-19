@@ -348,99 +348,102 @@
     <!-- Past Bookings Tab Content -->
     <div class="flight-tab-content" id="flight-content-past">
 
-    <c:if test="${not empty recentFlights}">
-        <c:forEach var="item" items="${recentFlights}">
-        <div class="flight-booking-card">
-            <div class="flight-booking-header-recent">
-                <div class="flight-booking-number">
-                    <i class="fas fa-ticket-alt"></i>
-                    Booking #BK10${item.booking.bookingId}
+        <c:if test="${not empty recentFlights}">
+            <c:forEach var="item" items="${recentFlights}">
+            <div class="flight-booking-card">
+                <div class="flight-booking-header-recent">
+                    <div class="flight-booking-number">
+                        <i class="fas fa-ticket-alt"></i>
+                        Booking #BK10${item.booking.bookingId}
+                    </div>
+                    <div class="flight-booking-status completed">${item.booking.bookingStatus}</div>
                 </div>
-                <div class="flight-booking-status completed">${item.booking.bookingStatus}</div>
+
+                <div class="flight-booking-content">
+                    <div class="flight-details-section">
+                        <h3 class="flight-section-title">Flight Details</h3>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Flight</div>
+                                <div class="flight-detail-value">${item.airline.name} → ${item.aircraft.model}</div>
+                            </div>
+                        </div>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Route</div>
+                                <div class="flight-route-db">${item.flight.departureLocation} → ${item.flight.arrivalLocation}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flight-date-section">
+                        <h3 class="flight-section-title">Date & Time</h3>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-icon">
+                                <i class="far fa-calendar-alt"></i>
+                            </div>
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Departure Date</div>
+                                <div class="flight-detail-value">${item.flight.flightDate}</div>
+                            </div>
+                        </div>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-icon">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Time</div>
+                                <div class="flight-detail-value">${item.flight.departureTime} - ${item.flight.arrivalTime}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flight-booking-info-section">
+                        <h3 class="flight-section-title">Booking Info</h3>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Booking Date</div>
+                                <div class="flight-detail-value">${item.booking.bookingDate}</div>
+                            </div>
+                        </div>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Passengers</div>
+                                <div class="flight-detail-value">${item.booking.seatsBooked}</div>
+                            </div>
+                        </div>
+
+                        <div class="flight-detail-item">
+                            <div class="flight-detail-content">
+                                <div class="flight-detail-label">Total Price</div>
+                                <div class="flight-price">NPR ${item.booking.totalPrice}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-booking-actions">
+                    <button class="flight-btn flight-btn-secondary">Download Invoice</button>
+                    <button class="flight-btn flight-btn-primary">Book Similar Flight</button>
+                </div>
             </div>
-
-            <div class="flight-booking-content">
-                <div class="flight-details-section">
-                    <h3 class="flight-section-title">Flight Details</h3>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-icon">
-                            <i class="fas fa-plane"></i>
-                        </div>
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Flight</div>
-                            <div class="flight-detail-value">${item.airline.name} → ${item.aircraft.model}</div>
-                        </div>
-                    </div>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Route</div>
-                            <div class="flight-route-db">${item.flight.departureLocation} → ${item.flight.arrivalLocation}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flight-date-section">
-                    <h3 class="flight-section-title">Date & Time</h3>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-icon">
-                            <i class="far fa-calendar-alt"></i>
-                        </div>
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Departure Date</div>
-                            <div class="flight-detail-value">${item.flight.flightDate}</div>
-                        </div>
-                    </div>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-icon">
-                            <i class="far fa-clock"></i>
-                        </div>
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Time</div>
-                            <div class="flight-detail-value">${item.flight.departureTime} - ${item.flight.arrivalTime}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flight-booking-info-section">
-                    <h3 class="flight-section-title">Booking Info</h3>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Booking Date</div>
-                            <div class="flight-detail-value">${item.booking.bookingDate}</div>
-                        </div>
-                    </div>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Passengers</div>
-                            <div class="flight-detail-value">${item.booking.seatsBooked}</div>
-                        </div>
-                    </div>
-
-                    <div class="flight-detail-item">
-                        <div class="flight-detail-content">
-                            <div class="flight-detail-label">Total Price</div>
-                            <div class="flight-price">NPR ${item.booking.totalPrice}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flight-booking-actions">
-                <button class="flight-btn flight-btn-secondary">Download Invoice</button>
-                <button class="flight-btn flight-btn-primary">Book Similar Flight</button>
-            </div>
-        </div>
-        </c:forEach>
-    </c:if>
+            </c:forEach>
+        </c:if>
+        <c:if test="${recentBookingNum == 0}">
+            <div>You have not booked any flights</div>
+        </c:if>
     </div>
 
     <!-- Boarding Pass Modal -->

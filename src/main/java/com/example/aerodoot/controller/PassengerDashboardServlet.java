@@ -102,6 +102,7 @@ public class PassengerDashboardServlet extends HttpServlet {
             session.setAttribute("passengerId", passengerData.getPassenger().getPassengerId());
 
             request.setAttribute("upcomingBookingNum", upcomingFlights.size());
+            request.setAttribute("recentBookingNum", recentFlights.size());
             request.setAttribute("totalBookingNum", recentFlights.size() + upcomingFlights.size());
             request.setAttribute("upcomingFlights", upcomingFlights);
             request.setAttribute("recentFlights", recentFlights);
