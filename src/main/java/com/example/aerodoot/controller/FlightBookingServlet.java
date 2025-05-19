@@ -6,6 +6,7 @@ import com.example.aerodoot.dao.FlightDAO;
 import com.example.aerodoot.model.Aircraft;
 import com.example.aerodoot.model.Airline;
 import com.example.aerodoot.model.Flight;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -106,6 +107,7 @@ public class FlightBookingServlet extends HttpServlet {
                 java.util.Date utilDate = sdf.parse(departureDateStr);
                 departureDate = new java.sql.Date(utilDate.getTime());
             } catch (ParseException e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 e.printStackTrace();
                 System.out.println("Error parsing date: " + departureDateStr);
             }
@@ -120,6 +122,7 @@ public class FlightBookingServlet extends HttpServlet {
                 java.util.Date utilDate = sdf.parse(returnDateStr);
                 returnDate = new java.sql.Date(utilDate.getTime());
             } catch (ParseException e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 e.printStackTrace();
                 System.out.println("Error parsing date: " + returnDateStr);
             }
@@ -139,6 +142,7 @@ public class FlightBookingServlet extends HttpServlet {
                 session.setAttribute("trip", "Round Trip");
                 session.setAttribute("passenger", passenger);
             } catch (SQLException e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 throw new RuntimeException(e);
             }
         } else {
@@ -149,6 +153,7 @@ public class FlightBookingServlet extends HttpServlet {
                 session.setAttribute("passenger", passenger);
                 flights = FlightDAO.getAllSearchFlights(departureLocation, arrivalLocation, departureDate);
             } catch (SQLException e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -159,6 +164,7 @@ public class FlightBookingServlet extends HttpServlet {
         session.setAttribute("arrivalLocation", arrivalLocation);
         session.setAttribute("flights", flights);
         System.out.println(flights.size());
+        FlashMessageUtil.setSuccess(request.getSession(), "Flight Booking Successful");
 
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }
