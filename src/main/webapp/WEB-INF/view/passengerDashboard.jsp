@@ -293,7 +293,17 @@
             </c:forEach>
         </c:if>
         <c:if test="${recentBookingNum == 0}">
-
+            <div class="empty-booking-container past">
+                <div class="empty-booking-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3 class="empty-booking-title">No Past Flights</h3>
+                <p class="empty-booking-message">Your flight history will appear here once you've completed trips with us.</p>
+                <a href="#" class="book-now-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Book Your First Trip
+                </a>
+            </div>
         </c:if>
     </div>
 
