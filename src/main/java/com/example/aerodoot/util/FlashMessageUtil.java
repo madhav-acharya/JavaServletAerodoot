@@ -7,7 +7,6 @@ public class FlashMessageUtil {
         session.setAttribute("toastMessage", message);
         session.setAttribute("toastType", "success");
     }
-g
     public static void setError(HttpSession session, String message) {
         session.setAttribute("toastMessage", message);
         session.setAttribute("toastType", "error");

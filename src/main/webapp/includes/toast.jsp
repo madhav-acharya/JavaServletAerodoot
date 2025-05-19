@@ -40,15 +40,15 @@
         z-index: 9999;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 30px;
+        top: 1rem;
         font-size: 16px;
         opacity: 0;
-        transition: opacity 0.5s ease, bottom 0.5s ease;
+        transition: opacity 0.5s ease, top 1s ease;
     }
     .toast.show {
         visibility: visible;
         opacity: 1;
-        bottom: 50px;
+        top: 10rem;
     }
     .toast.success { background-color: #28a745; }
     .toast.error { background-color: #dc3545; }

@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.model.User;
 import com.example.aerodoot.service.AuthService;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,6 +40,8 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
 
+            FlashMessageUtil.setSuccess(request.getSession(), "Login Succeed");
+
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("userType", user.getUserType());
             session.setAttribute("user", user);
@@ -59,6 +62,7 @@ public class LoginServlet extends HttpServlet {
             }
         } else {
             // Login failed
+            FlashMessageUtil.setError(request.getSession(), "Invalid email or password");
             request.setAttribute("email", email);
             request.setAttribute("error", "Invalid email or password");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
