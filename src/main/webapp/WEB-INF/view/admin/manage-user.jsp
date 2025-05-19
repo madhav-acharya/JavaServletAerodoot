@@ -44,14 +44,14 @@
                                 <option value="ADMIN">Admin</option>
                             </select>
                         </div>
-                        <div class="filter-group">
-                            <label>Registration Date</label>
-                            <div class="date-range-picker">
-                                <input type="date" id="user-start-date" class="input date-input" value="2023-04-28">
-                                <span>to</span>
-                                <input type="date" id="user-end-date" class="input date-input" value="2023-05-15">
-                            </div>
-                        </div>
+<%--                        <div class="filter-group">--%>
+<%--                            <label>Registration Date</label>--%>
+<%--                            <div class="date-range-picker">--%>
+<%--                                <input type="date" id="user-start-date" class="input date-input" value="2023-04-28">--%>
+<%--                                <span>to</span>--%>
+<%--                                <input type="date" id="user-end-date" class="input date-input" value="2023-05-15">--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
 
                     <div class="table-container">

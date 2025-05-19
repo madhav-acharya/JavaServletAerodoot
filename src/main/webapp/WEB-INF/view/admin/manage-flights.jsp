@@ -50,23 +50,23 @@
             <div class="filter-group">
               <label for="status-filter">Status</label>
               <select id="status-filter" class="select">
-                <option value="all">All Statuses</option>
-                <option value="scheduled">Scheduled</option>
-                <option value="ontime">On Time</option>
-                <option value="delayed">Delayed</option>
-                <option value="inair">In Air</option>
-                <option value="landed">Landed</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="ALL">All Statuses</option>
+                <option value="SCHEDULED">Scheduled</option>
+                <option value="ONTIME">On Time</option>
+                <option value="DELAYED">Delayed</option>
+                <option value="INAIR">In Air</option>
+                <option value="LANDED">Landed</option>
+                <option value="CANCELLED">Cancelled</option>
               </select>
             </div>
-            <div class="filter-group">
-              <label>Date Range</label>
-              <div class="date-range-picker">
-                <input type="date" id="flight-start-date" class="input date-input" value="2023-05-01">
-                <span>to</span>
-                <input type="date" id="flight-end-date" class="input date-input" value="2023-05-15">
-              </div>
-            </div>
+<%--            <div class="filter-group">--%>
+<%--              <label>Date Range</label>--%>
+<%--              <div class="date-range-picker">--%>
+<%--                <input type="date" id="flight-start-date" class="input date-input" value="2023-05-01">--%>
+<%--                <span>to</span>--%>
+<%--                <input type="date" id="flight-end-date" class="input date-input" value="2023-05-15">--%>
+<%--              </div>--%>
+<%--            </div>--%>
           </div>
 
           <div class="table-container">

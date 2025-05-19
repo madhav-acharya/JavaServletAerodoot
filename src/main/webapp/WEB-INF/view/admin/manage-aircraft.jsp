@@ -45,15 +45,15 @@
               <label for="search-aircraft">Search Aircraft</label>
               <input type="text" id="search-aircraft" class="input" placeholder="Search by registration, model, manufacturer...">
             </div>
-            <div class="filter-group">
-              <label for="aircraft-status-filter">Status</label>
-              <select id="aircraft-status-filter" class="select">
-                <option value="all">All Statuses</option>
-                <option value="active">Active</option>
-                <option value="maintenance">Maintenance</option>
-                <option value="retired">Retired</option>
-              </select>
-            </div>
+<%--            <div class="filter-group">--%>
+<%--              <label for="aircraft-status-filter">Status</label>--%>
+<%--              <select id="aircraft-status-filter" class="select">--%>
+<%--                <option value="all">All Statuses</option>--%>
+<%--                <option value="active">Active</option>--%>
+<%--                <option value="maintenance">Maintenance</option>--%>
+<%--                <option value="retired">Retired</option>--%>
+<%--              </select>--%>
+<%--            </div>--%>
           </div>
 
           <div class="table-container">

@@ -45,14 +45,14 @@
                             <label for="search-airlines">Search Airlines</label>
                             <input type="text" id="search-airlines" class="input" placeholder="Search by name, code, country...">
                         </div>
-                        <div class="filter-group">
-                            <label for="airline-status-filter">Status</label>
-                            <select id="airline-status-filter" class="select">
-                                <option value="all">All Statuses</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
+<%--                        <div class="filter-group">--%>
+<%--                            <label for="airline-status-filter">Status</label>--%>
+<%--                            <select id="airline-status-filter" class="select">--%>
+<%--                                <option value="all">All Statuses</option>--%>
+<%--                                <option value="active">Active</option>--%>
+<%--                                <option value="inactive">Inactive</option>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
                     </div>
 
                     <div class="table-container">
