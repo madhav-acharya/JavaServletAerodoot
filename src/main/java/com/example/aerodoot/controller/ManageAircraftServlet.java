@@ -112,6 +112,9 @@ public class ManageAircraftServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/admin/manage-aircraft");
                     return;
                 }
+                else{
+                    FlashMessageUtil.setError(request.getSession(), "Aircraft Update Failed");
+                }
 
             } catch (Exception e) {
                 FlashMessageUtil.setError(request.getSession(), e.getMessage());

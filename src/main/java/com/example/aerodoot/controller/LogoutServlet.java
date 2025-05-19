@@ -16,10 +16,10 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        FlashMessageUtil.setSuccess(request.getSession(), "Logged out");
 
         if(session!=null){
             session.invalidate();
-            FlashMessageUtil.setSuccess(session, "Logged out");
             request.getRequestDispatcher("/home.jsp").forward(request,response);
         }
     }

@@ -53,6 +53,10 @@ public class ManageAirlineServlet extends HttpServlet {
                 airline.setContactNumber(contactNumber);
                 airline.setEmail(email);
 
+                if (name == null || name.isEmpty() || headquarters == null || headquarters.isEmpty() || contactNumber == null || contactNumber.isEmpty() || email == null || email.isEmpty()) {
+                    FlashMessageUtil.setError(request.getSession(), "Please fill all the fields");
+                }
+
                 int createdAirlineId = AirlineDAO.createAirline(airline);
 
                 if (createdAirlineId >= 0) {
@@ -98,6 +102,9 @@ public class ManageAirlineServlet extends HttpServlet {
                     getServletContext().setAttribute("airlines", airlines);
                     response.sendRedirect(request.getContextPath() + "/admin/manage-airline");
                     return;
+                }
+                else{
+                    FlashMessageUtil.setError(request.getSession(), "Error updating airline");
                 }
 
             } catch (Exception e) {

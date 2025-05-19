@@ -43,12 +43,12 @@
         top: 1rem;
         font-size: 16px;
         opacity: 0;
-        transition: opacity 0.5s ease, top 1s ease;
+        transition: opacity 0.5s ease, top 0.5s ease;
     }
     .toast.show {
         visibility: visible;
         opacity: 1;
-        top: 10rem;
+        top: 5rem;
     }
     .toast.success { background-color: #28a745; }
     .toast.error { background-color: #dc3545; }

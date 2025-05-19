@@ -164,7 +164,6 @@ public class FlightBookingServlet extends HttpServlet {
         session.setAttribute("arrivalLocation", arrivalLocation);
         session.setAttribute("flights", flights);
         System.out.println(flights.size());
-        FlashMessageUtil.setSuccess(request.getSession(), "Flight Booking Successful");
 
         response.sendRedirect(request.getContextPath() + "/flight-booking");
     }
