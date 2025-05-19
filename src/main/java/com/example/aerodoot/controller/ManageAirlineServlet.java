@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.AirlineDAO;
 import com.example.aerodoot.model.Airline;
+import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -55,16 +56,19 @@ public class ManageAirlineServlet extends HttpServlet {
                 int createdAirlineId = AirlineDAO.createAirline(airline);
 
                 if (createdAirlineId >= 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Airline created successfully");
                     System.out.println("Airline creation successful");
                     airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
                     response.sendRedirect(request.getContextPath() + "/admin/manage-airline");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Error creating airline");
                     System.out.println("Failed to create airline");
                 }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error creating airline: " + e.getMessage());
                 throw new ServletException("Failed to create airline", e);
             }
@@ -88,6 +92,7 @@ public class ManageAirlineServlet extends HttpServlet {
                 int updateAirlineResult = AirlineDAO.updateAirline(airline);
 
                 if (updateAirlineResult == 0) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Airline updated successfully");
                     System.out.println("Airline update successful");
                     airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
@@ -96,6 +101,7 @@ public class ManageAirlineServlet extends HttpServlet {
                 }
 
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error updating airline: " + e.getMessage());
                 throw new ServletException("Failed to update airline", e);
             }
@@ -106,15 +112,18 @@ public class ManageAirlineServlet extends HttpServlet {
                 int airlineId = Integer.parseInt(request.getParameter("airlineId"));
                 boolean success = AirlineDAO.deleteAirline(airlineId);
                 if (success) {
+                    FlashMessageUtil.setSuccess(request.getSession(), "Airline deleted successfully");
                     System.out.println("Airline delete successful");
                     airlines = AirlineDAO.getAllAirlines();
                     getServletContext().setAttribute("airlines", airlines);
                     response.sendRedirect(request.getContextPath() + "/admin/manage-airline");
                     return;
                 } else {
+                    FlashMessageUtil.setError(request.getSession(), "Error deleting airline");
                     System.out.println("Failed to delete airline");
                 }
             } catch (Exception e) {
+                FlashMessageUtil.setError(request.getSession(), e.getMessage());
                 System.err.println("Error deleting airline: " + e.getMessage());
             }
         }
