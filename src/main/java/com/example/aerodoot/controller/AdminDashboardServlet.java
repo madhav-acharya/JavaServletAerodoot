@@ -3,6 +3,7 @@ package com.example.aerodoot.controller;
 import com.example.aerodoot.dao.AdminDAO;
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.dto.BookingTrend;
+import com.example.aerodoot.dto.FlightDistribution;
 import com.example.aerodoot.model.User;
 import com.example.aerodoot.service.AuthService;
 import com.example.aerodoot.util.AdminDashboardUtil;
@@ -33,7 +34,7 @@ public class AdminDashboardServlet extends HttpServlet {
         double totalRevenue = (double) getServletContext().getAttribute("totalRevenue");
         int totalPassengers = (int) getServletContext().getAttribute("totalPassengers");
         List<BookingTrend> bookingTrends = (List<BookingTrend>) getServletContext().getAttribute("bookingTrends");
-        List<AdminDAO.FlightDistribution> flightDistributions = (List<AdminDAO.FlightDistribution>) getServletContext().getAttribute("flightDistributions");
+        List<FlightDistribution> flightDistributions = (List<FlightDistribution>) getServletContext().getAttribute("flightDistributions");
 
         // Setting attributes for the JSP view
         request.setAttribute("totalFlights", totalFlights);

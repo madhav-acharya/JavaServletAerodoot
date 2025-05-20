@@ -1,6 +1,7 @@
 package com.example.aerodoot.dao;
 
 import com.example.aerodoot.dto.BookingTrend;
+import com.example.aerodoot.dto.FlightDistribution;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.Connection;
@@ -91,25 +92,6 @@ public class AdminDAO {
             }
         }
         return flightDistributions;
-    }
-
-    // Data Transfer Object for Flight Distribution
-    public static class FlightDistribution {
-        private String location;
-        private int count;
-
-        public FlightDistribution(String location, int count) {
-            this.location = location;
-            this.count = count;
-        }
-
-        public String getLocation() {
-            return location;
-        }
-
-        public int getCount() {
-            return count;
-        }
     }
 
     public List<BookingAnalysisByClass> getBookingAnalysisByClass() throws SQLException {
