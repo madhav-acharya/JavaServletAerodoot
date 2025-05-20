@@ -26,6 +26,7 @@ public class AdminDashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AdminDashboardUtil.refreshDashboardData(getServletContext());
         int totalFlights = (int) getServletContext().getAttribute("totalFlights");
         int activeBookings = (int) getServletContext().getAttribute("activeBookings");
         double totalRevenue = (double) getServletContext().getAttribute("totalRevenue");

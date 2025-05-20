@@ -23,6 +23,7 @@ public class AdminAnalyticsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AdminAnalyticsUtil.refreshAnalyticsData(getServletContext());
         List<AdminDAO.BookingAnalysisByClass> bookingAnalysisByClass = (List<AdminDAO.BookingAnalysisByClass>) getServletContext().getAttribute("bookingAnalysisByClass");
         List<AdminDAO.RevenueByRoute> revenueByRoute = (List<AdminDAO.RevenueByRoute>) getServletContext().getAttribute("revenueByRoute");
         request.setAttribute("bookingAnalysisByClass", bookingAnalysisByClass);
