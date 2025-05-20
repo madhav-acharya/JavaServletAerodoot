@@ -424,11 +424,6 @@ body {
     grid-template-columns: 1fr;
     gap: 16px;
 }
-
-.chart-card {
-    height: 100%;
-}
-
 .chart-container {
     position: relative;
     height: 300px;
@@ -568,14 +563,14 @@ label {
 .data-table th {
     font-weight: 600;
     color: var(--gray-700);
-    background-color: var(--gray-50);
+    background-color: var(--gray-100);
     position: sticky;
     top: 0;
     z-index: 1;
 }
 
 .data-table tbody tr:hover {
-    background-color: var(--gray-50);
+    background-color: var(--gray-100);
 }
 
 /* Status Badges */
