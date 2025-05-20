@@ -38,7 +38,7 @@ public class AdminDAO {
 
     // Method to get total revenue
     public double getTotalRevenue() throws SQLException {
-        String query = "SELECT SUM(totalPrice) AS total_revenue FROM Booking WHERE bookingStatus = 'CONFIRMED'";
+        String query = "SELECT SUM(totalPrice) AS total_revenue FROM Booking WHERE bookingStatus IN ('CONFIRMED', 'COMPLETED')";
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
@@ -155,7 +155,7 @@ public class AdminDAO {
     public List<RevenueByRoute> getRevenueByRoute() throws SQLException {
         String query = "SELECT departureLocation, arrivalLocation, SUM(totalPrice) AS total_revenue " +
                 "FROM Booking JOIN Flight ON Booking.flightId = Flight.flightId " +
-                "WHERE bookingStatus = 'CONFIRMED' " +
+                "WHERE bookingStatus in ('CONFIRMED', 'COMPLETED')" +
                 "GROUP BY departureLocation, arrivalLocation";
         List<RevenueByRoute> revenueByRoute = new ArrayList<>();
         try (Connection conn = DbConnectionUtil.getConnection();

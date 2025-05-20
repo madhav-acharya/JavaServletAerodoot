@@ -55,7 +55,7 @@
         </div>
         <div class="card-content">
           <div class="chart-container">
-            <canvas id="booking-analytics-chart" height="400"></canvas>
+            <canvas id="booking-analytics-chart" height="200"></canvas>
           </div>
           <div class="chart-actions">
             <button class="btn btn-outline btn-sm" id="reset-zoom-btn">Reset Zoom</button>
@@ -72,7 +72,7 @@
         </div>
         <div class="card-content">
           <div class="chart-container">
-            <canvas id="revenue-route-chart" height="350"></canvas>
+            <canvas id="revenue-route-chart" height="200"></canvas>
           </div>
         </div>
       </div>
@@ -82,12 +82,14 @@
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
+    // Restore active tab from localStorage
     const savedTab = localStorage.getItem('activeTab');
     if (savedTab) {
       updateActiveMenuItem(savedTab);
     }
 
+    // Booking Analysis Data (from JSP)
     const bookingAnalysisByClass = [
       <c:forEach var="b" items="${bookingAnalysisByClass}" varStatus="status">
       {
@@ -97,24 +99,24 @@
       }<c:if test="${!status.last}">,</c:if>
       </c:forEach>
     ];
-    // Booking Analytics Chart
+
     const bookingAnalyticsCtx = document.getElementById('booking-analytics-chart')?.getContext('2d');
     if (bookingAnalyticsCtx) {
-      console.log("bookingAnalysisByClass: ", bookingAnalysisByClass);
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const economyData = months.map(month =>
-              bookingAnalysisByClass.filter(b => b.classType === 'ECONOMY' && b.month === (months.indexOf(month) + 1))
-                      .reduce((total, b) => total + b.bookingCount, 0)
-      );
-      const businessData = months.map(month =>
-              bookingAnalysisByClass.filter(b => b.classType === 'BUSINESS' && b.month === (months.indexOf(month) + 1))
+
+      const economyData = months.map((month, index) =>
+              bookingAnalysisByClass
+                      .filter(b => b.classType === 'ECONOMY' && b.month === (index + 1))
                       .reduce((total, b) => total + b.bookingCount, 0)
       );
 
-      console.log("economyData: ", economyData);
-      console.log("businessData: ", businessData);
+      const businessData = months.map((month, index) =>
+              bookingAnalysisByClass
+                      .filter(b => b.classType === 'BUSINESS' && b.month === (index + 1))
+                      .reduce((total, b) => total + b.bookingCount, 0)
+      );
 
-      const bookingAnalyticsConfig = {
+      const bookingAnalyticsChart = createZoomableChart(bookingAnalyticsCtx, {
         type: 'line',
         data: {
           labels: months,
@@ -152,54 +154,33 @@
             }
           }
         }
-      };
+      });
 
-      const bookingAnalyticsChart = createZoomableChart(bookingAnalyticsCtx, bookingAnalyticsConfig);
+      window.bookingAnalyticsChart = bookingAnalyticsChart;
 
-      // Reset zoom button
-      document.getElementById('reset-zoom-btn')?.addEventListener('click', function() {
+      // Extra controls
+      document.getElementById('reset-zoom-btn')?.addEventListener('click', () => {
         resetChartZoom(bookingAnalyticsChart);
       });
 
-      // Download CSV button
-      document.getElementById('download-csv-btn')?.addEventListener('click', function() {
+      document.getElementById('download-csv-btn')?.addEventListener('click', () => {
         exportTableAsCSV('bookings-table', 'booking-analytics.csv');
       });
 
-      // Download Image button
-      document.getElementById('download-image-btn')?.addEventListener('click', function() {
+      document.getElementById('download-image-btn')?.addEventListener('click', () => {
         exportChartAsImage(bookingAnalyticsChart, 'booking-analytics.png');
       });
 
-      // Date range filter
-      const startDateInput = document.getElementById('analytics-start-date');
-      const endDateInput = document.getElementById('analytics-end-date');
-
-      function updateChartDateRange() {
-        // In a real application, this would fetch data for the selected date range
-        // For this demo, we'll just show an alert
-        alert(`Date range updated: ${startDateInput.value} to ${endDateInput.value}`);
-      }
-
-      startDateInput.addEventListener('change', updateChartDateRange);
-      endDateInput.addEventListener('change', updateChartDateRange);
-
-      // Chart type selector
       const chartTypeSelect = document.getElementById('chart-type');
-
-      chartTypeSelect.addEventListener('change', function() {
-        const chartType = this.value;
-        bookingAnalyticsChart.config.type = chartType;
-        bookingAnalyticsChart.update();
-      });
-
-      // Generate report button
-      document.getElementById('generate-report-btn').addEventListener('click', function() {
-        alert('Generating report for date range: ' + startDateInput.value + ' to ' + endDateInput.value);
-      });
+      if (chartTypeSelect) {
+        chartTypeSelect.addEventListener('change', function () {
+          bookingAnalyticsChart.config.type = this.value;
+          bookingAnalyticsChart.update();
+        });
+      }
     }
 
-
+    // Revenue By Route Data (from JSP)
     const revenueRouteLabels = [
       <c:forEach var="r" items="${revenueByRoute}" varStatus="status">
       '${r.routeName}'<c:if test="${!status.last}">,</c:if>
@@ -211,13 +192,10 @@
       ${r.totalRevenue}<c:if test="${!status.last}">,</c:if>
       </c:forEach>
     ];
-    console.log("revenueRouteLabels: ", revenueRouteLabels);
-    console.log("revenueRouteData: ", revenueRouteData);
 
-    // Revenue by Route Chart
     const revenueRouteCtx = document.getElementById('revenue-route-chart')?.getContext('2d');
     if (revenueRouteCtx) {
-      const revenueRouteConfig = {
+      const revenueRouteChart = createZoomableChart(revenueRouteCtx, {
         type: 'bar',
         data: {
           labels: revenueRouteLabels,
@@ -244,29 +222,24 @@
             }
           }
         }
-      };
-
-      const revenueRouteChart = createZoomableChart(revenueRouteCtx, revenueRouteConfig);
-
-      // Add reset zoom button
-      const resetZoomBtn = document.createElement('button');
-      resetZoomBtn.className = 'btn btn-outline btn-sm';
-      resetZoomBtn.textContent = 'Reset Zoom';
-      resetZoomBtn.addEventListener('click', function() {
-        resetChartZoom(revenueRouteChart);
       });
 
+      window.revenueRouteChart = revenueRouteChart;
+
+      // Optional: Add reset zoom button dynamically
+      const resetZoomBtn = document.createElement('button');
+      resetZoomBtn.className = 'btn btn-outline btn-sm mt-2';
+      resetZoomBtn.textContent = 'Reset Zoom';
+      resetZoomBtn.addEventListener('click', () => {
+        resetChartZoom(revenueRouteChart);
+      });
       revenueRouteCtx.canvas.parentNode.parentNode.appendChild(resetZoomBtn);
     }
 
-    // Handle window resize for chart responsiveness
-    window.addEventListener('resize', function() {
-      if (window.bookingAnalyticsChart) {
-        window.bookingAnalyticsChart.resize();
-      }
-      if (window.revenueRouteChart) {
-        window.revenueRouteChart.resize();
-      }
+    // Handle window resize for responsiveness
+    window.addEventListener('resize', function () {
+      if (window.bookingAnalyticsChart) window.bookingAnalyticsChart.resize();
+      if (window.revenueRouteChart) window.revenueRouteChart.resize();
     });
   });
 </script>

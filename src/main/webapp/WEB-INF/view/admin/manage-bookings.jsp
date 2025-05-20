@@ -123,6 +123,7 @@
                   <option value="CONFIRMED">Confirmed</option>
                   <option value="PENDING">Pending</option>
                   <option value="CANCELLED">Cancelled</option>
+                  <option value="COMPLETED">Completed</option>
                 </select>
               </div>
               <div class="form-group">
