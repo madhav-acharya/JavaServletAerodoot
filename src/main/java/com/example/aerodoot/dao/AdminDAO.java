@@ -3,6 +3,7 @@ package com.example.aerodoot.dao;
 import com.example.aerodoot.dto.BookingAnalysisByClass;
 import com.example.aerodoot.dto.BookingTrend;
 import com.example.aerodoot.dto.FlightDistribution;
+import com.example.aerodoot.dto.RevenueByRoute;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.Connection;
@@ -135,34 +136,6 @@ public class AdminDAO {
             }
         }
         return revenueByRoute;
-    }
-
-    // Data Transfer Object for Revenue by Route
-    public static class RevenueByRoute {
-        private String departureLocation;
-        private String arrivalLocation;
-        private double totalRevenue;
-
-        public RevenueByRoute(String departureLocation, String arrivalLocation, double totalRevenue) {
-            this.departureLocation = departureLocation;
-            this.arrivalLocation = arrivalLocation;
-            this.totalRevenue = totalRevenue;
-        }
-
-        public String getDepartureLocation() {
-            return departureLocation;
-        }
-
-        public String getArrivalLocation() {
-            return arrivalLocation;
-        }
-
-        public double getTotalRevenue() {
-            return totalRevenue;
-        }
-        public String getRouteName() {
-            return departureLocation + " to " + arrivalLocation;
-        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.AdminDAO;
 import com.example.aerodoot.dto.BookingAnalysisByClass;
+import com.example.aerodoot.dto.RevenueByRoute;
 import com.example.aerodoot.util.AdminAnalyticsUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class AdminAnalyticsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AdminAnalyticsUtil.refreshAnalyticsData(getServletContext());
         List<BookingAnalysisByClass> bookingAnalysisByClass = (List<BookingAnalysisByClass>) getServletContext().getAttribute("bookingAnalysisByClass");
-        List<AdminDAO.RevenueByRoute> revenueByRoute = (List<AdminDAO.RevenueByRoute>) getServletContext().getAttribute("revenueByRoute");
+        List<RevenueByRoute> revenueByRoute = (List<RevenueByRoute>) getServletContext().getAttribute("revenueByRoute");
         request.setAttribute("bookingAnalysisByClass", bookingAnalysisByClass);
         request.setAttribute("revenueByRoute", revenueByRoute);
 

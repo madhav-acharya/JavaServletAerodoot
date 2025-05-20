@@ -2,6 +2,7 @@ package com.example.aerodoot.util;
 
 import com.example.aerodoot.dao.AdminDAO;
 import com.example.aerodoot.dto.BookingAnalysisByClass;
+import com.example.aerodoot.dto.RevenueByRoute;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 
@@ -13,7 +14,7 @@ public class AdminAnalyticsUtil {
         AdminDAO adminDAO = new AdminDAO();
         try {
             List<BookingAnalysisByClass> bookingAnalysisByClass = adminDAO.getBookingAnalysisByClass();
-            List<AdminDAO.RevenueByRoute> revenueByRoute = adminDAO.getRevenueByRoute();
+            List<RevenueByRoute> revenueByRoute = adminDAO.getRevenueByRoute();
 
             context.setAttribute("bookingAnalysisByClass", bookingAnalysisByClass);
             context.setAttribute("revenueByRoute", revenueByRoute);
