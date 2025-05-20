@@ -4,6 +4,8 @@ import com.example.aerodoot.dao.AdminDAO;
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.model.User;
 import com.example.aerodoot.service.AuthService;
+import com.example.aerodoot.util.AdminDashboardUtil;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,30 +21,7 @@ import java.util.List;
 public class AdminDashboardServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
-        try {
-            AdminDAO dataModel = new AdminDAO();
-
-            // Fetching the required data from the model
-            int totalFlights = dataModel.getTotalFlights();
-            int activeBookings = dataModel.getActiveBookings();
-            double totalRevenue = dataModel.getTotalRevenue();
-            int totalPassengers = dataModel.getTotalPassengers();
-            List<AdminDAO.BookingTrend> bookingTrends = dataModel.getBookingTrends();
-            List<AdminDAO.FlightDistribution> flightDistributions = dataModel.getFlightDistribution();
-
-            // Storing the data in the ServletContext (for reuse in all requests)
-            getServletContext().setAttribute("totalFlights", totalFlights);
-            getServletContext().setAttribute("activeBookings", activeBookings);
-            getServletContext().setAttribute("totalRevenue", totalRevenue);
-            getServletContext().setAttribute("totalPassengers", totalPassengers);
-            getServletContext().setAttribute("bookingTrends", bookingTrends);
-            getServletContext().setAttribute("flightDistributions", flightDistributions);
-
-        } catch (SQLException e) {
-            System.err.println("Error initializing dashboard data: " + e.getMessage());
-            e.printStackTrace();
-            throw new ServletException("Error initializing dashboard data", e);
-        }
+        AdminDashboardUtil.refreshDashboardData(getServletContext());
     }
 
     @Override
