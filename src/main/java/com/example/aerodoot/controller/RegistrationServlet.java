@@ -40,7 +40,6 @@ public class RegistrationServlet extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/userType.jsp");
                 dispatcher.forward(request, response);
             } else {
-                FlashMessageUtil.setError(request.getSession(), "User Registration Failed!");
                 System.out.println("User creation failed " + fullname + " " + email + " " + phonenumber + " " + password + " " + confirmpassword);
                 String errorMessage = AuthService.getErrorMessage(userId);
                 request.setAttribute("errorMessage", errorMessage);
