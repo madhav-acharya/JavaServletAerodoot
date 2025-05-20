@@ -174,8 +174,8 @@
                 </div>
 
                 <div class="flight-booking-actions">
-                    <button class="flight-btn flight-btn-secondary" id="flight-btn-boarding-pass-1">Boarding Pass</button>
-                    <button class="flight-btn flight-btn-danger" id="flight-btn-cancel-booking-1">Cancel Booking</button>
+                    <button class="flight-btn flight-btn-secondary" id="flight-btn-boarding-pass-${item.booking.bookingId}">Boarding Pass</button>
+                    <button class="flight-btn flight-btn-danger" id="flight-btn-cancel-booking-${item.booking.bookingId}">Cancel Booking</button>
                 </div>
             </div>
         </c:forEach>
