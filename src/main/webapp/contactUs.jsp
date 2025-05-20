@@ -47,22 +47,22 @@
             <div class="aerodoot-contact__form-row">
                 <div class="aerodoot-contact__form-group">
                     <label class="aerodoot-contact__form-label" for="fullName">Full Name</label>
-                    <input type="text" id="fullName" class="aerodoot-contact__form-input" placeholder="John Doe">
+                    <input type="text" id="fullName" class="aerodoot-contact__form-input" placeholder="John Doe" required>
                 </div>
                 <div class="aerodoot-contact__form-group">
                     <label class="aerodoot-contact__form-label" for="email">Email Address</label>
-                    <input type="email" id="email" class="aerodoot-contact__form-input" placeholder="john@example.com">
+                    <input type="email" id="email" class="aerodoot-contact__form-input" placeholder="john@example.com" required>
                 </div>
             </div>
 
             <div class="aerodoot-contact__form-group">
                 <label class="aerodoot-contact__form-label" for="subject">Subject</label>
-                <input type="text" id="subject" class="aerodoot-contact__form-input" placeholder="How can we help you?">
+                <input type="text" id="subject" class="aerodoot-contact__form-input" placeholder="How can we help you?" required>
             </div>
 
             <div class="aerodoot-contact__form-group">
                 <label class="aerodoot-contact__form-label" for="message">Your Message</label>
-                <textarea id="message" class="aerodoot-contact__form-input aerodoot-contact__form-textarea" placeholder="Please provide details about your inquiry..."></textarea>
+                <textarea id="message" class="aerodoot-contact__form-input aerodoot-contact__form-textarea" placeholder="Please provide details about your inquiry..." required></textarea>
             </div>
 
             <button type="submit" class="aerodoot-contact__form-button">Send Message</button>
