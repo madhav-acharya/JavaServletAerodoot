@@ -1,5 +1,6 @@
 package com.example.aerodoot.dao;
 
+import com.example.aerodoot.dto.BookingAnalysisByClass;
 import com.example.aerodoot.dto.BookingTrend;
 import com.example.aerodoot.dto.FlightDistribution;
 import com.example.aerodoot.util.DbConnectionUtil;
@@ -134,30 +135,6 @@ public class AdminDAO {
             }
         }
         return revenueByRoute;
-    }
-
-    // Data Transfer Object for Booking Analysis by Class
-    public static class BookingAnalysisByClass {
-        private String classType;
-        private int bookingCount;
-        private int month;
-
-        public BookingAnalysisByClass(String classType, int bookingCount, int month) {
-            this.classType = classType;
-            this.bookingCount = bookingCount;
-            this.month = month;
-        }
-
-        public String getClassType() {
-            return classType;
-        }
-
-        public int getBookingCount() {
-            return bookingCount;
-        }
-        public int getMonth() {
-            return month;
-        }
     }
 
     // Data Transfer Object for Revenue by Route
