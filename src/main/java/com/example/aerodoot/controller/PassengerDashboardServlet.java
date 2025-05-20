@@ -173,7 +173,5 @@ public class PassengerDashboardServlet extends HttpServlet {
             FlashMessageUtil.setError(request.getSession(), e.getMessage());
             throw new RuntimeException(e);
         }
-//        response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
-
     }
 }

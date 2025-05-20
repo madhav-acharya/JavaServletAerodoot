@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="header.jsp" />
+<jsp:include page="includes/toast.jsp"/>
 
 <div class="container">
     <header class="aerodoot-contact__header">
@@ -43,7 +44,7 @@
 
     <div class="aerodoot-contact__form-container">
         <h2 class="aerodoot-contact__form-title">Send Us a Message</h2>
-        <form id="aerodootContactForm">
+        <form id="aerodootContactForm" method="post" action="${pageContext.request.contextPath}/contact">
             <div class="aerodoot-contact__form-row">
                 <div class="aerodoot-contact__form-group">
                     <label class="aerodoot-contact__form-label" for="fullName">Full Name</label>
