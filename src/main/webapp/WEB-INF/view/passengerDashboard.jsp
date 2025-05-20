@@ -307,53 +307,55 @@
         </c:if>
     </div>
 
-    <!-- Boarding Pass Modal -->
+    <!-- Boarding Pass Modals - One for each upcoming flight -->
     <c:if test="${not empty upcomingFlights}">
         <c:forEach var="item" items="${upcomingFlights}">
-        <div class="flight-modal-backdrop" id="flight-boarding-pass-modal">
-            <div class="flight-modal">
-                <div class="flight-modal-header">
-                    <div class="flight-modal-title">Boarding Pass</div>
-                    <button class="flight-modal-close">&times;</button>
-                </div>
-                <div class="flight-modal-body">
-                    <div class="flight-modal-message">Your boarding pass will be available before departure.</div>
-                    <div class="flight-modal-boarding-pass">
-                        <p>Boarding pass for Flight ${item.airline.name} ${item.aircraft.model} will be available on ${item.flight.flightDate} at  ${item.flight.departureTime}.</p>
+            <div class="flight-modal-backdrop" id="flight-boarding-pass-modal-${item.booking.bookingId}">
+                <div class="flight-modal">
+                    <div class="flight-modal-header">
+                        <div class="flight-modal-title">Boarding Pass - #BK10${item.booking.bookingId}</div>
+                        <button class="flight-modal-close">&times;</button>
                     </div>
-                    <div class="flight-modal-actions">
-                        <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal">Close</button>
+                    <div class="flight-modal-body">
+                        <div class="flight-modal-message">Your boarding pass will be available before departure.</div>
+                        <div class="flight-modal-boarding-pass">
+                            <p>Boarding pass for Flight ${item.airline.name} ${item.aircraft.model} will be available on ${item.flight.flightDate} at ${item.flight.departureTime}.</p>
+                            <p>Route: ${item.flight.departureLocation} → ${item.flight.arrivalLocation}</p>
+                        </div>
+                        <div class="flight-modal-actions">
+                            <button class="flight-btn flight-btn-primary" id="flight-close-boarding-modal-${item.booking.bookingId}">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flight-modal-backdrop" id="flight-cancel-booking-modal">
-            <div class="flight-modal">
-                <div class="flight-modal-header">
-                    <div class="flight-modal-title">Cancel Booking</div>
-                    <button class="flight-modal-close">&times;</button>
-                </div>
-                <div class="flight-modal-body">
-                    <div class="flight-modal-message">Are you sure you want to cancel this booking? This action cannot be undone.</div>
-
-                    <div class="flight-warning">
-                        <div class="flight-warning-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="flight-warning-content">
-                            <strong>Warning</strong>
-                            <p>Cancellation fees may apply based on your fare type. Refunds will be processed within 7 business days.</p>
-                        </div>
+            <div class="flight-modal-backdrop" id="flight-cancel-booking-modal-${item.booking.bookingId}">
+                <div class="flight-modal">
+                    <div class="flight-modal-header">
+                        <div class="flight-modal-title">Cancel Booking #BK10${item.booking.bookingId}</div>
+                        <button class="flight-modal-close">&times;</button>
                     </div>
+                    <div class="flight-modal-body">
+                        <div class="flight-modal-message">Are you sure you want to cancel this booking? This action cannot be undone.</div>
 
-                    <form method="post" action="${pageContext.request.contextPath}/cancel-booking" class="flight-modal-actions">
-                        <button type="button" class="flight-btn flight-btn-secondary" id="flight-keep-booking">No, Keep My Booking</button>
-                        <button type="submit" class="flight-btn flight-btn-danger" id="flight-confirm-cancel">Yes, Cancel Booking</button>
-                    </form>
+                        <div class="flight-warning">
+                            <div class="flight-warning-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="flight-warning-content">
+                                <strong>Warning</strong>
+                                <p>Cancellation fees may apply based on your fare type. Refunds will be processed within 7 business days.</p>
+                            </div>
+                        </div>
+
+                        <form method="post" action="${pageContext.request.contextPath}/cancel-booking" class="flight-modal-actions">
+                            <input type="hidden" name="bookingId" value="${item.booking.bookingId}" />
+                            <button type="button" class="flight-btn flight-btn-secondary" id="flight-keep-booking-${item.booking.bookingId}">No, Keep My Booking</button>
+                            <button type="submit" class="flight-btn flight-btn-danger" id="flight-confirm-cancel-${item.booking.bookingId}">Yes, Cancel Booking</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         </c:forEach>
     </c:if>
 </div>

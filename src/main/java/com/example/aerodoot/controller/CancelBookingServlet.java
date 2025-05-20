@@ -8,13 +8,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/cancel-booking")
 public class CancelBookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        int cancelBooking = BookingDAO.updateBookingStatus();
+        int bookingId = Integer.parseInt(request.getParameter("bookingId"));
+
+        int cancelBooking;
+        try {
+            cancelBooking = BookingDAO.updateBookingStatus(bookingId, "CANCELLED");
+            System.out.println("Cancel booking Done: " + cancelBooking);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         response.sendRedirect(request.getContextPath() + "/passenger/dashboard");
     }
