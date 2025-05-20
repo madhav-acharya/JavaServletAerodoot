@@ -98,36 +98,12 @@ public class FlightBookingServlet extends HttpServlet {
 
         Date departureDate = null;
         Date returnDate = null;
+
         if (departureDateStr != null && !departureDateStr.trim().isEmpty()) {
             departureDate = FlightBookingService.convertDepartureDate(request, departureDateStr);
-//            try {
-//                // Removing ordinal suffixes (st, nd, rd, th)
-//                departureDateStr = departureDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
-//
-//                // Format of the date string "May 5th, 2025" -> "May 5, 2025"
-//                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
-//                java.util.Date utilDate = sdf.parse(departureDateStr);
-//                departureDate = new java.sql.Date(utilDate.getTime());
-//            } catch (ParseException e) {
-//                FlashMessageUtil.setError(request.getSession(), e.getMessage());
-//                e.printStackTrace();
-//                System.out.println("Error parsing date: " + departureDateStr);
-//            }
         }
         if (returnDateStr != null && !returnDateStr.trim().isEmpty()) {
-            try {
-                // Removing ordinal suffixes (st, nd, rd, th)
-                returnDateStr = returnDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
-
-                // Format of the date string "May 5th, 2025" -> "May 5, 2025"
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
-                java.util.Date utilDate = sdf.parse(returnDateStr);
-                returnDate = new java.sql.Date(utilDate.getTime());
-            } catch (ParseException e) {
-                FlashMessageUtil.setError(request.getSession(), e.getMessage());
-                e.printStackTrace();
-                System.out.println("Error parsing date: " + returnDateStr);
-            }
+            returnDate = FlightBookingService.convertReturnDate(request, returnDateStr);
         }
 
         List<Flight> flights = null;
