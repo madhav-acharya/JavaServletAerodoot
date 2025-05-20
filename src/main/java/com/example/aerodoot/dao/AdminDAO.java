@@ -1,5 +1,6 @@
 package com.example.aerodoot.dao;
 
+import com.example.aerodoot.dto.BookingTrend;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.Connection;
@@ -90,25 +91,6 @@ public class AdminDAO {
             }
         }
         return flightDistributions;
-    }
-
-    // Data Transfer Object for Booking Trends
-    public static class BookingTrend {
-        private String date;
-        private int count;
-
-        public BookingTrend(String date, int count) {
-            this.date = date;
-            this.count = count;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public int getCount() {
-            return count;
-        }
     }
 
     // Data Transfer Object for Flight Distribution

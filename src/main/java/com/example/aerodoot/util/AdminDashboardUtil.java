@@ -1,6 +1,7 @@
 package com.example.aerodoot.util;
 
 import com.example.aerodoot.dao.AdminDAO;
+import com.example.aerodoot.dto.BookingTrend;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 
@@ -17,7 +18,7 @@ public class AdminDashboardUtil {
             int activeBookings = dataModel.getActiveBookings();
             double totalRevenue = dataModel.getTotalRevenue();
             int totalPassengers = dataModel.getTotalPassengers();
-            List<AdminDAO.BookingTrend> bookingTrends = dataModel.getBookingTrends();
+            List<BookingTrend> bookingTrends = dataModel.getBookingTrends();
             List<AdminDAO.FlightDistribution> flightDistributions = dataModel.getFlightDistribution();
 
             // Storing the data in the ServletContext (for reuse in all requests)
