@@ -78,13 +78,7 @@ public class PassengerDashboardServlet extends HttpServlet {
                 Booking books = (Booking) booking.get("booking");
                 Flight flight = (Flight) booking.get("flight");
                 Aircraft aircraft = (Aircraft) booking.get("aircraft");
-                System.out.println(books.getBookingDate() + " " + flight.getFlightDate() + " " + aircraft.getModel());
             }
-
-            System.out.println("Upcoming Flights: " + upcomingFlights.size());
-            System.out.println("Recent Flights: " + recentFlights.size());
-            int totalBooking = upcomingFlights.size() + recentFlights.size();
-            System.out.println("Total Booking: " + totalBooking);
 
             //for profile image
             byte[] profilePicture = passengerData.getPassenger().getProfilePicture();

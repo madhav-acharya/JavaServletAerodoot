@@ -6,6 +6,7 @@ import com.example.aerodoot.dao.FlightDAO;
 import com.example.aerodoot.model.Aircraft;
 import com.example.aerodoot.model.Airline;
 import com.example.aerodoot.model.Flight;
+import com.example.aerodoot.service.FlightBookingService;
 import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -98,19 +99,20 @@ public class FlightBookingServlet extends HttpServlet {
         Date departureDate = null;
         Date returnDate = null;
         if (departureDateStr != null && !departureDateStr.trim().isEmpty()) {
-            try {
-                // Removing ordinal suffixes (st, nd, rd, th)
-                departureDateStr = departureDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
-
-                // Format of the date string "May 5th, 2025" -> "May 5, 2025"
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
-                java.util.Date utilDate = sdf.parse(departureDateStr);
-                departureDate = new java.sql.Date(utilDate.getTime());
-            } catch (ParseException e) {
-                FlashMessageUtil.setError(request.getSession(), e.getMessage());
-                e.printStackTrace();
-                System.out.println("Error parsing date: " + departureDateStr);
-            }
+            departureDate = FlightBookingService.convertDepartureDate(request, departureDateStr);
+//            try {
+//                // Removing ordinal suffixes (st, nd, rd, th)
+//                departureDateStr = departureDateStr.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
+//
+//                // Format of the date string "May 5th, 2025" -> "May 5, 2025"
+//                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
+//                java.util.Date utilDate = sdf.parse(departureDateStr);
+//                departureDate = new java.sql.Date(utilDate.getTime());
+//            } catch (ParseException e) {
+//                FlashMessageUtil.setError(request.getSession(), e.getMessage());
+//                e.printStackTrace();
+//                System.out.println("Error parsing date: " + departureDateStr);
+//            }
         }
         if (returnDateStr != null && !returnDateStr.trim().isEmpty()) {
             try {
