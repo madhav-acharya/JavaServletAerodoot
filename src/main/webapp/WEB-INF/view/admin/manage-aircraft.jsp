@@ -223,10 +223,6 @@
     closeAircraftModalBtn.addEventListener('click', () => closeModal('aircraft-form-modal'));
     cancelAircraftBtn.addEventListener('click', () => closeModal('aircraft-form-modal'));
 
-    saveAircraftBtn.addEventListener('click', () => {
-        closeModal('aircraft-form-modal');
-    });
-
     // Function to edit aircraft
     function editAircraft(button) {
         aircraftModalTitle.textContent = 'Edit Aircraft';

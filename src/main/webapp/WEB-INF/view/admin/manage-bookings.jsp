@@ -166,10 +166,6 @@
     closeBookingStatusModalBtn.addEventListener('click', () => closeModal('booking-status-modal'));
     cancelBookingStatusBtn.addEventListener('click', () => closeModal('booking-status-modal'));
 
-    saveBookingStatusBtn.addEventListener('click', () => {
-        closeModal('booking-status-modal');
-    });
-
     function editBooking(button) {
       populateForm(button)
       openModal('booking-status-modal');

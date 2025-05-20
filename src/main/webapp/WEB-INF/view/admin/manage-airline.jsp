@@ -199,10 +199,6 @@
         closeAirlineModalBtn.addEventListener('click', () => closeModal('airline-form-modal'));
         cancelAirlineBtn.addEventListener('click', () => closeModal('airline-form-modal'));
 
-        saveAirlineBtn.addEventListener('click', () => {
-                closeModal('airline-form-modal');
-        });
-
         const deleteAirlinebtn = document.querySelectorAll('.delete-btn');
         deleteAirlinebtn.forEach(deleteBtn =>{
             deleteBtn.addEventListener('click', (event)=>{

@@ -1,6 +1,7 @@
 package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.AdminDAO;
+import com.example.aerodoot.util.AdminAnalyticsUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,23 +19,7 @@ public class AdminAnalyticsServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        try {
-            // Initializing AdminDAO and fetching the data
-            adminDAO = new AdminDAO();
-
-            List<AdminDAO.BookingAnalysisByClass> bookingAnalysisByClass = adminDAO.getBookingAnalysisByClass();
-            List<AdminDAO.RevenueByRoute> revenueByRoute = adminDAO.getRevenueByRoute();
-
-            getServletContext().setAttribute("bookingAnalysisByClass", bookingAnalysisByClass);
-            getServletContext().setAttribute("revenueByRoute", revenueByRoute);
-            System.out.println("bookingAnalysisByClass: " + bookingAnalysisByClass);
-            System.out.println("revenueByRoute: " + revenueByRoute);
-
-        } catch (SQLException e) {
-            System.err.println("Error initializing dashboard data: " + e.getMessage());
-            e.printStackTrace();
-            throw new ServletException("Error initializing dashboard data", e);
-        }
+        AdminAnalyticsUtil.refreshAnalyticsData(getServletContext());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

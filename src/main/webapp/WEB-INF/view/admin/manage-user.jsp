@@ -200,9 +200,6 @@
 
         closeUserEditModalBtn.addEventListener('click', () => closeModal('user-edit-modal'));
         cancelUserEditBtn.addEventListener('click', () => closeModal('user-edit-modal'));
-        saveUserBtn.addEventListener('click', () => {
-            closeModal('user-edit-modal');
-        });
 
         const deleteUserbtn = document.querySelectorAll('.delete-btn');
         deleteUserbtn.forEach(deleteBtn =>{
