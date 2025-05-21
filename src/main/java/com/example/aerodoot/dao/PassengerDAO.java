@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PassengerDAO {
     public static int createPassenger(Passenger passenger) {
@@ -39,6 +41,36 @@ public class PassengerDAO {
 
         return -1;
     }
+
+    public static List<Passenger> getAllPassengers() {
+        List<Passenger> passengerList = new ArrayList<>();
+        String sql = "SELECT * FROM Passenger";
+
+        try (Connection con = DbConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Passenger passenger = new Passenger();
+
+                passenger.setPassengerId(rs.getInt("passengerId"));
+                passenger.setPassportNumber(rs.getString("passportNumber"));
+                passenger.setDateOfBirth(rs.getDate("dateOfBirth"));
+                passenger.setGender(rs.getString("gender"));
+                passenger.setAddress(rs.getString("address"));
+                passenger.setProfilePicture(rs.getBytes("profilePicture"));
+                passenger.setUserId(rs.getInt("userId"));
+
+                passengerList.add(passenger);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error fetching all passengers: " + e.getMessage());
+        }
+
+        return passengerList;
+    }
+
 
     public static Passenger getPassengerByUserId(int userId) throws SQLException {
         String sql = "SELECT * FROM Passenger WHERE userId = ?";
