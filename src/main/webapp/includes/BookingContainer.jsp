@@ -148,18 +148,51 @@
             <input type="text" placeholder="Search for a city">
         </div>
         <div class="city-list">
-            <div class="city-item" data-city="Kathmandu">Kathmandu (KTM)</div>
-            <div class="city-item" data-city="Pokhara">Pokhara (PKR)</div>
-            <div class="city-item" data-city="Biratnagar">Biratnagar (BIR)</div>
-            <div class="city-item" data-city="Nepalgunj">Nepalgunj (KEP)</div>
-            <div class="city-item" data-city="Bharatpur">Bharatpur (BHR)</div>
-            <div class="city-item" data-city="Bhadrapur">Bhadrapur (BDP)</div>
-            <div class="city-item" data-city="Dhangadhi">Dhangadhi (DHI)</div>
-            <div class="city-item" data-city="Janakpur">Janakpur (JKR)</div>
-            <div class="city-item" data-city="Simara">Simara (SIF)</div>
-            <div class="city-item" data-city="Lukla">Lukla (LUA)</div>
-            <div class="city-item" data-city="Bhairahawa">Bhairahawa (BWA)</div>
+            <div class="city-item" data-city="KTM">Kathmandu (KTM)</div>
+            <div class="city-item" data-city="PHH">Pokhara International Airport (PHH)</div>
+            <div class="city-item" data-city="PKR">Pokhara (PKR)</div>
+            <div class="city-item" data-city="BWA">Bhairahawa – Gautam Buddha Int'l (BWA)</div>
+            <div class="city-item" data-city="BIR">Biratnagar (BIR)</div>
+            <div class="city-item" data-city="KEP">Nepalgunj (KEP)</div>
+            <div class="city-item" data-city="BDP">Bhadrapur (BDP)</div>
+            <div class="city-item" data-city="JKR">Janakpur (JKR)</div>
+            <div class="city-item" data-city="DHI">Dhangadhi (DHI)</div>
+            <div class="city-item" data-city="BHR">Bharatpur (BHR)</div>
+            <div class="city-item" data-city="SIF">Simara (SIF)</div>
+            <div class="city-item" data-city="LUA">Lukla (LUA)</div>
+            <div class="city-item" data-city="TMI">Tumlingtar (TMI)</div>
+            <div class="city-item" data-city="JMO">Jomsom (JMO)</div>
+            <div class="city-item" data-city="SKH">Surkhet (SKH)</div>
+            <div class="city-item" data-city="PPL">Phaplu (PPL)</div>
+            <div class="city-item" data-city="RJB">Rajbiraj (RJB)</div>
+            <div class="city-item" data-city="RHP">Ramechhap (RHP)</div>
+            <div class="city-item" data-city="DOP">Dolpa (DOP)</div>
+            <div class="city-item" data-city="JUM">Jumla (JUM)</div>
+            <div class="city-item" data-city="BJU">Bajura (BJU)</div>
+            <div class="city-item" data-city="BJH">Bajhang (BJH)</div>
+            <div class="city-item" data-city="DAP">Darchula (DAP)</div>
+            <div class="city-item" data-city="HRJ">Chaurjhari (HRJ)</div>
+            <div class="city-item" data-city="LDN">Lamidanda (LDN)</div>
+            <div class="city-item" data-city="MEY">Meghauli (MEY)</div>
+            <div class="city-item" data-city="SYH">Syangboche (SYH)</div>
+            <div class="city-item" data-city="NGX">Manang (NGX)</div>
+            <div class="city-item" data-city="XMG">Mahendranagar (XMG)</div>
+            <div class="city-item" data-city="RUK">Rukumkot (RUK)</div>
+            <div class="city-item" data-city="RPA">Rolpa (RPA)</div>
+            <div class="city-item" data-city="RUM">Rumjatar (RUM)</div>
+            <div class="city-item" data-city="JIR">Jiri (JIR)</div>
+            <div class="city-item" data-city="BIT">Baitadi (BIT)</div>
+            <div class="city-item" data-city="BGL">Baglung (BGL)</div>
+            <div class="city-item" data-city="BHP">Bhojpur (BHP)</div>
+            <div class="city-item" data-city="LTG">Langtang (LTG)</div>
+            <div class="city-item" data-city="MWP">Mountain (MWP)</div>
+            <div class="city-item" data-city="IMK">Simikot (IMK)</div>
+            <div class="city-item" data-city="TAL">Talcha (TAL)</div>
+            <div class="city-item" data-city="TMK">Thamkharka (TMK)</div>
+            <div class="city-item" data-city="TPJ">Taplejung (TPJ)</div>
+            <div class="city-item" data-city="TPU">Tikapur (TPU)</div>
         </div>
+
     </div>
 
     <!-- Passenger Selection Dropdown -->
