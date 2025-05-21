@@ -96,6 +96,12 @@ public class FlightBookingServlet extends HttpServlet {
         String returnDateStr = request.getParameter("returnDate");
         String passenger = request.getParameter("passenger");
 
+        System.out.println("departureLocation: " + departureLocation);
+        System.out.println("arrivalLocation: " + arrivalLocation);
+        System.out.println("departureDateStr: " + departureDateStr);
+        System.out.println("returnDateStr: " + returnDateStr);
+        System.out.println("passenger: " + passenger);
+
         Date departureDate = null;
         Date returnDate = null;
 

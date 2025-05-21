@@ -176,13 +176,48 @@
                   <select id="origin" name="departureLocation" class="select" required>
                     <option value="">Select Origin Airport</option>
                     <option value="KTM">Kathmandu (KTM)</option>
-                    <option value="PKR">Pokhara (PKR)</option>
-                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="PHH">Pokhara International Airport (PHH)</option>
+                    <option value="PKR">Pokhara Airport (PKR)</option>
+                    <option value="BWA">Gautam Buddha International Airport, Bhairahawa (BWA)</option>
                     <option value="BIR">Biratnagar (BIR)</option>
-                    <option value="BWA">Bhairahawa (BWA)</option>
-                    <option value="JKR">Janakpur (JKR)</option>
-                    <option value="TMI">Tumlingtar (TMI)</option>
                     <option value="KEP">Nepalgunj (KEP)</option>
+                    <option value="BDP">Bhadrapur (BDP)</option>
+                    <option value="JKR">Janakpur (JKR)</option>
+                    <option value="DHI">Dhangadhi (DHI)</option>
+                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="SIF">Simara (SIF)</option>
+                    <option value="LUA">Lukla (LUA)</option>
+                    <option value="TMI">Tumlingtar (TMI)</option>
+                    <option value="JUM">Jumla (JUM)</option>
+                    <option value="JMO">Jomsom (JMO)</option>
+                    <option value="SKH">Surkhet (SKH)</option>
+                    <option value="PPL">Phaplu (PPL)</option>
+                    <option value="RJB">Rajbiraj (RJB)</option>
+                    <option value="RHP">Ramechhap (RHP)</option>
+                    <option value="DOP">Dolpa (DOP)</option>
+                    <option value="BJU">Bajura (BJU)</option>
+                    <option value="BJH">Bajhang (BJH)</option>
+                    <option value="DAP">Darchula (DAP)</option>
+                    <option value="HRJ">Chaurjhari (HRJ)</option>
+                    <option value="LDN">Lamidanda (LDN)</option>
+                    <option value="MEY">Meghauli (MEY)</option>
+                    <option value="SYH">Syangboche (SYH)</option>
+                    <option value="NGX">Manang (NGX)</option>
+                    <option value="XMG">Mahendranagar (XMG)</option>
+                    <option value="RUK">Rukumkot (RUK)</option>
+                    <option value="RPA">Rolpa (RPA)</option>
+                    <option value="RUM">Rumjatar (RUM)</option>
+                    <option value="JIR">Jiri (JIR)</option>
+                    <option value="BIT">Baitadi (BIT)</option>
+                    <option value="BGL">Baglung (BGL)</option>
+                    <option value="BHP">Bhojpur (BHP)</option>
+                    <option value="LTG">Langtang (LTG)</option>
+                    <option value="MWP">Mountain (MWP)</option>
+                    <option value="IMK">Simikot (IMK)</option>
+                    <option value="TAL">Talcha (TAL)</option>
+                    <option value="TMK">Thamkharka (TMK)</option>
+                    <option value="TPJ">Taplejung (TPJ)</option>
+                    <option value="TPU">Tikapur (TPU)</option>
                   </select>
                 </div>
 
@@ -191,13 +226,48 @@
                   <select id="destination" name="arrivalLocation" class="select" required>
                     <option value="">Select Destination Airport</option>
                     <option value="KTM">Kathmandu (KTM)</option>
-                    <option value="PKR">Pokhara (PKR)</option>
-                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="PHH">Pokhara International Airport (PHH)</option>
+                    <option value="PKR">Pokhara Airport (PKR)</option>
+                    <option value="BWA">Gautam Buddha International Airport, Bhairahawa (BWA)</option>
                     <option value="BIR">Biratnagar (BIR)</option>
-                    <option value="BWA">Bhairahawa (BWA)</option>
-                    <option value="JKR">Janakpur (JKR)</option>
-                    <option value="TMI">Tumlingtar (TMI)</option>
                     <option value="KEP">Nepalgunj (KEP)</option>
+                    <option value="BDP">Bhadrapur (BDP)</option>
+                    <option value="JKR">Janakpur (JKR)</option>
+                    <option value="DHI">Dhangadhi (DHI)</option>
+                    <option value="BHR">Bharatpur (BHR)</option>
+                    <option value="SIF">Simara (SIF)</option>
+                    <option value="LUA">Lukla (LUA)</option>
+                    <option value="TMI">Tumlingtar (TMI)</option>
+                    <option value="JUM">Jumla (JUM)</option>
+                    <option value="JMO">Jomsom (JMO)</option>
+                    <option value="SKH">Surkhet (SKH)</option>
+                    <option value="PPL">Phaplu (PPL)</option>
+                    <option value="RJB">Rajbiraj (RJB)</option>
+                    <option value="RHP">Ramechhap (RHP)</option>
+                    <option value="DOP">Dolpa (DOP)</option>
+                    <option value="BJU">Bajura (BJU)</option>
+                    <option value="BJH">Bajhang (BJH)</option>
+                    <option value="DAP">Darchula (DAP)</option>
+                    <option value="HRJ">Chaurjhari (HRJ)</option>
+                    <option value="LDN">Lamidanda (LDN)</option>
+                    <option value="MEY">Meghauli (MEY)</option>
+                    <option value="SYH">Syangboche (SYH)</option>
+                    <option value="NGX">Manang (NGX)</option>
+                    <option value="XMG">Mahendranagar (XMG)</option>
+                    <option value="RUK">Rukumkot (RUK)</option>
+                    <option value="RPA">Rolpa (RPA)</option>
+                    <option value="RUM">Rumjatar (RUM)</option>
+                    <option value="JIR">Jiri (JIR)</option>
+                    <option value="BIT">Baitadi (BIT)</option>
+                    <option value="BGL">Baglung (BGL)</option>
+                    <option value="BHP">Bhojpur (BHP)</option>
+                    <option value="LTG">Langtang (LTG)</option>
+                    <option value="MWP">Mountain (MWP)</option>
+                    <option value="IMK">Simikot (IMK)</option>
+                    <option value="TAL">Talcha (TAL)</option>
+                    <option value="TMK">Thamkharka (TMK)</option>
+                    <option value="TPJ">Taplejung (TPJ)</option>
+                    <option value="TPU">Tikapur (TPU)</option>
                   </select>
                 </div>
 
