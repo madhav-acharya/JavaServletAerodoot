@@ -157,7 +157,6 @@
                         <th>Total Price</th>
                         <th>Flight ID</th>
                         <th>Passenger ID</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -178,9 +177,6 @@
                             </td>
                             <td>${booking.flightId}</td>
                             <td>${booking.passengerId}</td>
-                            <td>
-                                <a href="viewBooking.jsp?id=${booking.bookingId}" class="link">View</a>
-                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

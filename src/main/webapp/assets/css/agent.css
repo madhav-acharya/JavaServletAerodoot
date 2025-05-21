@@ -1,4 +1,3 @@
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,20 +5,17 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: #f5f5f5;
     color: #333;
     line-height: 1.5;
 }
 
-/* Layout */
 .app-container {
     display: flex;
     height: 100vh;
 }
 
-/* Sidebar */
 .sidebar {
     width: 250px;
     background-color: #fff;
@@ -65,7 +61,6 @@ body {
     margin-right: 8px;
 }
 
-/* Main content */
 .agent-dashboard-container,
 .agent-booking-container {
     flex: 1;
@@ -79,7 +74,6 @@ body {
     margin-bottom: 24px;
 }
 
-/* Cards */
 .stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -125,7 +119,6 @@ body {
     color: #ef4444;
 }
 
-/* Charts */
 .charts-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
@@ -150,7 +143,6 @@ body {
     height: 256px;
 }
 
-/* Tables */
 .table-card {
     background-color: #fff;
     border-radius: 8px;
@@ -197,7 +189,6 @@ tr:hover {
     background-color: #f9fafb;
 }
 
-/* Status badges */
 .status-badge {
     display: inline-block;
     padding: 2px 8px;
@@ -216,7 +207,6 @@ tr:hover {
     color: #92400e;
 }
 
-/* Forms */
 .form-card {
     background-color: #fff;
     border-radius: 8px;
@@ -291,7 +281,6 @@ tr:hover {
     background-color: #2563eb;
 }
 
-/* Links */
 .link {
     color: #3b82f6;
     text-decoration: none;
@@ -300,4 +289,30 @@ tr:hover {
 .link:hover {
     color: #1d4ed8;
     text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+    .app-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: relative;
+        box-shadow: none;
+    }
+
+    .agent-dashboard-container,
+    .agent-booking-container {
+        padding: 16px;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
 }

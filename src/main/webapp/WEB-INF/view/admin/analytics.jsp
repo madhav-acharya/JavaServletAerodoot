@@ -46,7 +46,7 @@
 <%--          </svg>--%>
 <%--          Generate Report--%>
 <%--        </button>--%>
-      </div>5
+      </div>
 
       <div class="card chart-card">
         <div class="card-header">
@@ -59,7 +59,6 @@
           </div>
           <div class="chart-actions">
             <button class="btn btn-outline btn-sm" id="reset-zoom-btn">Reset Zoom</button>
-            <button class="btn btn-outline btn-sm" id="download-csv-btn">Download CSV</button>
             <button class="btn btn-outline btn-sm" id="download-image-btn">Download Image</button>
           </div>
         </div>

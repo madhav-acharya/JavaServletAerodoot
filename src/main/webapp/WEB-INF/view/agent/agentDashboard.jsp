@@ -61,17 +61,17 @@
     <!-- Stats Cards -->
     <div class="stats-container">
       <div class="stat-card">
-        <h3 class="stat-card-title">Total Bookings</h3>
+        <h3 class="stat-card-title">Active Bookings</h3>
         <div class="stat-card-value">
-          <div class="stat-card-number">128</div>
+          <div class="stat-card-number">${activeBookings}</div>
           <span class="stat-card-change positive">+12%</span>
         </div>
       </div>
 
       <div class="stat-card">
-        <h3 class="stat-card-title">Revenue</h3>
+        <h3 class="stat-card-title">Total Revenue</h3>
         <div class="stat-card-value">
-          <div class="stat-card-number">$24,300</div>
+          <div class="stat-card-number">Rs.${totalRevenue}</div>
           <span class="stat-card-change positive">+8%</span>
         </div>
       </div>
@@ -79,25 +79,33 @@
       <div class="stat-card">
         <h3 class="stat-card-title">Active Flights</h3>
         <div class="stat-card-value">
-          <div class="stat-card-number">42</div>
+          <div class="stat-card-number">${totalFlights}</div>
           <span class="stat-card-change negative">-3%</span>
         </div>
       </div>
     </div>
 
-    <!-- Charts -->
-    <div class="charts-container">
-      <div class="chart-card">
-        <h3 class="chart-title">Bookings by Class</h3>
-        <div class="chart-container">
-          <canvas id="bookingsByClassChart"></canvas>
-        </div>
-      </div>
+    <div class="filter-group">
+      <label for="chart-type">Chart Type</label>
+      <select id="chart-type" class="select">
+        <option value="line">Line Chart</option>
+        <option value="bar">Bar Chart</option>
+        <option value="pie">Pie Chart</option>
+      </select>
+    </div>
 
-      <div class="chart-card">
-        <h3 class="chart-title">Monthly Revenue</h3>
+    <div class="card chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Booking Analytics</h3>
+        <p class="card-description">Booking trends with date range filtering and zoom capabilities</p>
+      </div>
+      <div class="card-content">
         <div class="chart-container">
-          <canvas id="revenueChart"></canvas>
+          <canvas id="booking-analytics-chart" height="200"></canvas>
+        </div>
+        <div class="chart-actions">
+          <button class="btn btn-outline btn-sm" id="reset-zoom-btn">Reset Zoom</button>
+          <button class="btn btn-outline btn-sm" id="download-image-btn">Download Image</button>
         </div>
       </div>
     </div>
@@ -119,7 +127,6 @@
             <th>Total Price</th>
             <th>Flight ID</th>
             <th>Passenger ID</th>
-            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -140,9 +147,6 @@
               </td>
               <td>${booking.flightId}</td>
               <td>${booking.passengerId}</td>
-              <td>
-                <a href="viewBooking.jsp?id=${booking.bookingId}" class="link">View</a>
-              </td>
             </tr>
           </c:forEach>
           </tbody>
@@ -152,51 +156,102 @@
     </div>
   </div>
 </div>
-
+<script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/agent.js"></script>
 <script>
-  // Bookings by Class Chart
-  const bookingsByClassCtx = document.getElementById('bookingsByClassChart').getContext('2d');
-  const bookingsByClassChart = new Chart(bookingsByClassCtx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Economy', 'Business'],
-      datasets: [{
-        data: [65, 35],
-        backgroundColor: ['#3B82F6', '#10B981'],
-        hoverOffset: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
+  // Booking Analysis Data (from JSP)
+  const bookingAnalysisByClass = [
+    <c:forEach var="b" items="${bookingAnalysisByClass}" varStatus="status">
+    {
+      classType: '${b.classType}',
+      bookingCount: ${b.bookingCount},
+      month: ${b.month}
+    }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+  ];
 
-  // Revenue Chart
-  const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-  const revenueChart = new Chart(revenueCtx, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      datasets: [{
-        label: 'Revenue',
-        data: [12000, 19000, 15000, 21000, 18000, 24000],
-        fill: false,
-        borderColor: '#3B82F6',
-        tension: 0.1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true
+  console.log("bookkkkk", bookingAnalysisByClass)
+  const bookingAnalyticsCtx = document.getElementById('booking-analytics-chart')?.getContext('2d');
+  if (bookingAnalyticsCtx) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const economyData = months.map((month, index) =>
+            bookingAnalysisByClass
+                    .filter(b => b.classType === 'ECONOMY' && b.month === (index + 1))
+                    .reduce((total, b) => total + b.bookingCount, 0)
+    );
+
+    const businessData = months.map((month, index) =>
+            bookingAnalysisByClass
+                    .filter(b => b.classType === 'BUSINESS' && b.month === (index + 1))
+                    .reduce((total, b) => total + b.bookingCount, 0)
+    );
+
+    const bookingAnalyticsChart = createZoomableChart(bookingAnalyticsCtx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: 'Economy Class',
+            data: economyData,
+            borderColor: 'rgb(59, 130, 246)',
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Business Class',
+            data: businessData,
+            borderColor: 'rgb(16, 185, 129)',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            tension: 0.3
+          },
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Bookings'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Month'
+            }
+          }
         }
       }
+    });
+
+    window.bookingAnalyticsChart = bookingAnalyticsChart;
+
+    // Extra controls
+    document.getElementById('reset-zoom-btn')?.addEventListener('click', () => {
+      resetChartZoom(bookingAnalyticsChart);
+    });
+
+    document.getElementById('download-csv-btn')?.addEventListener('click', () => {
+      exportTableAsCSV('bookings-table', 'booking-analytics.csv');
+    });
+
+    document.getElementById('download-image-btn')?.addEventListener('click', () => {
+      exportChartAsImage(bookingAnalyticsChart, 'booking-analytics.png');
+    });
+
+    const chartTypeSelect = document.getElementById('chart-type');
+    if (chartTypeSelect) {
+      chartTypeSelect.addEventListener('change', function () {
+        bookingAnalyticsChart.config.type = this.value;
+        bookingAnalyticsChart.update();
+      });
     }
-  });
+  }
+
 </script>
-<script src="${pageContext.request.contextPath}/assets/js/agent.js"></script>
+
 </body>
 </html>
