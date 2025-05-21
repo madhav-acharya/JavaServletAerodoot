@@ -134,6 +134,7 @@
     transition: 0.4s;
 }
 
+/* Update to this CSS rule in your original CSS */
 @media (max-width: 768px) {
     .navbar-toggle {
         display: flex;
@@ -142,16 +143,18 @@
     .navbar-menu {
         position: fixed;
         top: 60px;
-        left: -100%;
-        width: 100%;
+        right: -50%; /* Changed from left: -100% to right: -50% */
+        width: 50%;  /* Changed from 100% to 50% */
         height: calc(100vh - 60px);
         background-color: var(--primary-color);
         transition: 0.5s;
         overflow-y: auto;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); /* Added shadow on left side */
     }
 
     .navbar-menu.active {
-        left: 0;
+        right: 0;  /* Changed from left: 0 to right: 0 */
+        left: auto;
     }
 
     .navbar-nav {
@@ -159,8 +162,52 @@
         padding: 20px;
     }
 
-    .nav-item {
-        margin: 15px 0;
-    }
+    /*.nav-item {*/
+    /*    margin: 15px 0;*/
+    /*}*/
 }
 
+/* Additional CSS for the hamburger animation */
+.navbar-toggle .bar.active:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.navbar-toggle .bar.active:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle .bar.active:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Improve mobile menu styling */
+@media (max-width: 768px) {
+    .navbar-menu {
+        padding-top: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        width: 50%; /* Making the menu half width instead of full width */
+        right: -50%; /* Change positioning to slide from right */
+        left: auto; /* Remove left positioning */
+    }
+
+    .navbar-nav {
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        margin: 0;
+        text-align: left;
+    }
+
+    .nav-link {
+        padding: 12px 20px;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+}
