@@ -27,8 +27,23 @@ public class FlightPaymentServlet extends HttpServlet {
         try {
             int bookingId = FlightBookingPaymentService.createBooking(request, classType, passengerCount, totalPrice, flightNumber);
             int paymentId = FlightBookingPaymentService.createPayment(paymentMethod, totalPrice, bookingId);
+            if(paymentId > 0)
+            {
+                FlashMessageUtil.setSuccess(request.getSession(), "Payment Succeed");
+            }
+            else
+            {
+                FlashMessageUtil.setError(request.getSession(), "Payment Failed");
+            }
+            if(bookingId > 0)
+            {
+                FlashMessageUtil.setSuccess(request.getSession(), "Booking Succeed");
+            }
+            else
+            {
+                FlashMessageUtil.setError(request.getSession(), "Booking Failed");
+            }
             System.out.println("booking successful " + bookingId + " -> " + paymentId);
-            FlashMessageUtil.setSuccess(request.getSession(), "Flight Booking Successful");
         } catch (ClassNotFoundException | SQLException e) {
             FlashMessageUtil.setError(request.getSession(), e.getMessage());
             throw new RuntimeException(e);

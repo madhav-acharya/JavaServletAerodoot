@@ -4,7 +4,9 @@ import com.example.aerodoot.dto.BookingAnalysisByClass;
 import com.example.aerodoot.dto.BookingTrend;
 import com.example.aerodoot.dto.FlightDistribution;
 import com.example.aerodoot.dto.RevenueByRoute;
+import com.example.aerodoot.model.Admin;
 import com.example.aerodoot.util.DbConnectionUtil;
+import com.mysql.cj.jdbc.JdbcConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDAO {
+
+    public static int createAdmin(Admin admin) {
+        String sql = "INSERT INTO Admin (adminRole, userId) VALUES (?, ?)";
+
+        try (Connection con = DbConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, admin.getAdminRole()); // Should be "SUPER_ADMIN" or "ADMIN"
+            ps.setInt(2, admin.getUserId());
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1); // returns auto-generated adminId
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error creating admin: " + e.getMessage());
+        }
+        return -1; // return -1 if creation fails
+    }
+
     // Method to get total flights
     public int getTotalFlights() throws SQLException {
         String query = "SELECT COUNT(*) AS total_flights FROM Flight";

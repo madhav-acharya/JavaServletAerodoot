@@ -1,6 +1,8 @@
 package com.example.aerodoot.controller;
 
+import com.example.aerodoot.dao.AdminDAO;
 import com.example.aerodoot.dao.UserDAO;
+import com.example.aerodoot.model.Admin;
 import com.example.aerodoot.model.User;
 import com.example.aerodoot.util.FlashMessageUtil;
 import jakarta.servlet.ServletContext;
@@ -64,8 +66,21 @@ public class ManageUsersServlet extends HttpServlet {
                 int updateUserId = UserDAO.updateUser(user);
 
                 if (updateUserId >= 0) {
+
                     FlashMessageUtil.setSuccess(request.getSession(), "User updated successfully");
                     System.out.println("success");
+                    if ("ADMIN".equalsIgnoreCase(userType) || "SUPER_ADMIN".equalsIgnoreCase(userType)) {
+                        Admin admin = new Admin();
+                        admin.setAdminRole(userType.toUpperCase());
+                        admin.setUserId(userId);
+
+                        int adminId = AdminDAO.createAdmin(admin);
+                        if (adminId > 0) {
+                            System.out.println("Admin created with ID: " + adminId);
+                        } else {
+                            FlashMessageUtil.setError(request.getSession(), "No change has been made");
+                        }
+                    }
                     users = UserDAO.getAllUsers();
                     getServletContext().setAttribute("users", users);
                 }
