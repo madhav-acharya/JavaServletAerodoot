@@ -11,9 +11,6 @@
 
 <jsp:include page="../../header.jsp"/>
 <jsp:include page="../../includes/toast.jsp" />
-<div>
-    <h1>Agent Dashboard ...</h1>
-</div>
 <div class="dashboard-container">
     <!-- Sidebar -->
     <aside class="sidebar">
