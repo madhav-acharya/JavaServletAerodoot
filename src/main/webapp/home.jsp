@@ -13,15 +13,15 @@
         <div class="header-buttons">
             <c:choose>
                 <c:when test="${sessionScope.isLoggedIn == null}">
-                    <button class="btn-main btn-primary">
+                    <button class="btn-main-home btn-primary-home">
                         <a href="${pageContext.request.contextPath}/login">Book Your Flight</a>
                     </button>
-                    <button class="btn-main btn-secondary">
+                    <button class="btn-main-home btn-secondary-home">
                         <a href="${pageContext.request.contextPath}/login">Manage Booking</a>
                     </button>
                 </c:when>
                 <c:otherwise>
-                    <button class="btn-main btn-primary">
+                    <button class="btn-main-home btn-primary-home">
                         <a href="${pageContext.request.contextPath}/flight-booking">Book Your Flight</a>
                     </button>
 
