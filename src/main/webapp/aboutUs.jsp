@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="header.jsp"/>
@@ -11,13 +12,15 @@
 
     <p class="aerodoot-company-description">
         Your trusted partner for comprehensive airline management solutions,
-        connecting passengers, airlines, and travel agencies worldwide since
-        2023.
+        connecting passengers, airlines, and travel agencies within Nepal since
+        2025.
     </p>
 
     <div class="aerodoot-buttons-container">
-        <a href="#contact" class="aerodoot-contact-btn">Contact Us</a>
-        <a href="#join" class="aerodoot-join-btn">Join Now</a>
+        <a href="${pageContext.request.contextPath}/contact" class="aerodoot-contact-btn">Contact Us</a>
+        <c:if test="${sessionScope.isLoggedIn == null}">
+            <a href="${pageContext.request.contextPath}/register" class="aerodoot-join-btn">Join Now</a>
+        </c:if>
     </div>
 
     <div class="aerodoot-wave-shape"></div>
@@ -62,7 +65,7 @@
                 AeroDoot is committed to revolutionizing the airline management industry by
                 providing an intuitive, efficient, and secure platform that connects passengers,
                 airlines, and travel agents. We aim to simplify the complexities of air travel
-                management while ensuring exceptional service quality.
+                management for domestic flights while ensuring exceptional service quality.
             </p>
         </div>
 
@@ -74,7 +77,7 @@
             <p class="aerodoot-card-text">
                 We envision a future where air travel management is seamless, transparent,
                 and accessible to all. By leveraging cutting-edge technology and industry
-                expertise, we strive to be the global leader in airline service management
+                expertise, we strive to be the Nepal leader in airline service management
                 systems, setting new standards for efficiency and customer satisfaction.
             </p>
         </div>
@@ -99,10 +102,10 @@
                 <div class="aerodoot-timeline-content">
                     <h3 class="aerodoot-timeline-title">Founded with a Purpose</h3>
                     <p class="aerodoot-timeline-text">
-                        Founded in 2023, AeroDoot emerged from recognizing a significant gap in the
-                        airline management sector. Our founders combined their extensive expertise in
-                        aviation and technology to create a solution that addresses real industry
-                        challenges.
+                        Founded in 2025 as part of our Advanced Programming module coursework,
+                        AeroDoot was developed to address key challenges in the airline management sector.
+                        Drawing on our knowledge of aviation systems and programming skills,
+                        we designed this project to offer practical solutions inspired by real-world industry needs.
                     </p>
                 </div>
             </div>
@@ -114,9 +117,9 @@
                 <div class="aerodoot-timeline-content">
                     <h3 class="aerodoot-timeline-title">Rapid Growth</h3>
                     <p class="aerodoot-timeline-text">
-                        What began as a solution for small regional airlines has evolved into a
+                        What began as a solution for domestic airlines has evolved into a
                         comprehensive management system trusted by major carriers, travel agencies,
-                        and millions of passengers worldwide.
+                        and millions of passengers of Nepal.
                     </p>
                 </div>
             </div>
