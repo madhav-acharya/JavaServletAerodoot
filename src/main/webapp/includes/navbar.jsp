@@ -44,7 +44,7 @@
 
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/about-us" class="nav-link ${page == 'about' ? 'active' : ''}">
-                        <i class="fas fa-location-dot icon"></i>
+                        <i class="fas fa-info-circle icon"></i>
                         About Us
                     </a>
                 </li>
