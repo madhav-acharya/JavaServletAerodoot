@@ -3,7 +3,7 @@ package com.example.aerodoot.service;
 import com.example.aerodoot.dao.UserDAO;
 import com.example.aerodoot.model.User;
 import com.example.aerodoot.util.PasswordHashUtil;
-import com.example.aerodoot.util.RegistrationValidator;
+import com.example.aerodoot.util.RegistrationValidatorUtil;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class AuthService {
         String password = userPassword;
         String confirmpassword = userConfirmpassword;
 
-        int validateIntValue = RegistrationValidator.validateCreateUser(fullname, email, phonenumber, password, confirmpassword);
+        int validateIntValue = RegistrationValidatorUtil.validateCreateUser(fullname, email, phonenumber, password, confirmpassword);
 
         return validateIntValue;
     }

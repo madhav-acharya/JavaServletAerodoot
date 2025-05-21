@@ -6,7 +6,7 @@ import com.example.aerodoot.model.User;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-public class RegistrationValidator {
+public class RegistrationValidatorUtil {
 
     public static int validateCreateUser(String fullname, String email, String phonenumber, String password, String confirmpassword) throws  ClassNotFoundException, SQLException {
         /// Notes on Error Codes:

@@ -4,6 +4,8 @@ import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.util.DbConnectionUtil;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,13 +159,26 @@ public class FlightDAO {
 
     public static List<Flight> getAllSearchFlights(String departureLocation, String arrivalLocation, Date flightDate) throws SQLException {
         List<Flight> flightList = new ArrayList<>();
-        String sql = "SELECT * FROM Flight where departureLocation = ? and arrivalLocation = ? and flightDate = ?";
+        String sql;
+
+        boolean isToday = flightDate.toLocalDate().equals(LocalDate.now());
+
+        if (isToday) {
+            sql = "SELECT * FROM Flight WHERE departureLocation = ? AND arrivalLocation = ? AND flightDate = ? AND departureTime > ?";
+        } else {
+            sql = "SELECT * FROM Flight WHERE departureLocation = ? AND arrivalLocation = ? AND flightDate = ?";
+        }
+
 
         try (Connection conn = DbConnectionUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
              ps.setString(1, departureLocation);
              ps.setString(2, arrivalLocation);
              ps.setDate(3, flightDate);
+
+            if (isToday) {
+                ps.setTime(4, Time.valueOf(LocalTime.now()));
+            }
 
              ResultSet rs = ps.executeQuery();
 
