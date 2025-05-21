@@ -150,59 +150,41 @@
                     <thead>
                     <tr>
                         <th>Booking ID</th>
-                        <th>Passenger</th>
-                        <th>Flight</th>
-                        <th>Class</th>
-                        <th>Seats</th>
-                        <th>Status</th>
-                        <th>Amount</th>
+                        <th>Booking Date</th>
+                        <th>Class Type</th>
+                        <th>Seats Booked</th>
+                        <th>Booking Status</th>
+                        <th>Total Price</th>
+                        <th>Flight ID</th>
+                        <th>Passenger ID</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>B-1001</td>
-                        <td>John Doe</td>
-                        <td>KTM-DEL-001</td>
-                        <td>Business</td>
-                        <td>1</td>
-                        <td>
-                            <span class="status-badge status-confirmed">Confirmed</span>
-                        </td>
-                        <td>$850</td>
-                        <td>
-                            <a href="#" class="link">View</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>B-1002</td>
-                        <td>Jane Smith</td>
-                        <td>KTM-BOM-002</td>
-                        <td>Economy</td>
-                        <td>2</td>
-                        <td>
-                            <span class="status-badge status-pending">Pending</span>
-                        </td>
-                        <td>Rs.320</td>
-                        <td>
-                            <a href="#" class="link">View</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>B-1003</td>
-                        <td>Mike Johnson</td>
-                        <td>KTM-BKK-003</td>
-                        <td>Economy</td>
-                        <td>3</td>
-                        <td>
-                            <span class="status-badge status-confirmed">Confirmed</span>
-                        </td>
-                        <td>$420</td>
-                        <td>
-                            <a href="#" class="link">View</a>
-                        </td>
-                    </tr>
+                    <c:forEach var="booking" items="${bookings}">
+                        <tr>
+                            <td>${booking.bookingId}</td>
+                            <td>${booking.bookingDate}</td>
+                            <td>${booking.classType}</td>
+                            <td>${booking.seatsBooked}</td>
+                            <td>
+                                <span class="status-badge
+                                    ${booking.bookingStatus == 'Confirmed' ? 'status-confirmed' : 'status-pending'}">
+                                        ${booking.bookingStatus}
+                                </span>
+                            </td>
+                            <td>
+                                    ${'Rs.'}${booking.totalPrice}
+                            </td>
+                            <td>${booking.flightId}</td>
+                            <td>${booking.passengerId}</td>
+                            <td>
+                                <a href="viewBooking.jsp?id=${booking.bookingId}" class="link">View</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
+
                 </table>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package com.example.aerodoot.controller;
 
 import com.example.aerodoot.dao.*;
+import com.example.aerodoot.model.Booking;
 import com.example.aerodoot.model.Flight;
 import com.example.aerodoot.model.Passenger;
 import com.example.aerodoot.model.User;
@@ -20,6 +21,7 @@ import java.util.List;
 public class AgentBookingServlet extends HttpServlet {
     private List<Flight> flights;
     private List<User> passengers;
+    private List<Booking> bookings;
 
     @Override
     public void init() throws ServletException {
@@ -27,9 +29,11 @@ public class AgentBookingServlet extends HttpServlet {
         try {
             flights = FlightDAO.getAllFlights();
             passengers = UserDAO.getPassengerUsers();
+            bookings = BookingDAO.getAllBookings();
 
             getServletContext().setAttribute("flights", flights);
             getServletContext().setAttribute("passengers", passengers);
+            getServletContext().setAttribute("bookings", bookings);
             System.out.println("Flights loaded successfully.");
         } catch (Exception e) {
             throw new ServletException("Flight initialization failed", e);
@@ -40,20 +44,12 @@ public class AgentBookingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("flights", flights);
         request.setAttribute("passengers", passengers);
+        request.setAttribute("bookings", bookings);
         request.getRequestDispatcher("/WEB-INF/view/agent/agentBooking.jsp").forward(request, response);
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println("=== RAW REQUEST PARAMETERS ===");
-        System.out.println("userId: " + request.getParameter("userId"));
-        System.out.println("seatClass: " + request.getParameter("seatClass"));
-        System.out.println("passengerCount: " + request.getParameter("passengerCount"));
-        System.out.println("paymentAmount: " + request.getParameter("paymentAmount"));
-        System.out.println("flightNumber: " + request.getParameter("flightNumber"));
-        System.out.println("paymentMethod: " + request.getParameter("paymentMethod"));
-        System.out.println("==============================");
 
         int userId = Integer.parseInt(request.getParameter("userId"));
         String classType = request.getParameter("seatClass");

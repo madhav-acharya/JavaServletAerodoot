@@ -112,45 +112,41 @@
           <thead>
           <tr>
             <th>Booking ID</th>
-            <th>Passenger</th>
-            <th>Flight</th>
-            <th>Class</th>
-            <th>Status</th>
-            <th>Amount</th>
+            <th>Booking Date</th>
+            <th>Class Type</th>
+            <th>Seats Booked</th>
+            <th>Booking Status</th>
+            <th>Total Price</th>
+            <th>Flight ID</th>
+            <th>Passenger ID</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>B-1001</td>
-            <td>John Doe</td>
-            <td>KTM-DEL-001</td>
-            <td>Business</td>
-            <td>
-              <span class="status-badge status-confirmed">Confirmed</span>
-            </td>
-            <td>$850</td>
-          </tr>
-          <tr>
-            <td>B-1002</td>
-            <td>Jane Smith</td>
-            <td>KTM-BOM-002</td>
-            <td>Economy</td>
-            <td>
-              <span class="status-badge status-pending">Pending</span>
-            </td>
-            <td>$320</td>
-          </tr>
-          <tr>
-            <td>B-1003</td>
-            <td>Mike Johnson</td>
-            <td>KTM-BKK-003</td>
-            <td>Economy</td>
-            <td>
-              <span class="status-badge status-confirmed">Confirmed</span>
-            </td>
-            <td>$420</td>
-          </tr>
+          <c:forEach var="booking" items="${bookings}">
+            <tr>
+              <td>${booking.bookingId}</td>
+              <td>${booking.bookingDate}</td>
+              <td>${booking.classType}</td>
+              <td>${booking.seatsBooked}</td>
+              <td>
+                <span class="status-badge
+                    ${booking.bookingStatus == 'Confirmed' ? 'status-confirmed' : 'status-pending'}">
+                    ${booking.bookingStatus}
+                </span>
+              </td>
+              <td>
+                  ${'Rs.'}${booking.totalPrice}
+              </td>
+              <td>${booking.flightId}</td>
+              <td>${booking.passengerId}</td>
+              <td>
+                <a href="viewBooking.jsp?id=${booking.bookingId}" class="link">View</a>
+              </td>
+            </tr>
+          </c:forEach>
           </tbody>
+
         </table>
       </div>
     </div>
