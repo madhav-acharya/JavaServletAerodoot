@@ -1,0 +1,441 @@
+/* Hero Section Styles */
+.aerodoot-hero-section {
+    background: linear-gradient(135deg, #0a3677 0%, #2980b9 100%);
+    color: white;
+    position: relative;
+    padding: 100px 20px 200px;
+    text-align: center;
+}
+
+.aerodoot-wave-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: white;
+    clip-path: ellipse(55% 80% at 50% 100%);
+}
+
+.aerodoot-company-title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.aerodoot-brand-highlight {
+    background-color: #1a4b8c;
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+.aerodoot-company-description {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.aerodoot-plane-icon {
+    display: inline-block;
+    margin: 10px 0 25px;
+    position: relative;
+}
+
+.aerodoot-plane-icon::before,
+.aerodoot-plane-icon::after {
+    content: '';
+    height: 2px;
+    width: 60px;
+    background-color: rgba(255,255,255,0.6);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 15px;
+}
+
+/* Button Styles */
+.aerodoot-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.aerodoot-contact-btn {
+    background-color: white;
+    color: #1a4b8c;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.aerodoot-contact-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.aerodoot-join-btn {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.aerodoot-join-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Stats Section */
+.aerodoot-stats-section {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: -80px auto 0;
+    position: relative;
+    z-index: 1;
+}
+
+.aerodoot-stat-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    transition: transform 0.3s ease;
+}
+
+.aerodoot-stat-card:hover {
+    transform: translateY(-10px);
+}
+
+.aerodoot-stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a4b8c;
+    margin-bottom: 10px;
+}
+
+.aerodoot-stat-label {
+    color: #555;
+    font-size: 1.1rem;
+}
+
+/* Purpose Section Styles */
+.aerodoot-purpose-section {
+    padding: 80px 20px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.aerodoot-section-title {
+    font-size: 2.2rem;
+    color: #0a3677;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.aerodoot-underline {
+    height: 4px;
+    width: 80px;
+    background-color: #2980b9;
+    margin: 0 auto 15px;
+    border-radius: 2px;
+}
+
+.aerodoot-section-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.aerodoot-mission-vision-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.aerodoot-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 300px;
+    max-width: 550px;
+    text-align: left;
+    position: relative;
+    border-top: 5px solid;
+}
+
+.aerodoot-mission-card {
+    border-top-color: #2980b9;
+}
+
+.aerodoot-vision-card {
+    border-top-color: #0a3677;
+}
+
+.aerodoot-icon-container {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(41, 128, 185, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.aerodoot-icon-container i {
+    color: #2980b9;
+    font-size: 24px;
+}
+
+.aerodoot-globe-icon {
+    background-color: rgba(10, 54, 119, 0.1);
+}
+
+.aerodoot-globe-icon i {
+    color: #0a3677;
+}
+
+.aerodoot-card-title {
+    font-size: 1.5rem;
+    color: #0a3677;
+    margin-bottom: 15px;
+}
+
+.aerodoot-card-text {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Values Section Styles */
+.aerodoot-values-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #f0f5fa;
+}
+
+.aerodoot-values-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.aerodoot-value-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    text-align: center;
+}
+
+.aerodoot-value-icon {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(41, 128, 185, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.aerodoot-value-icon i {
+    color: #2980b9;
+    font-size: 28px;
+}
+
+.aerodoot-value-title {
+    font-size: 1.3rem;
+    color: #0a3677;
+    margin-bottom: 15px;
+}
+
+.aerodoot-value-text {
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Offer Section Styles */
+.aerodoot-offer-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.aerodoot-offer-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.aerodoot-service-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+    text-align: center;
+    border: 1px solid #eaeaea;
+}
+
+.aerodoot-service-icon {
+    margin-bottom: 15px;
+}
+
+.aerodoot-service-icon i {
+    color: #2980b9;
+    font-size: 24px;
+}
+
+.aerodoot-service-title {
+    font-size: 1.2rem;
+    color: #0a3677;
+    margin-bottom: 12px;
+}
+
+.aerodoot-service-text {
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Journey Section Styles */
+.aerodoot-journey-section {
+    padding: 50px 20px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.aerodoot-journey-container {
+    display: flex;
+    margin-top: 40px;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.aerodoot-journey-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.aerodoot-journey-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.aerodoot-journey-timeline {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.aerodoot-timeline-item {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+.aerodoot-timeline-icon {
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.aerodoot-timeline-icon i {
+    color: #2980b9;
+    font-size: 24px;
+}
+
+.aerodoot-timeline-content {
+    flex: 1;
+}
+
+.aerodoot-timeline-title {
+    color: #0a3677;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.aerodoot-timeline-text {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .aerodoot-company-title {
+        font-size: 2.2rem;
+    }
+
+    .aerodoot-company-description {
+        font-size: 1rem;
+    }
+
+    .aerodoot-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aerodoot-stat-card {
+        min-width: 150px;
+    }
+
+    .aerodoot-journey-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aerodoot-journey-image {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .aerodoot-section-title {
+        font-size: 1.8rem;
+    }
+}
