@@ -12,7 +12,7 @@ public class AgentDashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/agentDashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/agent/agentDashboard.jsp").forward(request, response);
     }
 
     @WebServlet("/admin/dashboard")

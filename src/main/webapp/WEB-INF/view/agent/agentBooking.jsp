@@ -11,226 +11,164 @@
 <html>
 <head>
     <title>Agent Booking Dashboard</title>
-    <link rel="stylesheet" href="../css/agent.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/agent.css">
 </head>
 <body>
-<div class="dashboard-container">
+<div class="app-container">
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <div class="sidebar">
         <div class="sidebar-header">
-            <h2 class="logo">AeroDoot</h2>
-            <button id="sidebar-toggle" class="sidebar-toggle">☰</button>
+            <h2 class="sidebar-title">AeroDoot Agent</h2>
         </div>
-
-        <div class="agent-profile">
-            <div class="agent-avatar">
-                <div class="avatar-placeholder">
-                    <c:out value="${agent.firstName.charAt(0)}${agent.lastName.charAt(0)}"/>
-                </div>
-            </div>
-            <div class="agent-info">
-                <h3><c:out value="${agent.firstName} ${agent.lastName}"/></h3>
-                <p><c:out value="${agent.position}"/></p>
-                <p class="agent-license">License: <c:out value="${agent.licenseNumber}"/></p>
-            </div>
-        </div>
-
-        <nav class="sidebar-nav">
-            <ul>
-                <li>
-                    <a href="agentDashboard.jsp" class="nav-link">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Analytics</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="agentBooking.jsp" class="nav-link">
-                        <i class="fas fa-ticket"></i>
-                        <span>Booking</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="${pageContext.request.contextPath}/agent/dashboard"  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="${pageContext.request.contextPath}/agent/booking" class="active">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                        <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    Bookings
+                </a>
+            </li>
+        </ul>
+    </div>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <div class="content-header">
-            <div class="header-search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search flights...">
-            </div>
-            <div class="header-actions">
-                <div class="notifications">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
+    <div class="agent-booking-container">
+        <h1 class="page-title">Create New Booking</h1>
+
+        <div class="form-card">
+            <form action="processBooking.jsp" method="post">
+                <!-- Passenger Selection -->
+                <div class="form-group">
+                    <label for="passenger" class="form-label">Select Passenger</label>
+                    <select id="passenger" name="passengerId" class="form-select">
+                        <option value="">-- Select Passenger --</option>
+                        <!-- These would be populated from database -->
+                        <option value="1">John Doe (Passport: AB123456)</option>
+                        <option value="2">Jane Smith (Passport: CD789012)</option>
+                        <option value="3">Mike Johnson (Passport: EF345678)</option>
+                    </select>
                 </div>
-                <div class="date-time" id="current-date"></div>
-            </div>
+
+                <!-- Flight Selection -->
+                <div class="form-group">
+                    <label for="flight" class="form-label">Select Flight</label>
+                    <select id="flight" name="flightId" class="form-select">
+                        <option value="">-- Select Flight --</option>
+                        <!-- These would be populated from database -->
+                        <option value="1">KTM-DEL-001 (Kathmandu to Delhi, 10:00 AM)</option>
+                        <option value="2">KTM-BOM-002 (Kathmandu to Mumbai, 2:30 PM)</option>
+                        <option value="3">KTM-BKK-003 (Kathmandu to Bangkok, 8:45 PM)</option>
+                    </select>
+                </div>
+
+                <!-- Class Type -->
+                <div class="form-group">
+                    <label class="form-label">Select Class</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input id="economy" name="classType" type="radio" value="ECONOMY" checked>
+                            <label for="economy">Economy</label>
+                        </div>
+                        <div class="radio-option">
+                            <input id="business" name="classType" type="radio" value="BUSINESS">
+                            <label for="business">Business</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Number of Seats -->
+                <div class="form-group">
+                    <label for="seats" class="form-label">Number of Seats</label>
+                    <input type="number" id="seats" name="seatsBooked" min="1" max="10" value="1" class="form-input">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Create Booking
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <div class="tab-content">
-            <!-- Flight Search Form -->
-            <div class="flight-search-form">
-                <form action="searchFlights" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="passenger">Select Passenger</label>
-                            <select id="passenger" name="passengerId" required>
-                                <option value="">Choose a passenger</option>
-                                <c:forEach items="${passengers}" var="passenger">
-                                    <option value="${passenger.passengerId}">
-                                            ${passenger.firstName} ${passenger.lastName} - ${passenger.passportNumber}
-                                    </option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="departure">From</label>
-                            <select id="departure" name="departureLocation" required>
-                                <option value="">Select departure</option>
-                                <c:forEach items="${locations}" var="location">
-                                    <option value="${location}">${location}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="swap-button">
-                            <button type="button" id="swap-destinations">
-                                <i class="fas fa-exchange-alt"></i>
-                            </button>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="arrival">To</label>
-                            <select id="arrival" name="arrivalLocation" required>
-                                <option value="">Select destination</option>
-                                <c:forEach items="${locations}" var="location">
-                                    <option value="${location}">${location}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="date" id="date" name="flightDate" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="classType">Class</label>
-                            <select id="classType" name="classType" required>
-                                <option value="">Select class</option>
-                                <option value="ECONOMY">Economy</option>
-                                <option value="BUSINESS">Business</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="seats">Number of Seats</label>
-                            <input type="number" id="seats" name="seatsBooked" min="1" max="9" required>
-                        </div>
-
-                        <div class="search-button-group">
-                            <button type="submit" class="btn-primary">
-                                <i class="fas fa-search"></i>
-                                Search Flights
-                            </button>
-                        </div>
-                    </div>
-                </form>
+        <!-- Recent Bookings Table -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3 class="table-title">Recent Bookings</h3>
             </div>
-
-            <!-- Flight Results -->
-            <div class="flight-results">
-                <h3>Available Flights</h3>
-
-                <div class="flight-filters">
-                    <button class="filter-btn active">All</button>
-                    <button class="filter-btn">Morning</button>
-                    <button class="filter-btn">Afternoon</button>
-                    <button class="filter-btn">Evening</button>
-
-                    <div class="sort-dropdown">
-                        <label for="sort">Sort by:</label>
-                        <select id="sort">
-                            <option value="price">Price</option>
-                            <option value="duration">Duration</option>
-                            <option value="departure">Departure Time</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="flight-cards">
-                    <c:forEach items="${flights}" var="flight">
-                        <div class="flight-card">
-                            <div class="flight-header">
-                                <div class="airline-info">
-                                    <div class="airline-logo">
-                                        <i class="fas fa-plane"></i>
-                                    </div>
-                                    <div class="airline-details">
-                                        <h4>${flight.airline.name}</h4>
-                                        <span class="flight-number">${flight.flightNumber}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flight-details">
-                                <div class="flight-route">
-                                    <div class="departure">
-                                        <div class="time">${flight.departureTime}</div>
-                                        <div class="airport">${flight.departureLocation}</div>
-                                        <div class="date">
-                                            <fmt:formatDate value="${flight.flightDate}" pattern="MMM dd, yyyy"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="flight-path">
-                                        <div class="duration">${flight.duration} mins</div>
-                                        <div class="path-line">
-                                            <div class="plane-icon">
-                                                <i class="fas fa-plane"></i>
-                                            </div>
-                                        </div>
-                                        <div class="flight-type">Direct Flight</div>
-                                    </div>
-
-                                    <div class="arrival">
-                                        <div class="time">${flight.arrivalTime}</div>
-                                        <div class="airport">${flight.arrivalLocation}</div>
-                                        <div class="date">
-                                            <fmt:formatDate value="${flight.flightDate}" pattern="MMM dd, yyyy"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flight-pricing">
-                                    <div class="price-info">
-                                        <div class="price">
-                                            $${flight.classType == 'ECONOMY' ? flight.economyPrice : flight.businessPrice}
-                                        </div>
-                                        <div class="price-type">${flight.classType}</div>
-                                    </div>
-                                    <div class="availability">
-                                        <div class="seats-left">
-                                                ${flight.classType == 'ECONOMY' ? flight.availableSeatsEconomy : flight.availableSeatsBusiness} seats left
-                                        </div>
-                                        <button class="btn-primary select-flight"
-                                                onclick="selectFlight(${flight.flightId})">
-                                            Select Flight
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Passenger</th>
+                        <th>Flight</th>
+                        <th>Class</th>
+                        <th>Seats</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>B-1001</td>
+                        <td>John Doe</td>
+                        <td>KTM-DEL-001</td>
+                        <td>Business</td>
+                        <td>1</td>
+                        <td>
+                            <span class="status-badge status-confirmed">Confirmed</span>
+                        </td>
+                        <td>$850</td>
+                        <td>
+                            <a href="#" class="link">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B-1002</td>
+                        <td>Jane Smith</td>
+                        <td>KTM-BOM-002</td>
+                        <td>Economy</td>
+                        <td>2</td>
+                        <td>
+                            <span class="status-badge status-pending">Pending</span>
+                        </td>
+                        <td>$320</td>
+                        <td>
+                            <a href="#" class="link">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B-1003</td>
+                        <td>Mike Johnson</td>
+                        <td>KTM-BKK-003</td>
+                        <td>Economy</td>
+                        <td>3</td>
+                        <td>
+                            <span class="status-badge status-confirmed">Confirmed</span>
+                        </td>
+                        <td>$420</td>
+                        <td>
+                            <a href="#" class="link">View</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </main>
+    </div>
 </div>
 
 <script src="${pageContext.request.contextPath}/assets/js/agent.js"></script>
