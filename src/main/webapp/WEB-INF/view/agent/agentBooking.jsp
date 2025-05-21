@@ -62,11 +62,12 @@
                 <div class="form-group">
                     <label for="passenger" class="form-label">Select Passenger</label>
                     <select id="passenger" name="passengerId" class="form-select">
-                        <option value="">-- Select Passenger --</option>
-                        <!-- These would be populated from database -->
-                        <option value="1">John Doe (Passport: AB123456)</option>
-                        <option value="2">Jane Smith (Passport: CD789012)</option>
-                        <option value="3">Mike Johnson (Passport: EF345678)</option>
+                        <option value="">Select Passenger</option>
+                        <c:forEach var="passenger" items="${passengers}">
+                            <option value="${passenger.passengerId}">
+                                    ${passenger.firstName} ${passenger.lastName} (Passport: ${passenger.passportNumber})
+                            </option>
+                        </c:forEach>
                     </select>
                 </div>
 
@@ -74,11 +75,12 @@
                 <div class="form-group">
                     <label for="flight" class="form-label">Select Flight</label>
                     <select id="flight" name="flightId" class="form-select">
-                        <option value="">-- Select Flight --</option>
-                        <!-- These would be populated from database -->
-                        <option value="1">KTM-DEL-001 (Kathmandu to Delhi, 10:00 AM)</option>
-                        <option value="2">KTM-BOM-002 (Kathmandu to Mumbai, 2:30 PM)</option>
-                        <option value="3">KTM-BKK-003 (Kathmandu to Bangkok, 8:45 PM)</option>
+                        <option value="">Select Flight</option>
+                        <c:forEach var="flight" items="${flights}">
+                            <option value="${flight.flightId}">
+                                    ${flight.flightCode} (${flight.origin} to ${flight.destination}, ${flight.departureTime})
+                            </option>
+                        </c:forEach>
                     </select>
                 </div>
 

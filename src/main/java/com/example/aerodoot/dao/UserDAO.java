@@ -146,6 +146,35 @@ public class UserDAO {
         return users;
     }
 
+    public static List<User> getPassengerUsers() throws SQLException {
+        List<User> passengers = new ArrayList<>();
+        String sql = "SELECT * FROM User WHERE userType = 'PASSENGER'";
+
+        try (Connection conn = DbConnectionUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setEmail(rs.getString("email"));
+                user.setPhoneNumber(rs.getString("phoneNumber"));
+                user.setPassword(rs.getString("password"));
+                user.setUserType(rs.getString("userType"));
+                user.setCreatedAt(rs.getTimestamp("createdAt"));
+
+                passengers.add(user);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching passenger users: " + e.getMessage());
+        }
+
+        return passengers;
+    }
+
+
     public static User getUserById(int userId) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM User WHERE userId = ?";
