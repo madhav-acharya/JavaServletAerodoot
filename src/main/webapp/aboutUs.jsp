@@ -88,7 +88,7 @@
 
     <div class="aerodoot-journey-container">
         <div class="aerodoot-journey-image">
-            <img src="/aboutus-bg.jpg" alt="Airplane on runway at dusk with mountains in background">
+            <img src="${pageContext.request.contextPath}/assets/image/aboutUs-bg.jpg" alt="Airplane on runway at dusk with mountains in background">
         </div>
 
         <div class="aerodoot-journey-timeline">
