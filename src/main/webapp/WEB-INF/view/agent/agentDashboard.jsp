@@ -15,6 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<jsp:include page="../../../includes/toast.jsp" />
 <div class="app-container">
   <!-- Sidebar -->
   <div class="sidebar">

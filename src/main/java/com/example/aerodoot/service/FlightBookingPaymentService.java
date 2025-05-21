@@ -58,8 +58,6 @@ public class FlightBookingPaymentService {
 
     public static int createAgentBooking(HttpServletRequest request, int userId, String classType, String passengerCount, Float totalPrice, String flightNumber) throws ClassNotFoundException, SQLException {
 
-        HttpSession session = request.getSession(false);
-
         Passenger passenger = null;
         try {
             passenger = PassengerDAO.getPassengerByUserId(userId);

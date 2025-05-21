@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/agent.css">
 </head>
 <body>
+<jsp:include page="../../../includes/toast.jsp" />
 <div class="app-container">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -57,14 +58,14 @@
         <h1 class="page-title">Create New Booking</h1>
 
         <div class="form-card">
-            <form action="payment" method="post">
+            <form action="${pageContext.request.contextPath}/agent/booking" method="post">
                 <!-- Passenger Selection -->
                 <div class="form-group">
                     <label for="passenger" class="form-label">Select Passenger</label>
-                    <select id="passenger" name="passengerId" class="form-select">
+                    <select id="passenger" name="userId" class="form-select">
                         <option value="">Select Passenger</option>
                         <c:forEach var="passenger" items="${passengers}">
-                            <option value="${passenger.userId}" name="userId">
+                            <option value="${passenger.userId}" >
                                     ${passenger.firstName} ${passenger.lastName}
                             </option>
                         </c:forEach>
@@ -74,11 +75,10 @@
                 <!-- Flight Selection -->
                 <div class="form-group">
                     <label for="flight" class="form-label">Select Flight</label>
-                    <select id="flight" name="flightId" class="form-select">
+                    <select id="flight" name="flightNumber" class="form-select">
                         <option value="">Select Flight</option>
                         <c:forEach var="flight" items="${flights}">
                             <option
-                                    name="flightNumber"
                                     value="${flight.flightNumber}"
                                     data-economy-price="${flight.economyPrice}"
                                     data-business-price="${flight.businessPrice}">
