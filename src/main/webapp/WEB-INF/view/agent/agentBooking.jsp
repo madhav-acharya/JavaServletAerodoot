@@ -57,15 +57,15 @@
         <h1 class="page-title">Create New Booking</h1>
 
         <div class="form-card">
-            <form action="processBooking.jsp" method="post">
+            <form action="payment" method="post">
                 <!-- Passenger Selection -->
                 <div class="form-group">
                     <label for="passenger" class="form-label">Select Passenger</label>
                     <select id="passenger" name="passengerId" class="form-select">
                         <option value="">Select Passenger</option>
                         <c:forEach var="passenger" items="${passengers}">
-                            <option value="${passenger.passengerId}">
-                                    ${passenger.firstName} ${passenger.lastName} (Passport: ${passenger.passportNumber})
+                            <option value="${passenger.userId}" name="userId">
+                                    ${passenger.firstName} ${passenger.lastName}
                             </option>
                         </c:forEach>
                     </select>
@@ -77,8 +77,12 @@
                     <select id="flight" name="flightId" class="form-select">
                         <option value="">Select Flight</option>
                         <c:forEach var="flight" items="${flights}">
-                            <option value="${flight.flightId}">
-                                    ${flight.flightCode} (${flight.origin} to ${flight.destination}, ${flight.departureTime})
+                            <option
+                                    name="flightNumber"
+                                    value="${flight.flightNumber}"
+                                    data-economy-price="${flight.economyPrice}"
+                                    data-business-price="${flight.businessPrice}">
+                                    ${flight.flightNumber} (${flight.departureLocation} to ${flight.arrivalLocation}, ${flight.departureTime})
                             </option>
                         </c:forEach>
                     </select>
@@ -89,11 +93,11 @@
                     <label class="form-label">Select Class</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input id="economy" name="classType" type="radio" value="ECONOMY" checked>
+                            <input id="economy" name="seatClass" type="radio" value="ECONOMY" checked>
                             <label for="economy">Economy</label>
                         </div>
                         <div class="radio-option">
-                            <input id="business" name="classType" type="radio" value="BUSINESS">
+                            <input id="business" name="seatClass" type="radio" value="BUSINESS">
                             <label for="business">Business</label>
                         </div>
                     </div>
@@ -102,8 +106,30 @@
                 <!-- Number of Seats -->
                 <div class="form-group">
                     <label for="seats" class="form-label">Number of Seats</label>
-                    <input type="number" id="seats" name="seatsBooked" min="1" max="10" value="1" class="form-input">
+                    <input type="number" id="seats" name="passengerCount"  value="1" class="form-input">
                 </div>
+
+                <!-- Total Price -->
+                <div class="form-group">
+                    <label for="totalPrice" class="form-label">Total Price (NPR)</label>
+                    <input type="number" step="0.01" id="totalPrice"  name="paymentAmount" class="form-input" readonly required>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input id="esewa" name="paymentMethod" type="radio" value="ESEWA" checked>
+                            <label for="esewa">eSewa</label>
+                        </div>
+                        <div class="radio-option">
+                            <input id="khalti" name="paymentMethod" type="radio" value="KHALTI">
+                            <label for="khalti">Khalti</label>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- Submit Button -->
                 <div class="form-actions">
@@ -184,5 +210,31 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/assets/js/agent.js"></script>
+<script>
+    const flightSelect = document.getElementById('flight');
+    const classRadios = document.getElementsByName('classType');
+    const seatsInput = document.getElementById('seats');
+    const totalPriceInput = document.getElementById('totalPrice');
+
+    function updateTotalPrice() {
+        const selectedOption = flightSelect.options[flightSelect.selectedIndex];
+        const seats = parseInt(seatsInput.value) || 0;
+        let pricePerSeat = 0;
+
+        if (selectedOption) {
+            const selectedClass = [...classRadios].find(r => r.checked)?.value;
+            pricePerSeat = selectedClass === 'BUSINESS'
+                ? parseFloat(selectedOption.getAttribute('data-business-price')) || 0
+                : parseFloat(selectedOption.getAttribute('data-economy-price')) || 0;
+        }
+
+        const total = pricePerSeat * seats;
+        totalPriceInput.value = total.toFixed(2);
+    }
+
+    flightSelect.addEventListener('change', updateTotalPrice);
+    seatsInput.addEventListener('input', updateTotalPrice);
+    classRadios.forEach(radio => radio.addEventListener('change', updateTotalPrice));
+</script>
 </body>
 </html>

@@ -19,8 +19,46 @@ public class FlightBookingPaymentService {
     public static int createBooking(HttpServletRequest request, String classType, String passengerCount, Float totalPrice, String flightNumber) throws ClassNotFoundException, SQLException {
 
         HttpSession session = request.getSession(false);
+
         int userId = (int) session.getAttribute("userId");
         System.out.println("userId in payment -> " + userId);
+
+        Passenger passenger = null;
+        try {
+            passenger = PassengerDAO.getPassengerByUserId(userId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        int passengerId = (int) passenger.getPassengerId();
+        System.out.println("passengerId in payment -> " + passengerId);
+
+        String[] passengerList = passengerCount.trim().split("\\s+");
+        int seatsBooked = Integer.parseInt(passengerList[0]);
+
+        Flight flight = null;
+        try {
+            flight = FlightDAO.getFlightByFlightNumber(flightNumber);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        int flightNum = flight.getFlightId();
+
+        //creating the booking object of current booking
+        Booking booking = new Booking();
+        booking.setClassType(classType);
+        booking.setSeatsBooked(seatsBooked);
+        booking.setTotalPrice(BigDecimal.valueOf(totalPrice));
+        booking.setBookingStatus("CONFIRMED");
+        booking.setFlightId(flightNum);
+        booking.setPassengerId(passengerId);
+
+        return BookingDAO.createBooking(booking);
+    }
+
+    public static int createAgentBooking(HttpServletRequest request, int userId, String classType, String passengerCount, Float totalPrice, String flightNumber) throws ClassNotFoundException, SQLException {
+
+        HttpSession session = request.getSession(false);
 
         Passenger passenger = null;
         try {
