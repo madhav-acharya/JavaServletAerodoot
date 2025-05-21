@@ -64,7 +64,7 @@
                 <h2>Quick Actions</h2>
             </div>
             <div class="card-content quick-actions">
-                <a href="#" class="btn-action-passdb">
+                <a href="${pageContext.request.contextPath}/flight-booking" class="btn-action-passdb">
                     <i class="fas fa-plane-departure"></i> Book a Flight
                 </a>
                 <a href="#" class="btn-action-passdb">
@@ -286,8 +286,9 @@
                 </div>
 
                 <div class="flight-booking-actions">
-                    <button class="flight-btn flight-btn-secondary">Download Invoice</button>
-                    <button class="flight-btn flight-btn-primary">Book Similar Flight</button>
+                    <button class="flight-btn flight-btn-primary">
+                        <a href="${pageContext.request.contextPath}/flight-booking">Book Similar Flight</a>
+                    </button>
                 </div>
             </div>
             </c:forEach>
