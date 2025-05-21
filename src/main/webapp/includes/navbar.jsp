@@ -6,6 +6,9 @@
         <c:set var="page" value="flight" />
 
     </c:when>
+    <c:when test="${pageContext.request.requestURI.contains('about')}">
+        <c:set var="page" value="about" />
+    </c:when>
     <c:when test="${pageContext.request.requestURI.contains('contact')}">
         <c:set var="page" value="contact" />
     </c:when>
@@ -36,6 +39,13 @@
                     <a href="${pageContext.request.contextPath}/flight-booking" class="nav-link ${page == 'flight' ? 'active' : ''}">
                         <i class="fas fa-jet-fighter icon"></i>
                         Flights
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/about-us" class="nav-link ${page == 'about' ? 'active' : ''}">
+                        <i class="fas fa-location-dot icon"></i>
+                        About Us
                     </a>
                 </li>
 

@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/payment.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/myBooking.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/agent.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/aboutUs.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
